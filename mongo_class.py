@@ -629,7 +629,7 @@ class Coll(DB):
 
         return self.coll.count(qry)
 
-    def coll_find(self, qry={}):
+    def coll_find(self, qry=None):
 
         """Method:  coll_find
 
@@ -640,6 +640,9 @@ class Coll(DB):
             (output) -> Return of documents from collection as cursor.
 
         """
+
+        if qry is None:
+            qry = {}
 
         return self.coll.find(qry)
 
