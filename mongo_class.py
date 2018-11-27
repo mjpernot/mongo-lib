@@ -612,7 +612,7 @@ class Coll(DB):
 
         self.coll = self.conn[db][coll]
 
-    def coll_cnt(self, qry={}):
+    def coll_cnt(self, qry=None):
 
         """Method:  coll_cnt
 
@@ -623,6 +623,9 @@ class Coll(DB):
             (output) -> Total number of documents in a collection.
 
         """
+
+        if qry is None:
+            qry = {}
 
         return self.coll.count(qry)
 
