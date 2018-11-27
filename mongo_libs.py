@@ -1,19 +1,5 @@
 # Classification (U)
 
-###############################################################################
-#
-# Filename:     mongo_libs.py
-#
-# Class Dependencies:
-#               mongo_class         => v2.0.0 or higher
-#
-# Library Dependenices:
-#               lib/arg_parser      => v1.35.1 or higher
-#               lib/gen_libs        => v1.35.1 or higher
-#               lib/cmds_gen        => v1.35.1 or higher
-#
-###############################################################################
-
 """Program:  mongo_libs.py
 
     Description:  Library of function calls for a Mongo database system.
@@ -46,7 +32,7 @@ import lib.cmds_gen as cmds_gen
 import mongo_class
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

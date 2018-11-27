@@ -21,6 +21,11 @@
     - git
     - python-pip
 
+  * List of local packages that need to be installed within the program structure.
+    - lib/arg_parser
+    - lib/gen_libs
+    - lib/cmds_gen
+
 
 # Installation:
   There are two types of installs: pip and git.  Pip will only install the program modules and classes, whereas git will install all modules and classes including testing programs along with README and CHANGELOG files.  The Pip installation will be modifying another program's project to install these supporting librarues via pip.
