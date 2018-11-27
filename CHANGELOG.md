@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.1.1] - 2018-11-27
+### Changed
+- Documentation updates.
+
+
 ## [2.1.0] - 2018-09-12
 ### Added
 - requirements-mongo-lib.txt:  Mongo support library install via pip.

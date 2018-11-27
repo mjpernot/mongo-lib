@@ -1,17 +1,5 @@
 # Classification (U)
 
-###############################################################################
-#
-# Filename:     mongo_class.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               mongo_libs      => v2.0.0 or higher
-#
-###############################################################################
-
 """Program:  mongo_class.py
 
     Description:  Class definitions and methods for Mongo database system.
@@ -33,7 +21,6 @@
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
@@ -47,7 +34,7 @@ import socket
 import mongo_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 
