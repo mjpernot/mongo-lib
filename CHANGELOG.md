@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class.Coll.coll_cnt:  Changed function parameter mutable argument default to immutable argument default.
 - mongo_class.Coll.coll_find:  Changed function parameter mutable argument default to immutable argument default.
 - mongo_class.Coll.coll_find1:  Changed function parameter mutable argument default to immutable argument default.
+- mongo_class.RepSetColl.coll_cnt:  Changed function parameter mutable argument default to immutable argument default.
 
 
 ## [2.1.0] - 2018-09-12

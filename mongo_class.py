@@ -1073,7 +1073,7 @@ class RepSetColl(RepSet):
 
         self.db_coll.insert_one(doc)
 
-    def coll_cnt(self, qry={}):
+    def coll_cnt(self, qry=None):
 
         """Method:  coll_cnt
 
@@ -1084,6 +1084,9 @@ class RepSetColl(RepSet):
             (output) -> Total number of documents in a collection.
 
         """
+
+        if qry is None:
+            qry = {}
 
         return self.db_coll.count(qry)
 
