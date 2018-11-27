@@ -660,7 +660,7 @@ class Coll(DB):
 
         return self.coll.distinct(col)
 
-    def coll_find1(self, qry={}):
+    def coll_find1(self, qry=None):
 
         """Method:  coll_find1
 
@@ -671,6 +671,9 @@ class Coll(DB):
             (output) -> Return of document from collection as cursor.
 
         """
+
+        if qry is None:
+            qry = {}
 
         return self.coll.find_one(qry)
 
