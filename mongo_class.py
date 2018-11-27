@@ -1,17 +1,5 @@
 # Classification (U)
 
-###############################################################################
-#
-# Filename:     mongo_class.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               mongo_libs      => v2.0.0 or higher
-#
-###############################################################################
-
 """Program:  mongo_class.py
 
     Description:  Class definitions and methods for Mongo database system.
@@ -33,7 +21,6 @@
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
@@ -47,7 +34,7 @@ import socket
 import mongo_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 
@@ -625,7 +612,7 @@ class Coll(DB):
 
         self.coll = self.conn[db][coll]
 
-    def coll_cnt(self, qry={}):
+    def coll_cnt(self, qry=None):
 
         """Method:  coll_cnt
 
@@ -637,9 +624,12 @@ class Coll(DB):
 
         """
 
+        if qry is None:
+            qry = {}
+
         return self.coll.count(qry)
 
-    def coll_find(self, qry={}):
+    def coll_find(self, qry=None):
 
         """Method:  coll_find
 
@@ -650,6 +640,9 @@ class Coll(DB):
             (output) -> Return of documents from collection as cursor.
 
         """
+
+        if qry is None:
+            qry = {}
 
         return self.coll.find(qry)
 
@@ -667,7 +660,7 @@ class Coll(DB):
 
         return self.coll.distinct(col)
 
-    def coll_find1(self, qry={}):
+    def coll_find1(self, qry=None):
 
         """Method:  coll_find1
 
@@ -678,6 +671,9 @@ class Coll(DB):
             (output) -> Return of document from collection as cursor.
 
         """
+
+        if qry is None:
+            qry = {}
 
         return self.coll.find_one(qry)
 
@@ -1077,7 +1073,7 @@ class RepSetColl(RepSet):
 
         self.db_coll.insert_one(doc)
 
-    def coll_cnt(self, qry={}):
+    def coll_cnt(self, qry=None):
 
         """Method:  coll_cnt
 
@@ -1088,6 +1084,9 @@ class RepSetColl(RepSet):
             (output) -> Total number of documents in a collection.
 
         """
+
+        if qry is None:
+            qry = {}
 
         return self.db_coll.count(qry)
 

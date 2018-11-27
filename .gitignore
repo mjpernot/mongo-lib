@@ -1,2 +1,7 @@
+TEST*
+test*
+*.swp
 *.pyc
 .coverage
+coverage.xml
+lib

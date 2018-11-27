@@ -1,24 +1,11 @@
 # Classification (U)
 
-###############################################################################
-#
-# Program:      setup.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               None
-#
-###############################################################################
-
 """Program:  setup.py
 
     Description:  A setuptools based setup module.
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
