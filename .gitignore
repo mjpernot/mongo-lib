@@ -4,3 +4,4 @@ test*
 *.pyc
 .coverage
 coverage.xml
+lib
