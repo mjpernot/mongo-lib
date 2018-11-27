@@ -17,5 +17,24 @@ pipeline {
             
             }
         }
+        stage('Artifactory upload') {
+            steps {
+                script {
+                    server = Artifactory.server('Artifactory')
+                    server.credentialsId = 'svc-highpoint-artifactory'
+                    uploadSpec = """{
+                        "files": [
+                            {
+                                "pattern": "./*.py",
+                                "recursive": false,
+                                "excludePatterns": [],
+                                "target": "generic-local/highpoint/mongo-lib/"
+                            }
+                        ]
+                    }"""
+                    server.upload(uploadSpec)
+                }
+            }
+        }
     }
 }
