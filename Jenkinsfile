@@ -45,10 +45,10 @@ pipeline {
                 sh './test/unit/sonarqube_code_coverage.sh'
                 sh 'rm -rf lib'
                 script {
-                    scannerHome = tool 'sonar-scanner -Dproject.settings=sonar-project.JACIDM.properties';
+                    scannerHome = tool 'sonar-scanner';
                 }
                 withSonarQubeEnv('Sonar') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar-project.JACIDM.properties"
                 }
             
             }
