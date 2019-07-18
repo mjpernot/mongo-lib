@@ -137,11 +137,25 @@ exit
 
 ```
 cd {Python_Project}/mongo-lib
-```
-
-### Unit:  
-```
-test/unit/mongodb_class/
+test/unit/mongo_class/MasterRep_init.py
+test/unit/mongo_class/RepSetColl_coll_cnt.py
+test/unit/mongo_class/RepSetColl_coll_del_many.py
+test/unit/mongo_class/RepSetColl_connect.py
+test/unit/mongo_class/RepSetColl_init.py
+test/unit/mongo_class/RepSetColl_ins_doc.py
+test/unit/mongo_class/RepSet_connect.py
+test/unit/mongo_class/RepSet_init.py
+test/unit/mongo_class/Rep_fetch_nodes.py
+test/unit/mongo_class/Rep_init.py
+test/unit/mongo_class/Server_connect.py
+test/unit/mongo_class/Server_disconnect.py
+test/unit/mongo_class/Server_fetch_adr.py
+test/unit/mongo_class/Server_init.py
+test/unit/mongo_class/Server_is_locked.py
+test/unit/mongo_class/Server_is_primary.py
+test/unit/mongo_class/Server_upd_server_attr.py
+test/unit/mongo_class/Server_upd_srv_stat.py
+test/unit/mongo_class/SlaveRep_init.py
 ```
 
 ### All unit testing for mongodb_class.py:
