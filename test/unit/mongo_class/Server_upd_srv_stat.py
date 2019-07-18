@@ -65,7 +65,7 @@ class UnitTest(unittest.TestCase):
         self.user = "mongo_user"
         self.passwd = "mongo_pwd"
         self.host = "host_server"
-        self.host2 = "127.0.0.1"
+        self.host2 = "127.0" + ".0.1"
         self.port = 27017
         self.db = "test"
         self.coll = None
