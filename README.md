@@ -150,9 +150,13 @@ test/unit/mongo_class/Rep_init.py
 test/unit/mongo_class/Server_connect.py
 test/unit/mongo_class/Server_disconnect.py
 test/unit/mongo_class/Server_fetch_adr.py
+test/unit/mongo_class/Server_fetch_dbs.py
+test/unit/mongo_class/Server_fetch_svr_info.py
 test/unit/mongo_class/Server_init.py
 test/unit/mongo_class/Server_is_locked.py
 test/unit/mongo_class/Server_is_primary.py
+test/unit/mongo_class/Server_lock_db.py
+test/unit/mongo_class/Server_unlock_db.py
 test/unit/mongo_class/Server_upd_server_attr.py
 test/unit/mongo_class/Server_upd_srv_stat.py
 test/unit/mongo_class/SlaveRep_init.py
