@@ -8,7 +8,7 @@
 ###  This README file is broken down into the following sections:
  * Prerequisites
  * Installation
- * Program Descriptions
+ * Class Descriptions
  * Testing
    - Unit
 
@@ -84,10 +84,7 @@ exit
 ```
 
 
-# Program Descriptions:
-### Program: mongodb_class.py
-##### Description: Class definitions and methods for connecting to Mongodb database system.
-##### Classes:
+# Class Descriptions:
   * Server => Class which is a representation of a Mongo database server.
   * DB => Class which is a representation of a database instance in a Mongo database server.
   * Coll => Class which is a representation of a collection instance in a Mongo database server.
@@ -103,8 +100,6 @@ exit
 # Testing
 
 # Unit Testing:
-
-### Description: Testing consists of unit testing for the functions in the mongodb_class.py and mongodb_libs.py programs.
 
 ### Installation:
 
@@ -174,7 +169,6 @@ test/unit/mongodb_class/code_coverage.sh
 
 # Unit test runs for mongodb_libs.py:
 
-### Unit:  
 ```
 test/unit/mongodb_lib/
 ```
