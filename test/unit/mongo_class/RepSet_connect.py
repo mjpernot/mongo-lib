@@ -46,6 +46,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_conn_true -> Test with conn set to true.
+        test_conn_false -> Test with conn set to false.
         test_no_conn_list2 -> Test no conn_list passed, set by repset_hosts.
         test_no_conn_list -> Test with no conn_list passed.
 
@@ -68,9 +70,48 @@ class UnitTest(unittest.TestCase):
         self.port = 27017
         self.db = "test"
         self.coll = None
-        self.db_auth = None
+        self.db_auth = False
         self.repset = "mongo_repset"
         self.repset_hosts = "host1:27017, host2:27107"
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_conn_true(self, mock_get, mock_mongo):
+
+        """Function:  test_conn_true
+
+        Description:  Test with conn set to true.
+
+        Arguments:
+
+        """
+
+        mock_get.return_value = True
+        mock_mongo.return_value = True
+        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
+                                   self.host, self.port, repset=self.repset)
+        mongo.auth = True
+
+        self.assertFalse(mongo.connect())
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_conn_false(self, mock_get, mock_mongo):
+
+        """Function:  test_conn_false
+
+        Description:  Test with conn set to false.
+
+        Arguments:
+
+        """
+
+        mock_get.return_value = True
+        mock_mongo.return_value = True
+        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
+                                   self.host, self.port, repset=self.repset)
+
+        self.assertFalse(mongo.connect())
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     def test_no_conn_list2(self, mock_get):
@@ -84,10 +125,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_get.return_value = True
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset,
-                                       repset_hosts=self.repset_hosts)
+        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
+                                   self.host, self.port, repset=self.repset,
+                                   repset_hosts=self.repset_hosts)
         mongo.conn = True
 
         self.assertFalse(mongo.connect())
@@ -104,9 +144,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_get.return_value = True
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
+                                   self.host, self.port, repset=self.repset)
         mongo.conn = True
 
         self.assertFalse(mongo.connect())
