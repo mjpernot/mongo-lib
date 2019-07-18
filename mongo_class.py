@@ -167,7 +167,6 @@ class Server(object):
         Description:  Updates the Server's status attributes.
 
         Arguments:
-            None
 
         """
 
@@ -210,7 +209,6 @@ class Server(object):
         Description:  Update server information attributes.
 
         Arguments:
-            None
 
         """
 
@@ -231,7 +229,6 @@ class Server(object):
         Description:  Exception handling for the upd_server_attr method.
 
         Arguments:
-            None
 
         """
 
@@ -255,7 +252,6 @@ class Server(object):
             basic server attributes.
 
         Arguments:
-            None
 
         """
 
@@ -573,7 +569,6 @@ class Coll(DB):
     Super-Class:  DB
 
     Sub-Classes:
-        None
 
     Methods:
         __init__
@@ -778,7 +773,6 @@ class MasterRep(Rep):
     Super-Class:  Rep
 
     Sub-Classes:
-        None
 
     Methods:
         __init__
@@ -831,7 +825,6 @@ class SlaveRep(Rep):
     Super-Class:  Rep
 
     Sub-Classes:
-        None
 
     Methods:
         __init__
@@ -972,7 +965,6 @@ class RepSetColl(RepSet):
     Super-Class:  RepSet
 
     Sub-Classes:
-        None
 
     Methods:
         __init__
