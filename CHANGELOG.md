@@ -23,22 +23,22 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_libs.py:  Changed "gen_libs.Print_Data" to "gen_libs.print_data" calls.
 
 ### Removed
-- mongo_libs.Crt_Base_Cmd: Function was previously deprecated.
-- mongo_libs.Create_Cmd: Function was previously deprecated.
-- mongo_libs.JSON_2_Out: Function was previously deprecated.
-- mongo_libs.JSON_Prt_Ins_2_DB: Function was previously deprecated.
-- mongo_libs.Create_Instance: Function was previously deprecated.
-- mongo_libs.Crt_Coll_Inst: Function was previously deprecated.
-- mongo_libs.Ins_Doc: Function was previously deprecated.
-- mongo_libs.Fetch_Cmd_Line: Function was previously deprecated.
-- mongo_libs.Fetch_Db_Info: Function was previously deprecated.
-- mongo_libs.Fetch_isMaster: Function was previously deprecated.
-- mongo_libs.Display_Data: Function was previously deprecated.
-- mongo_libs.Create_Slv_Array: Function was previously deprecated.
-- mongo_class.Rep_Set:  Class was previously deprecated.
-- mongo_class.Rep_Set_Coll:  Class was previously deprecated.
-- mongo_class.Slave_Rep:  Class was previously deprecated.
-- mongo_class.Master_Rep:  Class was previously deprecated.
+- mongo_libs.Crt_Base_Cmd
+- mongo_libs.Create_Cmd
+- mongo_libs.JSON_2_Out
+- mongo_libs.JSON_Prt_Ins_2_DB
+- mongo_libs.Create_Instance
+- mongo_libs.Crt_Coll_Inst
+- mongo_libs.Ins_Doc
+- mongo_libs.Fetch_Cmd_Line
+- mongo_libs.Fetch_Db_Info
+- mongo_libs.Fetch_isMaster
+- mongo_libs.Display_Data
+- mongo_libs.Create_Slv_Array
+- mongo_class.Rep_Set
+- mongo_class.Rep_Set_Coll
+- mongo_class.Slave_Rep
+- mongo_class.Master_Rep
 
 
 ## [2.0.0] - 2018-03-08
@@ -47,8 +47,8 @@ Breaking Change
 ### Changed
 - Renamed cmds_mongo.py to mongo_libs.py.
 - Renamed svr_mongo.py to mongo_class.py.
-- mongo_class.SlaveRep.__init__:  Changed mongo_libs reference to new naming schema.
-- mongo_class.MasterRep.__init__:  Changed mongo_libs reference to new naming schema.
+- mongo_class.SlaveRep.\_\_init\_\_:  Changed mongo_libs reference to new naming schema.
+- mongo_class.MasterRep.\_\_init\_\_:  Changed mongo_libs reference to new naming schema.
 - mongo_class.Server.upd_server_attr:  Changed mongo_libs reference to new naming schema.
 - mongo_libs.py: Changed mongo_class classes to new naming schema.
 - mongo_libs.py: Changed svr_mongo references to mongo_class references.
@@ -138,7 +138,7 @@ Breaking Change
 
 ## [1.8.0] - 2016-12-06
 ### Changed
-- svr_mongo.Rep_Set.__init__:  Added repset_hosts to initilization.
+- svr_mongo.Rep_Set.\_\_init\_\_:  Added repset_hosts to initilization.
 - svr_mongo.Rep_Set.connect:  Use repset_hosts if it is populated.
 
 ### Added
@@ -163,7 +163,7 @@ Breaking Change
 - svr_mongo:  Added psutil and socket modules.
 
 ### Changed
-- svr_mongo.Server.__init__:  Added attributes for the Servers memory and other status configuration settings.
+- svr_mongo.Server.\_\_init\_\_:  Added attributes for the Servers memory and other status configuration settings.
 
 
 ## [1.5.0] - 2016-03-17
@@ -179,7 +179,7 @@ Breaking Change
 - svr_mongo.DB:  isvalid_tbl method - Validates a table in a db.
 
 ### Fixed
-- svr_mongo.DB.db_connect:  Corrected error in 'if' statement.
+- svr_mongo.DB.db_connect:  Corrected error in "if" statement.
 
 
 ## [1.3.0] - 2016-03-04
@@ -200,7 +200,7 @@ Breaking Change
 - svr_mongo:  Coll class
 
 ### Changed
-- svr_mongo.DB.__init__: Added attribute db_name.
+- svr_mongo.DB.\_\_init\_\_: Added attribute db_name.
 
 
 ## [1.0.0] - 2016-02-09
