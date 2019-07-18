@@ -15,7 +15,7 @@ pipeline {
                 virtualenv test_env
                 source test_env/bin/activate
                 pip2 install mock --user
-                pip2 install mysql-connector-python --user
+                pip2 install pymongo --user
                 ./test/unit/mongo_class/MasterRep_init.py
                 ./test/unit/mongo_class/RepSetColl_coll_cnt.py
                 ./test/unit/mongo_class/RepSetColl_coll_del_many.py
