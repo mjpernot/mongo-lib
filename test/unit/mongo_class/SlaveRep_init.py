@@ -87,8 +87,8 @@ class UnitTest(unittest.TestCase):
 
         mock_connect.return_value = True
         mock_fetch.return_value = self.data
-        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
-                                   self.host, self.port, repset=self.repset)
+        mongo = mongo_class.SlaveRep(self.name, self.user, self.passwd,
+                                     self.host, self.port, repset=self.repset)
 
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
                           mongo.port, mongo.db, mongo.coll, mongo.repset,
