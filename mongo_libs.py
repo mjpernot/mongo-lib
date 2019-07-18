@@ -32,7 +32,6 @@ import lib.cmds_gen as cmds_gen
 import mongo_class
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -168,8 +167,6 @@ def crt_coll_inst(cfg, db, tbl, **kwargs):
         (input) cfg_file -> Configuration file name.
         (input) db -> Database name.
         (input) tbl ->  Collection name.
-        (input) **kwargs:
-            None
 
     """
 
@@ -197,8 +194,6 @@ def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
         (input) db -> Database name.
         (input) tbl ->  Collection name.
         (input) data -> Document to be inserted.
-        (input) **kwargs:
-            None
 
     """
 
