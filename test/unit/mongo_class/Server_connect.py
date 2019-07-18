@@ -24,6 +24,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -71,7 +72,7 @@ class UnitTest(unittest.TestCase):
         self.conf_file = "Conf_File"
 
     @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.adm_cmd")
+    @mock.patch("mongo_class.Server.get_srv_attr")
     def test_no_auth(self, mock_cmd, mock_client):
 
         """Function:  test_no_auth
@@ -83,15 +84,15 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_cmd.return_value = True
-        mock_cmd.return_value = self.data
+        mock_client.return_value = True
         mongo = mongo_class.Server(self.name, self.user, self.passwd,
                                    self.host, self.port, auth=False)
 
         mongo.connect()
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db),
+                          mongo.port),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db))
+                          self.port))
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
@@ -112,9 +113,9 @@ class UnitTest(unittest.TestCase):
 
         mongo.connect()
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db),
+                          mongo.port),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db))
+                          self.port))
 
 
 if __name__ == "__main__":

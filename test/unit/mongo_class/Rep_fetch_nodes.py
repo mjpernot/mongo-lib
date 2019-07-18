@@ -109,7 +109,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(self.name, self.user, self.passwd, self.host,
-                                self.port, repset=self.repset)
+                                self.port)
         mongo.conn = Conn()
 
         self.assertEqual(mongo.fetch_nodes(), self.nodes)

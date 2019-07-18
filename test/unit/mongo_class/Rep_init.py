@@ -80,12 +80,12 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(self.name, self.user, self.passwd, self.host,
-                                self.port, repset=self.repset)
+                                self.port)
 
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll, mongo.repset),
+                          mongo.port),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll, self.repset))
+                          self.port))
 
 
 if __name__ == "__main__":

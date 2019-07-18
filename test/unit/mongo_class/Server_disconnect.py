@@ -24,6 +24,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -86,9 +87,9 @@ class UnitTest(unittest.TestCase):
 
         mongo.disconnect()
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db. mongo.conn),
+                          mongo.port, mongo.conn),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, None))
+                          self.port, None))
 
 
 if __name__ == "__main__":

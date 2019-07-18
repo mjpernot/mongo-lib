@@ -24,6 +24,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -70,8 +71,8 @@ class UnitTest(unittest.TestCase):
         self.db_auth = None
         self.conf_file = "Conf_File"
         self.data = {"parsed": {"storage": {"dbPath": "db_path"},
-                                "systemLog": {"path": "dir_path"}},
-                               {"config": "conf_file"}}
+                                "systemLog": {"path": "dir_path"},
+                                "config": "conf_file"}}
 
     @mock.patch("mongo_class.Server.adm_cmd")
     def test_no_conf_file(self, mock_cmd):
@@ -90,9 +91,9 @@ class UnitTest(unittest.TestCase):
 
         mongo.upd_server_attr()
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.conf_file),
+                          mongo.port, mongo.conf_file),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, "conf_file"))
+                          self.port, "conf_file"))
 
     @mock.patch("mongo_class.fetch_cmd_line")
     def test_conf_file(self, mock_cmd):
@@ -107,13 +108,14 @@ class UnitTest(unittest.TestCase):
 
         mock_cmd.return_value = self.data
         mongo = mongo_class.Server(self.name, self.user, self.passwd,
-                                   self.host, self.port, self.conf_file)
+                                   self.host, self.port,
+                                   conf_file=self.conf_file)
 
         mongo.upd_server_attr()
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.conf_file),
+                          mongo.port, mongo.conf_file),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.conf_file))
+                          self.port, self.conf_file))
 
 
 if __name__ == "__main__":

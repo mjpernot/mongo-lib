@@ -90,8 +90,7 @@ class UnitTest(unittest.TestCase):
                                        repset_hosts=self.repset_hosts)
         mongo.conn = True
 
-        mongo.connect()
-        self.assertEqual(mongo.conn_list, self.repset_hosts)
+        self.assertFalse(mongo.connect())
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     def test_no_conn_list(self, mock_get):
@@ -110,8 +109,7 @@ class UnitTest(unittest.TestCase):
                                        repset=self.repset)
         mongo.conn = True
 
-        mongo.connect()
-        self.assertEqual(mongo.conn_list, self.host + ":" + str(self.port))
+        self.assertFalse(mongo.connect())
 
 
 if __name__ == "__main__":

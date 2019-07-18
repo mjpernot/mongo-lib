@@ -48,13 +48,14 @@ class InsDoc(object):
 
     """
 
-    def insert_one(self):
+    def insert_one(self, doc):
 
         """Function:  insert_one
 
         Description:  Stub holder for RepSetColl.db_coll.insert_one method.
 
         Arguments:
+            (input) doc -> Document
 
         """
 
@@ -96,6 +97,7 @@ class UnitTest(unittest.TestCase):
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"
+        self.doc = {"Document"}
 
     def test_ins_doc(self):
 
@@ -112,7 +114,7 @@ class UnitTest(unittest.TestCase):
                                        repset=self.repset)
         mongo.db_coll = InsDoc()
 
-        self.assertFalse(mongo.ins_doc())
+        self.assertFalse(mongo.ins_doc(self.doc))
 
 
 if __name__ == "__main__":

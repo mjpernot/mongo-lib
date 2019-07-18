@@ -82,9 +82,9 @@ class UnitTest(unittest.TestCase):
                                    self.port)
 
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll),
+                          mongo.port),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll))
+                          self.port))
 
 
 if __name__ == "__main__":

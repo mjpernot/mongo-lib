@@ -24,6 +24,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -69,7 +70,7 @@ class UnitTest(unittest.TestCase):
         self.db = "test"
         self.coll = None
         self.db_auth = None
-        self.data = {"uptime": 10, "connections: {"current": 1,
+        self.data = {"uptime": 10, "connections": {"current": 1,
                                                   "available": 9},
                      "mem": {"resident": 1000000}}
 
@@ -90,9 +91,9 @@ class UnitTest(unittest.TestCase):
 
         mongo.upd_srv_stat()
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll),
+                          mongo.port),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll))
+                          self.port))
 
     @mock.patch("mongo_class.Server.adm_cmd")
     def test_local_host(self, mock_cmd):
@@ -111,9 +112,9 @@ class UnitTest(unittest.TestCase):
 
         mongo.upd_srv_stat()
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll),
+                          mongo.port),
                          (self.name, self.user, self.passwd, self.host2,
-                          self.port, self.db, self.coll))
+                          self.port))
 
 
 if __name__ == "__main__":

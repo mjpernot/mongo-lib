@@ -45,7 +45,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_default -> Test with minimum number of arguments.
+        test_init -> Test with minimum number of arguments.
 
     """
 
@@ -69,9 +69,9 @@ class UnitTest(unittest.TestCase):
         self.db_auth = None
         self.repset = "mongo_repset"
 
-    def test_default(self):
+    def test_init(self):
 
-        """Function:  test_default
+        """Function:  test_init
 
         Description:  Test __init__ method with default arguments.
 
