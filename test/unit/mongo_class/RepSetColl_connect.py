@@ -69,6 +69,7 @@ class UnitTest(unittest.TestCase):
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"
+        self.repset_hosts = "host1:27017, host2:27107"
 
     def test_no_conn_list2(self):
 
@@ -82,12 +83,12 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
                                        self.host, self.port,
-                                       repset=self.repset)
+                                       repset=self.repset,
+                                       repset_hosts=self.repset_hosts)
         mongo.conn = True
-        mongo.repset_hosts = self.host + ":" + str(self.port)
 
         mongo.connect()
-        self.assertEqual(mongo.conn_list, self.host + ":" + str(self.port))
+        self.assertEqual(mongo.conn_list, self.repset_hosts)
 
     def test_no_conn_list(self):
 
