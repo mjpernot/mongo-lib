@@ -88,6 +88,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Server(self.name, self.user, self.passwd,
                                    self.host, self.port)
 
+        mongo.upd_server_attr()
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
                           mongo.port, mongo.db, mongo.conf_file),
                          (self.name, self.user, self.passwd, self.host,
@@ -108,6 +109,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Server(self.name, self.user, self.passwd,
                                    self.host, self.port, self.conf_file)
 
+        mongo.upd_server_attr()
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
                           mongo.port, mongo.db, mongo.conf_file),
                          (self.name, self.user, self.passwd, self.host,
