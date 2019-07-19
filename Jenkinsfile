@@ -42,6 +42,11 @@ pipeline {
                 ./test/unit/mongo_class/Server_upd_server_attr.py
                 ./test/unit/mongo_class/Server_upd_srv_stat.py
                 ./test/unit/mongo_class/SlaveRep_init.py
+                ./test/unit/mongo_libs/create_cmd.py
+                ./test/unit/mongo_libs/create_instance.py
+                ./test/unit/mongo_libs/create_slv_array.py
+                ./test/unit/mongo_libs/crt_base_cmd.py
+                ./test/unit/mongo_libs/crt_coll_inst.py
                 deactivate
                 rm -rf test_env
                 """
