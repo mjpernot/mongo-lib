@@ -100,11 +100,12 @@ def create_slv_array(cfg_array):
         array.
 
     Arguments:
-        (input) cfg_array -> Array of configurations.
+        (input) cfg_array -> List of configurations.
         (output) slaves -> List of slave instances.
 
     """
 
+    cfg_array = list(cfg_array)
     slaves = []
 
     for slv in cfg_array:
