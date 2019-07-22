@@ -75,13 +75,14 @@ class Mongo(object):
 
         return True
 
-    def ins_doc(self):
+    def ins_doc(self, doc):
 
         """Function:  ins_doc
 
         Description:  Stub holder for Mongo.Coll.ins_doc method.
 
         Arguments:
+            (input) doc -> Document.
 
         """
 
