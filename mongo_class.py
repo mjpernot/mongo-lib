@@ -141,11 +141,9 @@ class Server(object):
         self.port = port
         self.auth = auth
         self.conf_file = conf_file
-
         self.conn = None
         self.db_path = None
         self.log_path = None
-
         self.uptime = None
         self.days_up = None
         self.cur_conn = None
@@ -171,7 +169,6 @@ class Server(object):
         udp_addr = "8.8." + "8.8"
         loopback = "127.0." + "0.1"
         data = self.adm_cmd("serverStatus")
-
         self.uptime = data["uptime"]
         self.cur_conn = data["connections"]["current"]
         self.avl_conn = data["connections"]["available"]
@@ -179,6 +176,7 @@ class Server(object):
 
         # Get local IP address.
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
         # Connecting to an UDP address doesn't send packets.
         s.connect((udp_addr, 0))
         local_ip = s.getsockname()[0]
@@ -213,7 +211,6 @@ class Server(object):
         """
 
         data = fetch_cmd_line(self)
-
         self.db_path = data["parsed"]["storage"]["dbPath"]
         self.log_path = data["parsed"]["systemLog"]["path"]
 
@@ -272,13 +269,11 @@ class Server(object):
         Description:  Disconnects from a Mongo database server connection.
 
         Arguments:
-            (output) Returns a Null for the connection handler.
 
         """
 
         pymongo.MongoClient.close(self.conn)
         self.conn = None
-        return self
 
     def adm_cmd(self, cmd, **kwargs):
 
