@@ -181,7 +181,7 @@ class Server(object):
         # Get local IP address.
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # Connecting to an UDP address doesn't send packets.
-        s.connect((self.udp_addr, 0))
+        s.connect((udp_addr, 0))
         local_ip = s.getsockname()[0]
 
         # Only get System Memory if on local machine.
