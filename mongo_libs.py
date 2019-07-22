@@ -115,7 +115,7 @@ def create_slv_array(cfg_array):
     return slaves
 
 
-def crt_base_cmd(MONGO, prog_name, **kwargs):
+def crt_base_cmd(mongo, prog_name, **kwargs):
 
     """Function:  crt_base_cmd
 
@@ -124,7 +124,7 @@ def crt_base_cmd(MONGO, prog_name, **kwargs):
         basic setup will include program name, host, and port.
 
     Arguments:
-        (input) MONGO -> Database/Replication server instance.
+        (input) mongo -> Database/Replication server instance.
         (input) prog_name -> Name of binary program.
         (input) **kwargs:
             use_repset -> True|False - Use repset name connection.
@@ -134,23 +134,23 @@ def crt_base_cmd(MONGO, prog_name, **kwargs):
     """
 
     # Use repset name and hosts for connection, if set.
-    if kwargs.get("use_repset", False) and MONGO.repset \
-            and MONGO.repset_hosts:
+    if kwargs.get("use_repset", False) and mongo.repset \
+            and mongo.repset_hosts:
 
-        host_port = "--host=" + MONGO.repset + "/" + MONGO.repset_hosts
+        host_port = "--host=" + mongo.repset + "/" + mongo.repset_hosts
 
     # Use repset name for connection, if set.
-    elif kwargs.get("use_repset", False) and MONGO.repset:
-        host_port = "--host=" + MONGO.repset + "/" + MONGO.host + ":" \
-                    + str(MONGO.port)
+    elif kwargs.get("use_repset", False) and mongo.repset:
+        host_port = "--host=" + mongo.repset + "/" + mongo.host + ":" \
+                    + str(mongo.port)
 
     # Assume just host and port.
     else:
-        host_port = "--host=" + MONGO.host + ":" + str(MONGO.port)
+        host_port = "--host=" + mongo.host + ":" + str(mongo.port)
 
-    if MONGO.auth:
-        return [prog_name, "--username=" + MONGO.user, host_port,
-                "--password=" + MONGO.passwd]
+    if mongo.auth:
+        return [prog_name, "--username=" + mongo.user, host_port,
+                "--password=" + mongo.passwd]
 
     else:
         return [prog_name, host_port]
