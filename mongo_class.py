@@ -38,7 +38,7 @@ import version
 __version__ = version.__version__
 
 
-def fetch_cmd_line(MONGODB):
+def fetch_cmd_line(mongo):
 
     """Function:  fetch_cmd_line
 
@@ -46,42 +46,42 @@ def fetch_cmd_line(MONGODB):
         command.
 
     Arguments:
-        (input) MONGODB -> Database server connection.
+        (input) mongo -> Database instance.
         (output) -> Returns a document from the getCmdLineOpts command.
 
     """
 
-    return MONGODB.adm_cmd("getCmdLineOpts")
+    return mongo.adm_cmd("getCmdLineOpts")
 
 
-def fetch_db_info(MONGODB):
+def fetch_db_info(mongo):
 
     """Function:  fetch_db_info
 
     Description:  Calls adminstration command to run the listDatabases command.
 
     Arguments:
-        (input) MONGODB -> Database server connection.
+        (input) mongo -> Database instance.
         (output) -> Returns a document from the listDatabases command.
 
     """
 
-    return MONGODB.adm_cmd("listDatabases")
+    return mongo.adm_cmd("listDatabases")
 
 
-def fetch_ismaster(MONGODB):
+def fetch_ismaster(mongo):
 
     """Function:  fetch_ismaster
 
     Description:  Calls the adminstration command to run the isMaster command.
 
     Arguments:
-        (input) MONGODB -> Database server connection.
+        (input) mongo -> Database instance.
         (output) -> Returns a document from the isMaster command.
 
     """
 
-    return MONGODB.adm_cmd("isMaster")
+    return mongo.adm_cmd("isMaster")
 
 
 class Server(object):
