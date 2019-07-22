@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.1.2] - 2019-07-22
 ### Fixed
+- mongo_libs.ins_doc:  Fixed Sonarqube findings.
 - mongo_libs.crt_base_cmd:  Fixed Sonarqube findings.
 - mongo_libs.create_slv_array:  Fixed Sonarqube findings.
 - mongo_libs.create_instance:  Fixed Sonarqube findings.

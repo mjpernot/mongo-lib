@@ -198,10 +198,10 @@ def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
 
     """
 
-    COLL = crt_coll_inst(mongo_cfg, db, tbl, **kwargs)
-    COLL.connect()
-    COLL.ins_doc(json.loads(json.dumps(data)))
-    cmds_gen.disconnect([COLL])
+    coll = crt_coll_inst(mongo_cfg, db, tbl, **kwargs)
+    coll.connect()
+    coll.ins_doc(json.loads(json.dumps(data)))
+    cmds_gen.disconnect([coll])
 
 
 def json_2_out(data, **kwargs):
