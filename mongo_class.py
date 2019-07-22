@@ -1000,7 +1000,7 @@ class RepSetColl(RepSet):
         self.coll = coll
         self.db_auth = db_auth
 
-    def connect(self, conn_list=None):
+    def connect(self, connections=None):
 
         """Method:  connect
 
@@ -1008,23 +1008,23 @@ class RepSetColl(RepSet):
             connects to a database and collection.
 
         Arguments:
-            (input) conn_list ->  String of server connections.
+            (input) connections ->  String of server connections.
 
         """
 
-        if not conn_list:
+        if not connections:
 
             if self.repset_hosts:
-                conn_list = self.repset_hosts
+                connections = self.repset_hosts
 
             else:
-                conn_list = self.host + ":" + str(self.port)
+                connections = self.host + ":" + str(self.port)
 
         if not self.conn:
 
             # Is authenication required.
             if self.auth:
-                self.conn = pymongo.MongoClient(host=[conn_list],
+                self.conn = pymongo.MongoClient(host=[connections],
                                                 document_class=dict,
                                                 tz_aware=False, connect=True,
                                                 replicaset=self.repset)
@@ -1043,7 +1043,7 @@ class RepSetColl(RepSet):
 
             # Assume no authentication required.
             else:
-                self.conn = pymongo.MongoClient(conn_list,
+                self.conn = pymongo.MongoClient(connections,
                                                 replicaSet=self.repset)
 
     def ins_doc(self, doc):

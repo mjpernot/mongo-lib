@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.1.2] - 2019-07-22
 ### Change
+- mongo_class.RepSetColl.connect:  Changed conn_list to connections for readability.
 - mongo_class.RepSet.connect:  Changed conn_list to connections for readability.
 - mongo_class.Server.disconnect:  Removed returning Null connection status.
 - mongo_class.Server.upd_server_attr:  Refactored method and improved checking.
