@@ -119,7 +119,7 @@ class Server(object):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 auth=True, conf_file=None, **kwargs):
+                 auth=True, conf_file=None):
 
         """Method:  __init__
 
@@ -159,7 +159,6 @@ class Server(object):
         self.cur_mem = None
         self.max_mem = None
         self.prct_mem = None
-        self.udp_addr = kwargs.get("udp_addr", "8.8.8.8")
 
     def upd_srv_stat(self):
 
@@ -171,6 +170,7 @@ class Server(object):
 
         """
 
+        udp_addr = "8.8." + "8.8"
         data = self.adm_cmd("serverStatus")
 
         self.uptime = data["uptime"]
