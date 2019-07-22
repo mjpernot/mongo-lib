@@ -72,7 +72,7 @@ class UnitTest(unittest.TestCase):
         self.coll = None
         self.db_auth = None
         self.data = {"uptime": 10, "connections": {"current": 1,
-                                                  "available": 9},
+                                                   "available": 9},
                      "mem": {"resident": 1000000}}
 
     @mock.patch("mongo_class.Server.adm_cmd")
