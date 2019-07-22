@@ -537,13 +537,13 @@ class DB(Server):
 
         Arguments:
             (input) cmd -> Database command.
-                input) **kwargs:
+            (input) **kwargs:
                 obj -> Name of object command will work against.
+                    NOTE:  obj can be a database or collection.
             (output) Returns the output of the database command.
 
         """
 
-        # obj can be a database or collection.
         if "obj" in kwargs:
             return self.db.command(cmd, kwargs["obj"])
 
@@ -752,6 +752,7 @@ class Rep(Server):
         """
 
         time.sleep(0.1)
+
         return self.conn.nodes
 
 
@@ -1096,6 +1097,6 @@ class RepSetColl(RepSet):
         elif override:
             self.db_coll.delete_many({})
 
-        # Assume must be a mistake in search criteria.
+        # Assume must be a mistake.
         else:
             print("WARNING:  Require search criteria.")
