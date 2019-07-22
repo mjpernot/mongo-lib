@@ -911,7 +911,7 @@ class RepSet(Rep):
 
         self.repset_hosts = repset_hosts
 
-    def connect(self, conn_list=None):
+    def connect(self, connections=None):
 
         """Method:  connect
 
@@ -919,30 +919,30 @@ class RepSet(Rep):
             basic server attributes.
 
         Arguments:
-            (input) conn_list ->  String of server connections.
+            (input) connections ->  String of server connections.
 
         """
 
-        if not conn_list:
+        if not connections:
 
             # Connect to replica set.
             if self.repset_hosts:
-                conn_list = self.repset_hosts
+                connections = self.repset_hosts
 
             else:
-                conn_list = self.host + ":" + str(self.port)
+                connections = self.host + ":" + str(self.port)
 
         if not self.conn:
 
             # Is authenication set.
             if self.auth:
                 uri = "mongodb://" + self.user + ":" + self.passwd + "@" \
-                      + conn_list + "/?replicaSet=" + self.repset
+                      + connections + "/?replicaSet=" + self.repset
                 self.conn = pymongo.MongoClient(uri)
 
             # Assume no authentication required.
             else:
-                self.conn = pymongo.MongoClient(conn_list,
+                self.conn = pymongo.MongoClient(connections,
                                                 replicaSet=self.repset)
 
         self.get_srv_attr()
