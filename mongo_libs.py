@@ -99,19 +99,20 @@ def create_slv_array(cfg_array):
 
     Arguments:
         (input) cfg_array -> Array of configurations.
-        (output) SLV_ARRAY -> Array of slave instances.
+        (output) slaves -> List of slave instances.
 
     """
 
-    SLV_ARRAY = []
+    slaves = []
 
     for slv in cfg_array:
-        SLV = mongo_class.SlaveRep(slv["name"], slv["user"], slv["passwd"],
-                                   slv["host"], int(slv["port"]), slv["auth"],
-                                   slv["conf_file"])
-        SLV_ARRAY.append(SLV)
+        slave_inst = mongo_class.SlaveRep(slv["name"], slv["user"],
+                                          slv["passwd"], slv["host"],
+                                          int(slv["port"]), slv["auth"],
+                                          slv["conf_file"])
+        slaves.append(slave_inst)
 
-    return SLV_ARRAY
+    return slaves
 
 
 def crt_base_cmd(MONGO, prog_name, **kwargs):
