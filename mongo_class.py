@@ -217,10 +217,8 @@ class Server(object):
         self.db_path = data["parsed"]["storage"]["dbPath"]
         self.log_path = data["parsed"]["systemLog"]["path"]
 
-        if not self.conf_file:
-
-            if "config" in data["parsed"]:
-                self.conf_file = data["parsed"]["config"]
+        if not self.conf_file and "config" in data["parsed"]:
+            self.conf_file = data["parsed"]["config"]
 
     def get_srv_attr(self):
 

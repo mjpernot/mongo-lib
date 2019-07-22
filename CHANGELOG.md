@@ -5,6 +5,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.1.2] - 2019-07-22
+### Change
+- mongo_class.Server.upd_server_attr:  Refactored method and improved checking.
+
 ### Fixed
 - mongo_class.fetch_ismaster:  Fixed Sonarqube findings.
 - mongo_class.fetch_db_info:  Fixed Sonarqube findings.
