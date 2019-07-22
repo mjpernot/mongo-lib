@@ -170,6 +170,7 @@ class Server(object):
 
         """
 
+        udp_addr = "8.8.8.8"
         data = self.adm_cmd("serverStatus")
 
         self.uptime = data["uptime"]
@@ -180,7 +181,7 @@ class Server(object):
         # Get local IP address.
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # Connecting to an UDP address doesn't send packets.
-        s.connect(("8.8.8.8", 0))
+        s.connect((udp_addr, 0))
         local_ip = s.getsockname()[0]
 
         # Only get System Memory if on local machine.
