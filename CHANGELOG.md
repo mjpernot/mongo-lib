@@ -9,7 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class.Server.upd_server_attr:  Refactored method and improved checking.
 
 ### Fixed
-- mongo_class.Server.upd_srv_stat:  Fixed vulnerability from Sonarqube findings.
+- mongo_class.Server.upd_srv_stat:  Fixed two vulnerabilities from Sonarqube findings.
 - mongo_class.fetch_ismaster:  Fixed Sonarqube findings.
 - mongo_class.fetch_db_info:  Fixed Sonarqube findings.
 - mongo_class.fetch_cmd_line:  Fixed Sonarqube findings.

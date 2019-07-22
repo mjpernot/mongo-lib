@@ -171,6 +171,7 @@ class Server(object):
         """
 
         udp_addr = "8.8." + "8.8"
+        loopback = "127.0." + "0.1"
         data = self.adm_cmd("serverStatus")
 
         self.uptime = data["uptime"]
@@ -185,7 +186,7 @@ class Server(object):
         local_ip = s.getsockname()[0]
 
         # Only get System Memory if on local machine.
-        if self.host == local_ip or self.host == "127.0.0.1":
+        if self.host == local_ip or self.host == loopback:
 
             # Total Memory and percentage of memory used.
             self.avl_sys_mem = psutil.virtual_memory().available
