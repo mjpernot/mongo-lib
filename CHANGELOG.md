@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.1.2] - 2019-07-22
+### Fixed
+- mongo_libs.create_cmd:  Fixed Sonarqube findings.
+
+
 ## [2.1.1] - 2018-11-27
 ### Fixed
 - mongo_class.Coll.coll_cnt:  Changed function parameter mutable argument default to immutable argument default.

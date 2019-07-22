@@ -35,7 +35,7 @@ import version
 __version__ = version.__version__
 
 
-def create_cmd(MONGO, args_array, prog_name, path_opt, **kwargs):
+def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
 
     """Function:  create_cmd
 
@@ -43,7 +43,7 @@ def create_cmd(MONGO, args_array, prog_name, path_opt, **kwargs):
         then add required arguments and additional options if they are present.
 
     Arguments:
-        (input) MONGO -> Database/Replication server instance.
+        (input) mongo -> Database instance.
         (input) args_array -> Array of command line options and values.
         (input) prog_name -> Name of utility program.
         (input) path_opt -> Option containing the path dir to program.
@@ -56,7 +56,7 @@ def create_cmd(MONGO, args_array, prog_name, path_opt, **kwargs):
 
     """
 
-    cmd = crt_base_cmd(MONGO, arg_parser.arg_set_path(args_array, path_opt)
+    cmd = crt_base_cmd(mongo, arg_parser.arg_set_path(args_array, path_opt)
                        + prog_name, **kwargs)
 
     # Process required arguments.
