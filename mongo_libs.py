@@ -127,7 +127,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
         basic setup will include program name, host, and port.
 
     Arguments:
-        (input) mongo -> Database/Replication server instance.
+        (input) mongo -> Database instance.
         (input) prog_name -> Name of binary program.
         (input) **kwargs:
             use_repset -> True|False - Use repset name connection.
@@ -201,6 +201,7 @@ def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
 
     """
 
+    data = dict(data)
     coll = crt_coll_inst(mongo_cfg, db, tbl, **kwargs)
     coll.connect()
     coll.ins_doc(json.loads(json.dumps(data)))
