@@ -31,10 +31,8 @@ import psutil
 import socket
 
 # Local
-import mongo_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -1101,7 +1099,7 @@ class RepSetColl(RepSet):
 
         # Allow for truncation.
         elif override:
-            self.db_coll.delete_many(qry)
+            self.db_coll.delete_many({})
 
         # Assume must be a mistake in search criteria.
         else:

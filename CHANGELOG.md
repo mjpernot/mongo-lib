@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class.Server.upd_server_attr:  Refactored method and improved checking.
 
 ### Fixed
+- mongo_class.RepSetColl.coll_del_many:  Replaced qry with an empty document ({}) to allow for collection truncation.
 - mongo_class.Server.upd_srv_stat:  Fixed two vulnerabilities from Sonarqube findings.
 - mongo_class.fetch_ismaster:  Fixed Sonarqube findings.
 - mongo_class.fetch_db_info:  Fixed Sonarqube findings.
