@@ -67,7 +67,7 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
     return cmds_gen.is_add_cmd(args_array, cmd, kwargs.get("opt_arg", []))
 
 
-def create_instance(cfg_file, dir_path, CLASS):
+def create_instance(cfg_file, dir_path, class_name):
 
     """Function:  create_instance
 
@@ -79,15 +79,15 @@ def create_instance(cfg_file, dir_path, CLASS):
     Arguments:
         (input) cfg_file -> Configuration file name.
         (input) dir_path -> Directory path.
-        (input) CLASS -> Reference to a Class type.
+        (input) class_name -> Reference to a Class type.
         (output) -> Class type instance.
 
     """
 
     cfg = gen_libs.load_module(cfg_file, dir_path)
 
-    return CLASS(cfg.name, cfg.user, cfg.passwd, cfg.host, cfg.port, cfg.auth,
-                 cfg.conf_file)
+    return class_name(cfg.name, cfg.user, cfg.passwd, cfg.host, cfg.port,
+                      cfg.auth, cfg.conf_file)
 
 
 def create_slv_array(cfg_array):
