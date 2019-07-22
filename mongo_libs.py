@@ -56,15 +56,17 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
 
     """
 
+    args_array = dict(args_array)
     cmd = crt_base_cmd(mongo, arg_parser.arg_set_path(args_array, path_opt)
                        + prog_name, **kwargs)
 
     # Process required arguments.
-    for arg in kwargs.get("req_arg", []):
+    for arg in list(kwargs.get("req_arg", [])):
         cmd = cmds_gen.add_cmd(cmd, arg=arg)
 
-    # Add optional arguments.
-    return cmds_gen.is_add_cmd(args_array, cmd, kwargs.get("opt_arg", []))
+    # Process optional arguments.
+    return cmds_gen.is_add_cmd(args_array, cmd,
+                               list(kwargs.get("opt_arg", [])))
 
 
 def create_instance(cfg_file, dir_path, class_name):
