@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_init.py
+"""Program:  Server_fetch_dbs.py
 
-    Description:  Unit testing of RepSetColl.__init__ in mongo_class.py.
+    Description:  Unit testing of Server.fetch_dbs in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_init.py
+        test/unit/mongo_class/Server_fetch_dbs.py
 
     Arguments:
 
@@ -33,6 +33,34 @@ import version
 __version__ = version.__version__
 
 
+class FetchAdr(object):
+
+    """Class:  FetchAdr
+
+    Description:  Class stub holder for Server class.
+
+    Super-Class:
+
+    Sub-Classes:
+
+    Methods:
+        database_names -> Stub holder for Server.conn.database_names method.
+
+    """
+
+    def database_names(self):
+
+        """Function:  database_names
+
+        Description:  Stub holder for Server.conn.database_names method.
+
+        Arguments:
+
+        """
+
+        return True
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -45,7 +73,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_init -> Test with minimum number of arguments.
+        test_fetch_dbs -> Test fetch_dbs method.
 
     """
 
@@ -68,25 +96,23 @@ class UnitTest(unittest.TestCase):
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"
+        self.doc = {"Document"}
 
-    def test_init(self):
+    def test_fetch_dbs(self):
 
-        """Function:  test_init
+        """Function:  test_fetch_dbs
 
-        Description:  Test __init__ method with default arguments.
+        Description:  Test fetch_dbs method.
 
         Arguments:
 
         """
 
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.Server(self.name, self.user, self.passwd,
+                                   self.host, self.port)
+        mongo.conn = FetchAdr()
 
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll, mongo.repset),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll, self.repset))
+        self.assertTrue(mongo.fetch_dbs())
 
 
 if __name__ == "__main__":

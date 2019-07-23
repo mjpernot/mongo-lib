@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_init.py
+"""Program:  Server_disconnect.py
 
-    Description:  Unit testing of RepSetColl.__init__ in mongo_class.py.
+    Description:  Unit testing of Server.disconnect in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_init.py
+        test/unit/mongo_class/Server_disconnect.py
 
     Arguments:
 
@@ -24,6 +24,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -45,7 +46,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_init -> Test with minimum number of arguments.
+        test_disconnect -> Test disconnect method.
 
     """
 
@@ -67,26 +68,28 @@ class UnitTest(unittest.TestCase):
         self.db = "test"
         self.coll = None
         self.db_auth = None
-        self.repset = "mongo_repset"
+        self.conf_file = "Conf_File"
 
-    def test_init(self):
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_disconnect(self, mock_client):
 
-        """Function:  test_init
+        """Function:  test_disconnect
 
-        Description:  Test __init__ method with default arguments.
+        Description:  Test disconnect method.
 
         Arguments:
 
         """
 
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mock_client.close.return_value = True
+        mongo = mongo_class.Server(self.name, self.user, self.passwd,
+                                   self.host, self.port)
 
+        mongo.disconnect()
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll, mongo.repset),
+                          mongo.port, mongo.conn),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll, self.repset))
+                          self.port, None))
 
 
 if __name__ == "__main__":

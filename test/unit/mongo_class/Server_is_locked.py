@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_init.py
+"""Program:  Server_is_locked.py
 
-    Description:  Unit testing of RepSetColl.__init__ in mongo_class.py.
+    Description:  Unit testing of Server.is_locked in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_init.py
+        test/unit/mongo_class/Server_is_locked.py
 
     Arguments:
 
@@ -33,6 +33,34 @@ import version
 __version__ = version.__version__
 
 
+class Conn(object):
+
+    """Class:  Conn
+
+    Description:  Class stub holder for Rep class.
+
+    Super-Class:
+
+    Sub-Classes:
+
+    Methods:
+        __init__ -> Stub holder for Rep.conn method.
+
+    """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Stub holder for Rep.conn.is_locked attribute.
+
+        Arguments:
+
+        """
+
+        self.is_locked = True
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -45,7 +73,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_init -> Test with minimum number of arguments.
+        test_is_locked -> Test is_locked method.
 
     """
 
@@ -68,25 +96,23 @@ class UnitTest(unittest.TestCase):
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"
+        self.nodes = ["node1", "node2"]
 
-    def test_init(self):
+    def test_is_locked(self):
 
-        """Function:  test_init
+        """Function:  test_is_locked
 
-        Description:  Test __init__ method with default arguments.
+        Description:  Test is_locked method.
 
         Arguments:
 
         """
 
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.Rep(self.name, self.user, self.passwd, self.host,
+                                self.port)
+        mongo.conn = Conn()
 
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll, mongo.repset),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll, self.repset))
+        self.assertEqual(mongo.is_locked(), True)
 
 
 if __name__ == "__main__":

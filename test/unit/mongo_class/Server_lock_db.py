@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_init.py
+"""Program:  Server_lock_db.py
 
-    Description:  Unit testing of RepSetColl.__init__ in mongo_class.py.
+    Description:  Unit testing of Server.lock_db in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_init.py
+        test/unit/mongo_class/Server_lock_db.py
 
     Arguments:
 
@@ -33,6 +33,35 @@ import version
 __version__ = version.__version__
 
 
+class LockDb(object):
+
+    """Class:  LockDb
+
+    Description:  Class stub holder for Server class.
+
+    Super-Class:
+
+    Sub-Classes:
+
+    Methods:
+        fsync -> Stub holder for Server.conn.fsync method.
+
+    """
+
+    def fsync(self, lock):
+
+        """Function:  fsync
+
+        Description:  Stub holder for Server.conn.fsync method.
+
+        Arguments:
+            (input) lock -> Lock database.
+
+        """
+
+        return True
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -45,7 +74,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_init -> Test with minimum number of arguments.
+        test_lock_db -> Test lock_db method.
 
     """
 
@@ -69,24 +98,21 @@ class UnitTest(unittest.TestCase):
         self.db_auth = None
         self.repset = "mongo_repset"
 
-    def test_init(self):
+    def test_lock_db(self):
 
-        """Function:  test_init
+        """Function:  test_lock_db
 
-        Description:  Test __init__ method with default arguments.
+        Description:  Test lock_db method.
 
         Arguments:
 
         """
 
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.Server(self.name, self.user, self.passwd,
+                                   self.host, self.port)
+        mongo.conn = LockDb()
 
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll, mongo.repset),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll, self.repset))
+        self.assertTrue(mongo.lock_db(lock=True))
 
 
 if __name__ == "__main__":

@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_init.py
+"""Program:  RepSet_init.py
 
-    Description:  Unit testing of RepSetColl.__init__ in mongo_class.py.
+    Description:  Unit testing of RepSet.__init__ in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_init.py
+        test/unit/mongo_class/RepSet_init.py
 
     Arguments:
 
@@ -45,7 +45,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_init -> Test with minimum number of arguments.
+        test_default -> Test with minimum number of arguments.
 
     """
 
@@ -69,9 +69,9 @@ class UnitTest(unittest.TestCase):
         self.db_auth = None
         self.repset = "mongo_repset"
 
-    def test_init(self):
+    def test_default(self):
 
-        """Function:  test_init
+        """Function:  test_default
 
         Description:  Test __init__ method with default arguments.
 
@@ -79,14 +79,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
+                                   self.host, self.port, repset=self.repset)
 
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll, mongo.repset),
+                          mongo.port, mongo.repset),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll, self.repset))
+                          self.port, self.repset))
 
 
 if __name__ == "__main__":

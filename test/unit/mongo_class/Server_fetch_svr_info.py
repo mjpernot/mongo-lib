@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_init.py
+"""Program:  Server_fetch_svr_info.py
 
-    Description:  Unit testing of RepSetColl.__init__ in mongo_class.py.
+    Description:  Unit testing of Server.fetch_svr_info in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_init.py
+        test/unit/mongo_class/Server_fetch_svr_info.py
 
     Arguments:
 
@@ -33,6 +33,34 @@ import version
 __version__ = version.__version__
 
 
+class ServerInfo(object):
+
+    """Class:  ServerInfo
+
+    Description:  Class stub holder for Server class.
+
+    Super-Class:
+
+    Sub-Classes:
+
+    Methods:
+        server_info -> Stub holder for Server.conn.server_info method.
+
+    """
+
+    def server_info(self):
+
+        """Function:  database_names
+
+        Description:  Stub holder for Server.conn.server_info method.
+
+        Arguments:
+
+        """
+
+        return True
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -45,7 +73,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_init -> Test with minimum number of arguments.
+        test_fetch_svr_info -> Test fetch_svr_info method.
 
     """
 
@@ -69,24 +97,21 @@ class UnitTest(unittest.TestCase):
         self.db_auth = None
         self.repset = "mongo_repset"
 
-    def test_init(self):
+    def test_fetch_svr_info(self):
 
-        """Function:  test_init
+        """Function:  test_fetch_svr_info
 
-        Description:  Test __init__ method with default arguments.
+        Description:  Test fetch_svr_info method.
 
         Arguments:
 
         """
 
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.Server(self.name, self.user, self.passwd,
+                                   self.host, self.port)
+        mongo.conn = ServerInfo()
 
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll, mongo.repset),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll, self.repset))
+        self.assertTrue(mongo.fetch_svr_info())
 
 
 if __name__ == "__main__":

@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_init.py
+"""Program:  RepSetColl_ins_doc.py
 
-    Description:  Unit testing of RepSetColl.__init__ in mongo_class.py.
+    Description:  Unit testing of RepSetColl.ins_doc in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_init.py
+        test/unit/mongo_class/RepSetColl_ins_doc.py
 
     Arguments:
 
@@ -33,6 +33,35 @@ import version
 __version__ = version.__version__
 
 
+class InsDoc(object):
+
+    """Class:  InsDoc
+
+    Description:  Class stub holder for RepSetColl class.
+
+    Super-Class:
+
+    Sub-Classes:
+
+    Methods:
+        insert_one -> Stub holder for RepSetColl.db_coll.insert_one method.
+
+    """
+
+    def insert_one(self, doc):
+
+        """Function:  insert_one
+
+        Description:  Stub holder for RepSetColl.db_coll.insert_one method.
+
+        Arguments:
+            (input) doc -> Document
+
+        """
+
+        return True
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -45,7 +74,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_init -> Test with minimum number of arguments.
+        test_ins_doc -> Test ins_doc method.
 
     """
 
@@ -68,12 +97,13 @@ class UnitTest(unittest.TestCase):
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"
+        self.doc = {"Document"}
 
-    def test_init(self):
+    def test_ins_doc(self):
 
-        """Function:  test_init
+        """Function:  test_ins_doc
 
-        Description:  Test __init__ method with default arguments.
+        Description:  Test ins_doc method.
 
         Arguments:
 
@@ -82,11 +112,9 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
                                        self.host, self.port,
                                        repset=self.repset)
+        mongo.db_coll = InsDoc()
 
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll, mongo.repset),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll, self.repset))
+        self.assertFalse(mongo.ins_doc(self.doc))
 
 
 if __name__ == "__main__":

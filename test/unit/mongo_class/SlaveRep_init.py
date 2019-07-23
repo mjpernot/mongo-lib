@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_init.py
+"""Program:  SlaveRep_init.py
 
-    Description:  Unit testing of RepSetColl.__init__ in mongo_class.py.
+    Description:  Unit testing of SlaveRep.__init__ in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_init.py
+        test/unit/mongo_class/SlaveRep_init.py
 
     Arguments:
 
@@ -24,6 +24,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -45,7 +46,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_init -> Test with minimum number of arguments.
+        test_default -> Test with minimum number of arguments.
 
     """
 
@@ -68,10 +69,15 @@ class UnitTest(unittest.TestCase):
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"
+        self.data = {"secondary": True, "ismaster": False,
+                     "issecondary": True, "setName": "mongo_repset",
+                     "primary": "primary_host"}
 
-    def test_init(self):
+    @mock.patch("mongo_class.fetch_ismaster")
+    @mock.patch("mongo_class.Server.connect")
+    def test_default(self, mock_connect, mock_fetch):
 
-        """Function:  test_init
+        """Function:  test_default
 
         Description:  Test __init__ method with default arguments.
 
@@ -79,14 +85,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mock_connect.return_value = True
+        mock_fetch.return_value = self.data
+        mongo = mongo_class.SlaveRep(self.name, self.user, self.passwd,
+                                     self.host, self.port)
 
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll, mongo.repset),
+                          mongo.port, mongo.ismaster, mongo.issecondary),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll, self.repset))
+                          self.port, False, True))
 
 
 if __name__ == "__main__":
