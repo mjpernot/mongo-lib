@@ -8,7 +8,7 @@
 ###  This README file is broken down into the following sections:
  * Prerequisites
  * Installation
- * Program Descriptions
+ * Class Descriptions
  * Testing
    - Unit
 
@@ -84,10 +84,7 @@ exit
 ```
 
 
-# Program Descriptions:
-### Program: mongodb_class.py
-##### Description: Class definitions and methods for connecting to Mongodb database system.
-##### Classes:
+# Class Descriptions:
   * Server => Class which is a representation of a Mongo database server.
   * DB => Class which is a representation of a database instance in a Mongo database server.
   * Coll => Class which is a representation of a collection instance in a Mongo database server.
@@ -103,8 +100,6 @@ exit
 # Testing
 
 # Unit Testing:
-
-### Description: Testing consists of unit testing for the functions in the mongodb_class.py and mongodb_libs.py programs.
 
 ### Installation:
 
@@ -137,11 +132,32 @@ exit
 
 ```
 cd {Python_Project}/mongo-lib
-```
-
-### Unit:  
-```
-test/unit/mongodb_class/
+test/unit/mongo_class/fetch_cmd_line.py
+test/unit/mongo_class/fetch_db_info.py
+test/unit/mongo_class/fetch_ismaster.py
+test/unit/mongo_class/MasterRep_init.py
+test/unit/mongo_class/RepSetColl_coll_cnt.py
+test/unit/mongo_class/RepSetColl_coll_del_many.py
+test/unit/mongo_class/RepSetColl_connect.py
+test/unit/mongo_class/RepSetColl_init.py
+test/unit/mongo_class/RepSetColl_ins_doc.py
+test/unit/mongo_class/RepSet_connect.py
+test/unit/mongo_class/RepSet_init.py
+test/unit/mongo_class/Rep_fetch_nodes.py
+test/unit/mongo_class/Rep_init.py
+test/unit/mongo_class/Server_connect.py
+test/unit/mongo_class/Server_disconnect.py
+test/unit/mongo_class/Server_fetch_adr.py
+test/unit/mongo_class/Server_fetch_dbs.py
+test/unit/mongo_class/Server_fetch_svr_info.py
+test/unit/mongo_class/Server_init.py
+test/unit/mongo_class/Server_is_locked.py
+test/unit/mongo_class/Server_is_primary.py
+test/unit/mongo_class/Server_lock_db.py
+test/unit/mongo_class/Server_unlock_db.py
+test/unit/mongo_class/Server_upd_server_attr.py
+test/unit/mongo_class/Server_upd_srv_stat.py
+test/unit/mongo_class/SlaveRep_init.py
 ```
 
 ### All unit testing for mongodb_class.py:
@@ -156,9 +172,13 @@ test/unit/mongodb_class/code_coverage.sh
 
 # Unit test runs for mongodb_libs.py:
 
-### Unit:  
 ```
-test/unit/mongodb_lib/
+test/unit/mongo_libs/create_cmd.py
+test/unit/mongo_libs/create_instance.py
+test/unit/mongo_libs/create_slv_array.py
+test/unit/mongo_libs/crt_base_cmd.py
+test/unit/mongo_libs/crt_coll_inst.py
+test/unit/mongo_libs/ins_doc.py
 ```
 
 ### All unit testing for mongodb_ib.py:
