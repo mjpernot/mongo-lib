@@ -39,6 +39,7 @@ coverage run -a --source=mongo_libs test/unit/mongo_libs/create_instance.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/create_slv_array.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/crt_base_cmd.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/crt_coll_inst.py
+coverage run -a --source=mongo_libs test/unit/mongo_libs/ins_doc.py
 
 echo ""
 echo "Producing code coverage report"

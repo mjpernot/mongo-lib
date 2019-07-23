@@ -153,6 +153,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = Mongo()
+        mongo.repset_hosts = None
         self.assertEqual(mongo_libs.crt_base_cmd(mongo, self.prog_name,
                                                  use_repset=True),
                          [self.prog_name, "--username=" + self.user,

@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.1.2] - 2019-07-22
+### Change
+- mongo_class.RepSetColl.connect:  Changed conn_list to connections for readability.
+- mongo_class.RepSet.connect:  Changed conn_list to connections for readability.
+- mongo_class.Server.disconnect:  Removed returning Null connection status.
+- mongo_class.Server.upd_server_attr:  Refactored method and improved checking.
+
+### Fixed
+- mongo_libs.ins_doc:  Fixed problem with mutable default arguments issue.
+- mongo_libs.create_slv_array:  Fixed problem with mutable default arguments issue.
+- mongo_libs.create_cmd:  Fixed problem with mutable default arguments issue.
+- mongo_class.RepSetColl.coll_del_many:  Replaced qry with an empty document ({}) to allow for collection truncation.
+- mongo_class.Server.upd_srv_stat:  Fixed two vulnerabilities from Sonarqube findings.
+- mongo_class.fetch_ismaster:  Fixed Sonarqube findings.
+- mongo_class.fetch_db_info:  Fixed Sonarqube findings.
+- mongo_class.fetch_cmd_line:  Fixed Sonarqube findings.
+- mongo_libs.ins_doc:  Fixed Sonarqube findings.
+- mongo_libs.crt_base_cmd:  Fixed Sonarqube findings.
+- mongo_libs.create_slv_array:  Fixed Sonarqube findings.
+- mongo_libs.create_instance:  Fixed Sonarqube findings.
+- mongo_libs.create_cmd:  Fixed Sonarqube findings.
+
+
 ## [2.1.1] - 2018-11-27
 ### Fixed
 - mongo_class.Coll.coll_cnt:  Changed function parameter mutable argument default to immutable argument default.

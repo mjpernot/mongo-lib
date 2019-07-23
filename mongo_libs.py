@@ -35,7 +35,7 @@ import version
 __version__ = version.__version__
 
 
-def create_cmd(MONGO, args_array, prog_name, path_opt, **kwargs):
+def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
 
     """Function:  create_cmd
 
@@ -43,7 +43,7 @@ def create_cmd(MONGO, args_array, prog_name, path_opt, **kwargs):
         then add required arguments and additional options if they are present.
 
     Arguments:
-        (input) MONGO -> Database/Replication server instance.
+        (input) mongo -> Database instance.
         (input) args_array -> Array of command line options and values.
         (input) prog_name -> Name of utility program.
         (input) path_opt -> Option containing the path dir to program.
@@ -56,18 +56,20 @@ def create_cmd(MONGO, args_array, prog_name, path_opt, **kwargs):
 
     """
 
-    cmd = crt_base_cmd(MONGO, arg_parser.arg_set_path(args_array, path_opt)
+    args_array = dict(args_array)
+    cmd = crt_base_cmd(mongo, arg_parser.arg_set_path(args_array, path_opt)
                        + prog_name, **kwargs)
 
     # Process required arguments.
-    for arg in kwargs.get("req_arg", []):
+    for arg in list(kwargs.get("req_arg", [])):
         cmd = cmds_gen.add_cmd(cmd, arg=arg)
 
-    # Add optional arguments.
-    return cmds_gen.is_add_cmd(args_array, cmd, kwargs.get("opt_arg", []))
+    # Process optional arguments.
+    return cmds_gen.is_add_cmd(args_array, cmd,
+                               list(kwargs.get("opt_arg", [])))
 
 
-def create_instance(cfg_file, dir_path, CLASS):
+def create_instance(cfg_file, dir_path, class_name):
 
     """Function:  create_instance
 
@@ -79,15 +81,15 @@ def create_instance(cfg_file, dir_path, CLASS):
     Arguments:
         (input) cfg_file -> Configuration file name.
         (input) dir_path -> Directory path.
-        (input) CLASS -> Reference to a Class type.
+        (input) class_name -> Reference to a Class type.
         (output) -> Class type instance.
 
     """
 
     cfg = gen_libs.load_module(cfg_file, dir_path)
 
-    return CLASS(cfg.name, cfg.user, cfg.passwd, cfg.host, cfg.port, cfg.auth,
-                 cfg.conf_file)
+    return class_name(cfg.name, cfg.user, cfg.passwd, cfg.host, cfg.port,
+                      cfg.auth, cfg.conf_file)
 
 
 def create_slv_array(cfg_array):
@@ -98,23 +100,25 @@ def create_slv_array(cfg_array):
         array.
 
     Arguments:
-        (input) cfg_array -> Array of configurations.
-        (output) SLV_ARRAY -> Array of slave instances.
+        (input) cfg_array -> List of configurations.
+        (output) slaves -> List of slave instances.
 
     """
 
-    SLV_ARRAY = []
+    cfg_array = list(cfg_array)
+    slaves = []
 
     for slv in cfg_array:
-        SLV = mongo_class.SlaveRep(slv["name"], slv["user"], slv["passwd"],
-                                   slv["host"], int(slv["port"]), slv["auth"],
-                                   slv["conf_file"])
-        SLV_ARRAY.append(SLV)
+        slave_inst = mongo_class.SlaveRep(slv["name"], slv["user"],
+                                          slv["passwd"], slv["host"],
+                                          int(slv["port"]), slv["auth"],
+                                          slv["conf_file"])
+        slaves.append(slave_inst)
 
-    return SLV_ARRAY
+    return slaves
 
 
-def crt_base_cmd(MONGO, prog_name, **kwargs):
+def crt_base_cmd(mongo, prog_name, **kwargs):
 
     """Function:  crt_base_cmd
 
@@ -123,7 +127,7 @@ def crt_base_cmd(MONGO, prog_name, **kwargs):
         basic setup will include program name, host, and port.
 
     Arguments:
-        (input) MONGO -> Database/Replication server instance.
+        (input) mongo -> Database instance.
         (input) prog_name -> Name of binary program.
         (input) **kwargs:
             use_repset -> True|False - Use repset name connection.
@@ -133,23 +137,23 @@ def crt_base_cmd(MONGO, prog_name, **kwargs):
     """
 
     # Use repset name and hosts for connection, if set.
-    if kwargs.get("use_repset", False) and MONGO.repset \
-            and MONGO.repset_hosts:
+    if kwargs.get("use_repset", False) and mongo.repset \
+            and mongo.repset_hosts:
 
-        host_port = "--host=" + MONGO.repset + "/" + MONGO.repset_hosts
+        host_port = "--host=" + mongo.repset + "/" + mongo.repset_hosts
 
     # Use repset name for connection, if set.
-    elif kwargs.get("use_repset", False) and MONGO.repset:
-        host_port = "--host=" + MONGO.repset + "/" + MONGO.host + ":" \
-                    + str(MONGO.port)
+    elif kwargs.get("use_repset", False) and mongo.repset:
+        host_port = "--host=" + mongo.repset + "/" + mongo.host + ":" \
+                    + str(mongo.port)
 
     # Assume just host and port.
     else:
-        host_port = "--host=" + MONGO.host + ":" + str(MONGO.port)
+        host_port = "--host=" + mongo.host + ":" + str(mongo.port)
 
-    if MONGO.auth:
-        return [prog_name, "--username=" + MONGO.user, host_port,
-                "--password=" + MONGO.passwd]
+    if mongo.auth:
+        return [prog_name, "--username=" + mongo.user, host_port,
+                "--password=" + mongo.passwd]
 
     else:
         return [prog_name, host_port]
@@ -197,10 +201,11 @@ def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
 
     """
 
-    COLL = crt_coll_inst(mongo_cfg, db, tbl, **kwargs)
-    COLL.connect()
-    COLL.ins_doc(json.loads(json.dumps(data)))
-    cmds_gen.disconnect([COLL])
+    data = dict(data)
+    coll = crt_coll_inst(mongo_cfg, db, tbl, **kwargs)
+    coll.connect()
+    coll.ins_doc(json.loads(json.dumps(data)))
+    cmds_gen.disconnect([coll])
 
 
 def json_2_out(data, **kwargs):

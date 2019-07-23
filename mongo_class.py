@@ -31,14 +31,12 @@ import psutil
 import socket
 
 # Local
-import mongo_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
-def fetch_cmd_line(MONGODB):
+def fetch_cmd_line(mongo):
 
     """Function:  fetch_cmd_line
 
@@ -46,42 +44,42 @@ def fetch_cmd_line(MONGODB):
         command.
 
     Arguments:
-        (input) MONGODB -> Database server connection.
+        (input) mongo -> Database instance.
         (output) -> Returns a document from the getCmdLineOpts command.
 
     """
 
-    return MONGODB.adm_cmd("getCmdLineOpts")
+    return mongo.adm_cmd("getCmdLineOpts")
 
 
-def fetch_db_info(MONGODB):
+def fetch_db_info(mongo):
 
     """Function:  fetch_db_info
 
     Description:  Calls adminstration command to run the listDatabases command.
 
     Arguments:
-        (input) MONGODB -> Database server connection.
+        (input) mongo -> Database instance.
         (output) -> Returns a document from the listDatabases command.
 
     """
 
-    return MONGODB.adm_cmd("listDatabases")
+    return mongo.adm_cmd("listDatabases")
 
 
-def fetch_ismaster(MONGODB):
+def fetch_ismaster(mongo):
 
     """Function:  fetch_ismaster
 
     Description:  Calls the adminstration command to run the isMaster command.
 
     Arguments:
-        (input) MONGODB -> Database server connection.
+        (input) mongo -> Database instance.
         (output) -> Returns a document from the isMaster command.
 
     """
 
-    return MONGODB.adm_cmd("isMaster")
+    return mongo.adm_cmd("isMaster")
 
 
 class Server(object):
@@ -143,11 +141,9 @@ class Server(object):
         self.port = port
         self.auth = auth
         self.conf_file = conf_file
-
         self.conn = None
         self.db_path = None
         self.log_path = None
-
         self.uptime = None
         self.days_up = None
         self.cur_conn = None
@@ -170,8 +166,9 @@ class Server(object):
 
         """
 
+        udp_addr = "8.8." + "8.8"
+        loopback = "127.0." + "0.1"
         data = self.adm_cmd("serverStatus")
-
         self.uptime = data["uptime"]
         self.cur_conn = data["connections"]["current"]
         self.avl_conn = data["connections"]["available"]
@@ -179,12 +176,13 @@ class Server(object):
 
         # Get local IP address.
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
         # Connecting to an UDP address doesn't send packets.
-        s.connect(("8.8.8.8", 0))
+        s.connect((udp_addr, 0))
         local_ip = s.getsockname()[0]
 
         # Only get System Memory if on local machine.
-        if self.host == local_ip or self.host == "127.0.0.1":
+        if self.host == local_ip or self.host == loopback:
 
             # Total Memory and percentage of memory used.
             self.avl_sys_mem = psutil.virtual_memory().available
@@ -213,14 +211,11 @@ class Server(object):
         """
 
         data = fetch_cmd_line(self)
-
         self.db_path = data["parsed"]["storage"]["dbPath"]
         self.log_path = data["parsed"]["systemLog"]["path"]
 
-        if not self.conf_file:
-
-            if "config" in data["parsed"]:
-                self.conf_file = data["parsed"]["config"]
+        if not self.conf_file and "config" in data["parsed"]:
+            self.conf_file = data["parsed"]["config"]
 
     def get_srv_attr(self):
 
@@ -274,13 +269,11 @@ class Server(object):
         Description:  Disconnects from a Mongo database server connection.
 
         Arguments:
-            (output) Returns a Null for the connection handler.
 
         """
 
         pymongo.MongoClient.close(self.conn)
         self.conn = None
-        return self
 
     def adm_cmd(self, cmd, **kwargs):
 
@@ -544,13 +537,13 @@ class DB(Server):
 
         Arguments:
             (input) cmd -> Database command.
-                input) **kwargs:
+            (input) **kwargs:
                 obj -> Name of object command will work against.
+                    NOTE:  obj can be a database or collection.
             (output) Returns the output of the database command.
 
         """
 
-        # obj can be a database or collection.
         if "obj" in kwargs:
             return self.db.command(cmd, kwargs["obj"])
 
@@ -759,6 +752,7 @@ class Rep(Server):
         """
 
         time.sleep(0.1)
+
         return self.conn.nodes
 
 
@@ -917,7 +911,7 @@ class RepSet(Rep):
 
         self.repset_hosts = repset_hosts
 
-    def connect(self, conn_list=None):
+    def connect(self, connections=None):
 
         """Method:  connect
 
@@ -925,30 +919,30 @@ class RepSet(Rep):
             basic server attributes.
 
         Arguments:
-            (input) conn_list ->  String of server connections.
+            (input) connections ->  String of server connections.
 
         """
 
-        if not conn_list:
+        if not connections:
 
             # Connect to replica set.
             if self.repset_hosts:
-                conn_list = self.repset_hosts
+                connections = self.repset_hosts
 
             else:
-                conn_list = self.host + ":" + str(self.port)
+                connections = self.host + ":" + str(self.port)
 
         if not self.conn:
 
             # Is authenication set.
             if self.auth:
                 uri = "mongodb://" + self.user + ":" + self.passwd + "@" \
-                      + conn_list + "/?replicaSet=" + self.repset
+                      + connections + "/?replicaSet=" + self.repset
                 self.conn = pymongo.MongoClient(uri)
 
             # Assume no authentication required.
             else:
-                self.conn = pymongo.MongoClient(conn_list,
+                self.conn = pymongo.MongoClient(connections,
                                                 replicaSet=self.repset)
 
         self.get_srv_attr()
@@ -1006,7 +1000,7 @@ class RepSetColl(RepSet):
         self.coll = coll
         self.db_auth = db_auth
 
-    def connect(self, conn_list=None):
+    def connect(self, connections=None):
 
         """Method:  connect
 
@@ -1014,23 +1008,23 @@ class RepSetColl(RepSet):
             connects to a database and collection.
 
         Arguments:
-            (input) conn_list ->  String of server connections.
+            (input) connections ->  String of server connections.
 
         """
 
-        if not conn_list:
+        if not connections:
 
             if self.repset_hosts:
-                conn_list = self.repset_hosts
+                connections = self.repset_hosts
 
             else:
-                conn_list = self.host + ":" + str(self.port)
+                connections = self.host + ":" + str(self.port)
 
         if not self.conn:
 
             # Is authenication required.
             if self.auth:
-                self.conn = pymongo.MongoClient(host=[conn_list],
+                self.conn = pymongo.MongoClient(host=[connections],
                                                 document_class=dict,
                                                 tz_aware=False, connect=True,
                                                 replicaset=self.repset)
@@ -1049,7 +1043,7 @@ class RepSetColl(RepSet):
 
             # Assume no authentication required.
             else:
-                self.conn = pymongo.MongoClient(conn_list,
+                self.conn = pymongo.MongoClient(connections,
                                                 replicaSet=self.repset)
 
     def ins_doc(self, doc):
@@ -1101,8 +1095,8 @@ class RepSetColl(RepSet):
 
         # Allow for truncation.
         elif override:
-            self.db_coll.delete_many(qry)
+            self.db_coll.delete_many({})
 
-        # Assume must be a mistake in search criteria.
+        # Assume must be a mistake.
         else:
             print("WARNING:  Require search criteria.")
