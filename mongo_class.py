@@ -438,8 +438,6 @@ class DB(Server):
 
         super(DB, self).__init__(name, user, passwd, host, port, auth,
                                  conf_file)
-        super(DB, self).connect()
-
         self.db_name = db
         self.db = None
 
@@ -454,7 +452,7 @@ class DB(Server):
         """
 
         super(DB, self).connect()
-        self.db = self.conn[db]
+        self.db = self.conn[self.db_name]
 
     def db_connect(self, db="test"):
 

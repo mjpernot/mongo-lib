@@ -5,6 +5,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.2.0] - 2019-10-04
+### Changed
+- mongo_class.DB.\_\_init\_\_:  Removed connect() call from method.
+
 ### Added
 - mongo_class.DB.connect:  Connect method to a Mongo database for DB class.
 
