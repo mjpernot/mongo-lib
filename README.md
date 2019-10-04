@@ -135,6 +135,7 @@ cd {Python_Project}/mongo-lib
 test/unit/mongo_class/fetch_cmd_line.py
 test/unit/mongo_class/fetch_db_info.py
 test/unit/mongo_class/fetch_ismaster.py
+test/unit/mongo_class/DB_init.py
 test/unit/mongo_class/MasterRep_init.py
 test/unit/mongo_class/RepSetColl_coll_cnt.py
 test/unit/mongo_class/RepSetColl_coll_del_many.py
