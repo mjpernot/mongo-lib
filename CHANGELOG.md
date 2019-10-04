@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.2.0] - 2019-10-04
+### Added
+- mongo_class.DB.connect:  Connect method to a Mongo database for DB class.
+
+
 ## [2.1.2] - 2019-07-22
 ### Change
 - mongo_class.RepSetColl.connect:  Changed conn_list to connections for readability.

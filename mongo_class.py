@@ -407,6 +407,7 @@ class DB(Server):
 
     Methods:
         __init__
+        connect
         db_connect
         db_cmd
         validate_tbl
@@ -440,6 +441,19 @@ class DB(Server):
         super(DB, self).connect()
 
         self.db_name = db
+        self.db = None
+
+    def connect(self):
+
+        """Method:  connect
+
+        Description:  Connect to a Mongo database.
+
+        Arguments:
+
+        """
+
+        super(DB, self).connect()
         self.db = self.conn[db]
 
     def db_connect(self, db="test"):
