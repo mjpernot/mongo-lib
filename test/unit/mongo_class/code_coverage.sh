@@ -12,6 +12,7 @@ coverage run -a --source=mongo_class test/unit/mongo_class/fetch_cmd_line.py
 coverage run -a --source=mongo_class test/unit/mongo_class/fetch_db_info.py
 coverage run -a --source=mongo_class test/unit/mongo_class/fetch_ismaster.py
 coverage run -a --source=mongo_class test/unit/mongo_class/DB_init.py
+coverage run -a --source=mongo_class test/unit/mongo_class/DB_validate_tbl.py
 coverage run -a --source=mongo_class test/unit/mongo_class/MasterRep_init.py
 coverage run -a --source=mongo_class test/unit/mongo_class/RepSetColl_coll_cnt.py
 coverage run -a --source=mongo_class test/unit/mongo_class/RepSetColl_coll_del_many.py
