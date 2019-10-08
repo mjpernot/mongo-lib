@@ -44,14 +44,15 @@ class DBValidate(object):
 
     """
 
-    def collection_names(self, inc_sys):
+    def collection_names(self, include_system_collections):
 
         """Function:  collection_names
 
         Description:  Stub for DB.db.collection_names method.
 
         Arguments:
-            (input) inc_sys -> True|False - Include system tables
+            (input) include_system_collections -> True|False - Include system
+                tables
 
         """
 
