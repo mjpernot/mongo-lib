@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.2.0] - 2019-10-04
+## [3.0.0] - 2019-10-08
+Breaking Change
+
 ### Changed
 - mongo_class.DB.\_\_init\_\_:  Removed connect() call from method.
 
