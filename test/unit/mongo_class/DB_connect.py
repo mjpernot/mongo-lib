@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_validate_tbl.py
+"""Program:  DB_connect.py
 
-    Description:  Unit testing of DB.validate_tbl in mongo_class.py.
+    Description:  Unit testing of DB.connect in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_validate_tbl.py
+        test/unit/mongo_class/DB_connect.py
 
     Arguments:
 
@@ -24,6 +24,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -33,30 +34,28 @@ import version
 __version__ = version.__version__
 
 
-class DBValidate(object):
+class DBConn(object):
 
-    """Class:  DBValidate
+    """Class:  DBConn
 
     Description:  Class stub holder for DB class.
 
     Methods:
-        validate_collection -> Stub for DB.db.validate_collection method.
+        __init__ -> Class initialization.
 
     """
 
-    def validate_collection(self, tbl_name, full):
+    def __init__(self):
 
-        """Function:  validate_collection
+        """Function:  __init__
 
-        Description:  Stub for DB.db.validate_collection method.
+        Description:  Class initialization.
 
         Arguments:
-            (input) tbl_name -> Table name.
-            (input) full -> True|False - Do full scan.
 
         """
 
-        return True
+        self.test = "testdb"
 
 
 class UnitTest(unittest.TestCase):
@@ -67,7 +66,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_default -> Test with minimum number of arguments.
+        test_connection -> Test connection method.
 
     """
 
@@ -89,21 +88,26 @@ class UnitTest(unittest.TestCase):
         self.db = "test"
         self.db_auth = None
 
-    def test_default(self):
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_connection(self, mock_client, mock_cmd):
 
-        """Function:  test_default
+        """Function:  test_connection
 
-        Description:  Test validate_tbl method with default arguments.
+        Description:  Test connection method.
 
         Arguments:
 
         """
 
+        mock_client.return_value = True
+        mock_cmd.return_value = True
         mongo = mongo_class.DB(self.name, self.user, self.passwd,
                                self.host, self.port)
-        mongo.db = DBValidate()
+        mongo.conn = {"test": "testdb"}
+        mongo.connect()
 
-        self.assertTrue(mongo.validate_tbl("tbl", True))
+        self.assertEqual((mongo.db), ("testdb"))
 
 
 if __name__ == "__main__":

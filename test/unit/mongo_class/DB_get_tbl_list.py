@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_validate_tbl.py
+"""Program:  DB_get_tbl_list.py
 
-    Description:  Unit testing of DB.validate_tbl in mongo_class.py.
+    Description:  Unit testing of DB.get_tbl_list in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_validate_tbl.py
+        test/unit/mongo_class/DB_get_tbl_list.py
 
     Arguments:
 
@@ -40,19 +40,19 @@ class DBValidate(object):
     Description:  Class stub holder for DB class.
 
     Methods:
-        validate_collection -> Stub for DB.db.validate_collection method.
+        collection_names -> Stub for DB.db.collection_names method.
 
     """
 
-    def validate_collection(self, tbl_name, full):
+    def collection_names(self, include_system_collections):
 
-        """Function:  validate_collection
+        """Function:  collection_names
 
-        Description:  Stub for DB.db.validate_collection method.
+        Description:  Stub for DB.db.collection_names method.
 
         Arguments:
-            (input) tbl_name -> Table name.
-            (input) full -> True|False - Do full scan.
+            (input) include_system_collections -> True|False - Include system
+                tables
 
         """
 
@@ -93,7 +93,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_default
 
-        Description:  Test validate_tbl method with default arguments.
+        Description:  Test get_tbl_list method with default arguments.
 
         Arguments:
 
@@ -103,7 +103,7 @@ class UnitTest(unittest.TestCase):
                                self.host, self.port)
         mongo.db = DBValidate()
 
-        self.assertTrue(mongo.validate_tbl("tbl", True))
+        self.assertTrue(mongo.get_tbl_list(True))
 
 
 if __name__ == "__main__":

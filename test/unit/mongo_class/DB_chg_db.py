@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_validate_tbl.py
+"""Program:  DB_chg_db.py
 
-    Description:  Unit testing of DB.validate_tbl in mongo_class.py.
+    Description:  Unit testing of DB.chg_db in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_validate_tbl.py
+        test/unit/mongo_class/DB_chg_db.py
 
     Arguments:
 
@@ -33,32 +33,6 @@ import version
 __version__ = version.__version__
 
 
-class DBValidate(object):
-
-    """Class:  DBValidate
-
-    Description:  Class stub holder for DB class.
-
-    Methods:
-        validate_collection -> Stub for DB.db.validate_collection method.
-
-    """
-
-    def validate_collection(self, tbl_name, full):
-
-        """Function:  validate_collection
-
-        Description:  Stub for DB.db.validate_collection method.
-
-        Arguments:
-            (input) tbl_name -> Table name.
-            (input) full -> True|False - Do full scan.
-
-        """
-
-        return True
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -67,7 +41,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_default -> Test with minimum number of arguments.
+        test_database_passed -> Test with database passed.
+        test_no_database -> Test with no database passed.
 
     """
 
@@ -89,11 +64,11 @@ class UnitTest(unittest.TestCase):
         self.db = "test"
         self.db_auth = None
 
-    def test_default(self):
+    def test_database_passed(self):
 
-        """Function:  test_default
+        """Function:  test_database_passed
 
-        Description:  Test validate_tbl method with default arguments.
+        Description:  Test with database passed.
 
         Arguments:
 
@@ -101,9 +76,27 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(self.name, self.user, self.passwd,
                                self.host, self.port)
-        mongo.db = DBValidate()
+        mongo.conn = {"testdb": "testdb"}
+        mongo.chg_db("testdb")
 
-        self.assertTrue(mongo.validate_tbl("tbl", True))
+        self.assertEqual((mongo.db, mongo.db_name), ("testdb", "testdb"))
+
+    def test_no_database(self):
+
+        """Function:  test_no_database
+
+        Description:  Test with no database passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+                               self.host, self.port)
+        mongo.conn = {"test": "testdb"}
+        mongo.chg_db()
+
+        self.assertEqual((mongo.db, mongo.db_name), ("testdb", "test"))
 
 
 if __name__ == "__main__":

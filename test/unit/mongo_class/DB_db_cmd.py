@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_validate_tbl.py
+"""Program:  DB_db_cmd.py
 
-    Description:  Unit testing of DB.validate_tbl in mongo_class.py.
+    Description:  Unit testing of DB.db_cmd in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_validate_tbl.py
+        test/unit/mongo_class/DB_db_cmd.py
 
     Arguments:
 
@@ -40,19 +40,20 @@ class DBValidate(object):
     Description:  Class stub holder for DB class.
 
     Methods:
-        validate_collection -> Stub for DB.db.validate_collection method.
+        command -> Stub for DB.db.command method.
 
     """
 
-    def validate_collection(self, tbl_name, full):
+    def command(self, cmd, obj):
 
-        """Function:  validate_collection
+        """Function:  command
 
-        Description:  Stub for DB.db.validate_collection method.
+        Description:  Stub for DB.db.command method.
 
         Arguments:
-            (input) tbl_name -> Table name.
-            (input) full -> True|False - Do full scan.
+            (input) cmd -> Database command.
+            (input) obj -> Name of object command will work against.
+            (output) Returns the output of the database command.
 
         """
 
@@ -93,7 +94,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_default
 
-        Description:  Test validate_tbl method with default arguments.
+        Description:  Test db_cmd method with default arguments.
 
         Arguments:
 
@@ -103,7 +104,7 @@ class UnitTest(unittest.TestCase):
                                self.host, self.port)
         mongo.db = DBValidate()
 
-        self.assertTrue(mongo.validate_tbl("tbl", True))
+        self.assertTrue(mongo.db_cmd("command", obj="object_name"))
 
 
 if __name__ == "__main__":

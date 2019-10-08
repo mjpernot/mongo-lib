@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_validate_tbl.py
+"""Program:  DB_isvalid_tbl.py
 
-    Description:  Unit testing of DB.validate_tbl in mongo_class.py.
+    Description:  Unit testing of DB.isvalid_tbl in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_validate_tbl.py
+        test/unit/mongo_class/DB_isvalid_tbl.py
 
     Arguments:
 
@@ -93,7 +93,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_default
 
-        Description:  Test validate_tbl method with default arguments.
+        Description:  Test isvalid_tbl method with default arguments.
 
         Arguments:
 
@@ -103,7 +103,7 @@ class UnitTest(unittest.TestCase):
                                self.host, self.port)
         mongo.db = DBValidate()
 
-        self.assertTrue(mongo.validate_tbl("tbl", True))
+        self.assertTrue(mongo.isvalid_tbl("tbl", True))
 
 
 if __name__ == "__main__":
