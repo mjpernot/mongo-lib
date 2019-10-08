@@ -9,6 +9,7 @@ Breaking Change
 
 ### Changed
 - Documentation updates.
+- mongo_class.MasterRep.\_\_init\_\_:  Removed connect() call from method.
 - mongo_class.DB.\_\_init\_\_:  Removed connect() call from method.
 - mongo_class.Coll.\_\_init\_\_:  Removed connect() call from method.
 
