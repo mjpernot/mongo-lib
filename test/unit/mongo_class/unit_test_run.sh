@@ -8,6 +8,7 @@ echo "Unit test: mongo_class"
 test/unit/mongo_class/fetch_cmd_line.py
 test/unit/mongo_class/fetch_db_info.py
 test/unit/mongo_class/fetch_ismaster.py
+test/unit/mongo_class/Coll_init.py
 test/unit/mongo_class/DB_chg_db.py
 test/unit/mongo_class/DB_connect.py
 test/unit/mongo_class/DB_db_cmd.py
