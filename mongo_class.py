@@ -92,12 +92,6 @@ class Server(object):
         the server and a number of methods to call the Pymongo client
         functions.
 
-    Super-Class:  object
-
-    Sub-Classes:
-        DB
-        Rep
-
     Methods:
         __init__
         upd_srv_stat
@@ -400,11 +394,6 @@ class DB(Server):
         Mongo database server.  The basic methods and attributes include
         setting up a database instance connection.
 
-    Super-Class:  Server
-
-    Sub-Classes:
-        Coll
-
     Methods:
         __init__
         connect
@@ -571,10 +560,6 @@ class Coll(DB):
         Mongo database server.  The basic methods and attributes include
         setting up a collection instance and connection.
 
-    Super-Class:  DB
-
-    Sub-Classes:
-
     Methods:
         __init__
         coll_cnt
@@ -713,13 +698,6 @@ class Rep(Server):
         operating within a Mongo database server.  The basic methods
         and attributes include general methods for replication.
 
-    Super-Class:  Server
-
-    Sub-Classes:
-        MasterRep
-        SlaveRep
-        RepSet
-
     Methods:
         __init__
         fetch_nodes
@@ -776,10 +754,6 @@ class MasterRep(Rep):
         database server.  A master replication server object is used as
         a proxy for operating within a replication Mongo server.
 
-    Super-Class:  Rep
-
-    Sub-Classes:
-
     Methods:
         __init__
 
@@ -827,10 +801,6 @@ class SlaveRep(Rep):
     Description:  Class which is a representation of a Slave Replication Mongo
         database server.  A slave replication server object is used as a
         proxy for operating within a replication Mongo server.
-
-    Super-Class:  Rep
-
-    Sub-Classes:
 
     Methods:
         __init__
@@ -967,10 +937,6 @@ class RepSetColl(RepSet):
     Description:  Class which is a representation of a collection instance in a
         Mongo database server.  The basic methods and attributes include
         setting up a collection instance and connection.
-
-    Super-Class:  RepSet
-
-    Sub-Classes:
 
     Methods:
         __init__

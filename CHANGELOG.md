@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change
 
 ### Changed
+- Documentation updates.
 - mongo_class.DB.\_\_init\_\_:  Removed connect() call from method.
 
 ### Added
