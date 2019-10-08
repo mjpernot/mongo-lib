@@ -39,10 +39,6 @@ class DBValidate(object):
 
     Description:  Class stub holder for DB class.
 
-    Super-Class:
-
-    Sub-Classes:
-
     Methods:
         collection_names -> Stub for DB.db.collection_names method.
 
@@ -67,10 +63,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.
