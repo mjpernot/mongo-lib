@@ -770,6 +770,7 @@ class MasterRep(Rep):
 
     Methods:
         __init__
+        connect
 
     """
 
@@ -793,6 +794,30 @@ class MasterRep(Rep):
 
         super(MasterRep, self).__init__(name, user, passwd, host, port, auth,
                                         conf_file)
+        super(MasterRep, self).connect()
+
+        data = fetch_ismaster(self)
+
+        if data.get("ismaster"):
+            self.ismaster = data.get("ismaster")
+            self.issecondary = data.get("secondary")
+            self.repset = data.get("setName")
+            self.slaves = data.get("hosts", [])
+
+        else:
+            self.disconnect()
+            sys.exit("Error:  This is not a Master Replication server.")
+
+    def connect(self):
+
+        """Method:  connect
+
+        Description:  Connect to a Mongo database.
+
+        Arguments:
+
+        """
+
         super(MasterRep, self).connect()
 
         data = fetch_ismaster(self)
