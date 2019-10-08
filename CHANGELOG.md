@@ -14,6 +14,7 @@ Breaking Change
 - mongo_class.Coll.\_\_init\_\_:  Removed connect() call from method.
 
 ### Added
+- mongo_class.SlaveRep.connect:  Connect method to a Mongo database for SlaveRep class.
 - mongo_class.MasterRep.connect:  Connect method to a Mongo database for MasterRep class.
 - mongo_class.Coll.connect:  Connect method to a Mongo database for Coll class.
 - mongo_class.DB.connect:  Connect method to a Mongo database for DB class.

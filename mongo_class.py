@@ -835,6 +835,7 @@ class SlaveRep(Rep):
 
     Methods:
         __init__
+        connect
 
     """
 
@@ -858,6 +859,30 @@ class SlaveRep(Rep):
 
         super(SlaveRep, self).__init__(name, user, passwd, host, port, auth,
                                        conf_file)
+        super(SlaveRep, self).connect()
+
+        data = fetch_ismaster(self)
+
+        if data.get("secondary"):
+            self.ismaster = data.get("ismaster")
+            self.issecondary = data.get("secondary")
+            self.repset = data.get("setName")
+            self.primary = data.get("primary")
+
+        else:
+            self.disconnect()
+            sys.exit("Error:  This is not a Slave Replication server.")
+
+    def connect(self):
+
+        """Method:  connect
+
+        Description:  Connect to a Mongo database.
+
+        Arguments:
+
+        """
+
         super(SlaveRep, self).connect()
 
         data = fetch_ismaster(self)
