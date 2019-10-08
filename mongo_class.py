@@ -562,6 +562,7 @@ class Coll(DB):
 
     Methods:
         __init__
+        connect
         coll_cnt
         coll_find
         coll_dst
@@ -593,6 +594,20 @@ class Coll(DB):
 
         super(Coll, self).__init__(name, user, passwd, host, port, db, auth,
                                    conf_file)
+        super(Coll, self).connect()
+
+        self.coll = self.conn[db][coll]
+
+    def connect(self):
+
+        """Method:  connect
+
+        Description:  Connect to a Mongo database.
+
+        Arguments:
+
+        """
+
         super(Coll, self).connect()
 
         self.coll = self.conn[db][coll]
