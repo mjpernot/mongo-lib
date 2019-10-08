@@ -594,9 +594,8 @@ class Coll(DB):
 
         super(Coll, self).__init__(name, user, passwd, host, port, db, auth,
                                    conf_file)
-        super(Coll, self).connect()
 
-        self.coll = self.conn[db][coll]
+        self.coll = None
 
     def connect(self):
 

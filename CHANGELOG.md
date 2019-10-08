@@ -10,6 +10,7 @@ Breaking Change
 ### Changed
 - Documentation updates.
 - mongo_class.DB.\_\_init\_\_:  Removed connect() call from method.
+- mongo_class.Coll.\_\_init\_\_:  Removed connect() call from method.
 
 ### Added
 - mongo_class.Coll.connect:  Connect method to a Mongo database for Coll class.
