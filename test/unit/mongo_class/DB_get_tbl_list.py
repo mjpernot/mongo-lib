@@ -92,7 +92,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_default
 
-        Description:  Test __init__ method with default arguments.
+        Description:  Test get_tbl_list method with default arguments.
 
         Arguments:
 
