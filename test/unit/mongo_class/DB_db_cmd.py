@@ -44,7 +44,7 @@ class DBValidate(object):
 
     """
 
-    def command(self, cmd, **kwargs):
+    def command(self, cmd, obj):
 
         """Function:  command
 
@@ -52,8 +52,7 @@ class DBValidate(object):
 
         Arguments:
             (input) cmd -> Database command.
-            (input) **kwargs:
-                obj -> Name of object command will work against.
+            (input) obj -> Name of object command will work against.
             (output) Returns the output of the database command.
 
         """
