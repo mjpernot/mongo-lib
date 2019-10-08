@@ -596,6 +596,8 @@ class Coll(DB):
                                    conf_file)
 
         self.coll = None
+        self.coll_db = db
+        self.coll_coll = coll
 
     def connect(self):
 
@@ -609,7 +611,7 @@ class Coll(DB):
 
         super(Coll, self).connect()
 
-        self.coll = self.conn[db][coll]
+        self.coll = self.conn[self.coll_db][self.coll_coll]
 
     def coll_cnt(self, qry=None):
 
