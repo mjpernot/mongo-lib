@@ -104,7 +104,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollFind()
+        mongo.coll = CollFind()
 
         self.assertTrue(mongo.coll_find({"Key": "Value"}))
 
@@ -120,7 +120,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollFind()
+        mongo.coll = CollFind()
 
         self.assertTrue(mongo.coll_find({}))
 
@@ -136,7 +136,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollFind()
+        mongo.coll = CollFind()
 
         self.assertTrue(mongo.coll_find())
 
