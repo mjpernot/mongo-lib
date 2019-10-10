@@ -40,6 +40,7 @@ test/unit/mongo_class/Server_disconnect.py
 test/unit/mongo_class/Server_fetch_adr.py
 test/unit/mongo_class/Server_fetch_dbs.py
 test/unit/mongo_class/Server_fetch_svr_info.py
+test/unit/mongo_class/Server_get_server_attr.py
 test/unit/mongo_class/Server_init.py
 test/unit/mongo_class/Server_is_locked.py
 test/unit/mongo_class/Server_is_primary.py

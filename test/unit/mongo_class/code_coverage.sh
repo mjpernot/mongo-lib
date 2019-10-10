@@ -43,6 +43,7 @@ coverage run -a --source=mongo_class test/unit/mongo_class/Server_disconnect.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Server_fetch_adr.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Server_fetch_dbs.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Server_fetch_svr_info.py
+coverage run -a --source=mongo_class test/unit/mongo_class/Server_get_server_attr.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Server_init.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Server_is_locked.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Server_is_primary.py
