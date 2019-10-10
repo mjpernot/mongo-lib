@@ -13,6 +13,7 @@ coverage run -a --source=mongo_class test/unit/mongo_class/fetch_db_info.py
 coverage run -a --source=mongo_class test/unit/mongo_class/fetch_ismaster.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Coll_connect.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Coll_init.py
+coverage run -a --source=mongo_class test/unit/mongo_class/Coll_ins_doc.py
 coverage run -a --source=mongo_class test/unit/mongo_class/DB_chg_db.py
 coverage run -a --source=mongo_class test/unit/mongo_class/DB_connect.py
 coverage run -a --source=mongo_class test/unit/mongo_class/DB_db_cmd.py
