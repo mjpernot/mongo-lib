@@ -34,6 +34,32 @@ import version
 __version__ = version.__version__
 
 
+class RepSetColl(object):
+
+    """Class:  RepSetColl
+
+    Description:  Class stub holder for RepSetColl class.
+
+    Methods:
+        authenticate -> Stub for method.
+
+    """
+
+    def authenticate(self, user, passwd):
+
+        """Function:  authenticate
+
+        Description:  Stub for method.
+
+        Arguments:
+            (input) user -> User name.
+            (input) passwd -> Passwd.
+
+        """
+
+        return True
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -42,6 +68,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_auth_true -> Test with auth set to true.
         test_no_auth -> Test with auth set to false.
         test_no_conn_list2 -> Test no conn_list passed, set by repset_hosts.
         test_no_conn_list -> Test with no conn_list passed.
@@ -68,6 +95,28 @@ class UnitTest(unittest.TestCase):
         self.db_auth = "db_name"
         self.repset = "mongo_repset"
         self.repset_hosts = "host1:27017, host2:27107"
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_auth_true(self, mock_mongo):
+
+        """Function:  test_auth_true
+
+        Description:  Test with auth set to true.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
+                                       self.host, self.port,
+                                       repset=self.repset, coll=self.coll,
+                                       db_auth=self.db_auth, db=self.db)
+        mongo.auth = True
+        mongo.connect()
+
+        self.assertEqual((mongo.db_auth), (True))
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     def test_no_auth(self, mock_mongo):
