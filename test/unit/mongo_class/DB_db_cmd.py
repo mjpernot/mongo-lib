@@ -44,7 +44,7 @@ class DBValidate(object):
 
     """
 
-    def command(self, cmd, obj):
+    def command(self, cmd, obj=None):
 
         """Function:  command
 
@@ -69,6 +69,7 @@ class UnitTest(unittest.TestCase):
     Methods:
         setUp -> Initialize testing environment.
         test_default -> Test with minimum number of arguments.
+        test_object -> Test with object passed to method.
 
     """
 
@@ -95,6 +96,22 @@ class UnitTest(unittest.TestCase):
         """Function:  test_default
 
         Description:  Test db_cmd method with default arguments.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+                               self.host, self.port)
+        mongo.db = DBValidate()
+
+        self.assertTrue(mongo.db_cmd("command"))
+
+    def test_object(self):
+
+        """Function:  test_object
+
+        Description:  Test with object passed to method.
 
         Arguments:
 
