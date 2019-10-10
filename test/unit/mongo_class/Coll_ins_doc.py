@@ -67,8 +67,7 @@ class UnitTest(unittest.TestCase):
     Methods:
         setUp -> Initialize testing environment.
         test_query -> Test with query command.
-        test_empty_query -> Test with empty query command.
-        test_no_query -> Test with no query command.
+        test_empty_doc -> Test with empty document.
 
     """
 
@@ -104,31 +103,15 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollIns()
+        mongo.coll = CollIns()
 
-        self.assertTrue(mongo.ins_doc({"Key": "Value"}))
+        self.assertFalse(mongo.ins_doc({"Key": "Value"}))
 
-    def test_empty_query(self):
+    def test_empty_doc(self):
 
-        """Function:  test_empty_query
+        """Function:  test_empty_doc
 
-        Description:  Test with empty query command.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.Coll(self.name, self.user, self.passwd,
-                                 self.host, self.port)
-        mongo.db = CollIns()
-
-        self.assertTrue(mongo.ins_doc({}))
-
-    def test_no_query(self):
-
-        """Function:  test_no_query
-
-        Description:  Test with no query command.
+        Description:  Test with empty document.
 
         Arguments:
 
@@ -136,9 +119,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollIns()
+        mongo.coll = CollIns()
 
-        self.assertTrue(mongo.ins_doc())
+        self.assertFalse(mongo.ins_doc({}))
 
 
 if __name__ == "__main__":
