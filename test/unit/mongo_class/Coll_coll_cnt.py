@@ -48,7 +48,7 @@ class CollCnt(object):
 
         """Function:  coll_cnt
 
-        Description:  Stub for DB.db.coll_cnt method.
+        Description:  Stub for Coll.coll_cnt method.
 
         Arguments:
             (input) qry -> Query command.
