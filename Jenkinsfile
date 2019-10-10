@@ -20,6 +20,7 @@ pipeline {
                 ./test/unit/mongo_class/fetch_db_info.py
                 ./test/unit/mongo_class/fetch_ismaster.py
                 ./test/unit/mongo_class/Coll_coll_find.py
+                ./test/unit/mongo_class/Coll_coll_find1.py
                 ./test/unit/mongo_class/Coll_coll_options.py
                 ./test/unit/mongo_class/Coll_connect.py
                 ./test/unit/mongo_class/Coll_init.py
