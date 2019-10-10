@@ -40,13 +40,13 @@ class CollOpts(object):
     Description:  Class stub holder for Coll class.
 
     Methods:
-        coll_options -> Stub for Coll.coll_options method.
+        options -> Stub for Coll.coll_options method.
 
     """
 
-    def coll_options(self):
+    def options(self):
 
-        """Function:  coll_options
+        """Function:  options
 
         Description:  Stub for Coll.coll_options method.
 
