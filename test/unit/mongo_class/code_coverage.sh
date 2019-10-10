@@ -44,6 +44,7 @@ coverage run -a --source=mongo_class test/unit/mongo_class/Server_lock_db.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Server_unlock_db.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Server_upd_server_attr.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Server_upd_srv_stat.py
+coverage run -a --source=mongo_class test/unit/mongo_class/SlaveRep_connect.py
 coverage run -a --source=mongo_class test/unit/mongo_class/SlaveRep_init.py
 
 echo ""

@@ -52,6 +52,7 @@ pipeline {
                 ./test/unit/mongo_class/Server_unlock_db.py
                 ./test/unit/mongo_class/Server_upd_server_attr.py
                 ./test/unit/mongo_class/Server_upd_srv_stat.py
+                ./test/unit/mongo_class/SlaveRep_connect.py
                 ./test/unit/mongo_class/SlaveRep_init.py
                 ./test/unit/mongo_libs/create_cmd.py
                 ./test/unit/mongo_libs/create_instance.py
