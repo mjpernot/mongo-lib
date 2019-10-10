@@ -40,13 +40,13 @@ class CollDst(object):
     Description:  Class stub holder for Coll class.
 
     Methods:
-        coll_dst -> Stub for Coll.coll_dst method.
+        distinct -> Stub for Coll.coll_dst method.
 
     """
 
-    def coll_dst(self, qry):
+    def distinct(self, qry):
 
-        """Function:  coll_dst
+        """Function:  distinct
 
         Description:  Stub for Coll.coll_dst method.
 
