@@ -11,6 +11,7 @@ echo "Running unit test modules in conjunction with coverage"
 coverage run -a --source=mongo_class test/unit/mongo_class/fetch_cmd_line.py
 coverage run -a --source=mongo_class test/unit/mongo_class/fetch_db_info.py
 coverage run -a --source=mongo_class test/unit/mongo_class/fetch_ismaster.py
+coverage run -a --source=mongo_class test/unit/mongo_class/Coll_coll_cnt.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Coll_coll_dst.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Coll_coll_find.py
 coverage run -a --source=mongo_class test/unit/mongo_class/Coll_coll_find1.py
