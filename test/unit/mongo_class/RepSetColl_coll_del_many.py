@@ -40,10 +40,6 @@ class CollDelMany(object):
 
     Description:  Class stub holder for RepSetColl class.
 
-    Super-Class:
-
-    Sub-Classes:
-
     Methods:
         delete_many -> Stub holder for RepSetColl.db_coll.delete_many method.
 
@@ -68,10 +64,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.
