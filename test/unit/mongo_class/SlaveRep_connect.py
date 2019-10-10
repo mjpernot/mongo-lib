@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_no_data -> Test with no data returned.
         test_default -> Test with minimum number of arguments.
 
     """
@@ -68,6 +69,34 @@ class UnitTest(unittest.TestCase):
         self.data = {"secondary": True, "ismaster": False,
                      "issecondary": True, "setName": "mongo_repset",
                      "primary": "primary_host"}
+
+    @mock.patch("mongo_class.sys.exit")
+    @mock.patch("mongo_class.Server.disconnect")
+    @mock.patch("mongo_class.fetch_ismaster")
+    @mock.patch("mongo_class.Server.connect")
+    def test_no_data(self, mock_connect, mock_fetch, mock_disconnect,
+                     mock_exit):
+
+        """Function:  test_no_data
+
+        Description:  Test with no data returned.
+
+        Arguments:
+
+        """
+
+        mock_connect.return_value = True
+        mock_fetch.return_value = {}
+        mock_disconnect.return_value = True
+        mock_exit.return_value = True
+        mongo = mongo_class.SlaveRep(self.name, self.user, self.passwd,
+                                     self.host, self.port)
+        mongo.connect()
+
+        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
+                          mongo.port, mongo.ismaster, mongo.issecondary),
+                         (self.name, self.user, self.passwd, self.host,
+                          self.port, None, None))
 
     @mock.patch("mongo_class.fetch_ismaster")
     @mock.patch("mongo_class.Server.connect")
