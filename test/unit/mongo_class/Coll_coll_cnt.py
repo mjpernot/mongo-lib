@@ -40,13 +40,13 @@ class CollCnt(object):
     Description:  Class stub holder for Coll class.
 
     Methods:
-        coll_cnt -> Stub for Coll.coll_cnt method.
+        count -> Stub for Coll.coll_cnt method.
 
     """
 
-    def coll_cnt(self, qry):
+    def count(self, qry):
 
-        """Function:  coll_cnt
+        """Function:  count
 
         Description:  Stub for Coll.coll_cnt method.
 
