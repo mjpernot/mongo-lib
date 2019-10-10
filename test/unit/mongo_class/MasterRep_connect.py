@@ -85,6 +85,7 @@ class UnitTest(unittest.TestCase):
         mock_fetch.return_value = self.data
         mongo = mongo_class.MasterRep(self.name, self.user, self.passwd,
                                       self.host, self.port)
+        mongo.connect()
 
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
                           mongo.port, mongo.ismaster, mongo.issecondary),
