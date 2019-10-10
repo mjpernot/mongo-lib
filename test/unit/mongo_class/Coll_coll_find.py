@@ -40,13 +40,13 @@ class CollFind(object):
     Description:  Class stub holder for Coll class.
 
     Methods:
-        coll_find -> Stub for Coll.coll_find method.
+        find -> Stub for Coll.coll_find method.
 
     """
 
-    def coll_find(self, qry):
+    def find(self, qry):
 
-        """Function:  coll_find
+        """Function:  find
 
         Description:  Stub for Coll.coll_find method.
 
