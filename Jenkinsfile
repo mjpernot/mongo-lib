@@ -29,6 +29,7 @@ pipeline {
                 ./test/unit/mongo_class/DB_init.py
                 ./test/unit/mongo_class/DB_isvalid_tbl.py
                 ./test/unit/mongo_class/DB_validate_tbl.py
+                ./test/unit/mongo_class/MasterRep_connect.py
                 ./test/unit/mongo_class/MasterRep_init.py
                 ./test/unit/mongo_class/RepSetColl_coll_cnt.py
                 ./test/unit/mongo_class/RepSetColl_coll_del_many.py
