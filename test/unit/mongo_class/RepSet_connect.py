@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_no_auth -> Test with no authenication set.
         test_conn_true -> Test with conn set to true.
         test_conn_false -> Test with conn set to false.
         test_no_conn_list2 -> Test no conn_list passed, set by repset_hosts.
@@ -69,6 +70,26 @@ class UnitTest(unittest.TestCase):
         self.db_auth = False
         self.repset = "mongo_repset"
         self.repset_hosts = "host1:27017, host2:27107"
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_no_auth(self, mock_get, mock_mongo):
+
+        """Function:  test_no_auth
+
+        Description:  Test with no authenication set.
+
+        Arguments:
+
+        """
+
+        mock_get.return_value = True
+        mock_mongo.return_value = True
+        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
+                                   self.host, self.port, repset=self.repset)
+        mongo.auth = False
+
+        self.assertFalse(mongo.connect())
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
