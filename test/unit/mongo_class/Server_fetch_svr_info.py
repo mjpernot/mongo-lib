@@ -39,10 +39,6 @@ class ServerInfo(object):
 
     Description:  Class stub holder for Server class.
 
-    Super-Class:
-
-    Sub-Classes:
-
     Methods:
         server_info -> Stub holder for Server.conn.server_info method.
 
@@ -66,10 +62,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.
