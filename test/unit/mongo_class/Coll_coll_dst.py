@@ -104,7 +104,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollDst()
+        mongo.coll = CollDst()
 
         self.assertTrue(mongo.coll_dst({"Key": "Value"}))
 
@@ -120,7 +120,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollDst()
+        mongo.coll = CollDst()
 
         self.assertTrue(mongo.coll_dst({}))
 
@@ -136,7 +136,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollDst()
+        mongo.coll = CollDst()
 
         self.assertTrue(mongo.coll_dst())
 
