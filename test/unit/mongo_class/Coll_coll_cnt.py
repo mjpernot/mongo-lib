@@ -66,6 +66,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_query -> Test with query command.
+        test_empty_query -> Test with empty query command.
         test_no_query -> Test with no query command.
 
     """
@@ -89,6 +91,38 @@ class UnitTest(unittest.TestCase):
         self.coll = "coll_name"
         self.db_auth = None
 
+
+    def test_query(self):
+
+        """Function:  test_query
+
+        Description:  Test with query command.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Coll(self.name, self.user, self.passwd,
+                                 self.host, self.port)
+        mongo.db = CollCnt()
+
+        self.assertTrue(mongo.coll_cnt({"Key": "Value"}))
+
+    def test_empty_query(self):
+
+        """Function:  test_empty_query
+
+        Description:  Test with empty query command.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Coll(self.name, self.user, self.passwd,
+                                 self.host, self.port)
+        mongo.db = CollCnt()
+
+        self.assertTrue(mongo.coll_cnt({}))
 
     def test_no_query(self):
 
