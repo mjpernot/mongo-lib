@@ -101,7 +101,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollOpts()
+        mongo.coll = CollOpts()
 
         self.assertTrue(mongo.coll_options())
 
