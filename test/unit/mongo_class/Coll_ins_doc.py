@@ -40,13 +40,13 @@ class CollIns(object):
     Description:  Class stub holder for Coll class.
 
     Methods:
-        ins_doc -> Stub for Coll.ins_doc method.
+        insert_one -> Stub for Coll.ins_doc method.
 
     """
 
-    def ins_doc(self, doc):
+    def insert_one(self, doc):
 
-        """Function:  ins_doc
+        """Function:  insert_one
 
         Description:  Stub for Coll.ins_doc method.
 
