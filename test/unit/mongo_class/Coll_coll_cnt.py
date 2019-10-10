@@ -104,7 +104,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollCnt()
+        mongo.coll = CollCnt()
 
         self.assertTrue(mongo.coll_cnt({"Key": "Value"}))
 
@@ -120,7 +120,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollCnt()
+        mongo.coll = CollCnt()
 
         self.assertTrue(mongo.coll_cnt({}))
 
@@ -136,7 +136,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
                                  self.host, self.port)
-        mongo.db = CollCnt()
+        mongo.coll = CollCnt()
 
         self.assertTrue(mongo.coll_cnt())
 
