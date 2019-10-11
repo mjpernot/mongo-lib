@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change
 
 ### Changed
+- mongo_class.SlaveRep.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
 - mongo_libs.create_slv_array :  Updated arguments to be passed as keyword arguments to mongo_class SlaveRep class.
 - mongo_libs.create_instance:  Added kwargs to argument list.
 - mongo_libs.create_slv_array:  Added kwargs to argument list.
