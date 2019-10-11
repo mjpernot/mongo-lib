@@ -901,11 +901,6 @@ class RepSet(Rep):
         replication Mongo database server.  The basic methods and
         attributes include connecting method.
 
-    Super-Class:  Rep
-
-    Sub-Classes:
-        RepSetColl
-
     Methods:
         __init__
         connect
