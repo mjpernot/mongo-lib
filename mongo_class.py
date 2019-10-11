@@ -408,7 +408,7 @@ class DB(Server):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 db="test", auth=True, conf_file=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -420,15 +420,18 @@ class DB(Server):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) db -> 'test' or name of database.
-            (input) auth -> True|False - Authenication on or off.
-            (input) conf_file -> Location of mongo.conf file.
+            (input) kwargs:
+                db -> 'test' or name of database.
+                auth -> True|False - Authenication on or off.
+                conf_file -> Location of mongo.conf file.
 
         """
 
-        super(DB, self).__init__(name, user, passwd, host, port, auth,
-                                 conf_file)
-        self.db_name = db
+        super(DB, self).__init__(name, user, passwd, host=host, port=port,
+                                 auth=kwargs.get("auth", True),
+                                 conf_file=kwargs.get("conf_file", None))
+
+        self.db_name = kwargs.get("db", "test")
         self.db = None
 
     def connect(self):
