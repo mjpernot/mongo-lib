@@ -34,36 +34,6 @@ import version
 __version__ = version.__version__
 
 
-class Mongo(object):
-
-    """Class:  Mongo
-
-    Description:  Class stub holder for Mongo class.
-
-    Methods:
-        __init__ -> Class initialization.
-
-    """
-
-    def __init__(self, name, user, passwd, host, port, auth, conf_file):
-
-        """Function:  __init__
-
-        Description:  Class initialization.
-
-        Arguments:
-
-        """
-
-        self.name = name
-        self.user = user
-        self.passwd = passwd
-        self.host = host
-        self.port = port
-        self.auth = auth
-        self.conf_file = conf_file
-
-
 class Cfg(object):
 
     """Class:  Cfg
