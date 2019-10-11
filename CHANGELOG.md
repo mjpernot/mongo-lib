@@ -21,6 +21,7 @@ Breaking Change
 - mongo_class.DB.connect:  Connect method to a Mongo database for DB class.
 
 ### Removed
+- mongo_libs.json_prt_ins_2_db:  Function is no longer required.
 - mongo_libs.json_2_out:  Function is no longer required.
 
 
