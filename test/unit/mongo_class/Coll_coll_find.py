@@ -91,7 +91,6 @@ class UnitTest(unittest.TestCase):
         self.coll = "coll_name"
         self.db_auth = None
 
-
     def test_query(self):
 
         """Function:  test_query
