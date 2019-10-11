@@ -175,14 +175,16 @@ def crt_coll_inst(cfg, db, tbl, **kwargs):
 
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
-        return mongo_class.RepSetColl(cfg.name, cfg.user, cfg.passwd, cfg.host,
-                                      cfg.port, cfg.auth, repset=cfg.repset,
+        return mongo_class.RepSetColl(cfg.name, cfg.user, cfg.passwd,
+                                      host=cfg.host, port=cfg.port,
+                                      auth=cfg.auth, repset=cfg.repset,
                                       repset_hosts=cfg.repset_hosts, db=db,
                                       coll=tbl, db_auth=cfg.db_auth)
 
     else:
-        return mongo_class.Coll(cfg.name, cfg.user, cfg.passwd, cfg.host,
-                                cfg.port, db, tbl, cfg.auth, cfg.conf_file)
+        return mongo_class.Coll(cfg.name, cfg.user, cfg.passwd, host=cfg.host,
+                                port=cfg.port, db=db, coll=tbl, auth=cfg.auth,
+                                conf_file=cfg.conf_file)
 
 
 def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
