@@ -25,7 +25,6 @@ coverage run -a --source=mongo_class test/unit/mongo_class/DB_db_cmd.py
 coverage run -a --source=mongo_class test/unit/mongo_class/DB_db_connect.py
 coverage run -a --source=mongo_class test/unit/mongo_class/DB_get_tbl_list.py
 coverage run -a --source=mongo_class test/unit/mongo_class/DB_init.py
-coverage run -a --source=mongo_class test/unit/mongo_class/DB_isvalid_tbl.py
 coverage run -a --source=mongo_class test/unit/mongo_class/DB_validate_tbl.py
 coverage run -a --source=mongo_class test/unit/mongo_class/MasterRep_connect.py
 coverage run -a --source=mongo_class test/unit/mongo_class/MasterRep_init.py
