@@ -86,8 +86,8 @@ def create_instance(cfg_file, dir_path, class_name):
 
     cfg = gen_libs.load_module(cfg_file, dir_path)
 
-    return class_name(cfg.name, cfg.user, cfg.passwd, cfg.host, cfg.port,
-                      cfg.auth, cfg.conf_file)
+    return class_name(cfg.name, cfg.user, cfg.passwd, host=cfg.host,
+                      port=cfg.port, auth=cfg.auth, conf_file=cfg.conf_file)
 
 
 def create_slv_array(cfg_array):
