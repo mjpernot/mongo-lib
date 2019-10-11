@@ -502,21 +502,6 @@ class DB(Server):
 
         return self.db.collection_names(include_system_collections=inc_sys)
 
-    def isvalid_tbl(self, tbl_name, scan=False):
-
-        """Method:  isvalid_tbl
-
-        Description:  Validates a table.
-
-        Arguments:
-            (input) tbl_name -> Table name.
-            (input) scan -> True|False - Do full scan of table.
-            (output) -> Returns the results of the validate command.
-
-        """
-
-        return self.db.validate_collection(tbl_name, full=scan)
-
     def validate_tbl(self, tbl_name, scan=False):
 
         """Method:  validate_tbl
