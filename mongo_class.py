@@ -421,8 +421,8 @@ class DB(Server):
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
-                db -> 'test' or name of database.
-                auth -> True|False - Authenication on or off.
+                db -> Name of database.
+                auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
 
         """
@@ -577,7 +577,7 @@ class Coll(DB):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 db="test", coll=None, auth=True, conf_file=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -589,19 +589,22 @@ class Coll(DB):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) db -> 'test' or name of database.
-            (input) coll -> 'None' or name of collection.
-            (input) auth -> True|False - Authenication on or off.
-            (input) conf_file -> Location of mongo.conf file.
+            (input) kwargs:
+                db -> Name of database.
+                coll -> Name of collection.
+                auth -> True|False - Authenication on.
+                conf_file -> Location of mongo.conf file.
 
         """
 
-        super(Coll, self).__init__(name, user, passwd, host, port, db, auth,
-                                   conf_file)
+        super(Coll, self).__init__(name, user, passwd, host=host, port=port,
+                                   db=kwargs.get("db", "test")
+                                   auth=kwargs.get("auth", True),
+                                   conf_file=kwargs.get("conf_file", None))
 
         self.coll = None
-        self.coll_db = db
-        self.coll_coll = coll
+        self.coll_db = kwargs.get("db", "test")
+        self.coll_coll = kwargs.get("coll", None)
 
     def connect(self):
 
