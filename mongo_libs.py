@@ -90,7 +90,7 @@ def create_instance(cfg_file, dir_path, class_name):
                       port=cfg.port, auth=cfg.auth, conf_file=cfg.conf_file)
 
 
-def create_slv_array(cfg_array):
+def create_slv_array(cfg_array, **kwargs):
 
     """Function:  create_slv_array
 
