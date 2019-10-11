@@ -45,7 +45,7 @@ class Mongo(object):
 
     """
 
-    def __init__(self, name, user, passwd, host, port, auth, conf_file):
+    def __init__(self, name, user, passwd, host, port, **kwargs):
 
         """Function:  __init__
 
@@ -60,8 +60,8 @@ class Mongo(object):
         self.passwd = passwd
         self.host = host
         self.port = port
-        self.auth = auth
-        self.conf_file = conf_file
+        self.auth = kwargs.get("auth", None)
+        self.conf_file = kwargs.get("conf_file", None)
 
 
 class Cfg(object):
