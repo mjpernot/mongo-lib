@@ -11,7 +11,6 @@
         crt_base_cmd
         crt_coll_inst
         ins_doc
-        json_prt_ins_2_db
 
 """
 
@@ -206,28 +205,3 @@ def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
     coll.ins_doc(json.loads(json.dumps(data)))
     cmds_gen.disconnect([coll])
 
-
-def json_prt_ins_2_db(data, **kwargs):
-
-    """Function:  json_prt_ins_2_db
-
-    Description:  Convert dictionary to JSON format and print it.  If Mongo
-        instance is present, insert the data into database.
-
-    Arguments:
-        (input) data -> Data in dictionary format.
-        (input) **kwargs:
-            class_cfg -> Mongo server configuration.
-            db_tbl database:table_name -> Mongo database and table name.
-            ofile -> file name - Name of output file.
-
-    """
-
-    gen_libs.print_data(json.dumps(data, indent=4), **kwargs)
-
-    mongo_cfg = kwargs.get("class_cfg", None)
-    db_tbl = kwargs.get("db_tbl", None)
-
-    if mongo_cfg and db_tbl:
-        db, tbl = db_tbl.split(":")
-        ins_doc(mongo_cfg, db, tbl, data, **kwargs)
