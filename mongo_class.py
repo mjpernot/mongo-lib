@@ -778,7 +778,7 @@ class MasterRep(Rep):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 auth=True, conf_file=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -790,13 +790,17 @@ class MasterRep(Rep):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) auth -> True|False - Authenication on or off.
-            (input) conf_file -> Location of mongo.conf file.
+            (input) kwargs:
+                auth -> True|False - Authenication on.
+                conf_file -> Location of mongo.conf file.
 
         """
 
-        super(MasterRep, self).__init__(name, user, passwd, host, port, auth,
-                                        conf_file)
+        super(MasterRep, self).__init__(name, user, passwd,
+                                        host=host, port=port,
+                                        auth=kwargs.get("auth", True),
+                                        conf_file=kwargs.get("conf_file",
+                                                             None))
 
         self.ismaster = None
         self.issecondary = None
