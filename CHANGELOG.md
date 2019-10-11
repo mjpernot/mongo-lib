@@ -43,6 +43,10 @@ Breaking Change
 - mongo_libs.create_instance:  Fixed Sonarqube findings.
 - mongo_libs.create_cmd:  Fixed Sonarqube findings.
 
+### Deprecated
+- mongo_libs.json_prt_ins_2_db function.
+- mongo_libs.json_2_out function.
+
 
 ## [2.1.1] - 2018-11-27
 ### Fixed
