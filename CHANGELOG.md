@@ -8,11 +8,12 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change
 
 ### Changed
-- Documentation updates.
+- mongo_libs.create_instance:  Updated arguments to be passed as keyword arguments to mongo_class classes.
 - mongo_class.SlaveRep.\_\_init\_\_:  Removed connect() call from method.
 - mongo_class.MasterRep.\_\_init\_\_:  Removed connect() call from method.
 - mongo_class.DB.\_\_init\_\_:  Removed connect() call from method.
 - mongo_class.Coll.\_\_init\_\_:  Removed connect() call from method.
+- Documentation updates.
 
 ### Added
 - mongo_class.SlaveRep.connect:  Connect method to a Mongo database for SlaveRep class.
