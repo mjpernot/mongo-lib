@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change
 
 ### Changed
+- mongo_class.Server.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
 - mongo_libs.create_instance:  Updated arguments to be passed as keyword arguments to mongo_class classes.
 - mongo_class.SlaveRep.\_\_init\_\_:  Removed connect() call from method.
 - mongo_class.MasterRep.\_\_init\_\_:  Removed connect() call from method.
