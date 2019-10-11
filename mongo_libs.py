@@ -67,7 +67,7 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
                                list(kwargs.get("opt_arg", [])))
 
 
-def create_instance(cfg_file, dir_path, class_name):
+def create_instance(cfg_file, dir_path, class_name, **kwargs):
 
     """Function:  create_instance
 
