@@ -111,7 +111,7 @@ class Server(object):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 auth=True, conf_file=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -123,8 +123,9 @@ class Server(object):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) auth -> True|False - Authenication on or off.
-            (input) conf_file -> Location of mongo.conf file.
+            (input) kwargs:
+                auth -> True|False - Authenication on.
+                conf_file -> Location of mongo.conf file.
 
         """
 
@@ -133,8 +134,8 @@ class Server(object):
         self.passwd = passwd
         self.host = host
         self.port = port
-        self.auth = auth
-        self.conf_file = conf_file
+        self.auth = kwargs.get("auth", True)
+        self.conf_file = kwargs.get("conf_file", None)
         self.conn = None
         self.db_path = None
         self.log_path = None
