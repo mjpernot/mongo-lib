@@ -11,7 +11,6 @@
         crt_base_cmd
         crt_coll_inst
         ins_doc
-        json_2_out
         json_prt_ins_2_db
 
 """
@@ -206,35 +205,6 @@ def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
     coll.connect()
     coll.ins_doc(json.loads(json.dumps(data)))
     cmds_gen.disconnect([coll])
-
-
-def json_2_out(data, **kwargs):
-
-    """Function:  json_2_out
-
-    Description:  If Mongo instance is present, insert data into database, else
-        send data to standard out or file.
-
-    Arguments:
-        (input) data -> Data in dictionary format.
-        (input) **kwargs:
-            class_cfg -> Mongo server configuration.
-            db_tbl database:table_name -> Mongo database and table name.
-            ofile -> file name - Name of output file.
-
-    """
-
-    mongo_cfg = kwargs.get("class_cfg", False)
-    db_tbl = kwargs.get("db_tbl", False)
-
-    if mongo_cfg and db_tbl:
-        db, tbl = db_tbl.split(":")
-        ins_doc(mongo_cfg, db, tbl, data, **kwargs)
-
-    else:
-        # Convert dictionary to JSON and send to output.
-        #   NOTE: Only the last line of the output will be saved to file.
-        gen_libs.print_data(json.dumps(data, indent=4), **kwargs)
 
 
 def json_prt_ins_2_db(data, **kwargs):
