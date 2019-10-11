@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change
 
 ### Changed
+- mongo_class.RepSetColl.\_\_init\_\_:  Changed check of repset attribute until after it is set.
 - mongo_class.RepSetColl.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
 - mongo_class.RepSet.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
 - mongo_class.Coll.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.

@@ -598,7 +598,7 @@ class Coll(DB):
         """
 
         super(Coll, self).__init__(name, user, passwd, host=host, port=port,
-                                   db=kwargs.get("db", "test")
+                                   db=kwargs.get("db", "test"),
                                    auth=kwargs.get("auth", True),
                                    conf_file=kwargs.get("conf_file", None))
 
@@ -949,13 +949,11 @@ class RepSet(Rep):
                                      auth=kwargs.get("auth", True),
                                      conf_file=kwargs.get("conf_file", None))
 
-        if repset:
-            self.repset = kwargs.get("repset", None)
-
-        else:
-            sys.exit("Error:  Require Replication Set Name for RepSet class.")
-
+        self.repset = kwargs.get("repset", None)
         self.repset_hosts = kwargs.get("repset_hosts", None)
+
+        if not self.repset:
+            sys.exit("Error:  Require Replication Set Name for RepSet class.")
 
     def connect(self, connections=None):
 
