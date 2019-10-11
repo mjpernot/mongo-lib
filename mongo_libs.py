@@ -207,4 +207,3 @@ def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
     coll.connect()
     coll.ins_doc(json.loads(json.dumps(data)))
     cmds_gen.disconnect([coll])
-
