@@ -925,7 +925,7 @@ class RepSet(Rep):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 auth=True, repset=None, conf_file=None, repset_hosts=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -937,23 +937,25 @@ class RepSet(Rep):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) auth -> True|False - Authenication on or off.
-            (input) repset -> Replication Set name.
-            (input) conf_file -> Location of mongo.conf file.
-            (input) repset_hosts -> Repset hosts and ports.
+            (input) kwargs:
+                auth -> True|False - Authenication on.
+                repset -> Replication Set name.
+                conf_file -> Location of mongo.conf file.
+                repset_hosts -> Repset hosts:ports.
 
         """
 
-        super(RepSet, self).__init__(name, user, passwd, host, port, auth,
-                                     conf_file)
+        super(RepSet, self).__init__(name, user, passwd, host=host, port=port,
+                                     auth=kwargs.get("auth", True),
+                                     conf_file=kwargs.get("conf_file", None))
 
         if repset:
-            self.repset = repset
+            self.repset = kwargs.get("repset", None)
 
         else:
             sys.exit("Error:  Require Replication Set Name for RepSet class.")
 
-        self.repset_hosts = repset_hosts
+        self.repset_hosts = kwargs.get("repset_hosts", None)
 
     def connect(self, connections=None):
 
@@ -1010,8 +1012,7 @@ class RepSetColl(RepSet):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 auth=True, repset=None, conf_file=None, repset_hosts=None,
-                 db="test", coll=None, db_auth=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -1023,22 +1024,27 @@ class RepSetColl(RepSet):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) auth -> True|False - Authenication on or off.
-            (input) repset -> Replication Set name.
-            (input) conf_file -> Location of mongo.conf file.
-            (input) repset_hosts -> Repset hosts and ports.
-            (input) db -> 'test' or name of database.
-            (input) coll -> None or name of collection.
-            (input) db_auth -> None or name of authentication database.
+            (input) kwargs:
+                auth -> True|False - Authenication on.
+                repset -> Replication Set name.
+                conf_file -> Location of mongo.conf file.
+                repset_hosts -> Repset hosts and ports.
+                db -> Name of database.
+                coll -> Name of collection.
+                db_auth -> None or name of authentication database.
 
         """
 
-        super(RepSetColl, self).__init__(name, user, passwd, host, port, auth,
-                                         repset, conf_file, repset_hosts)
+        super(RepSetColl, self).__init__(
+            name, user, passwd, host=host, port=port,
+            auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None),
+            repset=kwargs.get("repset", None),
+            repset_hosts=kwargs.get("repset_hosts", None))
 
-        self.db = db
-        self.coll = coll
-        self.db_auth = db_auth
+        self.db = kwargs.get("db", "test")
+        self.coll = kwargs.get("coll", None)
+        self.db_auth = kwargs.get("db_auth", None)
 
     def connect(self, connections=None):
 
