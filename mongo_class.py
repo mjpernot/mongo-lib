@@ -511,11 +511,21 @@ class DB(Server):
         Arguments:
             (input) tbl_name -> Table name.
             (input) scan -> True|False - Do full scan of table.
-            (output) -> Returns the results of the validate command.
+            (output) status -> True|False - Operation successful.
+            (output) data -> Returns the results of the validate command.
 
         """
 
-        return self.db.validate_collection(tbl_name, full=scan)
+        status = True
+
+        try:
+            data = self.db.validate_collection(tbl_name, full=scan)
+
+        except pymongo.errors.OperationFailure as msg:
+            status = False
+            data = msg
+
+        return status, data
 
     def db_cmd(self, cmd, **kwargs):
 

@@ -7,6 +7,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [3.0.0] - 2019-10-08
 Breaking Change
 
+### Fixed
+- mongo_class.DB.validate_collection:  Add exception handler to deal with trying to validate views.
+
 ### Changed
 - mongo_class.RepSetColl.\_\_init\_\_:  Changed check of repset attribute until after it is set.
 - mongo_class.RepSetColl.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
