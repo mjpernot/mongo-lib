@@ -20,6 +20,9 @@ Breaking Change
 - mongo_class.Coll.connect:  Connect method to a Mongo database for Coll class.
 - mongo_class.DB.connect:  Connect method to a Mongo database for DB class.
 
+### Removed
+- mongo_libs.json_2_out:  Function is no longer required.
+
 
 ## [2.1.2] - 2019-07-22
 ### Change
