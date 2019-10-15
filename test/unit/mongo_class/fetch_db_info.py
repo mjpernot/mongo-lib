@@ -39,10 +39,6 @@ class Mongo(object):
 
     Description:  Class stub holder for Mongo class.
 
-    Super-Class:
-
-    Sub-Classes:
-
     Methods:
         adm_cmd -> Stub holder for mongo_class.adm_cmd attribute.
 
@@ -67,10 +63,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.

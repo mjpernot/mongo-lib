@@ -39,10 +39,6 @@ class LockDb(object):
 
     Description:  Class stub holder for Server class.
 
-    Super-Class:
-
-    Sub-Classes:
-
     Methods:
         fsync -> Stub holder for Server.conn.fsync method.
 
@@ -67,10 +63,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.

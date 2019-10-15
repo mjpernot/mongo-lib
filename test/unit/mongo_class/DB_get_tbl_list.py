@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_is_primary.py
+"""Program:  DB_get_tbl_list.py
 
-    Description:  Unit testing of Server.is_primary in mongo_class.py.
+    Description:  Unit testing of DB.get_tbl_list in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_is_primary.py
+        test/unit/mongo_class/DB_get_tbl_list.py
 
     Arguments:
 
@@ -33,28 +33,30 @@ import version
 __version__ = version.__version__
 
 
-class Conn(object):
+class DBValidate(object):
 
-    """Class:  Conn
+    """Class:  DBValidate
 
-    Description:  Class stub holder for Rep class.
+    Description:  Class stub holder for DB class.
 
     Methods:
-        __init__ -> Stub holder for Rep.conn method.
+        collection_names -> Stub for DB.db.collection_names method.
 
     """
 
-    def __init__(self):
+    def collection_names(self, include_system_collections):
 
-        """Function:  __init__
+        """Function:  collection_names
 
-        Description:  Stub holder for Rep.conn.is_locked attribute.
+        Description:  Stub for DB.db.collection_names method.
 
         Arguments:
+            (input) include_system_collections -> True|False - Include system
+                tables
 
         """
 
-        self.is_primary = True
+        return True
 
 
 class UnitTest(unittest.TestCase):
@@ -65,7 +67,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_is_primary -> Test is_primary method.
+        test_default -> Test with minimum number of arguments.
 
     """
 
@@ -85,26 +87,23 @@ class UnitTest(unittest.TestCase):
         self.host = "host_server"
         self.port = 27017
         self.db = "test"
-        self.coll = None
         self.db_auth = None
-        self.repset = "mongo_repset"
-        self.nodes = ["node1", "node2"]
 
-    def test_is_primary(self):
+    def test_default(self):
 
-        """Function:  test_is_primary
+        """Function:  test_default
 
-        Description:  Test is_primary method.
+        Description:  Test get_tbl_list method with default arguments.
 
         Arguments:
 
         """
 
-        mongo = mongo_class.Rep(self.name, self.user, self.passwd, self.host,
-                                self.port)
-        mongo.conn = Conn()
+        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+                               self.host, self.port)
+        mongo.db = DBValidate()
 
-        self.assertEqual(mongo.is_primary(), True)
+        self.assertTrue(mongo.get_tbl_list(True))
 
 
 if __name__ == "__main__":

@@ -92,12 +92,6 @@ class Server(object):
         the server and a number of methods to call the Pymongo client
         functions.
 
-    Super-Class:  object
-
-    Sub-Classes:
-        DB
-        Rep
-
     Methods:
         __init__
         upd_srv_stat
@@ -117,7 +111,7 @@ class Server(object):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 auth=True, conf_file=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -129,8 +123,9 @@ class Server(object):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) auth -> True|False - Authenication on or off.
-            (input) conf_file -> Location of mongo.conf file.
+            (input) kwargs:
+                auth -> True|False - Authenication on.
+                conf_file -> Location of mongo.conf file.
 
         """
 
@@ -139,8 +134,8 @@ class Server(object):
         self.passwd = passwd
         self.host = host
         self.port = port
-        self.auth = auth
-        self.conf_file = conf_file
+        self.auth = kwargs.get("auth", True)
+        self.conf_file = kwargs.get("conf_file", None)
         self.conn = None
         self.db_path = None
         self.log_path = None
@@ -400,13 +395,9 @@ class DB(Server):
         Mongo database server.  The basic methods and attributes include
         setting up a database instance connection.
 
-    Super-Class:  Server
-
-    Sub-Classes:
-        Coll
-
     Methods:
         __init__
+        connect
         db_connect
         db_cmd
         validate_tbl
@@ -417,7 +408,7 @@ class DB(Server):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 db="test", auth=True, conf_file=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -429,18 +420,32 @@ class DB(Server):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) db -> 'test' or name of database.
-            (input) auth -> True|False - Authenication on or off.
-            (input) conf_file -> Location of mongo.conf file.
+            (input) kwargs:
+                db -> Name of database.
+                auth -> True|False - Authenication on.
+                conf_file -> Location of mongo.conf file.
 
         """
 
-        super(DB, self).__init__(name, user, passwd, host, port, auth,
-                                 conf_file)
-        super(DB, self).connect()
+        super(DB, self).__init__(name, user, passwd, host=host, port=port,
+                                 auth=kwargs.get("auth", True),
+                                 conf_file=kwargs.get("conf_file", None))
 
-        self.db_name = db
-        self.db = self.conn[db]
+        self.db_name = kwargs.get("db", "test")
+        self.db = None
+
+    def connect(self):
+
+        """Method:  connect
+
+        Description:  Connect to a Mongo database.
+
+        Arguments:
+
+        """
+
+        super(DB, self).connect()
+        self.db = self.conn[self.db_name]
 
     def db_connect(self, db="test"):
 
@@ -497,21 +502,6 @@ class DB(Server):
 
         return self.db.collection_names(include_system_collections=inc_sys)
 
-    def isvalid_tbl(self, tbl_name, scan=False):
-
-        """Method:  isvalid_tbl
-
-        Description:  Validates a table.
-
-        Arguments:
-            (input) tbl_name -> Table name.
-            (input) scan -> True|False - Do full scan of table.
-            (output) -> Returns the results of the validate command.
-
-        """
-
-        return self.db.validate_collection(tbl_name, full=scan)
-
     def validate_tbl(self, tbl_name, scan=False):
 
         """Method:  validate_tbl
@@ -521,11 +511,21 @@ class DB(Server):
         Arguments:
             (input) tbl_name -> Table name.
             (input) scan -> True|False - Do full scan of table.
-            (output) -> Returns the results of the validate command.
+            (output) status -> True|False - Operation successful.
+            (output) data -> Returns the results of the validate command.
 
         """
 
-        return self.db.validate_collection(tbl_name, full=scan)
+        status = True
+
+        try:
+            data = self.db.validate_collection(tbl_name, full=scan)
+
+        except pymongo.errors.OperationFailure as msg:
+            status = False
+            data = msg
+
+        return status, data
 
     def db_cmd(self, cmd, **kwargs):
 
@@ -559,12 +559,9 @@ class Coll(DB):
         Mongo database server.  The basic methods and attributes include
         setting up a collection instance and connection.
 
-    Super-Class:  DB
-
-    Sub-Classes:
-
     Methods:
         __init__
+        connect
         coll_cnt
         coll_find
         coll_dst
@@ -575,7 +572,7 @@ class Coll(DB):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 db="test", coll=None, auth=True, conf_file=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -587,18 +584,36 @@ class Coll(DB):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) db -> 'test' or name of database.
-            (input) coll -> 'None' or name of collection.
-            (input) auth -> True|False - Authenication on or off.
-            (input) conf_file -> Location of mongo.conf file.
+            (input) kwargs:
+                db -> Name of database.
+                coll -> Name of collection.
+                auth -> True|False - Authenication on.
+                conf_file -> Location of mongo.conf file.
 
         """
 
-        super(Coll, self).__init__(name, user, passwd, host, port, db, auth,
-                                   conf_file)
+        super(Coll, self).__init__(name, user, passwd, host=host, port=port,
+                                   db=kwargs.get("db", "test"),
+                                   auth=kwargs.get("auth", True),
+                                   conf_file=kwargs.get("conf_file", None))
+
+        self.coll = None
+        self.coll_db = kwargs.get("db", "test")
+        self.coll_coll = kwargs.get("coll", None)
+
+    def connect(self):
+
+        """Method:  connect
+
+        Description:  Connect to a Mongo database.
+
+        Arguments:
+
+        """
+
         super(Coll, self).connect()
 
-        self.coll = self.conn[db][coll]
+        self.coll = self.conn[self.coll_db][self.coll_coll]
 
     def coll_cnt(self, qry=None):
 
@@ -701,13 +716,6 @@ class Rep(Server):
         operating within a Mongo database server.  The basic methods
         and attributes include general methods for replication.
 
-    Super-Class:  Server
-
-    Sub-Classes:
-        MasterRep
-        SlaveRep
-        RepSet
-
     Methods:
         __init__
         fetch_nodes
@@ -715,7 +723,7 @@ class Rep(Server):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 auth=True, conf_file=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -727,13 +735,15 @@ class Rep(Server):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) auth -> True|False - Authenication on or off.
-            (input) conf_file -> Location of mongo.conf file.
+            (input) kwargs:
+                auth -> True|False - Authenication on.
+                conf_file -> Location of mongo.conf file.
 
         """
 
-        super(Rep, self).__init__(name, user, passwd, host, port, auth,
-                                  conf_file)
+        super(Rep, self).__init__(name, user, passwd, host=host, port=port,
+                                  auth=kwargs.get("auth", True),
+                                  conf_file=kwargs.get("conf_file", None))
 
         self.repset = None
         self.ismaster = None
@@ -764,17 +774,14 @@ class MasterRep(Rep):
         database server.  A master replication server object is used as
         a proxy for operating within a replication Mongo server.
 
-    Super-Class:  Rep
-
-    Sub-Classes:
-
     Methods:
         __init__
+        connect
 
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 auth=True, conf_file=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -786,13 +793,33 @@ class MasterRep(Rep):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) auth -> True|False - Authenication on or off.
-            (input) conf_file -> Location of mongo.conf file.
+            (input) kwargs:
+                auth -> True|False - Authenication on.
+                conf_file -> Location of mongo.conf file.
 
         """
 
-        super(MasterRep, self).__init__(name, user, passwd, host, port, auth,
-                                        conf_file)
+        super(MasterRep, self).__init__(name, user, passwd,
+                                        host=host, port=port,
+                                        auth=kwargs.get("auth", True),
+                                        conf_file=kwargs.get("conf_file",
+                                                             None))
+
+        self.ismaster = None
+        self.issecondary = None
+        self.repset = None
+        self.slaves = None
+
+    def connect(self):
+
+        """Method:  connect
+
+        Description:  Connect to a Mongo database.
+
+        Arguments:
+
+        """
+
         super(MasterRep, self).connect()
 
         data = fetch_ismaster(self)
@@ -816,17 +843,14 @@ class SlaveRep(Rep):
         database server.  A slave replication server object is used as a
         proxy for operating within a replication Mongo server.
 
-    Super-Class:  Rep
-
-    Sub-Classes:
-
     Methods:
         __init__
+        connect
 
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 auth=True, conf_file=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -838,13 +862,33 @@ class SlaveRep(Rep):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) auth -> True|False - Authenication on or off.
-            (input) conf_file -> Location of mongo.conf file.
+            (input) kwargs:
+                auth -> True|False - Authenication on.
+                conf_file -> Location of mongo.conf file.
 
         """
 
-        super(SlaveRep, self).__init__(name, user, passwd, host, port, auth,
-                                       conf_file)
+        super(SlaveRep, self).__init__(name, user, passwd,
+                                       host=host, port=port,
+                                       auth=kwargs.get("auth", True),
+                                       conf_file=kwargs.get("conf_file",
+                                                            None))
+
+        self.ismaster = None
+        self.issecondary = None
+        self.repset = None
+        self.primary = None
+
+    def connect(self):
+
+        """Method:  connect
+
+        Description:  Connect to a Mongo database.
+
+        Arguments:
+
+        """
+
         super(SlaveRep, self).connect()
 
         data = fetch_ismaster(self)
@@ -869,11 +913,6 @@ class RepSet(Rep):
         replication Mongo database server.  The basic methods and
         attributes include connecting method.
 
-    Super-Class:  Rep
-
-    Sub-Classes:
-        RepSetColl
-
     Methods:
         __init__
         connect
@@ -881,7 +920,7 @@ class RepSet(Rep):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 auth=True, repset=None, conf_file=None, repset_hosts=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -893,23 +932,23 @@ class RepSet(Rep):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) auth -> True|False - Authenication on or off.
-            (input) repset -> Replication Set name.
-            (input) conf_file -> Location of mongo.conf file.
-            (input) repset_hosts -> Repset hosts and ports.
+            (input) kwargs:
+                auth -> True|False - Authenication on.
+                repset -> Replication Set name.
+                conf_file -> Location of mongo.conf file.
+                repset_hosts -> Repset hosts:ports.
 
         """
 
-        super(RepSet, self).__init__(name, user, passwd, host, port, auth,
-                                     conf_file)
+        super(RepSet, self).__init__(name, user, passwd, host=host, port=port,
+                                     auth=kwargs.get("auth", True),
+                                     conf_file=kwargs.get("conf_file", None))
 
-        if repset:
-            self.repset = repset
+        self.repset = kwargs.get("repset", None)
+        self.repset_hosts = kwargs.get("repset_hosts", None)
 
-        else:
+        if not self.repset:
             sys.exit("Error:  Require Replication Set Name for RepSet class.")
-
-        self.repset_hosts = repset_hosts
 
     def connect(self, connections=None):
 
@@ -956,10 +995,6 @@ class RepSetColl(RepSet):
         Mongo database server.  The basic methods and attributes include
         setting up a collection instance and connection.
 
-    Super-Class:  RepSet
-
-    Sub-Classes:
-
     Methods:
         __init__
         connect
@@ -970,8 +1005,7 @@ class RepSetColl(RepSet):
     """
 
     def __init__(self, name, user, passwd, host="localhost", port=27017,
-                 auth=True, repset=None, conf_file=None, repset_hosts=None,
-                 db="test", coll=None, db_auth=None):
+                 **kwargs):
 
         """Method:  __init__
 
@@ -983,22 +1017,27 @@ class RepSetColl(RepSet):
             (input) passwd -> User's password.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
-            (input) auth -> True|False - Authenication on or off.
-            (input) repset -> Replication Set name.
-            (input) conf_file -> Location of mongo.conf file.
-            (input) repset_hosts -> Repset hosts and ports.
-            (input) db -> 'test' or name of database.
-            (input) coll -> None or name of collection.
-            (input) db_auth -> None or name of authentication database.
+            (input) kwargs:
+                auth -> True|False - Authenication on.
+                repset -> Replication Set name.
+                conf_file -> Location of mongo.conf file.
+                repset_hosts -> Repset hosts and ports.
+                db -> Name of database.
+                coll -> Name of collection.
+                db_auth -> None or name of authentication database.
 
         """
 
-        super(RepSetColl, self).__init__(name, user, passwd, host, port, auth,
-                                         repset, conf_file, repset_hosts)
+        super(RepSetColl, self).__init__(
+            name, user, passwd, host=host, port=port,
+            auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None),
+            repset=kwargs.get("repset", None),
+            repset_hosts=kwargs.get("repset_hosts", None))
 
-        self.db = db
-        self.coll = coll
-        self.db_auth = db_auth
+        self.db = kwargs.get("db", "test")
+        self.coll = kwargs.get("coll", None)
+        self.db_auth = kwargs.get("db_auth", None)
 
     def connect(self, connections=None):
 
