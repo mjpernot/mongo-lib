@@ -94,6 +94,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_raise_exception -> Test the raise exception.
         test_default -> Test with minimum number of arguments.
 
     """
@@ -118,9 +119,9 @@ class UnitTest(unittest.TestCase):
 
     def test_raise_exception(self):
 
-        """Function:  test_default
+        """Function:  test_raise_exception
 
-        Description:  Test validate_tbl method with default arguments.
+        Description:  Test the raise exception.
 
         Arguments:
 
