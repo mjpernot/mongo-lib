@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_isvalid_tbl.py
+"""Program:  Coll_coll_options.py
 
-    Description:  Unit testing of DB.isvalid_tbl in mongo_class.py.
+    Description:  Unit testing of Coll.coll_options in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_isvalid_tbl.py
+        test/unit/mongo_class/Coll_coll_options.py
 
     Arguments:
 
@@ -33,26 +33,24 @@ import version
 __version__ = version.__version__
 
 
-class DBValidate(object):
+class CollOpts(object):
 
-    """Class:  DBValidate
+    """Class:  CollOpts
 
-    Description:  Class stub holder for DB class.
+    Description:  Class stub holder for Coll class.
 
     Methods:
-        validate_collection -> Stub for DB.db.validate_collection method.
+        options -> Stub for Coll.coll_options method.
 
     """
 
-    def validate_collection(self, tbl_name, full):
+    def options(self):
 
-        """Function:  validate_collection
+        """Function:  options
 
-        Description:  Stub for DB.db.validate_collection method.
+        Description:  Stub for Coll.coll_options method.
 
         Arguments:
-            (input) tbl_name -> Table name.
-            (input) full -> True|False - Do full scan.
 
         """
 
@@ -67,7 +65,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_default -> Test with minimum number of arguments.
+        test_query -> Test method.
 
     """
 
@@ -87,23 +85,24 @@ class UnitTest(unittest.TestCase):
         self.host = "host_server"
         self.port = 27017
         self.db = "test"
+        self.coll = "coll_name"
         self.db_auth = None
 
-    def test_default(self):
+    def test_query(self):
 
-        """Function:  test_default
+        """Function:  test_query
 
-        Description:  Test isvalid_tbl method with default arguments.
+        Description:  Test method.
 
         Arguments:
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.passwd,
-                               self.host, self.port)
-        mongo.db = DBValidate()
+        mongo = mongo_class.Coll(self.name, self.user, self.passwd,
+                                 self.host, self.port)
+        mongo.coll = CollOpts()
 
-        self.assertTrue(mongo.isvalid_tbl("tbl", True))
+        self.assertTrue(mongo.coll_options())
 
 
 if __name__ == "__main__":

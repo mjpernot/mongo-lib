@@ -34,49 +34,11 @@ import version
 __version__ = version.__version__
 
 
-class Mongo(object):
-
-    """Class:  Mongo
-
-    Description:  Class stub holder for Mongo class.
-
-    Super-Class:
-
-    Sub-Classes:
-
-    Methods:
-        __init__ -> Class initialization.
-
-    """
-
-    def __init__(self, name, user, passwd, host, port, auth, conf_file):
-
-        """Function:  __init__
-
-        Description:  Class initialization.
-
-        Arguments:
-
-        """
-
-        self.name = name
-        self.user = user
-        self.passwd = passwd
-        self.host = host
-        self.port = port
-        self.auth = auth
-        self.conf_file = conf_file
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.
@@ -116,7 +78,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_mongo.return_value = Mongo
+        mock_mongo.return_value = True
 
         self.assertEqual(len(mongo_libs.create_slv_array(self.cfg)), 1)
 

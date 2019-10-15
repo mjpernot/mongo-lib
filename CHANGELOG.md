@@ -7,18 +7,40 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [3.0.0] - 2019-10-08
 Breaking Change
 
+### Fixed
+- mongo_class.DB.validate_collection:  Add exception handler to deal with trying to validate views.
+
 ### Changed
-- Documentation updates.
+- mongo_class.RepSetColl.\_\_init\_\_:  Changed check of repset attribute until after it is set.
+- mongo_class.RepSetColl.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
+- mongo_class.RepSet.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
+- mongo_class.Coll.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
+- mongo_libs.crt_coll_inst:  Updated arguments to be passed as keyword arguments to mongo_class classes.
+- mongo_class.DB.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
+- mongo_class.Rep.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
+- mongo_class.MasterRep.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
+- mongo_class.SlaveRep.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
+- mongo_libs.create_slv_array :  Updated arguments to be passed as keyword arguments to mongo_class SlaveRep class.
+- mongo_libs.create_instance:  Added kwargs to argument list.
+- mongo_libs.create_slv_array:  Added kwargs to argument list.
+- mongo_class.Server.\_\_init\_\_:  Changed a number of arguments to be passed in as kwargs.
+- mongo_libs.create_instance:  Updated arguments to be passed as keyword arguments to mongo_class classes.
 - mongo_class.SlaveRep.\_\_init\_\_:  Removed connect() call from method.
 - mongo_class.MasterRep.\_\_init\_\_:  Removed connect() call from method.
 - mongo_class.DB.\_\_init\_\_:  Removed connect() call from method.
 - mongo_class.Coll.\_\_init\_\_:  Removed connect() call from method.
+- Documentation updates.
 
 ### Added
 - mongo_class.SlaveRep.connect:  Connect method to a Mongo database for SlaveRep class.
 - mongo_class.MasterRep.connect:  Connect method to a Mongo database for MasterRep class.
 - mongo_class.Coll.connect:  Connect method to a Mongo database for Coll class.
 - mongo_class.DB.connect:  Connect method to a Mongo database for DB class.
+
+### Removed
+- mongo_class.DB.isvalid_tbl:  Method has been replaced with validate_tbl method.
+- mongo_libs.json_prt_ins_2_db:  Function is no longer required.
+- mongo_libs.json_2_out:  Function is no longer required.
 
 
 ## [2.1.2] - 2019-07-22
@@ -42,6 +64,10 @@ Breaking Change
 - mongo_libs.create_slv_array:  Fixed Sonarqube findings.
 - mongo_libs.create_instance:  Fixed Sonarqube findings.
 - mongo_libs.create_cmd:  Fixed Sonarqube findings.
+
+### Deprecated
+- mongo_libs.json_prt_ins_2_db function.
+- mongo_libs.json_2_out function.
 
 
 ## [2.1.1] - 2018-11-27

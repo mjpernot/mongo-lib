@@ -40,16 +40,12 @@ class Mongo(object):
 
     Description:  Class stub holder for Mongo class.
 
-    Super-Class:
-
-    Sub-Classes:
-
     Methods:
         __init__ -> Class initialization.
 
     """
 
-    def __init__(self, name, user, passwd, host, port, auth, conf_file):
+    def __init__(self, name, user, passwd, host, port, **kwargs):
 
         """Function:  __init__
 
@@ -64,8 +60,8 @@ class Mongo(object):
         self.passwd = passwd
         self.host = host
         self.port = port
-        self.auth = auth
-        self.conf_file = conf_file
+        self.auth = kwargs.get("auth", None)
+        self.conf_file = kwargs.get("conf_file", None)
 
 
 class Cfg(object):
@@ -73,10 +69,6 @@ class Cfg(object):
     """Class:  Cfg
 
     Description:  Class stub holder for Cfg class.
-
-    Super-Class:
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class initialization.
@@ -107,10 +99,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.

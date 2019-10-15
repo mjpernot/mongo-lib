@@ -39,10 +39,6 @@ class Conn(object):
 
     Description:  Class stub holder for Rep class.
 
-    Super-Class:
-
-    Sub-Classes:
-
     Methods:
         insert_one -> Stub holder for Rep.conn.nodes attribute.
 
@@ -66,10 +62,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.

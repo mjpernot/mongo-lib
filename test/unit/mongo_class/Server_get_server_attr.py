@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_unlock_db.py
+"""Program:  Server_get_server_attr.py
 
-    Description:  Unit testing of Server.unlock_db in mongo_class.py.
+    Description:  Unit testing of Server.get_server_attr in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_unlock_db.py
+        test/unit/mongo_class/Server_get_server_attr.py
 
     Arguments:
 
@@ -24,6 +24,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -31,30 +32,6 @@ import mongo_class
 import version
 
 __version__ = version.__version__
-
-
-class UnlockDb(object):
-
-    """Class:  UnlockDb
-
-    Description:  Class stub holder for Server class.
-
-    Methods:
-        unlock_db -> Stub holder for Server.conn.unlock_db method.
-
-    """
-
-    def unlock(self):
-
-        """Function:  unlock
-
-        Description:  Stub holder for Server.conn.unlock method.
-
-        Arguments:
-
-        """
-
-        return True
 
 
 class UnitTest(unittest.TestCase):
@@ -65,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_unlock_db -> Test unlock_db method.
+        test_default -> Test with default settings.
 
     """
 
@@ -87,23 +64,32 @@ class UnitTest(unittest.TestCase):
         self.db = "test"
         self.coll = None
         self.db_auth = None
-        self.repset = "mongo_repset"
+        self.conf_file = "Conf_File"
+        self.data = {"parsed": {"storage": {"dbPath": "db_path"},
+                                "systemLog": {"path": "dir_path"},
+                                "config": "conf_file"}}
 
-    def test_unlock_db(self):
+    @mock.patch("mongo_class.Server.upd_server_attr")
+    def test_default(self, mock_cmd):
 
-        """Function:  test_unlock_db
+        """Function:  test_default
 
-        Description:  Test unlock_db method.
+        Description:  Test with default settings.
 
         Arguments:
 
         """
 
+        mock_cmd.return_value = True
         mongo = mongo_class.Server(self.name, self.user, self.passwd,
-                                   self.host, self.port)
-        mongo.conn = UnlockDb()
+                                   self.host, self.port,
+                                   conf_file=self.conf_file)
 
-        self.assertTrue(mongo.unlock_db())
+        mongo.get_srv_attr()
+        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
+                          mongo.port, mongo.conf_file),
+                         (self.name, self.user, self.passwd, self.host,
+                          self.port, self.conf_file))
 
 
 if __name__ == "__main__":
