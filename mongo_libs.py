@@ -11,8 +11,6 @@
         crt_base_cmd
         crt_coll_inst
         ins_doc
-        json_2_out
-        json_prt_ins_2_db
 
 """
 
@@ -69,7 +67,7 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
                                list(kwargs.get("opt_arg", [])))
 
 
-def create_instance(cfg_file, dir_path, class_name):
+def create_instance(cfg_file, dir_path, class_name, **kwargs):
 
     """Function:  create_instance
 
@@ -88,11 +86,11 @@ def create_instance(cfg_file, dir_path, class_name):
 
     cfg = gen_libs.load_module(cfg_file, dir_path)
 
-    return class_name(cfg.name, cfg.user, cfg.passwd, cfg.host, cfg.port,
-                      cfg.auth, cfg.conf_file)
+    return class_name(cfg.name, cfg.user, cfg.passwd, host=cfg.host,
+                      port=cfg.port, auth=cfg.auth, conf_file=cfg.conf_file)
 
 
-def create_slv_array(cfg_array):
+def create_slv_array(cfg_array, **kwargs):
 
     """Function:  create_slv_array
 
@@ -110,9 +108,10 @@ def create_slv_array(cfg_array):
 
     for slv in cfg_array:
         slave_inst = mongo_class.SlaveRep(slv["name"], slv["user"],
-                                          slv["passwd"], slv["host"],
-                                          int(slv["port"]), slv["auth"],
-                                          slv["conf_file"])
+                                          slv["passwd"], host=slv["host"],
+                                          port=int(slv["port"]),
+                                          auth=slv["auth"],
+                                          conf_file=slv["conf_file"])
         slaves.append(slave_inst)
 
     return slaves
@@ -176,14 +175,16 @@ def crt_coll_inst(cfg, db, tbl, **kwargs):
 
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
-        return mongo_class.RepSetColl(cfg.name, cfg.user, cfg.passwd, cfg.host,
-                                      cfg.port, cfg.auth, repset=cfg.repset,
+        return mongo_class.RepSetColl(cfg.name, cfg.user, cfg.passwd,
+                                      host=cfg.host, port=cfg.port,
+                                      auth=cfg.auth, repset=cfg.repset,
                                       repset_hosts=cfg.repset_hosts, db=db,
                                       coll=tbl, db_auth=cfg.db_auth)
 
     else:
-        return mongo_class.Coll(cfg.name, cfg.user, cfg.passwd, cfg.host,
-                                cfg.port, db, tbl, cfg.auth, cfg.conf_file)
+        return mongo_class.Coll(cfg.name, cfg.user, cfg.passwd, host=cfg.host,
+                                port=cfg.port, db=db, coll=tbl, auth=cfg.auth,
+                                conf_file=cfg.conf_file)
 
 
 def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
@@ -206,58 +207,3 @@ def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
     coll.connect()
     coll.ins_doc(json.loads(json.dumps(data)))
     cmds_gen.disconnect([coll])
-
-
-def json_2_out(data, **kwargs):
-
-    """Function:  json_2_out
-
-    Description:  If Mongo instance is present, insert data into database, else
-        send data to standard out or file.
-
-    Arguments:
-        (input) data -> Data in dictionary format.
-        (input) **kwargs:
-            class_cfg -> Mongo server configuration.
-            db_tbl database:table_name -> Mongo database and table name.
-            ofile -> file name - Name of output file.
-
-    """
-
-    mongo_cfg = kwargs.get("class_cfg", False)
-    db_tbl = kwargs.get("db_tbl", False)
-
-    if mongo_cfg and db_tbl:
-        db, tbl = db_tbl.split(":")
-        ins_doc(mongo_cfg, db, tbl, data, **kwargs)
-
-    else:
-        # Convert dictionary to JSON and send to output.
-        #   NOTE: Only the last line of the output will be saved to file.
-        gen_libs.print_data(json.dumps(data, indent=4), **kwargs)
-
-
-def json_prt_ins_2_db(data, **kwargs):
-
-    """Function:  json_prt_ins_2_db
-
-    Description:  Convert dictionary to JSON format and print it.  If Mongo
-        instance is present, insert the data into database.
-
-    Arguments:
-        (input) data -> Data in dictionary format.
-        (input) **kwargs:
-            class_cfg -> Mongo server configuration.
-            db_tbl database:table_name -> Mongo database and table name.
-            ofile -> file name - Name of output file.
-
-    """
-
-    gen_libs.print_data(json.dumps(data, indent=4), **kwargs)
-
-    mongo_cfg = kwargs.get("class_cfg", None)
-    db_tbl = kwargs.get("db_tbl", None)
-
-    if mongo_cfg and db_tbl:
-        db, tbl = db_tbl.split(":")
-        ins_doc(mongo_cfg, db, tbl, data, **kwargs)

@@ -40,10 +40,6 @@ class UnitTest(unittest.TestCase):
 
     Description:  Class which is a representation of a unit testing.
 
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
-
     Methods:
         setUp -> Initialize testing environment.
         test_default -> Test with minimum number of arguments.
@@ -68,11 +64,8 @@ class UnitTest(unittest.TestCase):
         self.db = "test"
         self.coll = "coll_name"
         self.db_auth = None
-        self.repset = "mongo_repset"
-        self.data = {"test": {"coll_name": "collName"}}
 
-    @mock.patch("mongo_class.Server.connect")
-    def test_default(self, mock_connect):
+    def test_default(self):
 
         """Function:  test_default
 
@@ -82,17 +75,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_connect.return_value = True
         mongo = mongo_class.Coll(self.name, self.user, self.passwd,
-                                 self.host, self.port, repset=self.repset)
-        mongo.conn = self.data
+                                 self.host, self.port, coll=self.coll)
 
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.db, mongo.coll, mongo.repset,
-                          mongo.coll),
+                          mongo.port, mongo.coll_db, mongo.coll_coll),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll, self.repset,
-                          "collName"))
+                          self.port, self.db, self.coll))
 
 
 if __name__ == "__main__":

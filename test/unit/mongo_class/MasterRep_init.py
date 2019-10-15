@@ -24,7 +24,6 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -39,10 +38,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.
@@ -69,13 +64,8 @@ class UnitTest(unittest.TestCase):
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"
-        self.data = {"secondary": False, "ismaster": True,
-                     "issecondary": False, "setName": "mongo_repset",
-                     "primary": "primary_host"}
 
-    @mock.patch("mongo_class.fetch_ismaster")
-    @mock.patch("mongo_class.Server.connect")
-    def test_default(self, mock_connect, mock_fetch):
+    def test_default(self):
 
         """Function:  test_default
 
@@ -85,15 +75,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_connect.return_value = True
-        mock_fetch.return_value = self.data
         mongo = mongo_class.MasterRep(self.name, self.user, self.passwd,
                                       self.host, self.port)
 
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
                           mongo.port, mongo.ismaster, mongo.issecondary),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, True, False))
+                          self.port, None, None))
 
 
 if __name__ == "__main__":

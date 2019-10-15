@@ -39,10 +39,6 @@ class InsDoc(object):
 
     Description:  Class stub holder for RepSetColl class.
 
-    Super-Class:
-
-    Sub-Classes:
-
     Methods:
         insert_one -> Stub holder for RepSetColl.db_coll.insert_one method.
 
@@ -67,10 +63,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.

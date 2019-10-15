@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_is_primary.py
+"""Program:  DB_connect.py
 
-    Description:  Unit testing of Server.is_primary in mongo_class.py.
+    Description:  Unit testing of DB.connect in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_is_primary.py
+        test/unit/mongo_class/DB_connect.py
 
     Arguments:
 
@@ -24,6 +24,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -33,14 +34,14 @@ import version
 __version__ = version.__version__
 
 
-class Conn(object):
+class DBConn(object):
 
-    """Class:  Conn
+    """Class:  DBConn
 
-    Description:  Class stub holder for Rep class.
+    Description:  Class stub holder for DB class.
 
     Methods:
-        __init__ -> Stub holder for Rep.conn method.
+        __init__ -> Class initialization.
 
     """
 
@@ -48,13 +49,13 @@ class Conn(object):
 
         """Function:  __init__
 
-        Description:  Stub holder for Rep.conn.is_locked attribute.
+        Description:  Class initialization.
 
         Arguments:
 
         """
 
-        self.is_primary = True
+        self.test = "testdb"
 
 
 class UnitTest(unittest.TestCase):
@@ -65,7 +66,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_is_primary -> Test is_primary method.
+        test_connection -> Test connection method.
 
     """
 
@@ -85,26 +86,28 @@ class UnitTest(unittest.TestCase):
         self.host = "host_server"
         self.port = 27017
         self.db = "test"
-        self.coll = None
         self.db_auth = None
-        self.repset = "mongo_repset"
-        self.nodes = ["node1", "node2"]
 
-    def test_is_primary(self):
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_connection(self, mock_client, mock_cmd):
 
-        """Function:  test_is_primary
+        """Function:  test_connection
 
-        Description:  Test is_primary method.
+        Description:  Test connection method.
 
         Arguments:
 
         """
 
-        mongo = mongo_class.Rep(self.name, self.user, self.passwd, self.host,
-                                self.port)
-        mongo.conn = Conn()
+        mock_client.return_value = True
+        mock_cmd.return_value = True
+        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+                               self.host, self.port)
+        mongo.conn = {"test": "testdb"}
+        mongo.connect()
 
-        self.assertEqual(mongo.is_primary(), True)
+        self.assertEqual((mongo.db), ("testdb"))
 
 
 if __name__ == "__main__":

@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_is_primary.py
+"""Program:  Coll_coll_options.py
 
-    Description:  Unit testing of Server.is_primary in mongo_class.py.
+    Description:  Unit testing of Coll.coll_options in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_is_primary.py
+        test/unit/mongo_class/Coll_coll_options.py
 
     Arguments:
 
@@ -33,28 +33,28 @@ import version
 __version__ = version.__version__
 
 
-class Conn(object):
+class CollOpts(object):
 
-    """Class:  Conn
+    """Class:  CollOpts
 
-    Description:  Class stub holder for Rep class.
+    Description:  Class stub holder for Coll class.
 
     Methods:
-        __init__ -> Stub holder for Rep.conn method.
+        options -> Stub for Coll.coll_options method.
 
     """
 
-    def __init__(self):
+    def options(self):
 
-        """Function:  __init__
+        """Function:  options
 
-        Description:  Stub holder for Rep.conn.is_locked attribute.
+        Description:  Stub for Coll.coll_options method.
 
         Arguments:
 
         """
 
-        self.is_primary = True
+        return True
 
 
 class UnitTest(unittest.TestCase):
@@ -65,7 +65,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_is_primary -> Test is_primary method.
+        test_query -> Test method.
 
     """
 
@@ -85,26 +85,24 @@ class UnitTest(unittest.TestCase):
         self.host = "host_server"
         self.port = 27017
         self.db = "test"
-        self.coll = None
+        self.coll = "coll_name"
         self.db_auth = None
-        self.repset = "mongo_repset"
-        self.nodes = ["node1", "node2"]
 
-    def test_is_primary(self):
+    def test_query(self):
 
-        """Function:  test_is_primary
+        """Function:  test_query
 
-        Description:  Test is_primary method.
+        Description:  Test method.
 
         Arguments:
 
         """
 
-        mongo = mongo_class.Rep(self.name, self.user, self.passwd, self.host,
-                                self.port)
-        mongo.conn = Conn()
+        mongo = mongo_class.Coll(self.name, self.user, self.passwd,
+                                 self.host, self.port)
+        mongo.coll = CollOpts()
 
-        self.assertEqual(mongo.is_primary(), True)
+        self.assertTrue(mongo.coll_options())
 
 
 if __name__ == "__main__":

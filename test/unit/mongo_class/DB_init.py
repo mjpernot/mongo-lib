@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_is_primary.py
+"""Program:  DB_init.py
 
-    Description:  Unit testing of Server.is_primary in mongo_class.py.
+    Description:  Unit testing of DB.__init__ in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_is_primary.py
+        test/unit/mongo_class/DB_init.py
 
     Arguments:
 
@@ -33,30 +33,6 @@ import version
 __version__ = version.__version__
 
 
-class Conn(object):
-
-    """Class:  Conn
-
-    Description:  Class stub holder for Rep class.
-
-    Methods:
-        __init__ -> Stub holder for Rep.conn method.
-
-    """
-
-    def __init__(self):
-
-        """Function:  __init__
-
-        Description:  Stub holder for Rep.conn.is_locked attribute.
-
-        Arguments:
-
-        """
-
-        self.is_primary = True
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -65,7 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_is_primary -> Test is_primary method.
+        test_default -> Test with minimum number of arguments.
 
     """
 
@@ -85,26 +61,25 @@ class UnitTest(unittest.TestCase):
         self.host = "host_server"
         self.port = 27017
         self.db = "test"
-        self.coll = None
         self.db_auth = None
-        self.repset = "mongo_repset"
-        self.nodes = ["node1", "node2"]
 
-    def test_is_primary(self):
+    def test_default(self):
 
-        """Function:  test_is_primary
+        """Function:  test_default
 
-        Description:  Test is_primary method.
+        Description:  Test __init__ method with default arguments.
 
         Arguments:
 
         """
 
-        mongo = mongo_class.Rep(self.name, self.user, self.passwd, self.host,
-                                self.port)
-        mongo.conn = Conn()
+        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+                               self.host, self.port)
 
-        self.assertEqual(mongo.is_primary(), True)
+        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
+                          mongo.port),
+                         (self.name, self.user, self.passwd, self.host,
+                          self.port))
 
 
 if __name__ == "__main__":
