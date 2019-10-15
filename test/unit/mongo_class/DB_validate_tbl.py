@@ -24,6 +24,7 @@ else:
     import unittest
 
 # Third-party
+import pymongo
 
 # Local
 sys.path.append(os.getcwd())
@@ -31,6 +32,32 @@ import mongo_class
 import version
 
 __version__ = version.__version__
+
+
+class DBValidate2(object):
+
+    """Class:  DBValidate2
+
+    Description:  Class stub holder for DB class.
+
+    Methods:
+        validate_collection -> Stub for DB.db.validate_collection method.
+
+    """
+
+    def validate_collection(self, tbl_name, full):
+
+        """Function:  validate_collection
+
+        Description:  Stub for DB.db.validate_collection method.
+
+        Arguments:
+            (input) tbl_name -> Table name.
+            (input) full -> True|False - Do full scan.
+
+        """
+
+        raise pymongo.errors.OperationFailure("ErrorMsg")
 
 
 class DBValidate(object):
@@ -88,6 +115,23 @@ class UnitTest(unittest.TestCase):
         self.port = 27017
         self.db = "test"
         self.db_auth = None
+
+    def test_raise_exception(self):
+
+        """Function:  test_default
+
+        Description:  Test validate_tbl method with default arguments.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+                               self.host, self.port)
+        mongo.db = DBValidate2()
+        status, msg = mongo.validate_tbl("tbl", True)
+
+        self.assertEqual((status, msg._message), (False, "ErrorMsg"))
 
     def test_default(self):
 
