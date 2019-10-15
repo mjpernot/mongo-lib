@@ -56,7 +56,7 @@ class DBValidate(object):
 
         """
 
-        return True
+        return "MessageHere"
 
 
 class UnitTest(unittest.TestCase):
@@ -103,7 +103,8 @@ class UnitTest(unittest.TestCase):
                                self.host, self.port)
         mongo.db = DBValidate()
 
-        self.assertTrue(mongo.validate_tbl("tbl", True))
+        self.assertEqual(mongo.validate_tbl("tbl", True),
+                         (True, "MessageHere"))
 
 
 if __name__ == "__main__":
