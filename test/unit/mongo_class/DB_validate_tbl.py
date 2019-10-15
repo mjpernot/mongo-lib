@@ -94,6 +94,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_raise_exception2 -> Test the raise exception in pymongo==3.2.0.
         test_raise_exception -> Test the raise exception.
         test_default -> Test with minimum number of arguments.
 
@@ -117,6 +118,24 @@ class UnitTest(unittest.TestCase):
         self.db = "test"
         self.db_auth = None
 
+    def test_raise_exception2(self):
+
+        """Function:  test_raise_exception
+
+        Description:  Test the raise exception in pymongo==3.2.0.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+                               self.host, self.port)
+        mongo.db = DBValidate2()
+        status, msg = mongo.validate_tbl("tbl", True)
+
+        self.assertEqual((status), (False))
+
+    @unittest.skip("Skipped due to pymongo is at 3.2.0 instead of 3.8.0")
     def test_raise_exception(self):
 
         """Function:  test_raise_exception
