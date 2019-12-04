@@ -64,7 +64,7 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
 
     # Process optional arguments.
     return cmds_gen.is_add_cmd(args_array, cmd,
-                               list(kwargs.get("opt_arg", [])))
+                               dict(kwargs.get("opt_arg", {})))
 
 
 def create_instance(cfg_file, dir_path, class_name, **kwargs):
