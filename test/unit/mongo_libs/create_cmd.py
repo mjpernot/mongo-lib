@@ -42,7 +42,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_create_cmd -> Test create_cmd function.
+        test_is_add_cmd -> Test with is_add_cmd call.
+        test_default -> Test with default settings.
 
     """
 
@@ -56,21 +57,44 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.mongo = "Mongo_Class"
-        self.args_array = {}
-        self.prog_name = "progam_name"
-        self.path_opt = "/dir_path/"
-        self.req_arg = "-d"
+        self.mongo = "MongoClass"
+        self.args_array = {"-m": True, "-n": False}
+        self.prog_name = "mongo_name"
+        self.path_opt = "/dir/path"
+        self.req_arg = []
+        self.opt_arg = {"-m": "-m=1", "-n": "-n=2"}
+        self.result = [self.path_opt + "/" + self.prog_name, "-m=1"]
+
+    @mock.patch("mongo_libs.cmds_gen.add_cmd")
+    @mock.patch("mongo_libs.crt_base_cmd")
+    @mock.patch("mongo_libs.arg_parser.arg_set_path")
+    def test_is_add_cmd(self, mock_arg, mock_cmd, mock_add):
+
+        """Function:  test_is_add_cmd
+
+        Description:  Test with is_add_cmd call.
+
+        Arguments:
+
+        """
+
+        mock_arg.return_value = self.path_opt + "/"
+        mock_cmd.return_value = [self.path_opt + "/" + self.prog_name]
+        mock_add.return_value = [self.path_opt + "/" + self.prog_name]
+        self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
+                                               self.prog_name, self.path_opt,
+                                               opt_arg=self.opt_arg),
+                         self.result)
 
     @mock.patch("mongo_libs.cmds_gen.is_add_cmd")
     @mock.patch("mongo_libs.cmds_gen.add_cmd")
     @mock.patch("mongo_libs.crt_base_cmd")
     @mock.patch("mongo_libs.arg_parser.arg_set_path")
-    def test_create_cmd(self, mock_arg, mock_cmd, mock_add, mock_is_add):
+    def test_default(self, mock_arg, mock_cmd, mock_add, mock_is_add):
 
-        """Function:  test_create_cmd
+        """Function:  test_default
 
-        Description:  Test create_cmd function.
+        Description:  Test with default settings.
 
         Arguments:
 
@@ -79,11 +103,11 @@ class UnitTest(unittest.TestCase):
         mock_arg.return_value = "Base_Program"
         mock_cmd.return_value = "Base_Crt_Program"
         mock_add.return_value = "Base_Crt_Program_Arg"
-        mock_is_add.return_value = "Base_Crt_Program_Arg_Plus"
+        mock_is_add.return_value = ["Base_Crt_Program_Arg_Plus"]
         self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
                                                self.prog_name, self.path_opt,
                                                req_arg=self.req_arg),
-                         "Base_Crt_Program_Arg_Plus")
+                         ["Base_Crt_Program_Arg_Plus"])
 
 
 if __name__ == "__main__":
