@@ -34,6 +34,36 @@ import version
 __version__ = version.__version__
 
 
+class Mongo(object):
+
+    """Class:  Mongo
+
+    Description:  Class stub holder for Mongo class.
+
+    Methods:
+        __init__ -> Class initialization.
+
+    """
+
+    def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Class initialization.
+
+        Arguments:
+
+        """
+
+        self.repset = "RepSetName"
+        self.repset_hosts = "ServerName1:27017, ServerName2:27017"
+        self.host = "IP"
+        self.port = 27017
+        self.user = "username"
+        self.passwd = "XXXXX"
+        self.auth = True
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -42,6 +72,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_full_test -> Test with all external calls.
+        test_crt_base_cmd -> Test with crt_base_cmd call.
+        test_add_cmd_list -> Test with list.
+        test_add_cmd_empty -> Test with empty list.
         test_is_add_cmd -> Test with is_add_cmd call.
         test_default -> Test with default settings.
 
@@ -57,13 +91,88 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.mongo = "MongoClass"
-        self.args_array = {"-m": True, "-n": False}
-        self.prog_name = "mongo_name"
-        self.path_opt = "/dir/path"
-        self.req_arg = []
+        self.mongo = Mongo()
+        self.args_array = {"-m": True, "-n": False, "-p": "/dir/path"}
+        self.prog_name = "mongostats"
+        self.path = "/dir/path"
+        self.path_opt = "-p"
+        self.req_arg = ["--required"]
         self.opt_arg = {"-m": "-m=1", "-n": "-n=2"}
-        self.result = [self.path_opt + "/" + self.prog_name, "-m=1"]
+        self.result = [self.path + "/" + self.prog_name, "-m=1"]
+        self.result2 = [self.path + "/" + self.prog_name, "--required", "-m=1"]
+
+    def test_full_test(self):
+
+        """Function:  test_full_test
+
+        Description:  Test with all external calls.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
+                                               self.prog_name, self.path_opt,
+                                               opt_arg=self.opt_arg,
+                                               req_arg=self.req_arg),
+                         self.result2)
+
+    @mock.patch("mongo_libs.arg_parser.arg_set_path")
+    def test_crt_base_cmd(self, mock_arg):
+
+        """Function:  test_crt_base_cmd
+
+        Description:  Test with crt_base_cmd call.
+
+        Arguments:
+
+        """
+
+        mock_arg.return_value = self.path_opt + "/"
+        self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
+                                               self.prog_name, self.path_opt,
+                                               opt_arg=self.opt_arg,
+                                               req_arg=self.req_arg),
+                         self.result2)
+
+    @mock.patch("mongo_libs.crt_base_cmd")
+    @mock.patch("mongo_libs.arg_parser.arg_set_path")
+    def test_add_cmd_list(self, mock_arg, mock_cmd):
+
+        """Function:  test_add_cmd_list
+
+        Description:  Test with list.
+
+        Arguments:
+
+        """
+
+        mock_arg.return_value = self.path_opt + "/"
+        mock_cmd.return_value = [self.path_opt + "/" + self.prog_name]
+        self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
+                                               self.prog_name, self.path_opt,
+                                               opt_arg=self.opt_arg,
+                                               req_arg=self.req_arg),
+                         self.result2)
+
+    @mock.patch("mongo_libs.crt_base_cmd")
+    @mock.patch("mongo_libs.arg_parser.arg_set_path")
+    def test_add_cmd_empty(self, mock_arg, mock_cmd):
+
+        """Function:  test_add_cmd_empty
+
+        Description:  Test with empty list.
+
+        Arguments:
+
+        """
+
+        mock_arg.return_value = self.path_opt + "/"
+        mock_cmd.return_value = [self.path_opt + "/" + self.prog_name]
+        self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
+                                               self.prog_name, self.path_opt,
+                                               opt_arg=self.opt_arg),
+                         self.result)
 
     @mock.patch("mongo_libs.cmds_gen.add_cmd")
     @mock.patch("mongo_libs.crt_base_cmd")
