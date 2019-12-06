@@ -92,14 +92,17 @@ class UnitTest(unittest.TestCase):
         """
 
         self.mongo = Mongo()
-        self.args_array = {"-m": True, "-n": False, "-p": "/dir/path"}
+        self.args_array = {"-m": True, "-p": "/dir/path"}
         self.prog_name = "mongostats"
         self.path = "/dir/path"
         self.path_opt = "-p"
         self.req_arg = ["--required"]
-        self.opt_arg = {"-m": "-m=1", "-n": "-n=2"}
+        self.opt_arg = {"-m": "-m=1"}
         self.result = [self.path + "/" + self.prog_name, "-m=1"]
         self.result2 = [self.path + "/" + self.prog_name, "--required", "-m=1"]
+        self.result3 = [self.path + "/" + self.prog_name,
+                        "--username=username", "--host=IP:27017",
+                        "--password=XXXXX", "--required", "-m=1"]
 
     def test_full_test(self):
 
@@ -115,7 +118,7 @@ class UnitTest(unittest.TestCase):
                                                self.prog_name, self.path_opt,
                                                opt_arg=self.opt_arg,
                                                req_arg=self.req_arg),
-                         self.result2)
+                         self.result3)
 
     @mock.patch("mongo_libs.arg_parser.arg_set_path")
     def test_crt_base_cmd(self, mock_arg):
@@ -128,12 +131,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_arg.return_value = self.path_opt + "/"
+        mock_arg.return_value = self.path + "/"
         self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
                                                self.prog_name, self.path_opt,
                                                opt_arg=self.opt_arg,
                                                req_arg=self.req_arg),
-                         self.result2)
+                         self.result3)
 
     @mock.patch("mongo_libs.crt_base_cmd")
     @mock.patch("mongo_libs.arg_parser.arg_set_path")
@@ -147,8 +150,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_arg.return_value = self.path_opt + "/"
-        mock_cmd.return_value = [self.path_opt + "/" + self.prog_name]
+        mock_arg.return_value = self.path + "/"
+        mock_cmd.return_value = [self.path + "/" + self.prog_name]
         self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
                                                self.prog_name, self.path_opt,
                                                opt_arg=self.opt_arg,
@@ -167,17 +170,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_arg.return_value = self.path_opt + "/"
-        mock_cmd.return_value = [self.path_opt + "/" + self.prog_name]
+        mock_arg.return_value = self.path + "/"
+        mock_cmd.return_value = [self.path + "/" + self.prog_name]
         self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
                                                self.prog_name, self.path_opt,
                                                opt_arg=self.opt_arg),
                          self.result)
 
-    @mock.patch("mongo_libs.cmds_gen.add_cmd")
     @mock.patch("mongo_libs.crt_base_cmd")
     @mock.patch("mongo_libs.arg_parser.arg_set_path")
-    def test_is_add_cmd(self, mock_arg, mock_cmd, mock_add):
+    def test_is_add_cmd(self, mock_arg, mock_cmd):
 
         """Function:  test_is_add_cmd
 
@@ -187,9 +189,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_arg.return_value = self.path_opt + "/"
-        mock_cmd.return_value = [self.path_opt + "/" + self.prog_name]
-        mock_add.return_value = [self.path_opt + "/" + self.prog_name]
+        mock_arg.return_value = self.path + "/"
+        mock_cmd.return_value = [self.path + "/" + self.prog_name]
         self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
                                                self.prog_name, self.path_opt,
                                                opt_arg=self.opt_arg),
