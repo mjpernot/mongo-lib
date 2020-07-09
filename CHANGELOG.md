@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [3.1.0] - 2020-07-09
 ### Changed
+- mongo_libs.crt_coll_inst:  Refactored function and remove else clause.
 - mongo_libs.crt_base_cmd:  Refactored function to have only one return.
 - mongo_class.Server.adm_cmd:  Refactored method and removed "if" statement.
 - mongo_class.SlaveRep.connect:  Removed sys.exit and replaced with status message return.

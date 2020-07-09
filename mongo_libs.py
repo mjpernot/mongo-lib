@@ -163,7 +163,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
     return cmd_list
 
 
-def crt_coll_inst(cfg, db, tbl, **kwargs):
+def crt_coll_inst(cfg, dbs, tbl, **kwargs):
 
     """Function:  crt_coll_inst
 
@@ -173,7 +173,7 @@ def crt_coll_inst(cfg, db, tbl, **kwargs):
 
     Arguments:
         (input) cfg_file -> Configuration file name.
-        (input) db -> Database name.
+        (input) dbs -> Database name.
         (input) tbl ->  Collection name.
 
     """
@@ -183,12 +183,11 @@ def crt_coll_inst(cfg, db, tbl, **kwargs):
         return mongo_class.RepSetColl(
             cfg.name, cfg.user, cfg.passwd, host=cfg.host, port=cfg.port,
             auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,
-            db=db, coll=tbl, db_auth=cfg.db_auth)
+            db=dbs, coll=tbl, db_auth=cfg.db_auth)
 
-    else:
-        return mongo_class.Coll(
-            cfg.name, cfg.user, cfg.passwd, host=cfg.host, port=cfg.port,
-            db=db, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file)
+    return mongo_class.Coll(
+        cfg.name, cfg.user, cfg.passwd, host=cfg.host, port=cfg.port,
+        db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file)
 
 
 def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
