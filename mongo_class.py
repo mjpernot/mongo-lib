@@ -285,11 +285,7 @@ class Server(object):
 
         """
 
-        if "arg1" in kwargs:
-            return self.conn.admin.command(cmd, kwargs["arg1"])
-
-        else:
-            return self.conn.admin.command(cmd)
+        return self.conn.admin.command(cmd, kwargs.get("arg1", None))
 
     def fetch_dbs(self):
 
