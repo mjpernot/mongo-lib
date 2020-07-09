@@ -95,7 +95,7 @@ pipeline {
                                 "pattern": "./*.py",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "generic-local/highpoint/mongo-lib/"
+                                "target": "pypi-proj-local/highpoint/mongo-lib/"
                             }
                         ]
                     }"""
