@@ -103,8 +103,8 @@ class UnitTest(unittest.TestCase):
         self.repset_hosts = "host:27017"
         self.prog_name = "program_name"
         self.host_port = host + self.repset + "/" + self.repset_hosts
-        self.host_port2 = host + self.repset + "/" + self.host + ":" \
-                          + str(self.port)
+        self.host_port2 = \
+            host + self.repset + "/" + self.host + ":" + str(self.port)
         self.host_port3 = host + self.host + ":" + str(self.port)
 
     def test_no_auth(self):
