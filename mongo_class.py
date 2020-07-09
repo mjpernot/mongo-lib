@@ -871,11 +871,10 @@ class SlaveRep(Rep):
 
         """
 
-        super(SlaveRep, self).__init__(name, user, passwd,
-                                       host=host, port=port,
-                                       auth=kwargs.get("auth", True),
-                                       conf_file=kwargs.get("conf_file",
-                                                            None))
+        super(SlaveRep, self).__init__(
+            name, user, passwd, host=host, port=port,
+            auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None))
 
         self.ismaster = None
         self.issecondary = None
@@ -895,6 +894,7 @@ class SlaveRep(Rep):
         super(SlaveRep, self).connect()
 
         data = fetch_ismaster(self)
+        msg = None
 
         if data.get("secondary"):
             self.ismaster = data.get("ismaster")
@@ -904,7 +904,9 @@ class SlaveRep(Rep):
 
         else:
             self.disconnect()
-            sys.exit("Error:  This is not a Slave Replication server.")
+            msg = "Error:  This is not a Slave Replication server."
+
+        return msg
 
 
 class RepSet(Rep):
