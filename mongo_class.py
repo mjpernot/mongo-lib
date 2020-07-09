@@ -170,11 +170,11 @@ class Server(object):
         self.cur_mem = data["mem"]["resident"]
 
         # Get local IP address.
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
         # Connecting to an UDP address doesn't send packets.
-        s.connect((udp_addr, 0))
-        local_ip = s.getsockname()[0]
+        sock.connect((udp_addr, 0))
+        local_ip = sock.getsockname()[0]
 
         # Only get System Memory if on local machine.
         if self.host == local_ip or self.host == loopback:
