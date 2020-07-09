@@ -799,11 +799,10 @@ class MasterRep(Rep):
 
         """
 
-        super(MasterRep, self).__init__(name, user, passwd,
-                                        host=host, port=port,
-                                        auth=kwargs.get("auth", True),
-                                        conf_file=kwargs.get("conf_file",
-                                                             None))
+        super(MasterRep, self).__init__(
+            name, user, passwd, host=host, port=port,
+            auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None))
 
         self.ismaster = None
         self.issecondary = None
@@ -817,12 +816,14 @@ class MasterRep(Rep):
         Description:  Connect to a Mongo database.
 
         Arguments:
+            (output) msg -> Message status.
 
         """
 
         super(MasterRep, self).connect()
 
         data = fetch_ismaster(self)
+        msg = None
 
         if data.get("ismaster"):
             self.ismaster = data.get("ismaster")
@@ -832,7 +833,9 @@ class MasterRep(Rep):
 
         else:
             self.disconnect()
-            sys.exit("Error:  This is not a Master Replication server.")
+            msg = "Error:  This is not a Master Replication server."
+
+        return msg
 
 
 class SlaveRep(Rep):

@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [3.1.0] - 2020-07-09
+### Changed
+- mongo_class.MasterRep.connect:  Removed sys.exit and replaced with status message return.
+
+
 ## [3.0.1] - 2019-12-04
 ### Fixed
 - mongo_libs.create_cmd:  Fixed incorrect typing of keyword argument.
