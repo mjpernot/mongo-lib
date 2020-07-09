@@ -69,13 +69,12 @@ class UnitTest(unittest.TestCase):
         self.data = {"secondary": False, "ismaster": True,
                      "issecondary": False, "setName": "mongo_repset",
                      "primary": "primary_host"}
+        self.msg = "Error:  This is not a Master Replication server."
 
-    @mock.patch("mongo_class.sys.exit")
-    @mock.patch("mongo_class.Server.disconnect")
-    @mock.patch("mongo_class.fetch_ismaster")
-    @mock.patch("mongo_class.Server.connect")
-    def test_no_data(self, mock_connect, mock_fetch, mock_disconnect,
-                     mock_exit):
+    @mock.patch("mongo_class.Server.disconnect", mock.Mock(return_value=True))
+    @mock.patch("mongo_class.Server.connect", mock.Mock(return_value=True))
+    @mock.patch("mongo_class.fetch_ismaster", mock.Mock(return_value={}))
+    def test_no_data(self):
 
         """Function:  test_no_data
 
@@ -85,22 +84,18 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_connect.return_value = True
-        mock_fetch.return_value = {}
-        mock_disconnect.return_value = True
-        mock_exit.return_value = True
         mongo = mongo_class.MasterRep(self.name, self.user, self.passwd,
                                       self.host, self.port)
-        mongo.connect()
 
+        self.assertEqual(mongo.connect(), self.msg)
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
                           mongo.port, mongo.ismaster, mongo.issecondary),
                          (self.name, self.user, self.passwd, self.host,
                           self.port, None, None))
 
+    @mock.patch("mongo_class.Server.connect", mock.Mock(return_value=True))
     @mock.patch("mongo_class.fetch_ismaster")
-    @mock.patch("mongo_class.Server.connect")
-    def test_default(self, mock_connect, mock_fetch):
+    def test_default(self, mock_fetch):
 
         """Function:  test_default
 
@@ -110,12 +105,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_connect.return_value = True
         mock_fetch.return_value = self.data
         mongo = mongo_class.MasterRep(self.name, self.user, self.passwd,
                                       self.host, self.port)
-        mongo.connect()
 
+        self.assertFalse(mongo.connect())
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
                           mongo.port, mongo.ismaster, mongo.issecondary),
                          (self.name, self.user, self.passwd, self.host,
