@@ -102,7 +102,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.DB(self.name, self.user, self.passwd,
                                self.host, self.port)
         mongo.conn = DBConn()
-        mongo.db_connect(db=None)
+        mongo.db_connect(dbs=None)
 
         self.assertEqual((mongo.db), ("testdb"))
 
