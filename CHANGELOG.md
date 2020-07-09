@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class.RepSetColl.\_\_init\_\_:  Initialized db_conn and db_coll attributes.
 
 ### Changed
+- Changed order of import of modules.
 - mongo_class.DB.db_cmd:  Refactored function and remove else clause.
 - mongo_class.DB.chg_db:  Changed variable name to standard naming convention.
 - mongo_class.DB.db_connect:  Changed variable name to standard naming convention.

@@ -25,10 +25,12 @@
 
 # Standard
 import sys
-import pymongo
 import time
-import psutil
 import socket
+
+# Third-party
+import psutil
+import pymongo
 
 # Local
 import version
