@@ -543,8 +543,7 @@ class DB(Server):
         if "obj" in kwargs:
             return self.db.command(cmd, kwargs["obj"])
 
-        else:
-            return self.db.command(cmd)
+        return self.db.command(cmd)
 
 
 class Coll(DB):
