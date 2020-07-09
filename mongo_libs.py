@@ -190,7 +190,7 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
         db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file)
 
 
-def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
+def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
 
     """Function:  ins_doc
 
@@ -199,14 +199,14 @@ def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
 
     Arguments:
         (input) mongo_cfg -> Mongo database configuration.
-        (input) db -> Database name.
+        (input) dbs -> Database name.
         (input) tbl ->  Collection name.
         (input) data -> Document to be inserted.
 
     """
 
     data = dict(data)
-    coll = crt_coll_inst(mongo_cfg, db, tbl, **kwargs)
+    coll = crt_coll_inst(mongo_cfg, dbs, tbl, **kwargs)
     coll.connect()
     coll.ins_doc(json.loads(json.dumps(data)))
     cmds_gen.disconnect([coll])
