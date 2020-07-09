@@ -135,22 +135,22 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     """
 
-    self.host = "--host="
+    host = "--host="
 
     # Use repset name and hosts for connection, if set.
     if kwargs.get("use_repset", False) and mongo.repset \
             and mongo.repset_hosts:
 
-        host_port = self.host + mongo.repset + "/" + mongo.repset_hosts
+        host_port = host + mongo.repset + "/" + mongo.repset_hosts
 
     # Use repset name for connection, if set.
     elif kwargs.get("use_repset", False) and mongo.repset:
-        host_port = self.host + mongo.repset + "/" + mongo.host + ":" \
+        host_port = host + mongo.repset + "/" + mongo.host + ":" \
                     + str(mongo.port)
 
     # Assume just host and port.
     else:
-        host_port = self.host + mongo.host + ":" + str(mongo.port)
+        host_port = host + mongo.host + ":" + str(mongo.port)
 
     if mongo.auth:
         return [prog_name, "--username=" + mongo.user, host_port,
