@@ -443,27 +443,27 @@ class DB(Server):
         super(DB, self).connect()
         self.db = self.conn[self.db_name]
 
-    def db_connect(self, db="test"):
+    def db_connect(self, dbs="test"):
 
         """Method:  db_connect
 
         Description:  Sets up an instance to a Mongo database.
 
         Arguments:
-            (input) db -> Name of database.
+            (input) dbs -> Name of database.
 
         """
 
         if not self.conn:
             self.connect()
 
-        if db:
-            self.db = self.conn[db]
+        if dbs:
+            self.db = self.conn[dbs]
 
         else:
             self.db = self.conn.test
 
-    def chg_db(self, db=None):
+    def chg_db(self, dbs=None):
 
         """Method:  chg_db
 
@@ -471,13 +471,13 @@ class DB(Server):
             database passed then will default to test database.
 
         Arguments:
-            (input) db -> Name of database.
+            (input) dbs -> Name of database.
 
         """
 
-        if db:
-            self.db = self.conn[db]
-            self.db_name = db
+        if dbs:
+            self.db = self.conn[dbs]
+            self.db_name = dbs
 
         else:
             self.db = self.conn["test"]

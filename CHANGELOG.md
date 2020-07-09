@@ -6,6 +6,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [3.1.0] - 2020-07-09
 ### Changed
+- mongo_class.DB.chg_db:  Changed variable name to standard naming convention.
+- mongo_class.DB.db_connect:  Changed variable name to standard naming convention.
 - mongo_class.Server.upd_srv_stat:  Changed variable name to standard naming convention.
 - mongo_libs.ins_doc:  Changed variable name to standard naming convention.
 - mongo_libs.crt_coll_inst:  Refactored function and remove else clause.
