@@ -1038,6 +1038,8 @@ class RepSetColl(RepSet):
         self.db = kwargs.get("db", "test")
         self.coll = kwargs.get("coll", None)
         self.db_auth = kwargs.get("db_auth", None)
+        self.db_conn = None
+        self.db_coll = None
 
     def connect(self, connections=None):
 

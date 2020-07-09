@@ -5,6 +5,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [3.1.0] - 2020-07-09
+### Fixed
+- mongo_class.RepSetColl.\_\_init\_\_:  Initialized db_conn and db_coll attributes.
+
 ### Changed
 - mongo_class.DB.db_cmd:  Refactored function and remove else clause.
 - mongo_class.DB.chg_db:  Changed variable name to standard naming convention.
