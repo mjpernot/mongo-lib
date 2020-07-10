@@ -41,9 +41,23 @@ class RepSetColl(object):
     Description:  Class stub holder for RepSetColl class.
 
     Methods:
+        __init__ -> Class initialization.
         authenticate -> Stub for method.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class intialization.
+
+        Arguments:
+
+        """
+
+        self.user = None
+        self.passwd = None
 
     def authenticate(self, user, passwd):
 
@@ -56,6 +70,9 @@ class RepSetColl(object):
             (input) passwd -> Passwd.
 
         """
+
+        self.user = user
+        self.passwd = passwd
 
         return True
 
@@ -90,7 +107,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.coll = "coll_name"
         self.db_auth = "db_name"
         self.repset = "mongo_repset"
@@ -112,7 +129,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
                                        self.host, self.port,
                                        repset=self.repset, coll=self.coll,
-                                       db_auth=self.db_auth, db=self.db)
+                                       db_auth=self.db_auth, db=self.dbs)
         mongo.auth = True
         mongo.connect()
 

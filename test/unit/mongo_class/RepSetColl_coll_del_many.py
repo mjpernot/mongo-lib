@@ -41,9 +41,22 @@ class CollDelMany(object):
     Description:  Class stub holder for RepSetColl class.
 
     Methods:
+        __init__ -> Class initialization.
         delete_many -> Stub holder for RepSetColl.db_coll.delete_many method.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class intialization.
+
+        Arguments:
+
+        """
+
+        self.qry = None
 
     def delete_many(self, qry):
 
@@ -55,6 +68,8 @@ class CollDelMany(object):
             (input) qry -> Mongo query statement.
 
         """
+
+        self.qry = qry
 
         return True
 
@@ -88,7 +103,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"

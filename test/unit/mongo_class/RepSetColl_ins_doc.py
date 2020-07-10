@@ -40,9 +40,22 @@ class InsDoc(object):
     Description:  Class stub holder for RepSetColl class.
 
     Methods:
+        __init__ -> Class initialization.
         insert_one -> Stub holder for RepSetColl.db_coll.insert_one method.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class intialization.
+
+        Arguments:
+
+        """
+
+        self.doc = None
 
     def insert_one(self, doc):
 
@@ -54,6 +67,8 @@ class InsDoc(object):
             (input) doc -> Document
 
         """
+
+        self.doc = doc
 
         return True
 
@@ -85,7 +100,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"

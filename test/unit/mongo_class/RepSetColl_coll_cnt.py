@@ -40,9 +40,22 @@ class CollCnt(object):
     Description:  Class stub holder for RepSetColl class.
 
     Methods:
+        __init__ -> Class initialization.
         count -> Stub holder for RepSetColl.db_coll.count method.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class intialization.
+
+        Arguments:
+
+        """
+
+        self.qry = None
 
     def count(self, qry):
 
@@ -54,6 +67,8 @@ class CollCnt(object):
             (input) qry -> Mongo query statement.
 
         """
+
+        self.qry = qry
 
         return 10
 
@@ -86,7 +101,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"

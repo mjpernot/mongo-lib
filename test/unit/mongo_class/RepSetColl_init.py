@@ -60,7 +60,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"
@@ -82,7 +82,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
                           mongo.port, mongo.db, mongo.coll, mongo.repset),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll, self.repset))
+                          self.port, self.dbs, self.coll, self.repset))
 
 
 if __name__ == "__main__":
