@@ -24,7 +24,6 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -61,7 +60,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.coll = "coll_name"
         self.db_auth = None
 
@@ -81,7 +80,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
                           mongo.port, mongo.coll_db, mongo.coll_coll),
                          (self.name, self.user, self.passwd, self.host,
-                          self.port, self.db, self.coll))
+                          self.port, self.dbs, self.coll))
 
 
 if __name__ == "__main__":

@@ -40,9 +40,23 @@ class DBValidate(object):
     Description:  Class stub holder for DB class.
 
     Methods:
+        __init__ -> Class initialization.
         command -> Stub for DB.db.command method.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class intialization.
+
+        Arguments:
+
+        """
+
+        self.cmd = None
+        self.obj = None
 
     def command(self, cmd, obj=None):
 
@@ -56,6 +70,9 @@ class DBValidate(object):
             (output) Returns the output of the database command.
 
         """
+
+        self.cmd = cmd
+        self.obj = obj
 
         return True
 
@@ -88,7 +105,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.db_auth = None
 
     def test_default(self):

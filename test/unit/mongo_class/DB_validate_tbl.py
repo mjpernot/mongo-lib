@@ -41,9 +41,23 @@ class DBValidate2(object):
     Description:  Class stub holder for DB class.
 
     Methods:
+        __init__ -> Class initialization.
         validate_collection -> Stub for DB.db.validate_collection method.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class intialization.
+
+        Arguments:
+
+        """
+
+        self.tbl_name = None
+        self.full = None
 
     def validate_collection(self, tbl_name, full):
 
@@ -56,6 +70,9 @@ class DBValidate2(object):
             (input) full -> True|False - Do full scan.
 
         """
+
+        self.tbl_name = tbl_name
+        self.full = full
 
         raise pymongo.errors.OperationFailure("ErrorMsg")
 
@@ -67,9 +84,23 @@ class DBValidate(object):
     Description:  Class stub holder for DB class.
 
     Methods:
+        __init__ -> Class initialization.
         validate_collection -> Stub for DB.db.validate_collection method.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class intialization.
+
+        Arguments:
+
+        """
+
+        self.tbl_name = None
+        self.full = None
 
     def validate_collection(self, tbl_name, full):
 
@@ -82,6 +113,9 @@ class DBValidate(object):
             (input) full -> True|False - Do full scan.
 
         """
+
+        self.tbl_name = tbl_name
+        self.full = full
 
         return "MessageHere"
 

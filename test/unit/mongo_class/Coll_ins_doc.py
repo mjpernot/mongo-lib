@@ -40,9 +40,22 @@ class CollIns(object):
     Description:  Class stub holder for Coll class.
 
     Methods:
+        __init__ -> Class initialization.
         insert_one -> Stub for Coll.ins_doc method.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class intialization.
+
+        Arguments:
+
+        """
+
+        self.doc = None
 
     def insert_one(self, doc):
 
@@ -54,6 +67,8 @@ class CollIns(object):
             (input) doc -> Document.
 
         """
+
+        self.doc = doc
 
         return True
 
@@ -86,7 +101,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.coll = "coll_name"
         self.db_auth = None
 

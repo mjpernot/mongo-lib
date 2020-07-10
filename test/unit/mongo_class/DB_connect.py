@@ -85,7 +85,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.db_auth = None
 
     @mock.patch("mongo_class.Server.get_srv_attr")

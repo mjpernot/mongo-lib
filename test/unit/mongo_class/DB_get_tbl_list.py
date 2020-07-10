@@ -40,9 +40,22 @@ class DBValidate(object):
     Description:  Class stub holder for DB class.
 
     Methods:
+        __init__ -> Class initialization.
         collection_names -> Stub for DB.db.collection_names method.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class intialization.
+
+        Arguments:
+
+        """
+
+        self.include_system_collections = None
 
     def collection_names(self, include_system_collections):
 
@@ -55,6 +68,8 @@ class DBValidate(object):
                 tables
 
         """
+
+        self.include_system_collections = include_system_collections
 
         return True
 
@@ -86,7 +101,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.db_auth = None
 
     def test_default(self):
