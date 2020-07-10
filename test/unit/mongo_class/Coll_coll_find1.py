@@ -55,8 +55,6 @@ class CollFind(object):
 
         """
 
-        self.qry = qry
-
         self.qry = None
 
     def find_one(self, qry):
@@ -69,6 +67,8 @@ class CollFind(object):
             (input) qry -> Query command.
 
         """
+
+        self.qry = qry
 
         return True
 
