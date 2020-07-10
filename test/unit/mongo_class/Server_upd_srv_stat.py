@@ -64,7 +64,7 @@ class UnitTest(unittest.TestCase):
         # Require a string concatenation to pass quality check
         self.host2 = "127.0" + ".0.1"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.coll = None
         self.db_auth = None
         self.data = {"uptime": 10, "connections": {"current": 1,
