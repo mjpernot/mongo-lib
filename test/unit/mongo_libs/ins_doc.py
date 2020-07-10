@@ -57,7 +57,7 @@ class Mongo(object):
 
         """
 
-        pass
+        self.doc = None
 
     def connect(self):
 
@@ -81,6 +81,8 @@ class Mongo(object):
             (input) doc -> Document.
 
         """
+
+        self.doc = doc
 
         return True
 
@@ -108,7 +110,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.mongo_cfg = "MongoCfg"
-        self.db = "DBName"
+        self.dbs = "DBName"
         self.tbl = "TableName"
         self.data = {"key": "value"}
 
@@ -126,7 +128,7 @@ class UnitTest(unittest.TestCase):
 
         mock_inst.return_value = Mongo()
         mock_cmd.return_value = True
-        self.assertFalse(mongo_libs.ins_doc(self.mongo_cfg, self.db, self.tbl,
+        self.assertFalse(mongo_libs.ins_doc(self.mongo_cfg, self.dbs, self.tbl,
                                             self.data))
 
 
