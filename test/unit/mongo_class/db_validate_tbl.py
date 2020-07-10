@@ -165,7 +165,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.DB(self.name, self.user, self.passwd,
                                self.host, self.port)
         mongo.db = DBValidate2()
-        status, msg = mongo.validate_tbl("tbl", True)
+        status, _ = mongo.validate_tbl("tbl", True)
 
         self.assertEqual((status), (False))
 
