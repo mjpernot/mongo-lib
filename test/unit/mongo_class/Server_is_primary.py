@@ -40,7 +40,7 @@ class Conn(object):
     Description:  Class stub holder for Rep class.
 
     Methods:
-        __init__ -> Stub holder for Rep.conn method.
+        __init__ -> Class intialization.
 
     """
 
@@ -48,7 +48,7 @@ class Conn(object):
 
         """Function:  __init__
 
-        Description:  Stub holder for Rep.conn.is_locked attribute.
+        Description:  Class intialization.
 
         Arguments:
 
@@ -84,7 +84,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"
