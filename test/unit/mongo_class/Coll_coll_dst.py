@@ -40,9 +40,22 @@ class CollDst(object):
     Description:  Class stub holder for Coll class.
 
     Methods:
+        __init__ -> Class initialization.
         distinct -> Stub for Coll.coll_dst method.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class intialization.
+
+        Arguments:
+
+        """
+
+        self.qry = None
 
     def distinct(self, qry):
 
@@ -54,6 +67,8 @@ class CollDst(object):
             (input) qry -> Query command.
 
         """
+
+        self.qry = qry
 
         return True
 
@@ -87,7 +102,7 @@ class UnitTest(unittest.TestCase):
         self.passwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
-        self.db = "test"
+        self.dbs = "test"
         self.coll = "coll_name"
         self.db_auth = None
 
