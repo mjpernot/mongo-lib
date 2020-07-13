@@ -55,7 +55,7 @@ class Mongo(object):
 
         """
 
-        self.mongo = None
+        self.mongodb = None
 
     def adm_cmd(self, mongo):
 
@@ -68,7 +68,7 @@ class Mongo(object):
 
         """
 
-        self.mongo = mongo
+        self.mongodb = mongo
 
         return True
 
@@ -95,7 +95,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.mongodb = Mongo()
+        self.mongo = Mongo()
 
     def test_fetch_cmd_line(self):
 
@@ -107,7 +107,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(mongo_class.fetch_cmd_line(self.mongodb))
+        self.assertTrue(mongo_class.fetch_cmd_line(self.mongo))
 
 
 if __name__ == "__main__":
