@@ -95,7 +95,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.mongo = Mongo()
+        self.mongodb = Mongo()
 
     def test_fetch_cmd_line(self):
 
@@ -107,7 +107,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(mongo_class.fetch_cmd_line(self.mongo))
+        self.assertTrue(mongo_class.fetch_cmd_line(self.mongodb))
 
 
 if __name__ == "__main__":
