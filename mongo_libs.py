@@ -107,11 +107,11 @@ def create_slv_array(cfg_array, **kwargs):
     slaves = []
 
     for slv in cfg_array:
-        slave_inst = mongo_class.SlaveRep(slv["name"], slv["user"],
-                                          slv["passwd"], host=slv["host"],
-                                          port=int(slv["port"]),
-                                          auth=slv["auth"],
-                                          conf_file=slv["conf_file"])
+        slave_inst = mongo_class.SlaveRep(
+            slv["name"], slv["user"], slv["passwd"], host=slv["host"],
+            port=int(slv["port"]), auth=slv["auth"],
+            conf_file=slv["conf_file"])
+
         slaves.append(slave_inst)
 
     return slaves
@@ -135,30 +135,35 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     """
 
+    host = "--host="
+    cmd_list = []
+
     # Use repset name and hosts for connection, if set.
     if kwargs.get("use_repset", False) and mongo.repset \
             and mongo.repset_hosts:
 
-        host_port = "--host=" + mongo.repset + "/" + mongo.repset_hosts
+        host_port = host + mongo.repset + "/" + mongo.repset_hosts
 
     # Use repset name for connection, if set.
     elif kwargs.get("use_repset", False) and mongo.repset:
-        host_port = "--host=" + mongo.repset + "/" + mongo.host + ":" \
+        host_port = host + mongo.repset + "/" + mongo.host + ":" \
                     + str(mongo.port)
 
     # Assume just host and port.
     else:
-        host_port = "--host=" + mongo.host + ":" + str(mongo.port)
+        host_port = host + mongo.host + ":" + str(mongo.port)
 
     if mongo.auth:
-        return [prog_name, "--username=" + mongo.user, host_port,
-                "--password=" + mongo.passwd]
+        cmd_list = [prog_name, "--username=" + mongo.user, host_port,
+                    "--password=" + mongo.passwd]
 
     else:
-        return [prog_name, host_port]
+        cmd_list = [prog_name, host_port]
+
+    return cmd_list
 
 
-def crt_coll_inst(cfg, db, tbl, **kwargs):
+def crt_coll_inst(cfg, dbs, tbl, **kwargs):
 
     """Function:  crt_coll_inst
 
@@ -168,26 +173,24 @@ def crt_coll_inst(cfg, db, tbl, **kwargs):
 
     Arguments:
         (input) cfg_file -> Configuration file name.
-        (input) db -> Database name.
+        (input) dbs -> Database name.
         (input) tbl ->  Collection name.
 
     """
 
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
-        return mongo_class.RepSetColl(cfg.name, cfg.user, cfg.passwd,
-                                      host=cfg.host, port=cfg.port,
-                                      auth=cfg.auth, repset=cfg.repset,
-                                      repset_hosts=cfg.repset_hosts, db=db,
-                                      coll=tbl, db_auth=cfg.db_auth)
+        return mongo_class.RepSetColl(
+            cfg.name, cfg.user, cfg.passwd, host=cfg.host, port=cfg.port,
+            auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,
+            db=dbs, coll=tbl, db_auth=cfg.db_auth)
 
-    else:
-        return mongo_class.Coll(cfg.name, cfg.user, cfg.passwd, host=cfg.host,
-                                port=cfg.port, db=db, coll=tbl, auth=cfg.auth,
-                                conf_file=cfg.conf_file)
+    return mongo_class.Coll(
+        cfg.name, cfg.user, cfg.passwd, host=cfg.host, port=cfg.port,
+        db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file)
 
 
-def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
+def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
 
     """Function:  ins_doc
 
@@ -196,14 +199,14 @@ def ins_doc(mongo_cfg, db, tbl, data, **kwargs):
 
     Arguments:
         (input) mongo_cfg -> Mongo database configuration.
-        (input) db -> Database name.
+        (input) dbs -> Database name.
         (input) tbl ->  Collection name.
         (input) data -> Document to be inserted.
 
     """
 
     data = dict(data)
-    coll = crt_coll_inst(mongo_cfg, db, tbl, **kwargs)
+    coll = crt_coll_inst(mongo_cfg, dbs, tbl, **kwargs)
     coll.connect()
     coll.ins_doc(json.loads(json.dumps(data)))
     cmds_gen.disconnect([coll])

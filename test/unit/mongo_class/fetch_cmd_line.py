@@ -40,9 +40,22 @@ class Mongo(object):
     Description:  Class stub holder for Mongo class.
 
     Methods:
+        __init__ -> Class initialization.
         adm_cmd -> Stub holder for mongo_class.adm_cmd attribute.
 
     """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class intialization.
+
+        Arguments:
+
+        """
+
+        self.mongodb = None
 
     def adm_cmd(self, mongo):
 
@@ -54,6 +67,8 @@ class Mongo(object):
             (input) mongo -> Mongo class.
 
         """
+
+        self.mongodb = mongo
 
         return True
 

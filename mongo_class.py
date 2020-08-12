@@ -25,10 +25,12 @@
 
 # Standard
 import sys
-import pymongo
 import time
-import psutil
 import socket
+
+# Third-party
+import psutil
+import pymongo
 
 # Local
 import version
@@ -170,11 +172,11 @@ class Server(object):
         self.cur_mem = data["mem"]["resident"]
 
         # Get local IP address.
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
         # Connecting to an UDP address doesn't send packets.
-        s.connect((udp_addr, 0))
-        local_ip = s.getsockname()[0]
+        sock.connect((udp_addr, 0))
+        local_ip = sock.getsockname()[0]
 
         # Only get System Memory if on local machine.
         if self.host == local_ip or self.host == loopback:
@@ -285,11 +287,7 @@ class Server(object):
 
         """
 
-        if "arg1" in kwargs:
-            return self.conn.admin.command(cmd, kwargs["arg1"])
-
-        else:
-            return self.conn.admin.command(cmd)
+        return self.conn.admin.command(cmd, kwargs.get("arg1", None))
 
     def fetch_dbs(self):
 
@@ -447,27 +445,27 @@ class DB(Server):
         super(DB, self).connect()
         self.db = self.conn[self.db_name]
 
-    def db_connect(self, db="test"):
+    def db_connect(self, dbs="test"):
 
         """Method:  db_connect
 
         Description:  Sets up an instance to a Mongo database.
 
         Arguments:
-            (input) db -> Name of database.
+            (input) dbs -> Name of database.
 
         """
 
         if not self.conn:
             self.connect()
 
-        if db:
-            self.db = self.conn[db]
+        if dbs:
+            self.db = self.conn[dbs]
 
         else:
             self.db = self.conn.test
 
-    def chg_db(self, db=None):
+    def chg_db(self, dbs=None):
 
         """Method:  chg_db
 
@@ -475,13 +473,13 @@ class DB(Server):
             database passed then will default to test database.
 
         Arguments:
-            (input) db -> Name of database.
+            (input) dbs -> Name of database.
 
         """
 
-        if db:
-            self.db = self.conn[db]
-            self.db_name = db
+        if dbs:
+            self.db = self.conn[dbs]
+            self.db_name = dbs
 
         else:
             self.db = self.conn["test"]
@@ -547,8 +545,7 @@ class DB(Server):
         if "obj" in kwargs:
             return self.db.command(cmd, kwargs["obj"])
 
-        else:
-            return self.db.command(cmd)
+        return self.db.command(cmd)
 
 
 class Coll(DB):
@@ -799,11 +796,10 @@ class MasterRep(Rep):
 
         """
 
-        super(MasterRep, self).__init__(name, user, passwd,
-                                        host=host, port=port,
-                                        auth=kwargs.get("auth", True),
-                                        conf_file=kwargs.get("conf_file",
-                                                             None))
+        super(MasterRep, self).__init__(
+            name, user, passwd, host=host, port=port,
+            auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None))
 
         self.ismaster = None
         self.issecondary = None
@@ -817,12 +813,14 @@ class MasterRep(Rep):
         Description:  Connect to a Mongo database.
 
         Arguments:
+            (output) msg -> Message status.
 
         """
 
         super(MasterRep, self).connect()
 
         data = fetch_ismaster(self)
+        msg = None
 
         if data.get("ismaster"):
             self.ismaster = data.get("ismaster")
@@ -832,7 +830,9 @@ class MasterRep(Rep):
 
         else:
             self.disconnect()
-            sys.exit("Error:  This is not a Master Replication server.")
+            msg = "Error:  This is not a Master Replication server."
+
+        return msg
 
 
 class SlaveRep(Rep):
@@ -868,11 +868,10 @@ class SlaveRep(Rep):
 
         """
 
-        super(SlaveRep, self).__init__(name, user, passwd,
-                                       host=host, port=port,
-                                       auth=kwargs.get("auth", True),
-                                       conf_file=kwargs.get("conf_file",
-                                                            None))
+        super(SlaveRep, self).__init__(
+            name, user, passwd, host=host, port=port,
+            auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None))
 
         self.ismaster = None
         self.issecondary = None
@@ -892,6 +891,7 @@ class SlaveRep(Rep):
         super(SlaveRep, self).connect()
 
         data = fetch_ismaster(self)
+        msg = None
 
         if data.get("secondary"):
             self.ismaster = data.get("ismaster")
@@ -901,7 +901,9 @@ class SlaveRep(Rep):
 
         else:
             self.disconnect()
-            sys.exit("Error:  This is not a Slave Replication server.")
+            msg = "Error:  This is not a Slave Replication server."
+
+        return msg
 
 
 class RepSet(Rep):
@@ -1038,6 +1040,8 @@ class RepSetColl(RepSet):
         self.db = kwargs.get("db", "test")
         self.coll = kwargs.get("coll", None)
         self.db_auth = kwargs.get("db_auth", None)
+        self.db_conn = None
+        self.db_coll = None
 
     def connect(self, connections=None):
 

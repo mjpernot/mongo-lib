@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [3.1.0] - 2020-07-09
+### Fixed
+- mongo_class.RepSetColl.\_\_init\_\_:  Initialized db_conn and db_coll attributes.
+
+### Changed
+- Changed order of import of modules.
+- mongo_class.DB.db_cmd:  Refactored function and remove else clause.
+- mongo_class.DB.chg_db:  Changed variable name to standard naming convention.
+- mongo_class.DB.db_connect:  Changed variable name to standard naming convention.
+- mongo_class.Server.upd_srv_stat:  Changed variable name to standard naming convention.
+- mongo_libs.ins_doc:  Changed variable name to standard naming convention.
+- mongo_libs.crt_coll_inst:  Refactored function and remove else clause.
+- mongo_libs.crt_base_cmd:  Refactored function to have only one return.
+- mongo_class.Server.adm_cmd:  Refactored method and removed "if" statement.
+- mongo_class.SlaveRep.connect:  Removed sys.exit and replaced with status message return.
+- mongo_class.MasterRep.connect:  Removed sys.exit and replaced with status message return.
+
+
 ## [3.0.1] - 2019-12-04
 ### Fixed
 - mongo_libs.create_cmd:  Fixed incorrect typing of keyword argument.
