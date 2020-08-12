@@ -146,7 +146,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.passwd = None
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -169,12 +169,13 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual((status), (False))
 
-    @unittest.skip("Skipped due to pymongo is at 3.2.0 instead of 3.8.0")
     def test_raise_exception(self):
 
         """Function:  test_raise_exception
 
         Description:  Test the raise exception.
+
+        Note:  This test will fail is pymongo is below 3.8.0.
 
         Arguments:
 
