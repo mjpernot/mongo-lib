@@ -169,13 +169,14 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual((status), (False))
 
+    @unittest.skip("Bug: Skipped since pymongo 3.2.0 is current production.")
     def test_raise_exception(self):
 
         """Function:  test_raise_exception
 
         Description:  Test the raise exception.
 
-        Note:  This test will fail is pymongo is below 3.8.0.
+        Note:  This test will fail if pymongo is below 3.8.0.
 
         Arguments:
 
