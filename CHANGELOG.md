@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.0.0] - 2020-08-17
+Breaking Change.
+
+
 ## [3.1.0] - 2020-07-09
 ### Fixed
 - mongo_class.RepSetColl.\_\_init\_\_:  Initialized db_conn and db_coll attributes.
