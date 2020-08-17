@@ -425,7 +425,7 @@ class DB(Server):
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japwd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -435,19 +435,23 @@ class DB(Server):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japwd -> User's psword.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
                 db -> Name of database.
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
-        super(DB, self).__init__(name, user, passwd, host=host, port=port,
-                                 auth=kwargs.get("auth", True),
-                                 conf_file=kwargs.get("conf_file", None))
+        super(DB, self).__init__(
+            name, user, japwd, host=host, port=port,
+            auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None), **kwargs)
 
         self.db_name = kwargs.get("db", "test")
         self.db = None
