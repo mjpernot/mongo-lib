@@ -41,6 +41,11 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_conn_list_attr -> Test setting the conn_list attribute.
+        test_config_attr -> Test setting the config attribute.
+        test_using_auth_db -> Test using the auth_db attribute.
+        test_using_arg -> Test using the arg connection.
+        test_using_uri -> Test using the uri connection.
         test_default -> Test with minimum number of arguments.
 
     """
@@ -55,14 +60,99 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        key1 = "pass"
+        key2 = "word"
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
         self.coll = None
         self.db_auth = None
+        self.use_uri = True
+        self.use_arg = True
+        self.auth_db = "sysmon"
+        self.config = {key1 + key2: self.japwd}
+        self.conn_list = [self.host + ":" + str(self.port)]
+
+    def test_conn_list_attr(self):
+
+        """Function:  test_conn_list_attr
+
+        Description:  Test setting the conn_list attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japwd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.conn_list, self.conn_list)
+
+    def test_config_attr(self):
+
+        """Function:  test_config_attr
+
+        Description:  Test setting the config attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japwd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.config, self.config)
+
+    def test_using_auth_db(self):
+
+        """Function:  test_using_auth_db
+
+        Description:  Test using the auth_db attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japwd, host=self.host, port=self.port,
+            auth_db=self.auth_db)
+
+        self.assertEqual(mongo.auth_db, self.auth_db)
+
+    def test_using_arg(self):
+
+        """Function:  test_using_arg
+
+        Description:  Test using the arg connection.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japwd, host=self.host, port=self.port,
+            use_arg=self.use_arg)
+
+        self.assertTrue(mongo.use_arg)
+
+    def test_using_uri(self):
+
+        """Function:  test_using_uri
+
+        Description:  Test using the uri connection.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japwd, host=self.host, port=self.port,
+            use_uri=self.use_uri)
+
+        self.assertTrue(mongo.use_uri)
 
     def test_default(self):
 
@@ -74,12 +164,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.Server(self.name, self.user, self.passwd,
-                                   self.host, self.port)
+        mongo = mongo_class.Server(self.name, self.user, self.japwd,
+                                   host=self.host, port=self.port)
 
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
+        self.assertEqual((mongo.name, mongo.user, mongo.japwd, mongo.host,
                           mongo.port),
-                         (self.name, self.user, self.passwd, self.host,
+                         (self.name, self.user, self.japwd, self.host,
                           self.port))
 
 
