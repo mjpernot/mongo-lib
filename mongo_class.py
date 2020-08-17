@@ -37,6 +37,10 @@ import version
 
 __version__ = version.__version__
 
+# Global
+KEY1 = "pass"
+KEY2 = "word"
+
 
 def fetch_cmd_line(mongo):
 
@@ -112,7 +116,7 @@ class Server(object):
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japwd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -122,18 +126,24 @@ class Server(object):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japwd -> User's psword.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
+        global KEY1
+        global KEY2
+
         self.name = name
         self.user = user
-        self.passwd = passwd
+        self.japwd = japwd
         self.host = host
         self.port = port
         self.auth = kwargs.get("auth", True)
@@ -152,6 +162,11 @@ class Server(object):
         self.cur_mem = None
         self.max_mem = None
         self.prct_mem = None
+        self.use_uri = kwargs.get("use_uri", False)
+        self.use_arg = kwargs.get("use_arg", False)
+        self.config = {KEY1 + KEY2: self.japwd}
+        self.conn_list = [self.host + ":" + str(self.port)]
+        self.auth_db = kwargs.get("auth_db", "admin")
 
     def upd_srv_stat(self):
 
@@ -250,7 +265,7 @@ class Server(object):
         if not self.conn:
 
             if self.auth:
-                uri = "mongodb://" + self.user + ":" + self.passwd + "@" \
+                uri = "mongodb://" + self.user + ":" + self.japwd + "@" \
                       + self.host + ":" + str(self.port)
                 self.conn = pymongo.MongoClient(uri)
 

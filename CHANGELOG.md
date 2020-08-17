@@ -7,6 +7,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [4.0.0] - 2020-08-17
 Breaking Change.
 
+### Changed
+- mongo_class.Server.\_\_init\_\_:  Added a number of attributes to handle connecting into Mongo using arguments.
+
 
 ## [3.1.0] - 2020-07-09
 ### Fixed
