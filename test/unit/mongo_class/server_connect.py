@@ -42,8 +42,9 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_auth_arg -> Test with auth and arg present.
+        test_auth_uri -> Test with auth and uri present.
         test_no_auth -> Test with no auth present.
-        test_auth -> Test with auth present.
 
     """
 
@@ -59,13 +60,65 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
         self.coll = None
         self.db_auth = None
         self.conf_file = "Conf_File"
+        self.use_uri = True
+        self.use_arg = True
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_auth_arg(self, mock_cmd, mock_client):
+
+        """Function:  test_auth_arg
+
+        Description:  Test with auth and arg present.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = True
+        mock_client.return_value = True
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japwd, host=self.host, port=self.port,
+            use_arg=self.use_arg)
+
+        mongo.connect()
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+             mongo.use_arg),
+            (self.name, self.user, self.japwd, self.host, self.port,
+             self.use_arg))
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_auth_uri(self, mock_cmd, mock_client):
+
+        """Function:  test_auth_uri
+
+        Description:  Test with auth and uri present.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = True
+        mock_client.return_value = True
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japwd, host=self.host, port=self.port,
+            use_uri=self.use_uri)
+
+        mongo.connect()
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+             mongo.use_uri),
+            (self.name, self.user, self.japwd, self.host, self.port,
+             self.use_uri))
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
@@ -81,37 +134,13 @@ class UnitTest(unittest.TestCase):
 
         mock_cmd.return_value = True
         mock_client.return_value = True
-        mongo = mongo_class.Server(self.name, self.user, self.passwd,
-                                   self.host, self.port, auth=False)
+        mongo = mongo_class.Server(self.name, self.user, self.japwd,
+                                   host=self.host, port=self.port, auth=False)
 
         mongo.connect()
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port))
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_auth(self, mock_cmd, mock_client):
-
-        """Function:  test_auth
-
-        Description:  Test with auth present.
-
-        Arguments:
-
-        """
-
-        mock_cmd.return_value = True
-        mock_client.return_value = True
-        mongo = mongo_class.Server(self.name, self.user, self.passwd,
-                                   self.host, self.port)
-
-        mongo.connect()
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port))
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port),
+            (self.name, self.user, self.japwd, self.host, self.port))
 
 
 if __name__ == "__main__":
