@@ -59,7 +59,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -82,14 +82,15 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_cmd.return_value = self.data
-        mongo = mongo_class.Server(self.name, self.user, self.passwd,
+        mongo = mongo_class.Server(self.name, self.user, self.japwd,
                                    self.host, self.port)
 
         mongo.upd_server_attr()
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.conf_file),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port, "conf_file"))
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+             mongo.conf_file),
+            (self.name, self.user, self.japwd, self.host, self.port,
+             "conf_file"))
 
     @mock.patch("mongo_class.fetch_cmd_line")
     def test_conf_file(self, mock_cmd):
@@ -103,15 +104,16 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_cmd.return_value = self.data
-        mongo = mongo_class.Server(self.name, self.user, self.passwd,
-                                   self.host, self.port,
-                                   conf_file=self.conf_file)
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japwd, self.host, self.port,
+            conf_file=self.conf_file)
 
         mongo.upd_server_attr()
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.conf_file),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port, self.conf_file))
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+             mongo.conf_file),
+            (self.name, self.user, self.japwd, self.host, self.port,
+             self.conf_file))
 
 
 if __name__ == "__main__":
