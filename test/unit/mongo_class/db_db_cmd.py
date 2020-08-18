@@ -102,7 +102,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -118,7 +118,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japwd,
                                self.host, self.port)
         mongo.db = DBValidate()
 
@@ -134,7 +134,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japwd,
                                self.host, self.port)
         mongo.db = DBValidate()
 
