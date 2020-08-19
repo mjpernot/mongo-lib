@@ -67,9 +67,12 @@ class UnitTest(unittest.TestCase):
         self.port = 27017
         self.dbs = "test"
         self.coll = None
-        self.db_auth = False
         self.repset = "mongo_repset"
         self.repset_hosts = "host1:27017, host2:27107"
+        self.db_auth = None
+        self.conf_file = "Conf_File"
+        self.use_uri = True
+        self.use_arg = True
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
@@ -145,12 +148,13 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(self.name, self.user, self.japwd,
                                    self.host, self.port, repset=self.repset,
                                    repset_hosts=self.repset_hosts)
-        mongo.conn = True
+        mongo.connect()
 
         self.assertFalse(mongo.connect())
 
+    @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_no_conn_list(self, mock_get):
+    def test_no_conn_list(self, mock_get, mock_client):
 
         """Function:  test_no_conn_list
 
@@ -161,11 +165,17 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_get.return_value = True
+        mock_client.return_value = True
+
         mongo = mongo_class.RepSet(self.name, self.user, self.japwd,
                                    self.host, self.port, repset=self.repset)
-        mongo.conn = True
+        mongo.connect()
 
-        self.assertFalse(mongo.connect())
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+             mongo.repset_hosts),
+            (self.name, self.user, self.japwd, self.host, self.port,
+             None))
 
 
 if __name__ == "__main__":
