@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change.
 
 ### Changed
+- mongo_class.Coll.\_\_init\_\_:  Passed new attributes to super command for the Server class.
 - mongo_class.DB.\_\_init\_\_:  Passed new attributes to super command for the Server class.
 - mongo_class.Server.connect:  Added capability to connect into Mongo using arguments.
 - mongo_class.Server.\_\_init\_\_:  Added a number of new attributes to handle connecting into Mongo using arguments.
