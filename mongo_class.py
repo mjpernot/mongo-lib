@@ -1022,7 +1022,6 @@ class RepSet(Rep):
 
         if not connections:
 
-            # Connect to replica set.
             if self.repset_hosts:
                 connections = self.repset_hosts
 
@@ -1031,13 +1030,17 @@ class RepSet(Rep):
 
         if not self.conn:
 
-            # Is authenication set.
-            if self.auth:
-                uri = "mongodb://" + self.user + ":" + self.passwd + "@" \
+            if self.auth and self.use_arg:
+                self.conn = pymongo.MongoClient(
+                    connections, username=self.user,
+                    authSource=self.auth_db, replicaSet=self.repset,
+                    **self.config)
+                
+            elif self.auth and self.use_uri:
+                uri = "mongodb://" + self.user + ":" + self.japwd + "@" \
                       + connections + "/?replicaSet=" + self.repset
                 self.conn = pymongo.MongoClient(uri)
 
-            # Assume no authentication required.
             else:
                 self.conn = pymongo.MongoClient(connections,
                                                 replicaSet=self.repset)
