@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change.
 
 ### Changed
+- mongo_class.RepSet.\_\_init\_\_:  Passed new attributes to super command for the Rep class.
 - mongo_class.SlaveRep.\_\_init\_\_:  Passed new attributes to super command for the Rep class.
 - mongo_class.MasterRep.\_\_init\_\_:  Passed new attributes to super command for the Rep class.
 - mongo_class.Rep.\_\_init\_\_:  Passed new attributes to super command for the Server class.
