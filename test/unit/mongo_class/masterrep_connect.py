@@ -59,7 +59,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -84,14 +84,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.MasterRep(self.name, self.user, self.passwd,
+        mongo = mongo_class.MasterRep(self.name, self.user, self.japwd,
                                       self.host, self.port)
 
         self.assertEqual(mongo.connect(), self.msg)
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.ismaster, mongo.issecondary),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port, None, None))
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+             mongo.ismaster, mongo.issecondary),
+            (self.name, self.user, self.japwd, self.host, self.port, None,
+             None))
 
     @mock.patch("mongo_class.Server.connect", mock.Mock(return_value=True))
     @mock.patch("mongo_class.fetch_ismaster")
@@ -106,14 +107,15 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_fetch.return_value = self.data
-        mongo = mongo_class.MasterRep(self.name, self.user, self.passwd,
+        mongo = mongo_class.MasterRep(self.name, self.user, self.japwd,
                                       self.host, self.port)
 
         self.assertFalse(mongo.connect())
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.ismaster, mongo.issecondary),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port, True, False))
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+             mongo.ismaster, mongo.issecondary),
+            (self.name, self.user, self.japwd, self.host, self.port, True,
+             False))
 
 
 if __name__ == "__main__":
