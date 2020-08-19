@@ -451,7 +451,10 @@ class DB(Server):
         super(DB, self).__init__(
             name, user, japwd, host=host, port=port,
             auth=kwargs.get("auth", True),
-            conf_file=kwargs.get("conf_file", None), **kwargs)
+            conf_file=kwargs.get("conf_file", None),
+            use_uri=kwargs.get("use_uri", False),
+            use_arg=kwargs.get("use_arg", False),
+            auth_db=kwargs.get("auth_db", "admin"))
 
         self.db_name = kwargs.get("db", "test")
         self.db = None
