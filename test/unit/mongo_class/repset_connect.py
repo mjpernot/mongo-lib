@@ -62,7 +62,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -85,7 +85,7 @@ class UnitTest(unittest.TestCase):
 
         mock_get.return_value = True
         mock_mongo.return_value = True
-        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
+        mongo = mongo_class.RepSet(self.name, self.user, self.japwd,
                                    self.host, self.port, repset=self.repset)
         mongo.auth = False
 
@@ -105,7 +105,7 @@ class UnitTest(unittest.TestCase):
 
         mock_get.return_value = True
         mock_mongo.return_value = True
-        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
+        mongo = mongo_class.RepSet(self.name, self.user, self.japwd,
                                    self.host, self.port, repset=self.repset)
         mongo.auth = True
 
@@ -125,7 +125,7 @@ class UnitTest(unittest.TestCase):
 
         mock_get.return_value = True
         mock_mongo.return_value = True
-        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
+        mongo = mongo_class.RepSet(self.name, self.user, self.japwd,
                                    self.host, self.port, repset=self.repset)
 
         self.assertFalse(mongo.connect())
@@ -142,7 +142,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_get.return_value = True
-        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
+        mongo = mongo_class.RepSet(self.name, self.user, self.japwd,
                                    self.host, self.port, repset=self.repset,
                                    repset_hosts=self.repset_hosts)
         mongo.conn = True
@@ -161,7 +161,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_get.return_value = True
-        mongo = mongo_class.RepSet(self.name, self.user, self.passwd,
+        mongo = mongo_class.RepSet(self.name, self.user, self.japwd,
                                    self.host, self.port, repset=self.repset)
         mongo.conn = True
 
