@@ -605,7 +605,7 @@ class Coll(DB):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) japwd -> User's password.
+            (input) japwd -> User's psword.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -752,7 +752,7 @@ class Rep(Server):
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japwd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -762,18 +762,25 @@ class Rep(Server):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japwd -> User's psword.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
-        super(Rep, self).__init__(name, user, passwd, host=host, port=port,
-                                  auth=kwargs.get("auth", True),
-                                  conf_file=kwargs.get("conf_file", None))
+        super(Rep, self).__init__(
+            name, user, japwd, host=host, port=port,
+            auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None),
+            use_uri=kwargs.get("use_uri", False),
+            use_arg=kwargs.get("use_arg", False),
+            auth_db=kwargs.get("auth_db", "admin"))
 
         self.repset = None
         self.ismaster = None
