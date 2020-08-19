@@ -991,6 +991,9 @@ class RepSet(Rep):
                 repset -> Replication Set name.
                 conf_file -> Location of mongo.conf file.
                 repset_hosts -> Repset hosts:ports.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
