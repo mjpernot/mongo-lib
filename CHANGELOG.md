@@ -18,6 +18,7 @@ Breaking Change.
 - mongo_class.DB.\_\_init\_\_:  Passed new attributes to super command for the Server class.
 - mongo_class.Server.connect:  Added capability to connect into Mongo using arguments.
 - mongo_class.Server.\_\_init\_\_:  Added a number of new attributes to handle connecting into Mongo using arguments.
+- Documentation updates.
 
 
 ## [3.1.0] - 2020-07-09

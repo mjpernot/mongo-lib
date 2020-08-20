@@ -1133,26 +1133,22 @@ class RepSetColl(RepSet):
 
         if not self.conn:
 
-            # Is authenication required.
             if self.auth:
-                self.conn = pymongo.MongoClient(host=[connections],
-                                                document_class=dict,
-                                                tz_aware=False, connect=True,
-                                                replicaset=self.repset)
+                self.conn = pymongo.MongoClient(
+                    host=[connections], document_class=dict, tz_aware=False,
+                    connect=True, replicaset=self.repset)
 
-                # Authenticate to which database.
+                # Database to authenticate to.
                 if self.db_auth:
                     self.db_conn = self.conn[self.db_auth]
 
                 else:
                     self.db_conn = self.conn[self.db]
 
-                # Authenticate and connect.
-                self.db_auth = self.db_conn.authenticate(self.user,
-                                                         self.passwd)
+                # Authenticate.
+                self.db_auth = self.db_conn.authenticate(self.user, self.japwd)
                 self.db_coll = self.conn[self.db][self.coll]
 
-            # Assume no authentication required.
             else:
                 self.conn = pymongo.MongoClient(connections,
                                                 replicaSet=self.repset)
