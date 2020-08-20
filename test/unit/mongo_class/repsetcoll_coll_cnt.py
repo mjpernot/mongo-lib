@@ -98,7 +98,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -117,9 +117,9 @@ class UnitTest(unittest.TestCase):
         """
 
         qry = {"QueryHere"}
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japwd, self.host, self.port,
+            repset=self.repset)
         mongo.db_coll = CollCnt()
 
         self.assertEqual(mongo.coll_cnt(qry), 10)
@@ -134,9 +134,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japwd, self.host, self.port,
+            repset=self.repset)
         mongo.db_coll = CollCnt()
 
         self.assertEqual(mongo.coll_cnt(), 10)
