@@ -121,10 +121,15 @@ def create_slv_array(cfg_array, **kwargs):
     slaves = []
 
     for slv in cfg_array:
+        auth_db = slv.get("auth_db", "admin")
+        use_uri = slv.get("use_uri", False)
+        use_arg = slv.get("use_arg", False)
+
         slave_inst = mongo_class.SlaveRep(
-            slv["name"], slv["user"], slv["passwd"], host=slv["host"],
+            slv["name"], slv["user"], slv["japwd"], host=slv["host"],
             port=int(slv["port"]), auth=slv["auth"],
-            conf_file=slv["conf_file"])
+            conf_file=slv["conf_file"], auth_db=auth_db, use_arg=use_arg,
+            use_uri=use_uri)
 
         slaves.append(slave_inst)
 

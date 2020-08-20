@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change.
 
 ### Changed
+- mongo_libs.create_slv_array:  Added in new class attributes to instance call.
 - mongo_libs.create_instance:  Added in new class attributes to instance call.
 - mongo_class.RepSetColl.\_\_init\_\_:  Passed new attributes to super command for the RepSet class.
 - mongo_class.RepSet.connect:  Added capability to connect into Mongo using arguments.
