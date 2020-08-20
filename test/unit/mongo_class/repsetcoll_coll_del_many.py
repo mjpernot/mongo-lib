@@ -100,7 +100,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japwd = "mongo_pwd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -119,9 +119,9 @@ class UnitTest(unittest.TestCase):
         """
 
         override = True
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japwd, self.host, self.port,
+            repset=self.repset)
         mongo.db_coll = CollDelMany()
 
         self.assertFalse(mongo.coll_del_many(override=override))
@@ -137,9 +137,9 @@ class UnitTest(unittest.TestCase):
         """
 
         qry = {"QueryHere"}
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japwd, self.host, self.port,
+            repset=self.repset)
         mongo.db_coll = CollDelMany()
 
         self.assertFalse(mongo.coll_del_many(qry))
@@ -154,9 +154,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japwd, self.host, self.port,
+            repset=self.repset)
         mongo.db_coll = CollDelMany()
 
         with gen_libs.no_std_out():
