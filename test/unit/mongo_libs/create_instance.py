@@ -126,8 +126,8 @@ class Cfg2(object):
         self.auth = True
         self.conf_file = "conf_file"
         self.use_uri = False
-        self.use_arg = False
-        self.auth_db = "admin"
+        self.use_arg = True
+        self.auth_db = "mydatabase"
 
 
 class UnitTest(unittest.TestCase):
@@ -138,6 +138,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_new_attributes2 -> Test new use_uri, use_arg, & auth_db attrs.
         test_new_attributes -> Test with new use_uri, use_arg, & auth_db attrs.
         test_create_instance -> Test create_instance function.
 
@@ -165,6 +166,27 @@ class UnitTest(unittest.TestCase):
         self.auth_db = "admin"
         self.cfg = Cfg()
         self.cfg2 = Cfg2()
+        self.use_uri2 = False
+        self.use_arg2 = True
+        self.auth_db2 = "mydatabase"
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_new_attributes2(self, mock_load):
+
+        """Function:  test_new_attributes2
+
+        Description:  Test with new use_uri, use_arg, and auth_db attributes.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg2
+        mongo = mongo_libs.create_instance("cfg_file", "dir_path", Mongo)
+
+        self.assertEqual(
+            (mongo.use_uri, mongo.use_arg, mongo.auth_db),
+            (self.use_uri2, self.use_arg2, self.auth_db2))
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_new_attributes(self, mock_load):
@@ -177,7 +199,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_load.return_value = self.cfg2
+        mock_load.return_value = self.cfg
         mongo = mongo_libs.create_instance("cfg_file", "dir_path", Mongo)
 
         self.assertEqual(
