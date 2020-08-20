@@ -174,7 +174,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     if mongo.auth:
         cmd_list = [prog_name, "--username=" + mongo.user, host_port,
-                    "--password=" + mongo.passwd]
+                    "--password=" + mongo.japwd]
 
     else:
         cmd_list = [prog_name, host_port]
