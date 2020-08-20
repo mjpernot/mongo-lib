@@ -120,7 +120,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(
             self.name, self.user, self.japwd, self.host, self.port,
-            coll=self.coll)
+            coll=self.coll, auth_db=self.auth_db)
 
         self.assertEqual(mongo.auth_db, self.auth_db)
 
