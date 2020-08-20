@@ -84,10 +84,24 @@ def create_instance(cfg_file, dir_path, class_name, **kwargs):
 
     """
 
+    auth_db = "admin"
+    use_arg = False
+    use_uri = False
     cfg = gen_libs.load_module(cfg_file, dir_path)
 
-    return class_name(cfg.name, cfg.user, cfg.passwd, host=cfg.host,
-                      port=cfg.port, auth=cfg.auth, conf_file=cfg.conf_file)
+    if hasattr(cfg, "auth_db"):
+        auth_db = cfg.auth_db
+
+    if hasattr(cfg, "use_arg"):
+        use_arg = cfg.use_arg
+
+    if hasattr(cfg, "use_uri"):
+        use_uri = cfg.use_uri
+
+    return class_name(
+        cfg.name, cfg.user, cfg.japwd, host=cfg.host, port=cfg.port,
+        auth=cfg.auth, conf_file=cfg.conf_file, auth_db=auth_db,
+        use_arg=use_arg, use_uri=use_uri)
 
 
 def create_slv_array(cfg_array, **kwargs):
