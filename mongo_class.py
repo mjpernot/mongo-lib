@@ -1068,7 +1068,7 @@ class RepSetColl(RepSet):
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japwd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -1078,7 +1078,7 @@ class RepSetColl(RepSet):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japwd -> User's psword.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -1089,15 +1089,21 @@ class RepSetColl(RepSet):
                 db -> Name of database.
                 coll -> Name of collection.
                 db_auth -> None or name of authentication database.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
         super(RepSetColl, self).__init__(
-            name, user, passwd, host=host, port=port,
+            name, user, japwd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
             repset=kwargs.get("repset", None),
-            repset_hosts=kwargs.get("repset_hosts", None))
+            repset_hosts=kwargs.get("repset_hosts", None),
+            use_uri=kwargs.get("use_uri", False),
+            use_arg=kwargs.get("use_arg", False),
+            auth_db=kwargs.get("auth_db", "admin"))
 
         self.db = kwargs.get("db", "test")
         self.coll = kwargs.get("coll", None)
