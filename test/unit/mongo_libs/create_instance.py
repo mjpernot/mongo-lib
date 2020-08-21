@@ -45,7 +45,7 @@ class Mongo(object):
 
     """
 
-    def __init__(self, name, user, japwd, host, port, **kwargs):
+    def __init__(self, name, user, japd, host, port, **kwargs):
 
         """Function:  __init__
 
@@ -57,7 +57,7 @@ class Mongo(object):
 
         self.name = name
         self.user = user
-        self.japwd = japwd
+        self.japd = japd
         self.host = host
         self.port = port
         self.auth = kwargs.get("auth", None)
@@ -90,7 +90,7 @@ class Cfg(object):
 
         self.name = "name"
         self.user = "user"
-        self.japwd = None
+        self.japd = "userpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
@@ -120,7 +120,7 @@ class Cfg2(object):
 
         self.name = "name"
         self.user = "user"
-        self.japwd = None
+        self.japd = "userpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
@@ -156,7 +156,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "name"
         self.user = "user"
-        self.japwd = None
+        self.japd = "userpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
@@ -221,9 +221,9 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance("cfg_file", "dir_path", Mongo)
 
         self.assertEqual(
-            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.auth, mongo.conf_file),
-            (self.name, self.user, self.japwd, self.host, self.port, self.auth,
+            (self.name, self.user, self.japd, self.host, self.port, self.auth,
              self.conf_file))
 
 
