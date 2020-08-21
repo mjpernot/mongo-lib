@@ -104,8 +104,8 @@ class UnitTest(unittest.TestCase):
         self.result = [self.path + "/" + self.prog_name, "-m=1"]
         self.result2 = [self.path + "/" + self.prog_name, "--required", "-m=1"]
         self.result3 = [self.path + "/" + self.prog_name,
-                        "--username=username", "--host=IP:27017", pwd,
-                        "--required", "-m=1"]
+                        "--username=username", "--host=IP:27017",
+                        pwd + "userpd", "--required", "-m=1"]
 
     def test_full_test(self):
 
