@@ -58,7 +58,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.japwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -82,14 +82,14 @@ class UnitTest(unittest.TestCase):
 
         mock_cmd.return_value = True
         mongo = mongo_class.Server(
-            self.name, self.user, self.japwd, self.host, self.port,
+            self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file)
 
         mongo.get_srv_attr()
         self.assertEqual(
-            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.conf_file),
-            (self.name, self.user, self.japwd, self.host, self.port,
+            (self.name, self.user, self.japd, self.host, self.port,
              self.conf_file))
 
 

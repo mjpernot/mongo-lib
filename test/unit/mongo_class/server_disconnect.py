@@ -58,7 +58,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.japwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -78,14 +78,14 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_client.close.return_value = True
-        mongo = mongo_class.Server(self.name, self.user, self.japwd,
+        mongo = mongo_class.Server(self.name, self.user, self.japd,
                                    self.host, self.port)
 
         mongo.disconnect()
         self.assertEqual(
-            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.conn),
-            (self.name, self.user, self.japwd, self.host, self.port, None))
+            (self.name, self.user, self.japd, self.host, self.port, None))
 
 
 if __name__ == "__main__":
