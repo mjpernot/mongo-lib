@@ -146,7 +146,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.japwd = None
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -162,7 +162,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.japwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.db = DBValidate2()
         status, _ = mongo.validate_tbl("tbl", True)
@@ -182,7 +182,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.japwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.db = DBValidate2()
         status, msg = mongo.validate_tbl("tbl", True)
@@ -199,7 +199,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.japwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.db = DBValidate()
 
