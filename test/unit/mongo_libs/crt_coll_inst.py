@@ -57,7 +57,7 @@ class Cfg(object):
 
         self.name = "name"
         self.user = "user"
-        self.japwd = None
+        self.japd = "userpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
@@ -90,7 +90,7 @@ class Cfg2(object):
 
         self.name = "name"
         self.user = "user"
-        self.japwd = None
+        self.japd = "userpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
@@ -101,39 +101,6 @@ class Cfg2(object):
         self.use_uri = False
         self.use_arg = True
         self.auth_db = "mydatabase"
-
-
-class CfgA(object):
-
-    """Class:  Cfg
-
-    Description:  Class stub holder for Cfg class.
-
-    Methods:
-        __init__ -> Class initialization.
-
-    """
-
-    def __init__(self, repset_hosts=None):
-
-        """Function:  __init__
-
-        Description:  Class initialization.
-
-        Arguments:
-
-        """
-
-        self.name = "name"
-        self.user = "user"
-        self.japd = "usrpd"
-        self.host = "host"
-        self.port = 27017
-        self.auth = True
-        self.repset = "repset_name"
-        self.conf_file = "conf_file"
-        self.repset_hosts = repset_hosts
-        self.db_auth = "db_name"
 
 
 class UnitTest(unittest.TestCase):
