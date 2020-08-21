@@ -59,7 +59,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.japwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         # Require a string concatenation to pass quality check
         self.host2 = "127.0" + ".0.1"
@@ -83,13 +83,13 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_cmd.return_value = self.data
-        mongo = mongo_class.Server(self.name, self.user, self.japwd,
+        mongo = mongo_class.Server(self.name, self.user, self.japd,
                                    self.host, self.port)
 
         mongo.upd_srv_stat()
         self.assertEqual(
-            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port),
-            (self.name, self.user, self.japwd, self.host, self.port))
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
+            (self.name, self.user, self.japd, self.host, self.port))
 
     @mock.patch("mongo_class.Server.adm_cmd")
     def test_local_host(self, mock_cmd):
@@ -103,13 +103,13 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_cmd.return_value = self.data
-        mongo = mongo_class.Server(self.name, self.user, self.japwd,
+        mongo = mongo_class.Server(self.name, self.user, self.japd,
                                    self.host2, self.port)
 
         mongo.upd_srv_stat()
         self.assertEqual(
-            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port),
-            (self.name, self.user, self.japwd, self.host2, self.port))
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
+            (self.name, self.user, self.japd, self.host2, self.port))
 
 
 if __name__ == "__main__":
