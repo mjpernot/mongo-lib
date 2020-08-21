@@ -59,18 +59,18 @@ class UnitTest(unittest.TestCase):
 
         self.name = "name"
         self.user = "user"
-        self.japwd = None
+        self.japd = "userpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
         self.conf_file = "conf_file"
-        self.cfg = [{"name": "name", "user": "user", "japwd": None,
+        self.cfg = [{"name": "name", "user": "user", "japd": "userpd",
                      "host": "host", "port": 27017, "auth": True,
                      "conf_file": "conf_file"}]
-        self.cfg2 = [{"name": "name", "user": "user", "japwd": None,
+        self.cfg2 = [{"name": "name", "user": "user", "japd": "userpd",
                       "host": "host", "port": 27017, "auth": True,
                       "conf_file": "conf_file"},
-                     {"name": "name", "user": "user", "japwd": None,
+                     {"name": "name", "user": "user", "japd": "userpd",
                       "host": "host", "port": 27017, "auth": True,
                       "conf_file": "conf_file", "auth_db": "admin",
                       "use_uri": False, "use_arg": True}]
