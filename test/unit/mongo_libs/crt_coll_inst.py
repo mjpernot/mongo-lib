@@ -126,7 +126,7 @@ class CfgA(object):
 
         self.name = "name"
         self.user = "user"
-        self.japd = "usrpd"
+        self.japwd = "usrpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
