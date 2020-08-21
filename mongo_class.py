@@ -116,7 +116,7 @@ class Server(object):
 
     """
 
-    def __init__(self, name, user, japwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -126,7 +126,7 @@ class Server(object):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) japwd -> User's psword.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -143,7 +143,7 @@ class Server(object):
 
         self.name = name
         self.user = user
-        self.japwd = japwd
+        self.japd = japd
         self.host = host
         self.port = port
         self.auth = kwargs.get("auth", True)
@@ -164,7 +164,7 @@ class Server(object):
         self.prct_mem = None
         self.use_uri = kwargs.get("use_uri", False)
         self.use_arg = kwargs.get("use_arg", False)
-        self.config = {KEY1 + KEY2: self.japwd}
+        self.config = {KEY1 + KEY2: self.japd}
         self.conn_list = [self.host + ":" + str(self.port)]
         self.auth_db = kwargs.get("auth_db", "admin")
 
@@ -270,7 +270,7 @@ class Server(object):
                     authSource=self.auth_db, **self.config)
                 
             elif self.auth and self.use_uri:
-                uri = "mongodb://" + self.user + ":" + self.japwd + "@" \
+                uri = "mongodb://" + self.user + ":" + self.japd + "@" \
                       + self.host + ":" + str(self.port)
                 self.conn = pymongo.MongoClient(uri)
 
@@ -425,7 +425,7 @@ class DB(Server):
 
     """
 
-    def __init__(self, name, user, japwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -435,7 +435,7 @@ class DB(Server):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) japwd -> User's psword.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -449,7 +449,7 @@ class DB(Server):
         """
 
         super(DB, self).__init__(
-            name, user, japwd, host=host, port=port,
+            name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
             use_uri=kwargs.get("use_uri", False),
@@ -595,7 +595,7 @@ class Coll(DB):
 
     """
 
-    def __init__(self, name, user, japwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -605,7 +605,7 @@ class Coll(DB):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) japwd -> User's psword.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -620,7 +620,7 @@ class Coll(DB):
         """
 
         super(Coll, self).__init__(
-            name, user, japwd, host=host, port=port,
+            name, user, japd, host=host, port=port,
             db=kwargs.get("db", "test"), auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
             use_uri=kwargs.get("use_uri", False),
@@ -752,7 +752,7 @@ class Rep(Server):
 
     """
 
-    def __init__(self, name, user, japwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -762,7 +762,7 @@ class Rep(Server):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) japwd -> User's psword.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -775,7 +775,7 @@ class Rep(Server):
         """
 
         super(Rep, self).__init__(
-            name, user, japwd, host=host, port=port,
+            name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
             use_uri=kwargs.get("use_uri", False),
@@ -817,7 +817,7 @@ class MasterRep(Rep):
 
     """
 
-    def __init__(self, name, user, japwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -827,7 +827,7 @@ class MasterRep(Rep):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) japwd -> User's psword.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -840,7 +840,7 @@ class MasterRep(Rep):
         """
 
         super(MasterRep, self).__init__(
-            name, user, japwd, host=host, port=port,
+            name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
             use_uri=kwargs.get("use_uri", False),
@@ -895,7 +895,7 @@ class SlaveRep(Rep):
 
     """
 
-    def __init__(self, name, user, japwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -905,7 +905,7 @@ class SlaveRep(Rep):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) japwd -> User's psword.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -918,7 +918,7 @@ class SlaveRep(Rep):
         """
 
         super(SlaveRep, self).__init__(
-            name, user, japwd, host=host, port=port,
+            name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
             use_uri=kwargs.get("use_uri", False),
@@ -973,7 +973,7 @@ class RepSet(Rep):
 
     """
 
-    def __init__(self, name, user, japwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -983,7 +983,7 @@ class RepSet(Rep):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) japwd -> User's psword.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -998,7 +998,7 @@ class RepSet(Rep):
         """
 
         super(RepSet, self).__init__(
-            name, user, japwd, host=host, port=port,
+            name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
             use_uri=kwargs.get("use_uri", False),
@@ -1040,7 +1040,7 @@ class RepSet(Rep):
                     **self.config)
                 
             elif self.auth and self.use_uri:
-                uri = "mongodb://" + self.user + ":" + self.japwd + "@" \
+                uri = "mongodb://" + self.user + ":" + self.japd + "@" \
                       + connections + "/?replicaSet=" + self.repset
                 self.conn = pymongo.MongoClient(uri)
 
@@ -1068,7 +1068,7 @@ class RepSetColl(RepSet):
 
     """
 
-    def __init__(self, name, user, japwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -1078,7 +1078,7 @@ class RepSetColl(RepSet):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) japwd -> User's psword.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -1096,7 +1096,7 @@ class RepSetColl(RepSet):
         """
 
         super(RepSetColl, self).__init__(
-            name, user, japwd, host=host, port=port,
+            name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
             repset=kwargs.get("repset", None),
@@ -1146,7 +1146,7 @@ class RepSetColl(RepSet):
                     self.db_conn = self.conn[self.db]
 
                 # Authenticate.
-                self.db_auth = self.db_conn.authenticate(self.user, self.japwd)
+                self.db_auth = self.db_conn.authenticate(self.user, self.japd)
                 self.db_coll = self.conn[self.db][self.coll]
 
             else:
