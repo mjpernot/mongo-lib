@@ -64,7 +64,7 @@ class UnitTest(unittest.TestCase):
         key2 = "word"
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.japwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -74,7 +74,7 @@ class UnitTest(unittest.TestCase):
         self.use_uri = True
         self.use_arg = True
         self.auth_db = "sysmon"
-        self.config = {key1 + key2: self.japwd}
+        self.config = {key1 + key2: self.japd}
         self.conn_list = [self.host + ":" + str(self.port)]
 
     def test_conn_list_attr(self):
@@ -87,7 +87,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.MasterRep(self.name, self.user, self.japwd,
+        mongo = mongo_class.MasterRep(self.name, self.user, self.japd,
                                       self.host, self.port)
 
         self.assertEqual(mongo.conn_list, self.conn_list)
@@ -102,7 +102,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.MasterRep(self.name, self.user, self.japwd,
+        mongo = mongo_class.MasterRep(self.name, self.user, self.japd,
                                       self.host, self.port)
 
         self.assertEqual(mongo.config, self.config)
@@ -118,7 +118,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.MasterRep(
-            self.name, self.user, self.japwd, self.host, self.port,
+            self.name, self.user, self.japd, self.host, self.port,
             auth_db=self.auth_db)
 
         self.assertEqual(mongo.auth_db, self.auth_db)
@@ -134,7 +134,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.MasterRep(
-            self.name, self.user, self.japwd, self.host, self.port,
+            self.name, self.user, self.japd, self.host, self.port,
             use_arg=self.use_arg)
 
         self.assertTrue(mongo.use_arg)
@@ -150,7 +150,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.MasterRep(
-            self.name, self.user, self.japwd, self.host, self.port,
+            self.name, self.user, self.japd, self.host, self.port,
             use_uri=self.use_uri)
 
         self.assertTrue(mongo.use_uri)
@@ -165,13 +165,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.MasterRep(self.name, self.user, self.japwd,
+        mongo = mongo_class.MasterRep(self.name, self.user, self.japd,
                                       self.host, self.port)
 
         self.assertEqual(
-            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.ismaster, mongo.issecondary),
-            (self.name, self.user, self.japwd, self.host, self.port, None,
+            (self.name, self.user, self.japd, self.host, self.port, None,
              None))
 
 

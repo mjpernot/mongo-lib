@@ -65,7 +65,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.japwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -95,7 +95,7 @@ class UnitTest(unittest.TestCase):
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
-            self.name, self.user, self.japwd, self.host, self.port,
+            self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_arg=True)
         mongo.connect()
 
@@ -117,7 +117,7 @@ class UnitTest(unittest.TestCase):
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
-            self.name, self.user, self.japwd, self.host, self.port,
+            self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_uri=True)
         mongo.connect()
 
@@ -139,7 +139,7 @@ class UnitTest(unittest.TestCase):
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
-            self.name, self.user, self.japwd, self.host, self.port,
+            self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=False)
         mongo.connect()
 
@@ -161,7 +161,7 @@ class UnitTest(unittest.TestCase):
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
-            self.name, self.user, self.japwd, self.host, self.port,
+            self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True)
         mongo.connect()
 
@@ -182,7 +182,7 @@ class UnitTest(unittest.TestCase):
         mock_get.return_value = True
         mock_mongo.return_value = self.conn
 
-        mongo = mongo_class.RepSet(self.name, self.user, self.japwd,
+        mongo = mongo_class.RepSet(self.name, self.user, self.japd,
                                    self.host, self.port, repset=self.repset)
         mongo.connect()
 
@@ -201,15 +201,15 @@ class UnitTest(unittest.TestCase):
 
         mock_get.return_value = True
 
-        mongo = mongo_class.RepSet(self.name, self.user, self.japwd,
+        mongo = mongo_class.RepSet(self.name, self.user, self.japd,
                                    self.host, self.port, repset=self.repset)
         mongo.connect(connections=self.connections)
         mongo.conn = True
 
         self.assertEqual(
-            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.repset_hosts),
-            (self.name, self.user, self.japwd, self.host, self.port,
+            (self.name, self.user, self.japd, self.host, self.port,
              None))
 
     @mock.patch("mongo_class.Server.get_srv_attr")
@@ -224,16 +224,16 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_get.return_value = True
-        mongo = mongo_class.RepSet(self.name, self.user, self.japwd,
+        mongo = mongo_class.RepSet(self.name, self.user, self.japd,
                                    self.host, self.port, repset=self.repset,
                                    repset_hosts=self.repset_hosts)
         mongo.connect()
         mongo.conn = True
 
         self.assertEqual(
-            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.repset_hosts),
-            (self.name, self.user, self.japwd, self.host, self.port,
+            (self.name, self.user, self.japd, self.host, self.port,
              self.repset_hosts))
 
     @mock.patch("mongo_class.Server.get_srv_attr")
@@ -249,15 +249,15 @@ class UnitTest(unittest.TestCase):
 
         mock_get.return_value = True
 
-        mongo = mongo_class.RepSet(self.name, self.user, self.japwd,
+        mongo = mongo_class.RepSet(self.name, self.user, self.japd,
                                    self.host, self.port, repset=self.repset)
         mongo.connect()
         mongo.conn = True
 
         self.assertEqual(
-            (mongo.name, mongo.user, mongo.japwd, mongo.host, mongo.port,
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.repset_hosts),
-            (self.name, self.user, self.japwd, self.host, self.port,
+            (self.name, self.user, self.japd, self.host, self.port,
              None))
 
 
