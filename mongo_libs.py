@@ -99,7 +99,7 @@ def create_instance(cfg_file, dir_path, class_name, **kwargs):
         use_uri = cfg.use_uri
 
     return class_name(
-        cfg.name, cfg.user, cfg.japwd, host=cfg.host, port=cfg.port,
+        cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         auth=cfg.auth, conf_file=cfg.conf_file, auth_db=auth_db,
         use_arg=use_arg, use_uri=use_uri)
 
@@ -126,7 +126,7 @@ def create_slv_array(cfg_array, **kwargs):
         use_arg = slv.get("use_arg", False)
 
         slave_inst = mongo_class.SlaveRep(
-            slv["name"], slv["user"], slv["japwd"], host=slv["host"],
+            slv["name"], slv["user"], slv["japd"], host=slv["host"],
             port=int(slv["port"]), auth=slv["auth"],
             conf_file=slv["conf_file"], auth_db=auth_db, use_arg=use_arg,
             use_uri=use_uri)
@@ -174,7 +174,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     if mongo.auth:
         cmd_list = [prog_name, "--username=" + mongo.user, host_port,
-                    "--password=" + mongo.japwd]
+                    "--password=" + mongo.japd]
 
     else:
         cmd_list = [prog_name, host_port]
@@ -213,13 +213,13 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
         return mongo_class.RepSetColl(
-            cfg.name, cfg.user, cfg.japwd, host=cfg.host, port=cfg.port,
+            cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
             auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,
             db=dbs, coll=tbl, db_auth=cfg.db_auth, auth_db=auth_db,
             use_arg=use_arg, use_uri=use_uri)
 
     return mongo_class.Coll(
-        cfg.name, cfg.user, cfg.japwd, host=cfg.host, port=cfg.port,
+        cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file,
         auth_db=auth_db, use_arg=use_arg, use_uri=use_uri)
 
