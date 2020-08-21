@@ -90,7 +90,7 @@ class Cfg(object):
 
         self.name = "name"
         self.user = "user"
-        self.japwd = "pswd"
+        self.japwd = "userpw"
         self.host = "host"
         self.port = 27017
         self.auth = True
@@ -120,7 +120,7 @@ class Cfg2(object):
 
         self.name = "name"
         self.user = "user"
-        self.japwd = "pswd"
+        self.japwd = "userpw"
         self.host = "host"
         self.port = 27017
         self.auth = True
@@ -156,7 +156,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "name"
         self.user = "user"
-        self.japwd = "pswd"
+        self.japwd = "userpw"
         self.host = "host"
         self.port = 27017
         self.auth = True
