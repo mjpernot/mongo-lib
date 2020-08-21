@@ -60,7 +60,7 @@ class Mongo(object):
         self.host = "IP"
         self.port = 27017
         self.user = "username"
-        self.japwd = ""
+        self.japd = "userpd"
         self.auth = True
 
 
