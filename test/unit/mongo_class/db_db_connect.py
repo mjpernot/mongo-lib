@@ -83,7 +83,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.japwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -99,7 +99,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.japwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.conn = DBConn()
         mongo.db_connect(dbs=None)
@@ -116,7 +116,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.japwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.conn = {"testdb": "testdb"}
         mongo.db_connect("testdb")
@@ -133,7 +133,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.japwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.conn = {"test": "testdb"}
         mongo.db_connect()

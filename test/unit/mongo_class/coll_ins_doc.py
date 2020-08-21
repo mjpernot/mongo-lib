@@ -98,7 +98,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.japwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -115,7 +115,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.Coll(self.name, self.user, self.japwd, self.host,
+        mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
                                  self.port)
         mongo.coll = CollIns()
 
@@ -131,7 +131,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.Coll(self.name, self.user, self.japwd, self.host,
+        mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
                                  self.port)
         mongo.coll = CollIns()
 

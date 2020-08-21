@@ -58,7 +58,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.japwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -80,7 +80,7 @@ class UnitTest(unittest.TestCase):
         mock_client.return_value = True
         mock_cmd.return_value = True
 
-        mongo = mongo_class.Coll(self.name, self.user, self.japwd, self.host,
+        mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
                                  self.port, coll=self.coll)
         mongo.conn = {"test": {"coll_name": "connect"}}
         mongo.connect()
