@@ -191,22 +191,37 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
         This will be based on the type of configuration passed.
 
     Arguments:
-        (input) cfg_file -> Configuration file name.
+        (input) cfg -> Configuration module.
         (input) dbs -> Database name.
         (input) tbl ->  Collection name.
 
     """
 
+    auth_db = "admin"
+    use_arg = False
+    use_uri = False
+
+    if hasattr(cfg, "auth_db"):
+        auth_db = cfg.auth_db
+
+    if hasattr(cfg, "use_arg"):
+        use_arg = cfg.use_arg
+
+    if hasattr(cfg, "use_uri"):
+        use_uri = cfg.use_uri
+
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
         return mongo_class.RepSetColl(
-            cfg.name, cfg.user, cfg.passwd, host=cfg.host, port=cfg.port,
+            cfg.name, cfg.user, cfg.japwd, host=cfg.host, port=cfg.port,
             auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,
-            db=dbs, coll=tbl, db_auth=cfg.db_auth)
+            db=dbs, coll=tbl, db_auth=cfg.db_auth, auth_db=auth_db,
+            use_arg=use_arg, use_uri=use_uri)
 
     return mongo_class.Coll(
-        cfg.name, cfg.user, cfg.passwd, host=cfg.host, port=cfg.port,
-        db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file)
+        cfg.name, cfg.user, cfg.japwd, host=cfg.host, port=cfg.port,
+        db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file,
+        auth_db=auth_db, use_arg=use_arg, use_uri=use_uri)
 
 
 def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
