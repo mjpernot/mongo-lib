@@ -479,11 +479,17 @@ class DB(Server):
         Description:  Connect to a Mongo database.
 
         Arguments:
+            (output) status -> True|False - Connection successful.
+            (output) msg -> Error message if connection failed.
 
         """
 
-        super(DB, self).connect()
-        self.db = self.conn[self.db_name]
+        status, errmsg = super(DB, self).connect()
+
+        if status:
+            self.db = self.conn[self.db_name]
+
+        return status, errmsg
 
     def db_connect(self, dbs="test"):
 
