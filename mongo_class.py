@@ -665,12 +665,17 @@ class Coll(DB):
         Description:  Connect to a Mongo database.
 
         Arguments:
+            (output) status -> True|False - Connection successful.
+            (output) msg -> Error message if connection failed.
 
         """
 
-        super(Coll, self).connect()
+        status, errmsg = super(Coll, self).connect()
 
-        self.coll = self.conn[self.coll_db][self.coll_coll]
+        if status:
+            self.coll = self.conn[self.coll_db][self.coll_coll]
+
+        return status, errmsg
 
     def coll_cnt(self, qry=None):
 

@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change.
 
 ### Changed
+- mongo_class.Coll.connect:  Captured return status from connect, added check for return status and returned status.
 - mongo_class.DB.db_connect:  Captured return status from connect, added check for return status and returned status.
 - mongo_class.DB.connect:  Captured return status from connect, added check for return status and returned status.
 - mongo_class.RepSet.connect:  Captured return status from get_srv_attr and returned status.
