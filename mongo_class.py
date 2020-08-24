@@ -1008,8 +1008,8 @@ class RepSet(Rep):
         self.repset = kwargs.get("repset", None)
         self.repset_hosts = kwargs.get("repset_hosts", None)
 
-        if not self.repset:
-            sys.exit("Error:  Require Replication Set Name for RepSet class.")
+        #if not self.repset:
+        #    sys.exit("Error:  Require Replication Set Name for RepSet class.")
 
     def connect(self, connections=None):
 

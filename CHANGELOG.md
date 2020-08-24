@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change.
 
 ### Changed
+- mongo_class.RepSet.\_\_init\_\_:  Removed sys.exit on checking existence of repset attribute.
 - mongo_class.RepSet.connect:  Changed uri connection to handle a null repset attribute setting.
 - mongo_libs.crt_coll_inst:  Added in new class attributes to instance call.
 - mongo_libs.create_slv_array:  Added in new class attributes to instance call.
