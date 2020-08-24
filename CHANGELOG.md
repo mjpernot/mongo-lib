@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change.
 
 ### Changed
+- mongo_class.RepSet.connect:  Captured return status from get_srv_attr and returned status.
 - mongo_class.Server.connect:  Captured return status from get_srv_attr and returned status.
 - mongo_class.Server.get_srv_attr:  Removed sys.exit and replaced with status message return.
 - mongo_class.RepSet.\_\_init\_\_:  Removed sys.exit on checking existence of repset attribute.
