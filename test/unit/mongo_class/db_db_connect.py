@@ -24,6 +24,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -89,6 +90,24 @@ class UnitTest(unittest.TestCase):
         self.dbs = "test"
         self.db_auth = None
 
+    @mock.patch("mongo_class.Server.connect",
+                mock.Mock(return_value=(False, "Error Message")))
+    def test_fail_connection(self):
+
+        """Function:  test_fail_connection
+
+        Description:  Test with failed connection.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
+                               self.host, self.port)
+
+        self.assertEqual(mongo.db_connect("testdb"), (False, "Error Message"))
+        self.assertEqual((mongo.db), (None))
+
     def test_none_database_passed(self):
 
         """Function:  test_none_database_passed
@@ -102,8 +121,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.conn = DBConn()
-        mongo.db_connect(dbs=None)
 
+        self.assertEqual(mongo.db_connect(dbs=None), (True, None))
         self.assertEqual((mongo.db), ("testdb"))
 
     def test_database_passed(self):
@@ -119,8 +138,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.conn = {"testdb": "testdb"}
-        mongo.db_connect("testdb")
 
+        self.assertEqual(mongo.db_connect("testdb"), (True, None))
         self.assertEqual((mongo.db), ("testdb"))
 
     def test_no_database(self):
@@ -136,8 +155,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.conn = {"test": "testdb"}
-        mongo.db_connect()
 
+        self.assertEqual(mongo.db_connect(), (True, None))
         self.assertEqual((mongo.db), ("testdb"))
 
 
