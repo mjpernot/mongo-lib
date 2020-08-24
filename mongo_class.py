@@ -971,25 +971,28 @@ class SlaveRep(Rep):
         Description:  Connect to a Mongo database.
 
         Arguments:
+            (output) status -> True|False - Connection successful.
+            (output) errmsg -> Error message if connection failed.
 
         """
 
-        super(SlaveRep, self).connect()
+        status, errmsg = super(SlaveRep, self).connect()
 
-        data = fetch_ismaster(self)
-        msg = None
+        if status:
+            data = fetch_ismaster(self)
 
-        if data.get("secondary"):
-            self.ismaster = data.get("ismaster")
-            self.issecondary = data.get("secondary")
-            self.repset = data.get("setName")
-            self.primary = data.get("primary")
+            if data.get("secondary"):
+                self.ismaster = data.get("ismaster")
+                self.issecondary = data.get("secondary")
+                self.repset = data.get("setName")
+                self.primary = data.get("primary")
 
-        else:
-            self.disconnect()
-            msg = "Error:  This is not a Slave Replication server."
+            else:
+                self.disconnect()
+                status = False
+                errmsg = "Error:  This is not a Slave Replication server."
 
-        return msg
+        return status, errmsg
 
 
 class RepSet(Rep):
