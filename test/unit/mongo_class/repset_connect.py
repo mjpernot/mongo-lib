@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_fail_get_srv_attr -> Test with failed get_srv_attr call.
         test_uri_no_repset -> Test with uri and no repset present.
         test_uri_repset -> Test with uri and repset present.
         test_auth_arg -> Test with auth and arg present.
@@ -81,6 +82,28 @@ class UnitTest(unittest.TestCase):
         self.use_arg = True
         self.connections = ["mongo1:27017", "mongo2:27017", "mongo3:27017"]
         self.conn = "Mongo_Connection"
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_fail_get_srv_attr(self, mock_get, mock_mongo):
+
+        """Function:  test_fail_get_srv_attr
+
+        Description:  Test with failed get_srv_attr call.
+
+        Arguments:
+
+        """
+
+        mock_get.return_value = (False, "Error Message")
+        mock_mongo.return_value = self.conn
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, auth=True, use_uri=True)
+
+        self.assertEqual(mongo.connect(), (False, "Error Message"))
+        self.assertTrue(mongo.use_uri)
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
