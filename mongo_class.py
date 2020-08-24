@@ -1168,6 +1168,9 @@ class RepSetColl(RepSet):
 
         """
 
+        status = True
+        errmsg = None
+
         if not connections:
 
             if self.repset_hosts:
@@ -1191,14 +1194,28 @@ class RepSetColl(RepSet):
                     self.db_conn = self.conn[self.db]
 
                 # Authenticate.
-                self.db_auth = self.db_conn.authenticate(self.user, self.japd)
-                self.db_coll = self.conn[self.db][self.coll]
+                try:
+                    self.db_auth = self.db_conn.authenticate(self.user,
+                                                             self.japd)
+                    self.db_coll = self.conn[self.db][self.coll]
+
+                except pymongo.errors.ServerSelectionTimeoutError:
+                    self.disconnect()
+                    status = False
+                    errmsg = "Error:  Server not detected."
+
+                except pymongo.errors.OperationFailure as msg:
+                    self.disconnect()
+                    status = False
+                    errmsg = "Error: Auth flag/login params is incorrect: %s" \
+                             % msg
 
             else:
                 self.conn = pymongo.MongoClient(connections,
                                                 replicaSet=self.repset)
 
-        status, errmsg = self.get_srv_attr()
+        if status:
+            status, errmsg = self.get_srv_attr()
 
         return status, errmsg
 
