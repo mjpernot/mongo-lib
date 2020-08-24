@@ -66,6 +66,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_fail_connection -> Test with failed connection.
         test_connection -> Test connection method.
 
     """
@@ -90,6 +91,26 @@ class UnitTest(unittest.TestCase):
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_fail_connection(self, mock_client, mock_cmd):
+
+        """Function:  test_fail_connection
+
+        Description:  Test with failed connection.
+
+        Arguments:
+
+        """
+
+        mock_client.return_value = True
+        mock_cmd.return_value = (False, "Error Message")
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
+                               self.host, self.port)
+
+        self.assertEqual(mongo.connect(), (False, "Error Message"))
+        self.assertEqual((mongo.db), (None))
+
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
     def test_connection(self, mock_client, mock_cmd):
 
         """Function:  test_connection
@@ -101,12 +122,12 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_client.return_value = True
-        mock_cmd.return_value = True
+        mock_cmd.return_value = (True, None)
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.conn = {"test": "testdb"}
-        mongo.connect()
 
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertEqual((mongo.db), ("testdb"))
 
 
