@@ -236,11 +236,17 @@ def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
         (input) dbs -> Database name.
         (input) tbl ->  Collection name.
         (input) data -> Document to be inserted.
+        (output) status -> True|False - Connection successful.
+        (output) errmsg -> Error message if connection failed.
 
     """
 
     data = dict(data)
     coll = crt_coll_inst(mongo_cfg, dbs, tbl, **kwargs)
-    coll.connect()
-    coll.ins_doc(json.loads(json.dumps(data)))
-    cmds_gen.disconnect([coll])
+    status, errmsg = coll.connect()
+
+    if status:
+        coll.ins_doc(json.loads(json.dumps(data)))
+        cmds_gen.disconnect([coll])
+
+    return status, errmsg
