@@ -41,6 +41,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_no_repset_attr -> Test setting the repset attribute to None.
+        test_repset_attr -> Test setting the repset attribute.
         test_conn_list_attr -> Test setting the conn_list attribute.
         test_config_attr -> Test setting the config attribute.
         test_using_auth_db -> Test using the auth_db attribute.
@@ -71,11 +73,44 @@ class UnitTest(unittest.TestCase):
         self.coll = None
         self.db_auth = None
         self.repset = "mongo_repset"
+        self.repset2 = None
         self.use_uri = True
         self.use_arg = True
         self.auth_db = "sysmon"
         self.config = {key1 + key2: self.japd}
         self.conn_list = [self.host + ":" + str(self.port)]
+
+    def test_no_repset_attr(self):
+
+        """Function:  test_no_repset_attr
+
+        Description:  Test setting the repset attribute to None.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset2)
+
+        self.assertEqual(mongo.repset, self.repset2)
+
+    def test_repset_attr(self):
+
+        """Function:  test_repset_attr
+
+        Description:  Test setting the repset attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset)
+
+        self.assertEqual(mongo.repset, self.repset)
 
     def test_conn_list_attr(self):
 
