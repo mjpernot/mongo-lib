@@ -42,6 +42,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_uri_no_repset -> Test with uri and no repset present.
+        test_uri_repset -> Test with uri and repset present.
         test_auth_arg -> Test with auth and arg present.
         test_auth_uri -> Test with auth and uri present.
         test_no_auth -> Test with no authenication set.
@@ -71,6 +73,7 @@ class UnitTest(unittest.TestCase):
         self.dbs = "test"
         self.coll = None
         self.repset = "mongo_repset"
+        self.repset2 = None
         self.repset_hosts = "host1:27017, host2:27107"
         self.db_auth = None
         self.conf_file = "Conf_File"
@@ -78,6 +81,50 @@ class UnitTest(unittest.TestCase):
         self.use_arg = True
         self.connections = ["mongo1:27017", "mongo2:27017", "mongo3:27017"]
         self.conn = "Mongo_Connection"
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_uri_no_repset(self, mock_get, mock_mongo):
+
+        """Function:  test_uri_no_repset
+
+        Description:  Test with uri and no repset present.
+
+        Arguments:
+
+        """
+
+        mock_get.return_value = True
+        mock_mongo.return_value = self.conn
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset2, auth=True, use_uri=True)
+        mongo.connect()
+
+        self.assertTrue(mongo.use_uri)
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_uri_repset(self, mock_get, mock_mongo):
+
+        """Function:  test_uri_repset
+
+        Description:  Test with uri and repset present.
+
+        Arguments:
+
+        """
+
+        mock_get.return_value = True
+        mock_mongo.return_value = self.conn
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, auth=True, use_uri=True)
+        mongo.connect()
+
+        self.assertTrue(mongo.use_uri)
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
