@@ -94,14 +94,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = True
+        mock_get.return_value = (True, None)
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset2, auth=True, use_uri=True)
-        mongo.connect()
 
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertTrue(mongo.use_uri)
 
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -116,14 +116,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = True
+        mock_get.return_value = (True, None)
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_uri=True)
-        mongo.connect()
 
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertTrue(mongo.use_uri)
 
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -138,14 +138,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = True
+        mock_get.return_value = (True, None)
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_arg=True)
-        mongo.connect()
 
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertTrue(mongo.use_arg)
 
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -160,14 +160,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = True
+        mock_get.return_value = (True, None)
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_uri=True)
-        mongo.connect()
 
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertTrue(mongo.use_uri)
 
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -182,14 +182,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = True
+        mock_get.return_value = (True, None)
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=False)
-        mongo.connect()
 
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertFalse(mongo.auth)
 
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -204,14 +204,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = True
+        mock_get.return_value = (True, None)
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True)
-        mongo.connect()
 
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertTrue(mongo.auth)
 
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -226,13 +226,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = True
+        mock_get.return_value = (True, None)
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(self.name, self.user, self.japd,
                                    self.host, self.port, repset=self.repset)
-        mongo.connect()
 
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertEqual(mongo.conn, self.conn)
 
     @mock.patch("mongo_class.Server.get_srv_attr")
@@ -246,13 +246,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = True
+        mock_get.return_value = (True, None)
 
         mongo = mongo_class.RepSet(self.name, self.user, self.japd,
                                    self.host, self.port, repset=self.repset)
-        mongo.connect(connections=self.connections)
         mongo.conn = True
 
+        self.assertEqual(mongo.connect(connections=self.connections),
+                         (True, None))
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.repset_hosts),
@@ -270,13 +271,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = True
+        mock_get.return_value = (True, None)
         mongo = mongo_class.RepSet(self.name, self.user, self.japd,
                                    self.host, self.port, repset=self.repset,
                                    repset_hosts=self.repset_hosts)
-        mongo.connect()
         mongo.conn = True
 
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.repset_hosts),
@@ -294,13 +295,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = True
+        mock_get.return_value = (True, None)
 
         mongo = mongo_class.RepSet(self.name, self.user, self.japd,
                                    self.host, self.port, repset=self.repset)
-        mongo.connect()
         mongo.conn = True
 
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.repset_hosts),
