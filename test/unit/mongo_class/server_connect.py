@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_fail_get_srv_attr -> Test with failed get_srv_attr call.
         test_auth_arg -> Test with auth and arg present.
         test_auth_uri -> Test with auth and uri present.
         test_no_auth -> Test with no auth present.
@@ -72,6 +73,31 @@ class UnitTest(unittest.TestCase):
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_fail_get_srv_attr(self, mock_cmd, mock_client):
+
+        """Function:  test_fail_get_srv_attr
+
+        Description:  Test with failed get_srv_attr call.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = (False, "Error Message")
+        mock_client.return_value = True
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            use_arg=self.use_arg)
+
+        self.assertEqual(mongo.connect(), (False, "Error Message"))
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
+             mongo.use_arg),
+            (self.name, self.user, self.japd, self.host, self.port,
+             self.use_arg))
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
     def test_auth_arg(self, mock_cmd, mock_client):
 
         """Function:  test_auth_arg
@@ -82,13 +108,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_cmd.return_value = True
+        mock_cmd.return_value = (True, None)
         mock_client.return_value = True
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, host=self.host, port=self.port,
             use_arg=self.use_arg)
 
-        mongo.connect()
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.use_arg),
@@ -107,13 +133,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_cmd.return_value = True
+        mock_cmd.return_value = (True, None)
         mock_client.return_value = True
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, host=self.host, port=self.port,
             use_uri=self.use_uri)
 
-        mongo.connect()
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.use_uri),
@@ -132,12 +158,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_cmd.return_value = True
+        mock_cmd.return_value = (True, None)
         mock_client.return_value = True
         mongo = mongo_class.Server(self.name, self.user, self.japd,
                                    host=self.host, port=self.port, auth=False)
 
-        mongo.connect()
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.name, self.user, self.japd, self.host, self.port))
