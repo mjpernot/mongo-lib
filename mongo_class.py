@@ -1040,8 +1040,13 @@ class RepSet(Rep):
                     **self.config)
                 
             elif self.auth and self.use_uri:
+                repset_str = ""
+
+                if self.repset:
+                    repset_str = "/?replicaSet=" + self.repset
+
                 uri = "mongodb://" + self.user + ":" + self.japd + "@" \
-                      + connections + "/?replicaSet=" + self.repset
+                      + connections + repset_str
                 self.conn = pymongo.MongoClient(uri)
 
             else:
