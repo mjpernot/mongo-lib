@@ -891,26 +891,28 @@ class MasterRep(Rep):
         Description:  Connect to a Mongo database.
 
         Arguments:
+            (output) status -> True|False - Connection success or not master.
             (output) msg -> Message status.
 
         """
 
-        super(MasterRep, self).connect()
+        status, msg = super(MasterRep, self).connect()
 
-        data = fetch_ismaster(self)
-        msg = None
+        if status:
+            data = fetch_ismaster(self)
 
-        if data.get("ismaster"):
-            self.ismaster = data.get("ismaster")
-            self.issecondary = data.get("secondary")
-            self.repset = data.get("setName")
-            self.slaves = data.get("hosts", [])
+            if data.get("ismaster"):
+                self.ismaster = data.get("ismaster")
+                self.issecondary = data.get("secondary")
+                self.repset = data.get("setName")
+                self.slaves = data.get("hosts", [])
 
-        else:
-            self.disconnect()
-            msg = "Error:  This is not a Master Replication server."
+            else:
+                self.disconnect()
+                status = False
+                msg = "Error:  This is not a Master Replication server."
 
-        return msg
+        return status, msg
 
 
 class SlaveRep(Rep):
