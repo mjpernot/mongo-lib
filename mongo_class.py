@@ -236,20 +236,28 @@ class Server(object):
         Description:  Exception handling for the upd_server_attr method.
 
         Arguments:
+            (output) status -> True|False - Connection successful.
+            (output) msg -> Error message if connection failed.
 
         """
+
+        status = True
+        errmsg = None
 
         try:
             self.upd_server_attr()
 
         except pymongo.errors.ServerSelectionTimeoutError:
             self.disconnect()
-            sys.exit("Error:  Server not detected.")
+            status = False
+            errmsg = "Error:  Server not detected."
 
         except pymongo.errors.OperationFailure as msg:
             self.disconnect()
-            sys.exit("Error:  Auth flag or login params is incorrect: \n\t%s."
-                     % msg)
+            status = False
+            errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
+
+        return status, errmsg
 
     def connect(self):
 
