@@ -267,6 +267,8 @@ class Server(object):
             basic server attributes.
 
         Arguments:
+            (output) status -> True|False - Connection successful.
+            (output) msg -> Error message if connection failed.
 
         """
 
@@ -285,7 +287,10 @@ class Server(object):
             else:
                 self.conn = pymongo.MongoClient(self.host, self.port)
 
-        self.get_srv_attr()
+        status, errmsg = self.get_srv_attr()
+
+        return status, errmsg
+        
 
     def disconnect(self):
 
