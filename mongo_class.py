@@ -480,7 +480,7 @@ class DB(Server):
 
         Arguments:
             (output) status -> True|False - Connection successful.
-            (output) msg -> Error message if connection failed.
+            (output) errmsg -> Error message if connection failed.
 
         """
 
@@ -500,7 +500,7 @@ class DB(Server):
         Arguments:
             (input) dbs -> Name of database.
             (output) status -> True|False - Connection successful.
-            (output) msg -> Error message if connection failed.
+            (output) errmsg -> Error message if connection failed.
 
         """
 
@@ -666,7 +666,7 @@ class Coll(DB):
 
         Arguments:
             (output) status -> True|False - Connection successful.
-            (output) msg -> Error message if connection failed.
+            (output) errmsg -> Error message if connection failed.
 
         """
 
