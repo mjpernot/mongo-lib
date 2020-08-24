@@ -85,12 +85,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file)
 
-        mongo.get_srv_attr()
-        self.assertEqual(
-            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
-             mongo.conf_file),
-            (self.name, self.user, self.japd, self.host, self.port,
-             self.conf_file))
+        self.assertEqual(mongo.get_srv_attr(), (True, None))
 
 
 if __name__ == "__main__":
