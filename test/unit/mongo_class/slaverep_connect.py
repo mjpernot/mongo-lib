@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_fail_connection -> Test with failed connection.
         test_no_data -> Test with no data returned.
         test_default -> Test with minimum number of arguments.
 
@@ -71,9 +72,34 @@ class UnitTest(unittest.TestCase):
                      "primary": "primary_host"}
         self.msg = "Error:  This is not a Slave Replication server."
 
+    @mock.patch("mongo_class.Server.connect",
+                mock.Mock(return_value=(False, "Error Message")))
+    @mock.patch("mongo_class.fetch_ismaster")
+    def test_fail_connection(self, mock_fetch):
+
+        """Function:  test_fail_connection
+
+        Description:  Test with failed connection.
+
+        Arguments:
+
+        """
+
+        mock_fetch.return_value = self.data
+        mongo = mongo_class.SlaveRep(self.name, self.user, self.japd,
+                                     self.host, self.port)
+
+        self.assertEqual(mongo.connect(), (False, "Error Message"))
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
+             mongo.ismaster, mongo.issecondary),
+            (self.name, self.user, self.japd, self.host, self.port, None,
+             None))
+
     @mock.patch("mongo_class.Server.disconnect", mock.Mock(return_value=True))
     @mock.patch("mongo_class.fetch_ismaster", mock.Mock(return_value={}))
-    @mock.patch("mongo_class.Server.connect", mock.Mock(return_value=True))
+    @mock.patch("mongo_class.Server.connect",
+                mock.Mock(return_value=(True, None)))
     def test_no_data(self):
 
         """Function:  test_no_data
@@ -87,14 +113,15 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(self.name, self.user, self.japd,
                                      self.host, self.port)
 
-        self.assertEqual(mongo.connect(), self.msg)
+        self.assertEqual(mongo.connect(), (False, self.msg))
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.ismaster, mongo.issecondary),
             (self.name, self.user, self.japd, self.host, self.port, None,
              None))
 
-    @mock.patch("mongo_class.Server.connect", mock.Mock(return_value=True))
+    @mock.patch("mongo_class.Server.connect",
+                mock.Mock(return_value=(True, None)))
     @mock.patch("mongo_class.fetch_ismaster")
     def test_default(self, mock_fetch):
 
@@ -109,7 +136,8 @@ class UnitTest(unittest.TestCase):
         mock_fetch.return_value = self.data
         mongo = mongo_class.SlaveRep(self.name, self.user, self.japd,
                                      self.host, self.port)
-        self.assertFalse(mongo.connect())
+
+        self.assertEqual(mongo.connect(), (True, None))
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.ismaster, mongo.issecondary),
