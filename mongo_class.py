@@ -1055,7 +1055,7 @@ class RepSet(Rep):
         Arguments:
             (input) connections ->  String of server connections.
             (output) status -> True|False - Connection successful.
-            (output) msg -> Error message if connection failed.
+            (output) errmsg -> Error message if connection failed.
 
         """
 
@@ -1163,6 +1163,8 @@ class RepSetColl(RepSet):
 
         Arguments:
             (input) connections ->  String of server connections.
+            (output) status -> True|False - Connection successful.
+            (output) errmsg -> Error message if connection failed.
 
         """
 
@@ -1195,6 +1197,10 @@ class RepSetColl(RepSet):
             else:
                 self.conn = pymongo.MongoClient(connections,
                                                 replicaSet=self.repset)
+
+        status, errmsg = self.get_srv_attr()
+
+        return status, errmsg
 
     def ins_doc(self, doc):
 
