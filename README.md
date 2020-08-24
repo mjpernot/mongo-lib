@@ -8,6 +8,8 @@
 ###  This README file is broken down into the following sections:
  * Prerequisites
  * Installation
+   - Pip Installation
+   - Git Installation
  * Testing
    - Unit
 
