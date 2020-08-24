@@ -499,17 +499,25 @@ class DB(Server):
 
         Arguments:
             (input) dbs -> Name of database.
+            (output) status -> True|False - Connection successful.
+            (output) msg -> Error message if connection failed.
 
         """
 
+        status = True
+        errmsg = None
+
         if not self.conn:
-            self.connect()
+            status, errmsg = self.connect()
 
-        if dbs:
-            self.db = self.conn[dbs]
+        if status:
+            if dbs:
+                self.db = self.conn[dbs]
 
-        else:
-            self.db = self.conn.test
+            else:
+                self.db = self.conn.test
+
+        return status, errmsg
 
     def chg_db(self, dbs=None):
 
