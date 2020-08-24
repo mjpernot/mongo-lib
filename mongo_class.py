@@ -892,11 +892,11 @@ class MasterRep(Rep):
 
         Arguments:
             (output) status -> True|False - Connection success or not master.
-            (output) msg -> Message status.
+            (output) errmsg -> Message status.
 
         """
 
-        status, msg = super(MasterRep, self).connect()
+        status, errmsg = super(MasterRep, self).connect()
 
         if status:
             data = fetch_ismaster(self)
@@ -910,9 +910,9 @@ class MasterRep(Rep):
             else:
                 self.disconnect()
                 status = False
-                msg = "Error:  This is not a Master Replication server."
+                errmsg = "Error:  This is not a Master Replication server."
 
-        return status, msg
+        return status, errmsg
 
 
 class SlaveRep(Rep):
