@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Change.
 
 ### Added
+- mongo_class.RepSetColl.coll_options:  Return the collections option settings.
 - mongo_class.RepSetColl.coll_find1:  Query of document using findOne command.
 - mongo_class.RepSetColl.coll_dst:  Query of document using distinct command.
 - mongo_class.RepSetColl.coll_find:  Query of document using find command.

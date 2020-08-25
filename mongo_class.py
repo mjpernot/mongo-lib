@@ -1112,6 +1112,7 @@ class RepSetColl(RepSet):
         coll_find
         coll_dst
         coll_find1
+        coll_options
 
     """
 
@@ -1342,3 +1343,16 @@ class RepSetColl(RepSet):
             query = {}
 
         return self.db_coll.find_one(query)
+
+    def coll_options(self):
+
+        """Method:  coll_options
+
+        Description:  Return the collections option settings.
+
+        Arguments:
+            (output) -> Return options settings on the collection.
+
+        """
+
+        return self.db_coll.options()
