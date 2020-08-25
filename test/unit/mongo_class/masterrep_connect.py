@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  MasterRep_connect.py
+"""Program:  masterrep_connect.py
 
     Description:  Unit testing of MasterRep.connect in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/MasterRep_connect.py
+        test/unit/mongo_class/masterrep_connect.py
 
     Arguments:
 

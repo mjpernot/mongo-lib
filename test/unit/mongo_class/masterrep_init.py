@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  MasterRep_init.py
+"""Program:  masterrep_init.py
 
     Description:  Unit testing of MasterRep.__init__ in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/MasterRep_init.py
+        test/unit/mongo_class/masterrep_init.py
 
     Arguments:
 
