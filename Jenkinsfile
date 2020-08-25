@@ -40,6 +40,7 @@ pipeline {
                 ./test/unit/mongo_class/repsetcoll_coll_del_many.py
                 ./test/unit/mongo_class/repsetcoll_coll_dst.py
                 ./test/unit/mongo_class/repsetcoll_coll_find.py
+                ./test/unit/mongo_class/repsetcoll_coll_find1.py
                 ./test/unit/mongo_class/repsetcoll_connect.py
                 ./test/unit/mongo_class/repsetcoll_db_auth.py
                 ./test/unit/mongo_class/repsetcoll_init.py
