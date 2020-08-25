@@ -1110,6 +1110,7 @@ class RepSetColl(RepSet):
         coll_cnt
         coll_del_many
         coll_find
+        coll_dst
 
     """
 
@@ -1309,3 +1310,17 @@ class RepSetColl(RepSet):
             query = {}
 
         return self.db_coll.find(query)
+
+    def coll_dst(self, column=""):
+
+        """Method:  coll_dst
+
+        Description:  Query of document using distinct command.
+
+        Arguments:
+            (input) column -> Column distinct will be ran against.
+            (output) -> Return of distinct values for col.
+
+        """
+
+        return self.db_coll.distinct(column)
