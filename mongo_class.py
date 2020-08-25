@@ -278,7 +278,7 @@ class Server(object):
                 self.conn = pymongo.MongoClient(
                     self.conn_list, username=self.user,
                     authSource=self.auth_db, **self.config)
-                
+
             elif self.auth and self.use_uri:
                 uri = "mongodb://" + self.user + ":" + self.japd + "@" \
                       + self.host + ":" + str(self.port)
@@ -290,7 +290,6 @@ class Server(object):
         status, errmsg = self.get_srv_attr()
 
         return status, errmsg
-        
 
     def disconnect(self):
 
@@ -1074,7 +1073,7 @@ class RepSet(Rep):
                     connections, username=self.user,
                     authSource=self.auth_db, replicaSet=self.repset,
                     **self.config)
-                
+
             elif self.auth and self.use_uri:
                 repset_str = ""
 
