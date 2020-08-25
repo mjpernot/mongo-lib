@@ -35,6 +35,7 @@ test/unit/mongo_class/repset_connect.py
 test/unit/mongo_class/repset_init.py
 test/unit/mongo_class/rep_fetch_nodes.py
 test/unit/mongo_class/rep_init.py
+test/unit/mongo_class/server_adm_cmd.py
 test/unit/mongo_class/server_connect.py
 test/unit/mongo_class/server_disconnect.py
 test/unit/mongo_class/server_fetch_adr.py
