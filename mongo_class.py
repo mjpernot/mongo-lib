@@ -1111,6 +1111,7 @@ class RepSetColl(RepSet):
         coll_del_many
         coll_find
         coll_dst
+        coll_find1
 
     """
 
@@ -1324,3 +1325,20 @@ class RepSetColl(RepSet):
         """
 
         return self.db_coll.distinct(column)
+
+    def coll_find1(self, query=None):
+
+        """Method:  coll_find1
+
+        Description:  Query of document using findOne command.
+
+        Arguments:
+            (input) query -> Query criteria for findOne command.
+            (output) -> Return of document from collection as cursor.
+
+        """
+
+        if query is None:
+            query = {}
+
+        return self.db_coll.find_one(query)
