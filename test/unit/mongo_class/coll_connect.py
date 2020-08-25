@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Coll_connect.py
+"""Program:  coll_connect.py
 
     Description:  Unit testing of Coll.connect in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Coll_connect.py
+        test/unit/mongo_class/coll_connect.py
 
     Arguments:
 
