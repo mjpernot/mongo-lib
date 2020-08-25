@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  SlaveRep_connect.py
+"""Program:  slaverep_connect.py
 
     Description:  Unit testing of SlaveRep.connect in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/SlaveRep_connect.py
+        test/unit/mongo_class/slaverep_connect.py
 
     Arguments:
 

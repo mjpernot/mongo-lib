@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  SlaveRep_init.py
+"""Program:  slaverep_init.py
 
     Description:  Unit testing of SlaveRep.__init__ in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/SlaveRep_init.py
+        test/unit/mongo_class/slaverep_init.py
 
     Arguments:
 
