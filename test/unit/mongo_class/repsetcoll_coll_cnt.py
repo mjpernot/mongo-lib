@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_coll_cnt.py
+"""Program:  repsetcoll_coll_cnt.py
 
     Description:  Unit testing of RepSetColl.coll_cnt in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_coll_cnt.py
+        test/unit/mongo_class/repsetcoll_coll_cnt.py
 
     Arguments:
 
