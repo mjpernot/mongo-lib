@@ -28,6 +28,7 @@ test/unit/mongo_class/masterrep_init.py
 test/unit/mongo_class/repsetcoll_coll_cnt.py
 test/unit/mongo_class/repsetcoll_coll_del_many.py
 test/unit/mongo_class/repsetcoll_connect.py
+test/unit/mongo_class/repsetcoll_db_auth.py
 test/unit/mongo_class/repsetcoll_init.py
 test/unit/mongo_class/repsetcoll_ins_doc.py
 test/unit/mongo_class/repset_connect.py
