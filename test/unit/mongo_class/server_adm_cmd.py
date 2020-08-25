@@ -33,9 +33,9 @@ import version
 __version__ = version.__version__
 
 
-class Command(object):
+class Command1(object):
 
-    """Class:  Command
+    """Class:  Command1
 
     Description:  Class stub holder for command class.
 
@@ -74,9 +74,9 @@ class Command(object):
         return True
 
 
-class Admin(object):
+class Admin1(object):
 
-    """Class:  Admin
+    """Class:  Admin1
 
     Description:  Class stub holder for admin class.
 
@@ -95,7 +95,7 @@ class Admin(object):
 
         """
 
-        self.admin = Command()
+        self.admin = Command1()
 
 
 class UnitTest(unittest.TestCase):
@@ -146,7 +146,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Server(self.name, self.user, self.japd,
                                    self.host, self.port)
-        mongo.conn = Admin()
+        mongo.conn = Admin1()
 
         self.assertTrue(mongo.adm_cmd(self.cmd, arg1=self.arg1))
 
@@ -162,7 +162,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Server(self.name, self.user, self.japd,
                                    self.host, self.port)
-        mongo.conn = Admin()
+        mongo.conn = Admin1()
 
         self.assertTrue(mongo.adm_cmd(self.cmd))
 
