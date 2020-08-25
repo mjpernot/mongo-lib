@@ -43,6 +43,9 @@ Breaking Change.
 - mongo_class.Server.\_\_init\_\_:  Added a number of new attributes to handle connecting into Mongo using arguments.
 - Documentation updates.
 
+### Removed
+- mongo_class:  Removed sys module.
+
 
 ## [3.1.0] - 2020-07-09
 ### Fixed

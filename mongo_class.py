@@ -24,7 +24,6 @@
 # Libraries and Global Variables
 
 # Standard
-import sys
 import time
 import socket
 
