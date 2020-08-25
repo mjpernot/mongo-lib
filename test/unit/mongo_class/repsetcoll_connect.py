@@ -85,6 +85,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_auth_false -> Test with auth set to false.
         test_fail_get_srv_attr -> Test with failed get_srv_attr call.
         test_auth_true -> Test with auth set to true.
         test_no_auth -> Test with auth set to false.
@@ -122,6 +123,30 @@ class UnitTest(unittest.TestCase):
         self.connections = ["mongo1:27017", "mongo2:27017", "mongo3:27017"]
         self.conn = "Mongo_Connection"
         self.conn2 = {"db_name": RepSetColl(), "test": {"coll_name": True}}
+
+    @mock.patch("mongo_class.RepSetColl._db_auth",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_auth_false(self, mock_mongo):
+
+        """Function:  test_auth_false
+
+        Description:  Test with auth set to false.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=None,
+            db=self.dbs, auth=True)
+
+        self.assertEqual(mongo.connect(), (True, None))
 
     @mock.patch("mongo_class.Server.get_srv_attr",
                 mock.Mock(return_value=(False, "Error Message")))
