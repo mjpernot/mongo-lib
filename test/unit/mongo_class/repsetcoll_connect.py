@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_connect.py
+"""Program:  repsetcoll_connect.py
 
     Description:  Unit testing of RepSetColl.connect in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_connect.py
+        test/unit/mongo_class/repsetcoll_connect.py
 
     Arguments:
 
