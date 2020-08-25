@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Rep_fetch_nodes.py
+"""Program:  rep_fetch_nodes.py
 
     Description:  Unit testing of Rep.fetch_nodes in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Rep_fetch_nodes.py
+        test/unit/mongo_class/rep_fetch_nodes.py
 
     Arguments:
 
