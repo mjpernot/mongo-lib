@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_disconnect.py
+"""Program:  server_disconnect.py
 
     Description:  Unit testing of Server.disconnect in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_disconnect.py
+        test/unit/mongo_class/server_disconnect.py
 
     Arguments:
 

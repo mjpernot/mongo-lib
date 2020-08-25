@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_is_primary.py
+"""Program:  server_is_primary.py
 
     Description:  Unit testing of Server.is_primary in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_is_primary.py
+        test/unit/mongo_class/server_is_primary.py
 
     Arguments:
 

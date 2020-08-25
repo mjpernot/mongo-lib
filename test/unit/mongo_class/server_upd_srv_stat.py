@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_upd_srv_stat.py
+"""Program:  server_upd_srv_stat.py
 
     Description:  Unit testing of Server.upd_srv_stat in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_upd_srv_stat.py
+        test/unit/mongo_class/server_upd_srv_stat.py
 
     Arguments:
 

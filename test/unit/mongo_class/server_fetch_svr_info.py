@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_fetch_svr_info.py
+"""Program:  server_fetch_svr_info.py
 
     Description:  Unit testing of Server.fetch_svr_info in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_fetch_svr_info.py
+        test/unit/mongo_class/server_fetch_svr_info.py
 
     Arguments:
 

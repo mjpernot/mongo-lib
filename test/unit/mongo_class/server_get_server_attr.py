@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_get_server_attr.py
+"""Program:  server_get_server_attr.py
 
     Description:  Unit testing of Server.get_server_attr in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_get_server_attr.py
+        test/unit/mongo_class/server_get_server_attr.py
 
     Arguments:
 

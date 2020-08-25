@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_init.py
+"""Program:  server_init.py
 
     Description:  Unit testing of Server.__init__ in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_init.py
+        test/unit/mongo_class/server_init.py
 
     Arguments:
 

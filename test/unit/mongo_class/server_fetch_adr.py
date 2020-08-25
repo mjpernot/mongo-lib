@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_fetch_adr.py
+"""Program:  server_fetch_adr.py
 
     Description:  Unit testing of Server.fetch_adr in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_fetch_adr.py
+        test/unit/mongo_class/server_fetch_adr.py
 
     Arguments:
 

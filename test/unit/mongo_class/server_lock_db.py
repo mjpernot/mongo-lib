@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_lock_db.py
+"""Program:  server_lock_db.py
 
     Description:  Unit testing of Server.lock_db in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_lock_db.py
+        test/unit/mongo_class/server_lock_db.py
 
     Arguments:
 

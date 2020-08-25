@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_connect.py
+"""Program:  server_connect.py
 
     Description:  Unit testing of Server.connect in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_connect.py
+        test/unit/mongo_class/server_connect.py
 
     Arguments:
 
