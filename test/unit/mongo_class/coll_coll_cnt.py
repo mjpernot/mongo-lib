@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Coll_coll_cnt.py
+"""Program:  coll_coll_cnt.py
 
     Description:  Unit testing of Coll.coll_cnt in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Coll_coll_cnt.py
+        test/unit/mongo_class/coll_coll_cnt.py
 
     Arguments:
 
