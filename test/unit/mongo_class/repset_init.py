@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSet_init.py
+"""Program:  repset_init.py
 
     Description:  Unit testing of RepSet.__init__ in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSet_init.py
+        test/unit/mongo_class/repset_init.py
 
     Arguments:
 
