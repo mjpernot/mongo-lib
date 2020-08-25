@@ -3,7 +3,7 @@
 
 """Program:  repsetcoll_coll_dst.py
 
-    Description:  Unit testing of repsetcoll.coll_dst in mongo_class.py.
+    Description:  Unit testing of RepSetColl.coll_dst in mongo_class.py.
 
     Usage:
         test/unit/mongo_class/repsetcoll_coll_dst.py
