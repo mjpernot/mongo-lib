@@ -7,6 +7,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [4.0.0] - 2020-08-17
 Breaking Change.
 
+### Added
+- mongo_class.RepSetColl.\_db_auth:  Database authentication, private function for connect method.
+
 ### Changed
 - mongo_class.RepSetColl.connect:  Added try/exception on authentication to database.
 - mongo_libs.ins_doc:  Captured return status from connect, added check for return status and returned status.
