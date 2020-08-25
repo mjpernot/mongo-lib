@@ -1105,9 +1105,11 @@ class RepSetColl(RepSet):
     Methods:
         __init__
         connect
+        _db_auth
         ins_doc
         coll_cnt
         coll_del_many
+        coll_find
 
     """
 
@@ -1290,3 +1292,20 @@ class RepSetColl(RepSet):
         # Assume must be a mistake.
         else:
             print("WARNING:  Require search criteria.")
+
+    def coll_find(self, query=None):
+
+        """Method:  coll_find
+
+        Description:  Query of document using find command.
+
+        Arguments:
+            (input) query -> Query criteria for find command.
+            (output) -> Return of documents from collection as cursor.
+
+        """
+
+        if query is None:
+            query = {}
+
+        return self.db_coll.find(query)
