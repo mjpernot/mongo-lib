@@ -30,6 +30,7 @@ coverage run -a --source=mongo_class test/unit/mongo_class/masterrep_connect.py
 coverage run -a --source=mongo_class test/unit/mongo_class/masterrep_init.py
 coverage run -a --source=mongo_class test/unit/mongo_class/repsetcoll_coll_cnt.py
 coverage run -a --source=mongo_class test/unit/mongo_class/repsetcoll_coll_del_many.py
+coverage run -a --source=mongo_class test/unit/mongo_class/repsetcoll_coll_find.py
 coverage run -a --source=mongo_class test/unit/mongo_class/repsetcoll_connect.py
 coverage run -a --source=mongo_class test/unit/mongo_class/repsetcoll_db_auth.py
 coverage run -a --source=mongo_class test/unit/mongo_class/repsetcoll_init.py
