@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_db_connect.py
+"""Program:  db_db_connect.py
 
     Description:  Unit testing of DB.db_connect in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_db_connect.py
+        test/unit/mongo_class/db_db_connect.py
 
     Arguments:
 

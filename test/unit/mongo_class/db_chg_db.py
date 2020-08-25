@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_chg_db.py
+"""Program:  db_chg_db.py
 
     Description:  Unit testing of DB.chg_db in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_chg_db.py
+        test/unit/mongo_class/db_chg_db.py
 
     Arguments:
 

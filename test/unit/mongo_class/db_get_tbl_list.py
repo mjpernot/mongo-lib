@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_get_tbl_list.py
+"""Program:  db_get_tbl_list.py
 
     Description:  Unit testing of DB.get_tbl_list in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_get_tbl_list.py
+        test/unit/mongo_class/db_get_tbl_list.py
 
     Arguments:
 

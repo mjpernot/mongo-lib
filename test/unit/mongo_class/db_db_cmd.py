@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_db_cmd.py
+"""Program:  db_db_cmd.py
 
     Description:  Unit testing of DB.db_cmd in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_db_cmd.py
+        test/unit/mongo_class/db_db_cmd.py
 
     Arguments:
 

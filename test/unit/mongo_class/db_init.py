@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_init.py
+"""Program:  db_init.py
 
     Description:  Unit testing of DB.__init__ in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_init.py
+        test/unit/mongo_class/db_init.py
 
     Arguments:
 

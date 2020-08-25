@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_validate_tbl.py
+"""Program:  db_validate_tbl.py
 
     Description:  Unit testing of DB.validate_tbl in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_validate_tbl.py
+        test/unit/mongo_class/db_validate_tbl.py
 
     Arguments:
 
