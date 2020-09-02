@@ -43,8 +43,11 @@ class UnitTest(unittest.TestCase):
     Methods:
         setUp -> Initialize testing environment.
         test_fail_get_srv_attr -> Test with failed get_srv_attr call.
+        test_auth_arg2 -> Test with auth and arg present.
         test_auth_arg -> Test with auth and arg present.
+        test_auth_uri2 -> Test with auth and uri present.
         test_auth_uri -> Test with auth and uri present.
+        test_no_auth2 -> Test with no auth present.
         test_no_auth -> Test with no auth present.
 
     """
@@ -98,6 +101,26 @@ class UnitTest(unittest.TestCase):
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_auth_arg2(self, mock_cmd, mock_client):
+
+        """Function:  test_auth_arg2
+
+        Description:  Test with auth and arg present.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = (True, None)
+        mock_client.return_value = True
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            use_arg=self.use_arg)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
     def test_auth_arg(self, mock_cmd, mock_client):
 
         """Function:  test_auth_arg
@@ -114,12 +137,31 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, host=self.host, port=self.port,
             use_arg=self.use_arg)
 
-        self.assertEqual(mongo.connect(), (True, None))
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.use_arg),
             (self.name, self.user, self.japd, self.host, self.port,
              self.use_arg))
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_auth_uri2(self, mock_cmd, mock_client):
+
+        """Function:  test_auth_uri2
+
+        Description:  Test with auth and uri present.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = (True, None)
+        mock_client.return_value = True
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            use_uri=self.use_uri)
+
+        self.assertEqual(mongo.connect(), (True, None))
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
@@ -139,12 +181,32 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, host=self.host, port=self.port,
             use_uri=self.use_uri)
 
-        self.assertEqual(mongo.connect(), (True, None))
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.use_uri),
             (self.name, self.user, self.japd, self.host, self.port,
              self.use_uri))
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_no_auth2(self, mock_cmd, mock_client):
+
+        """Function:  test_no_auth2
+
+        Description:  Test with no auth present.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = (True, None)
+        mock_client.return_value = True
+        mongo = mongo_class.Server(self.name, self.user, self.japd,
+                                   host=self.host, port=self.port, auth=False)
+
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
+            (self.name, self.user, self.japd, self.host, self.port))
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
@@ -164,9 +226,6 @@ class UnitTest(unittest.TestCase):
                                    host=self.host, port=self.port, auth=False)
 
         self.assertEqual(mongo.connect(), (True, None))
-        self.assertEqual(
-            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
-            (self.name, self.user, self.japd, self.host, self.port))
 
 
 if __name__ == "__main__":
