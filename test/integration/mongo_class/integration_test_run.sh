@@ -45,7 +45,7 @@ test/integration/mongo_class/server_disconnect.py
 #test/integration/mongo_class/server_fetch_adr.py
 #test/integration/mongo_class/server_fetch_dbs.py
 #test/integration/mongo_class/server_fetch_svr_info.py
-#test/integration/mongo_class/server_get_server_attr.py
+test/integration/mongo_class/server_get_server_attr.py
 test/integration/mongo_class/server_init.py
 #test/integration/mongo_class/server_is_locked.py
 #test/integration/mongo_class/server_is_primary.py
