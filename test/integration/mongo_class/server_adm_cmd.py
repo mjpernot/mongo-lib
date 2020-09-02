@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_arg2 -> Test with argument passed.
         test_arg -> Test with argument passed.
         test_adm_cmd -> Test adm_cmd method.
 
