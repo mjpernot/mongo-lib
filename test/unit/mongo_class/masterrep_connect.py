@@ -42,8 +42,11 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_fail_connection2 -> Test with failed connection.
         test_fail_connection -> Test with failed connection.
+        test_no_data2 -> Test with no data returned.
         test_no_data -> Test with no data returned.
+        test_default2 -> Test with minimum number of arguments.
         test_default -> Test with minimum number of arguments.
 
     """
@@ -75,6 +78,29 @@ class UnitTest(unittest.TestCase):
     @mock.patch("mongo_class.Server.connect",
                 mock.Mock(return_value=(False, "Error Message")))
     @mock.patch("mongo_class.fetch_ismaster")
+    def test_fail_connection2(self, mock_fetch):
+
+        """Function:  test_fail_connection2
+
+        Description:  Test with failed connection.
+
+        Arguments:
+
+        """
+
+        mock_fetch.return_value = self.data
+        mongo = mongo_class.MasterRep(self.name, self.user, self.japd,
+                                      self.host, self.port)
+
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
+             mongo.ismaster, mongo.issecondary),
+            (self.name, self.user, self.japd, self.host, self.port, None,
+             None))
+
+    @mock.patch("mongo_class.Server.connect",
+                mock.Mock(return_value=(False, "Error Message")))
+    @mock.patch("mongo_class.fetch_ismaster")
     def test_fail_connection(self, mock_fetch):
 
         """Function:  test_fail_connection
@@ -90,6 +116,24 @@ class UnitTest(unittest.TestCase):
                                       self.host, self.port)
 
         self.assertEqual(mongo.connect(), (False, "Error Message"))
+
+    @mock.patch("mongo_class.Server.disconnect", mock.Mock(return_value=True))
+    @mock.patch("mongo_class.Server.connect",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.fetch_ismaster", mock.Mock(return_value={}))
+    def test_no_data2(self):
+
+        """Function:  test_no_data2
+
+        Description:  Test with no data returned.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.MasterRep(self.name, self.user, self.japd,
+                                      self.host, self.port)
+
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.ismaster, mongo.issecondary),
@@ -114,11 +158,30 @@ class UnitTest(unittest.TestCase):
                                       self.host, self.port)
 
         self.assertEqual(mongo.connect(), (False, self.msg))
+
+    @mock.patch("mongo_class.Server.connect",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.fetch_ismaster")
+    def test_default2(self, mock_fetch):
+
+        """Function:  test_default2
+
+        Description:  Test connect method with default arguments.
+
+        Arguments:
+
+        """
+
+        mock_fetch.return_value = self.data
+        mongo = mongo_class.MasterRep(self.name, self.user, self.japd,
+                                      self.host, self.port)
+        mongo.connect()
+
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
              mongo.ismaster, mongo.issecondary),
-            (self.name, self.user, self.japd, self.host, self.port, None,
-             None))
+            (self.name, self.user, self.japd, self.host, self.port, True,
+             False))
 
     @mock.patch("mongo_class.Server.connect",
                 mock.Mock(return_value=(True, None)))
@@ -138,11 +201,6 @@ class UnitTest(unittest.TestCase):
                                       self.host, self.port)
 
         self.assertEqual(mongo.connect(), (True, None))
-        self.assertEqual(
-            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
-             mongo.ismaster, mongo.issecondary),
-            (self.name, self.user, self.japd, self.host, self.port, True,
-             False))
 
 
 if __name__ == "__main__":

@@ -42,7 +42,9 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_fail_connection2 -> Test with failed connection.
         test_fail_connection -> Test with failed connection.
+        test_default2 -> Test with minimum number of arguments.
         test_default -> Test with minimum number of arguments.
 
     """
@@ -68,6 +70,26 @@ class UnitTest(unittest.TestCase):
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_fail_connection2(self, mock_client, mock_cmd):
+
+        """Function:  test_fail_connection2
+
+        Description:  Test with failed connection.
+
+        Arguments:
+
+        """
+
+        mock_client.return_value = True
+        mock_cmd.return_value = (False, "Error Message")
+
+        mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
+                                 self.port, coll=self.coll)
+
+        self.assertEqual(mongo.coll, None)
+
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
     def test_fail_connection(self, mock_client, mock_cmd):
 
         """Function:  test_fail_connection
@@ -85,7 +107,28 @@ class UnitTest(unittest.TestCase):
                                  self.port, coll=self.coll)
 
         self.assertEqual(mongo.connect(), (False, "Error Message"))
-        self.assertEqual(mongo.coll, None)
+
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_default2(self, mock_client, mock_cmd):
+
+        """Function:  test_default2
+
+        Description:  Test connect method with default arguments.
+
+        Arguments:
+
+        """
+
+        mock_client.return_value = True
+        mock_cmd.return_value = (True, None)
+
+        mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
+                                 self.port, coll=self.coll)
+        mongo.conn = {"test": {"coll_name": "connect"}}
+        mongo.connect()
+
+        self.assertEqual((mongo.coll), ("connect"))
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -107,7 +150,6 @@ class UnitTest(unittest.TestCase):
         mongo.conn = {"test": {"coll_name": "connect"}}
 
         self.assertEqual(mongo.connect(), (True, None))
-        self.assertEqual((mongo.coll), ("connect"))
 
 
 if __name__ == "__main__":
