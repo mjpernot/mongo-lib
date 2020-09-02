@@ -41,7 +41,7 @@ echo "Unit test: mongo_class"
 #test/integration/mongo_class/rep_init.py
 #test/integration/mongo_class/server_adm_cmd.py
 test/integration/mongo_class/server_connect.py
-#test/integration/mongo_class/server_disconnect.py
+test/integration/mongo_class/server_disconnect.py
 #test/integration/mongo_class/server_fetch_adr.py
 #test/integration/mongo_class/server_fetch_dbs.py
 #test/integration/mongo_class/server_fetch_svr_info.py
