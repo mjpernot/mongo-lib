@@ -13,7 +13,7 @@ echo "Running unit test modules in conjunction with coverage"
 #coverage run -a --source=mongo_class test/integration/mongo_class/fetch_ismaster.py
 coverage run -a --source=mongo_class test/integration/mongo_class/coll_coll_cnt.py
 #coverage run -a --source=mongo_class test/integration/mongo_class/coll_coll_dst.py
-#coverage run -a --source=mongo_class test/integration/mongo_class/coll_coll_find.py
+coverage run -a --source=mongo_class test/integration/mongo_class/coll_coll_find.py
 #coverage run -a --source=mongo_class test/integration/mongo_class/coll_coll_find1.py
 #coverage run -a --source=mongo_class test/integration/mongo_class/coll_coll_options.py
 coverage run -a --source=mongo_class test/integration/mongo_class/coll_connect.py
