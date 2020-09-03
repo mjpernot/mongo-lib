@@ -126,6 +126,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file)
+        mongo.connect()
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -147,6 +148,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
             use_arg=False, auth_db=True, conf_file=self.cfg.conf_file)
+        mongo.connect()
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -186,6 +188,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file)
+        mongo.connect()
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
