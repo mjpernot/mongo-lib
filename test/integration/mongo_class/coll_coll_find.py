@@ -43,8 +43,11 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_query2 -> Test with query command.
         test_query -> Test with query command.
+        test_empty_query2 -> Test with empty query command.
         test_empty_query -> Test with empty query command.
+        test_no_query2 -> Test with no query command.
         test_no_query -> Test with no query command.
 
     """
