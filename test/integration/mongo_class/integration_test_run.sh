@@ -13,7 +13,7 @@ echo "Unit test: mongo_class"
 #test/integration/mongo_class/coll_coll_find.py
 #test/integration/mongo_class/coll_coll_find1.py
 #test/integration/mongo_class/coll_coll_options.py
-#test/integration/mongo_class/coll_connect.py
+test/integration/mongo_class/coll_connect.py
 test/integration/mongo_class/coll_init.py
 #test/integration/mongo_class/coll_ins_doc.py
 test/integration/mongo_class/db_chg_db.py
