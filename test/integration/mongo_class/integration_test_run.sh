@@ -32,7 +32,7 @@ test/integration/mongo_class/masterrep_init.py
 #test/integration/mongo_class/repsetcoll_coll_options.py
 #test/integration/mongo_class/repsetcoll_connect.py
 #test/integration/mongo_class/repsetcoll_db_auth.py
-#test/integration/mongo_class/repsetcoll_init.py
+test/integration/mongo_class/repsetcoll_init.py
 #test/integration/mongo_class/repsetcoll_ins_doc.py
 test/integration/mongo_class/repset_connect.py
 test/integration/mongo_class/repset_init.py
