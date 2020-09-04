@@ -37,7 +37,7 @@ test/integration/mongo_class/db_validate_tbl.py
 #test/integration/mongo_class/repset_connect.py
 #test/integration/mongo_class/repset_init.py
 #test/integration/mongo_class/rep_fetch_nodes.py
-#test/integration/mongo_class/rep_init.py
+test/integration/mongo_class/rep_init.py
 test/integration/mongo_class/server_adm_cmd.py
 test/integration/mongo_class/server_connect.py
 test/integration/mongo_class/server_disconnect.py
