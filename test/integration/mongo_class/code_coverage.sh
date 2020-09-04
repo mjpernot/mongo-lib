@@ -54,7 +54,7 @@ coverage run -a --source=mongo_class test/integration/mongo_class/server_is_prim
 coverage run -a --source=mongo_class test/integration/mongo_class/server_upd_server_attr.py
 coverage run -a --source=mongo_class test/integration/mongo_class/server_upd_srv_stat.py
 #coverage run -a --source=mongo_class test/integration/mongo_class/slaverep_connect.py
-#coverage run -a --source=mongo_class test/integration/mongo_class/slaverep_init.py
+coverage run -a --source=mongo_class test/integration/mongo_class/slaverep_init.py
 
 echo ""
 echo "Producing code coverage report"
