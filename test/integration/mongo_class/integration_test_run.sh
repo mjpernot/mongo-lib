@@ -51,5 +51,5 @@ test/integration/mongo_class/server_is_primary.py
 test/integration/mongo_class/server_upd_server_attr.py
 test/integration/mongo_class/server_upd_srv_stat.py
 #test/integration/mongo_class/slaverep_connect.py
-#test/integration/mongo_class/slaverep_init.py
+test/integration/mongo_class/slaverep_init.py
 
