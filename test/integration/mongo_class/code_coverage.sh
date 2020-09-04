@@ -18,7 +18,6 @@ coverage run -a --source=mongo_class test/integration/mongo_class/coll_coll_find
 #coverage run -a --source=mongo_class test/integration/mongo_class/coll_coll_options.py
 coverage run -a --source=mongo_class test/integration/mongo_class/coll_connect.py
 coverage run -a --source=mongo_class test/integration/mongo_class/coll_init.py
-#coverage run -a --source=mongo_class test/integration/mongo_class/coll_ins_doc.py
 coverage run -a --source=mongo_class test/integration/mongo_class/db_chg_db.py
 coverage run -a --source=mongo_class test/integration/mongo_class/db_connect.py
 coverage run -a --source=mongo_class test/integration/mongo_class/db_db_cmd.py
