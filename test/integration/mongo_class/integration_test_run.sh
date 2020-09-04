@@ -25,7 +25,6 @@ test/integration/mongo_class/db_validate_tbl.py
 test/integration/mongo_class/masterrep_connect.py
 test/integration/mongo_class/masterrep_init.py
 test/integration/mongo_class/repsetcoll_coll_cnt.py
-#test/integration/mongo_class/repsetcoll_coll_del_many.py
 test/integration/mongo_class/repsetcoll_coll_dst.py
 test/integration/mongo_class/repsetcoll_coll_find.py
 test/integration/mongo_class/repsetcoll_coll_find1.py
