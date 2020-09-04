@@ -28,7 +28,6 @@ coverage run -a --source=mongo_class test/integration/mongo_class/db_validate_tb
 coverage run -a --source=mongo_class test/integration/mongo_class/masterrep_connect.py
 coverage run -a --source=mongo_class test/integration/mongo_class/masterrep_init.py
 coverage run -a --source=mongo_class test/integration/mongo_class/repsetcoll_coll_cnt.py
-#coverage run -a --source=mongo_class test/integration/mongo_class/repsetcoll_coll_del_many.py
 coverage run -a --source=mongo_class test/integration/mongo_class/repsetcoll_coll_dst.py
 coverage run -a --source=mongo_class test/integration/mongo_class/repsetcoll_coll_find.py
 coverage run -a --source=mongo_class test/integration/mongo_class/repsetcoll_coll_find1.py
