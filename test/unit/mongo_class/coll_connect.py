@@ -67,6 +67,7 @@ class UnitTest(unittest.TestCase):
         self.dbs = "test"
         self.coll = "coll_name"
         self.db_auth = None
+        self.errmsg = "Error Message"
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -81,7 +82,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_client.return_value = True
-        mock_cmd.return_value = (False, "Error Message")
+        mock_cmd.return_value = (False, self.errmsg)
 
         mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
                                  self.port, coll=self.coll)
@@ -101,12 +102,12 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_client.return_value = True
-        mock_cmd.return_value = (False, "Error Message")
+        mock_cmd.return_value = (False, self.errmsg)
 
         mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
                                  self.port, coll=self.coll)
 
-        self.assertEqual(mongo.connect(), (False, "Error Message"))
+        self.assertEqual(mongo.connect(), (False, self.errmsg))
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
