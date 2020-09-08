@@ -93,6 +93,7 @@ class UnitTest(unittest.TestCase):
         self.use_arg = True
         self.connections = ["mongo1:27017", "mongo2:27017", "mongo3:27017"]
         self.conn = "Mongo_Connection"
+        self.errmsg = "Error Message"
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
@@ -106,7 +107,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = (False, "Error Message")
+        mock_get.return_value = (False, self.errmsg)
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
@@ -127,14 +128,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_get.return_value = (False, "Error Message")
+        mock_get.return_value = (False, self.errmsg)
         mock_mongo.return_value = self.conn
 
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_uri=True)
 
-        self.assertEqual(mongo.connect(), (False, "Error Message"))
+        self.assertEqual(mongo.connect(), (False, self.errmsg))
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
