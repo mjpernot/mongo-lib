@@ -1156,6 +1156,7 @@ class RepSetColl(RepSet):
         self.db_auth = kwargs.get("db_auth", None)
         self.db_conn = None
         self.db_coll = None
+        self.db_auth_conn = None
 
     def connect(self, connections=None):
 
@@ -1224,7 +1225,7 @@ class RepSetColl(RepSet):
         errmsg = None
 
         try:
-            self.db_auth = self.db_conn.authenticate(self.user, self.japd)
+            self.db_auth_conn = self.db_conn.authenticate(self.user, self.japd)
             self.db_coll = self.conn[self.db][self.coll]
 
         except pymongo.errors.ServerSelectionTimeoutError:

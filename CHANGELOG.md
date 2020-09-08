@@ -7,6 +7,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [4.0.0] - 2020-08-17
 Breaking Change.
 
+### Fixed
+- mongo_class.RepSetColl.\_db_auth:  Changed db_auth to db_auth_conn to avoid overwrite of attribute.
+
 ### Added
 - mongo_class.RepSetColl.coll_options:  Return the collections option settings.
 - mongo_class.RepSetColl.coll_find1:  Query of document using findOne command.
@@ -15,6 +18,7 @@ Breaking Change.
 - mongo_class.RepSetColl.\_db_auth:  Database authentication, private function for connect method.
 
 ### Changed
+- mongo_class.RepSetColl.\_\_init\_\_:  Added db_auth_conn attribute.
 - mongo_class.RepSetColl.connect:  Added try/exception on authentication to database.
 - mongo_libs.ins_doc:  Captured return status from connect, added check for return status and returned status.
 - mongo_class.RepSetColl.connect:  Added get_srv_attr call and return status to calling function.
