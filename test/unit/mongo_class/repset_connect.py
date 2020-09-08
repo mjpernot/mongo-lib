@@ -56,6 +56,8 @@ class UnitTest(unittest.TestCase):
         test_auth_arg -> Test with auth and arg present.
         test_auth_uri2 -> Test with auth and uri present.
         test_auth_uri -> Test with auth and uri present.
+        test_auth_true2 -> Test with auth set to true.
+        test_auth_true -> Test with auth set to true.
         test_no_auth2 -> Test with no authenication set.
         test_no_auth -> Test with no authenication set.
         test_conn_true2 -> Test with conn set to true.
@@ -390,6 +392,48 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_uri=True)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_auth_true2(self, mock_get, mock_mongo):
+
+        """Function:  test_auth_true2
+
+        Description:  Test with auth set to True.
+
+        Arguments:
+
+        """
+
+        mock_get.return_value = (True, None)
+        mock_mongo.return_value = self.conn
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, auth=True)
+
+        self.assertTrue(mongo.auth)
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_auth_true(self, mock_get, mock_mongo):
+
+        """Function:  test_auth_true
+
+        Description:  Test with auth set to True.
+
+        Arguments:
+
+        """
+
+        mock_get.return_value = (True, None)
+        mock_mongo.return_value = self.conn
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, auth=True)
 
         self.assertEqual(mongo.connect(), (True, None))
 
