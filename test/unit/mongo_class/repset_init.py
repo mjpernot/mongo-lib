@@ -58,6 +58,8 @@ class UnitTest(unittest.TestCase):
         test_using_arg -> Test with auth and arg present.
         test_no_auth_uri -> Test with auth and no uri present.
         test_auth_uri -> Test with auth and uri present.
+        test_auth_false -> Test with auth passed as False.
+        test_auth_true -> Test with auth passed as True.
         test_no_auth -> Test with no auth present.
 
     """
@@ -362,6 +364,46 @@ class UnitTest(unittest.TestCase):
             repset=self.repset, use_uri=self.use_uri)
 
         self.assertTrue(mongo.use_uri)
+
+    def test_auth_false(self):
+
+        """Function:  test_auth_false
+
+        Description:  Test with auth passed as False.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd,self.host, self.port,
+            repset=self.repset, auth=False)
+
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
+             mongo.repset, mongo.auth),
+            (self.name, self.user, self.japd, self.host, self.port,
+             self.repset, False))
+
+    def test_auth_true(self):
+
+        """Function:  test_auth_true
+
+        Description:  Test with auth passed as True.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd,self.host, self.port,
+            repset=self.repset, auth=True)
+
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
+             mongo.repset, mongo.auth),
+            (self.name, self.user, self.japd, self.host, self.port,
+             self.repset, True))
 
     def test_no_auth(self):
 
