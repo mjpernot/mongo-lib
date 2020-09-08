@@ -119,6 +119,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset2, auth=True, use_arg=True)
+        mongo.connect()
 
         self.assertTrue(mongo.use_arg)
 
@@ -161,6 +162,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_arg=True)
+        mongo.connect()
 
         self.assertTrue(mongo.use_arg)
 
@@ -203,6 +205,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_uri=True)
+        mongo.connect()
 
         self.assertTrue(mongo.use_uri)
 
@@ -245,6 +248,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset2, auth=True, use_uri=True)
+        mongo.connect()
 
         self.assertTrue(mongo.use_uri)
 
@@ -287,6 +291,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_uri=True)
+        mongo.connect()
 
         self.assertTrue(mongo.use_uri)
 
@@ -329,6 +334,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_arg=True)
+        mongo.connect()
 
         self.assertTrue(mongo.use_arg)
 
@@ -371,6 +377,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_uri=True)
+        mongo.connect()
 
         self.assertTrue(mongo.use_uri)
 
@@ -413,6 +420,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True)
+        mongo.connect()
 
         self.assertTrue(mongo.auth)
 
@@ -455,6 +463,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=False)
+        mongo.connect()
 
         self.assertFalse(mongo.auth)
 
@@ -497,6 +506,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True)
+        mongo.connect()
 
         self.assertTrue(mongo.auth)
 
