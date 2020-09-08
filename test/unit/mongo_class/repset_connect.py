@@ -578,6 +578,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(self.name, self.user, self.japd,
                                    self.host, self.port, repset=self.repset)
         mongo.conn = True
+        mongo.connect(connections=self.connections)
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -621,6 +622,7 @@ class UnitTest(unittest.TestCase):
                                    self.host, self.port, repset=self.repset,
                                    repset_hosts=self.repset_hosts)
         mongo.conn = True
+        mongo.connect()
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -663,6 +665,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(self.name, self.user, self.japd,
                                    self.host, self.port, repset=self.repset)
         mongo.conn = True
+        mongo.connect()
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
