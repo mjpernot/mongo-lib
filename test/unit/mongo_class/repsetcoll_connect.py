@@ -85,6 +85,18 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_db_auth_passed2 -> Test with db_auth passed.
+        test_db_auth_passed -> Test with db_auth passed.
+        test_coll_passed2 -> Test with coll passed.
+        test_coll_passed -> Test with coll passed.
+        test_db_not_passed2 -> Test with db not passed.
+        test_db_not_passed -> Test with db not passed.
+        test_db_passed2 -> Test with db passed.
+        test_db_passed -> Test with db passed.
+        test_auth_uri2 -> Test with auth and uri present.
+        test_auth_uri -> Test with auth and uri present.
+        test_auth_arg2 -> Test with auth and arg present.
+        test_auth_arg -> Test with auth and arg present.
         test_auth_false -> Test with auth set to false.
         test_fail_get_srv_attr2 -> Test with failed get_srv_attr call.
         test_fail_get_srv_attr -> Test with failed get_srv_attr call.
@@ -131,6 +143,285 @@ class UnitTest(unittest.TestCase):
         self.connections = ["mongo1:27017", "mongo2:27017", "mongo3:27017"]
         self.conn = "Mongo_Connection"
         self.conn2 = {"db_name": RepSetColl(), "test": {"coll_name": True}}
+        self.dbn = "MyDatabase"
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_db_auth_passed2(self, mock_mongo):
+
+        """Function:  test_db_auth_passed2
+
+        Description:  Test with db_auth passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri)
+        mongo.connect()
+
+        self.assertEqual(mongo.db_auth, self.db_auth)
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_db_auth_passed(self, mock_mongo):
+
+        """Function:  test_db_auth_passed
+
+        Description:  Test with db_auth passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_coll_passed2(self, mock_mongo):
+
+        """Function:  test_coll_passed2
+
+        Description:  Test with coll passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri)
+        mongo.connect()
+
+        self.assertEqual(mongo.coll, self.coll)
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_coll_passed(self, mock_mongo):
+
+        """Function:  test_coll_passed
+
+        Description:  Test with coll passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_db_not_passed2(self, mock_mongo):
+
+        """Function:  test_db_not_passed2
+
+        Description:  Test with db not passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            auth=True, use_uri=self.use_uri)
+        mongo.connect()
+
+        self.assertEqual(mongo.db, "test")
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_db_not_passed(self, mock_mongo):
+
+        """Function:  test_db_not_passed
+
+        Description:  Test with db not passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            auth=True, use_uri=self.use_uri)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_db_passed2(self, mock_mongo):
+
+        """Function:  test_db_passed2
+
+        Description:  Test with db passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "MyDatabase": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            auth=True, use_uri=self.use_uri, db=self.dbn)
+        mongo.connect()
+
+        self.assertEqual(mongo.db, self.dbn)
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_db_passed(self, mock_mongo):
+
+        """Function:  test_db_passed
+
+        Description:  Test with db passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "MyDatabase": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            auth=True, use_uri=self.use_uri, db=self.dbn)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_auth_uri2(self, mock_mongo):
+
+        """Function:  test_auth_uri2
+
+        Description:  Test with auth and uri present.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri)
+        mongo.connect()
+
+        self.assertEqual((mongo.use_uri), (True))
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_auth_uri(self, mock_mongo):
+
+        """Function:  test_auth_uri
+
+        Description:  Test with auth and uri present.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_auth_arg2(self, mock_mongo):
+
+        """Function:  test_auth_arg2
+
+        Description:  Test with auth and arg present.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_arg=self.use_arg)
+        mongo.connect()
+
+        self.assertEqual((mongo.use_arg), (True))
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_auth_arg(self, mock_mongo):
+
+        """Function:  test_auth_arg
+
+        Description:  Test with auth and arg present.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_arg=self.use_arg)
+
+        self.assertEqual(mongo.connect(), (True, None))
 
     @mock.patch("mongo_class.RepSetColl._db_auth",
                 mock.Mock(return_value=(True, None)))
@@ -152,7 +443,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=None,
-            db=self.dbs, auth=True)
+            db=self.dbs, auth=False)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -218,7 +509,7 @@ class UnitTest(unittest.TestCase):
             db=self.dbs, auth=True)
         mongo.connect()
 
-        self.assertEqual((mongo.db_auth), (True))
+        self.assertEqual((mongo.auth), (True))
 
     @mock.patch("mongo_class.Server.get_srv_attr",
                 mock.Mock(return_value=(True, None)))
