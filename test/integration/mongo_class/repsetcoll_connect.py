@@ -43,6 +43,18 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_db_auth_passed2 -> Test with db_auth passed.
+        test_db_auth_passed -> Test with db_auth passed.
+        test_coll_passed2 -> Test with coll passed.
+        test_coll_passed -> Test with coll passed.
+        test_db_not_passed2 -> Test with db not passed.
+        test_db_not_passed -> Test with db not passed.
+        test_db_passed2 -> Test with db passed.
+        test_db_passed -> Test with db passed.
+        test_auth_uri2 -> Test with auth and uri present.
+        test_auth_uri -> Test with auth and uri present.
+        test_auth_arg2 -> Test with auth and arg present.
+        test_auth_arg -> Test with auth and arg present.
         test_auth_false -> Test with auth set to false.
         test_fail_get_srv_attr2 -> Test with failed get_srv_attr call.
         test_fail_get_srv_attr -> Test with failed get_srv_attr call.
@@ -81,6 +93,236 @@ class UnitTest(unittest.TestCase):
         self.dbs = "admin"
         self.coll = "system.users"
         self.db_auth = "admin"
+
+    def test_db_auth_passed2(self):
+
+        """Function:  test_db_auth_passed2
+
+        Description:  Test with db_auth passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
+            db=self.dbs)
+        mongo.connect()
+
+        self.assertTrue(mongo.db_auth, self.cfg.auth_db)
+
+    def test_db_auth_passed(self):
+
+        """Function:  test_db_auth_passed
+
+        Description:  Test with db_auth passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
+            db=self.dbs)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    def test_coll_passed2(self):
+
+        """Function:  test_coll_passed2
+
+        Description:  Test with coll passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
+            db=self.dbs)
+        mongo.connect()
+
+        self.assertTrue(mongo.coll, self.coll)
+
+    def test_coll_passed(self):
+
+        """Function:  test_coll_passed
+
+        Description:  Test with coll passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
+            db=self.dbs)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    def test_db_not_passed2(self):
+
+        """Function:  test_db_not_passed2
+
+        Description:  Test with db not passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db)
+        mongo.connect()
+
+        self.assertTrue(mongo.db, "test")
+
+    def test_db_not_passed(self):
+
+        """Function:  test_db_not_passed
+
+        Description:  Test with db not passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    def test_db_passed2(self):
+
+        """Function:  test_db_passed2
+
+        Description:  Test with db passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
+            db=self.dbs)
+        mongo.connect()
+
+        self.assertTrue(mongo.db, self.dbs)
+
+    def test_db_passed(self):
+
+        """Function:  test_db_passed
+
+        Description:  Test with db passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
+            db=self.dbs)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    def test_auth_uri2(self):
+
+        """Function:  test_auth_uri2
+
+        Description:  Test with auth and uri present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_uri=True, auth_db=True,
+            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
+            coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
+        mongo.connect()
+
+        self.assertTrue(mongo.use_uri)
+
+    def test_auth_uri(self):
+
+        """Function:  test_auth_uri
+
+        Description:  Test with auth and uri present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_uri=True, auth_db=True,
+            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
+            coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    def test_auth_arg2(self):
+
+        """Function:  test_auth_arg2
+
+        Description:  Test with auth and arg present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
+            db=self.dbs)
+        mongo.connect()
+
+        self.assertTrue(mongo.use_arg)
+
+    def test_auth_arg(self):
+
+        """Function:  test_auth_arg
+
+        Description:  Test with auth and arg present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
+            db=self.dbs)
+
+        self.assertEqual(mongo.connect(), (True, None))
 
     def test_auth_false(self):
 
