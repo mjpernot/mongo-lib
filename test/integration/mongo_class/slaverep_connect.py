@@ -44,10 +44,15 @@ class UnitTest(unittest.TestCase):
         setUp -> Initialize testing environment.
         test_is_not_slave2 -> Test with connecting to master node.
         test_is_not_slave -> Test with connecting to master node.
+        test_primary2 -> Test primary attribute.
         test_primary -> Test primary attribute.
+        test_repset2 -> Test repset attribute.
         test_repset -> Test repset attribute.
+        test_issecondary2 -> Test issecondary attribute.
         test_issecondary -> Test issecondary attribute.
+        test_ismaster2 -> Test ismaster attribute.
         test_ismaster -> Test ismaster attribute.
+        test_fail_get_srv_attr2 -> Test with failed get_srv_attr call.
         test_fail_get_srv_attr -> Test with failed get_srv_attr call.
         test_auth_arg2 -> Test with auth and arg present.
         test_auth_arg -> Test with auth and arg present.
@@ -120,6 +125,24 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(mongo.connect(), (False, errmsg))
 
+    def test_primary2(self):
+
+        """Function:  test_primary2
+
+        Description:  Test primary attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
+            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
     def test_primary(self):
 
         """Function:  test_primary
@@ -138,6 +161,24 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertTrue(mongo.primary)
+
+    def test_repset2(self):
+
+        """Function:  test_repset2
+
+        Description:  Test repset attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
+            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file)
+
+        self.assertEqual(mongo.connect(), (True, None))
 
     def test_repset(self):
 
@@ -158,6 +199,24 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(mongo.repset, self.cfg.repset)
 
+    def test_issecondary2(self):
+
+        """Function:  test_issecondary2
+
+        Description:  Test issecondary attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
+            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
     def test_issecondary(self):
 
         """Function:  test_issecondary
@@ -177,6 +236,24 @@ class UnitTest(unittest.TestCase):
 
         self.assertTrue(mongo.issecondary)
 
+    def test_ismaster2(self):
+
+        """Function:  test_ismaster2
+
+        Description:  Test ismaster attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
+            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
     def test_ismaster(self):
 
         """Function:  test_ismaster
@@ -195,6 +272,32 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertFalse(mongo.ismaster)
+
+    def test_fail_get_srv_attr2(self):
+
+        """Function:  test_fail_get_srv_attr2
+
+        Description:  Test with failed get_srv_attr call.
+
+        Arguments:
+
+        """
+
+        msg = "Authentication failed."
+        errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
+            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
+            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file)
+        mongo.connect()
+
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
+             mongo.use_arg),
+            (self.cfg.name, self.cfg.user, "mytestpd", self.cfg.host,
+             self.cfg.port, self.cfg.use_arg))
 
     def test_fail_get_srv_attr(self):
 
