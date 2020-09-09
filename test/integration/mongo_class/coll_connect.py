@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_fail_get_srv_attr2 -> Test with failed get_srv_attr call.
         test_fail_get_srv_attr -> Test with failed get_srv_attr call.
         test_auth_arg2 -> Test with auth and arg present.
         test_auth_arg -> Test with auth and arg present.
@@ -72,6 +73,25 @@ class UnitTest(unittest.TestCase):
         self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
         self.database = "admin"
         self.coll = "system.users"
+
+    def test_fail_get_srv_attr2(self):
+
+        """Function:  test_fail_get_srv_attr2
+
+        Description:  Test with failed get_srv_attr call.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Coll(
+            self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
+            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
+            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file, db=self.database, coll=self.coll)
+        mongo.connect()
+
+        self.assertFalse(mongo.coll)
 
     def test_fail_get_srv_attr(self):
 
