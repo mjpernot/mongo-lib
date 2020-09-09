@@ -42,6 +42,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_no_db_name_attr -> Test no db_name attribute passed.
+        test_db_name_attr -> Test db_name attribute passed.
         test_default_conf_file -> Test using the default conf_file setting.
         test_using_conf_file -> Test using the conf_file connection.
         test_default_auth -> Test using the default auth setting.
@@ -76,6 +78,39 @@ class UnitTest(unittest.TestCase):
         key2 = "word"
         self.config = {key1 + key2: self.cfg.japd}
         self.conn_list = [self.cfg.host + ":" + str(self.cfg.port)]
+        self.db_name = "admin"
+
+    def test_no_db_name_attr(self):
+
+        """Function:  test_no_db_name_attr
+
+        Description:  Test no db_name attribute passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.DB(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.db_name, "test")
+
+    def test_db_name_attr(self):
+
+        """Function:  test_db_name_attr
+
+        Description:  Test db_name attribute passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.DB(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, db=self.db_name)
+
+        self.assertEqual(mongo.db_name, self.db_name)
 
     def test_default_conf_file(self):
 
