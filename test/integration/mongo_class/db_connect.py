@@ -72,6 +72,9 @@ class UnitTest(unittest.TestCase):
         self.config_name = "mongo"
         self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
         self.database = "admin"
+        self.failure = "Authentication failed."
+        self.ermsg = "Error:  Auth flag or login params is incorrect: %s"
+        
 
     def test_db_attr2(self):
 
@@ -120,8 +123,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg = "Authentication failed."
-        errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
+        msg = self.failure
+        errmsg = self.ermsg % msg
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
@@ -142,8 +145,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg = "Authentication failed."
-        errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
+        msg = self.failure
+        errmsg = self.ermsg % msg
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
@@ -300,8 +303,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg = "Authentication failed."
-        errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
+        msg = self.failure
+        errmsg = self.ermsg % msg
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
