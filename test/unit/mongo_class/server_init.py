@@ -41,11 +41,27 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_uptime_attr -> Test uptime attribute.
+        test_port_attr -> Test port attribute.
+        test_host_attr -> Test host attribute.
+        test_japd_attr -> Test japd attribute.
+        test_user_attr -> Test user attribute.
+        test_name_attr -> Test name attribute.
+        test_log_path_attr -> Test log_path attribute.
+        test_db_path_attr -> Test db_path attribute.
+        test_conn_attr -> Test conn attribute.
+        test_no_conf_file_attr -> Test no conf_file attribute passed.
+        test_conf_file_attr -> Test conf_file attribute passed.
         test_conn_list_attr -> Test setting the conn_list attribute.
         test_config_attr -> Test setting the config attribute.
+        test_using_no_auth_db -> Test using no auth_db attribute.
         test_using_auth_db -> Test using the auth_db attribute.
-        test_using_arg -> Test using the arg connection.
-        test_using_uri -> Test using the uri connection.
+        test_no_using_arg -> Test with auth and no arg present.
+        test_using_arg -> Test with auth and arg present.
+        test_no_auth_uri -> Test with auth and no uri present.
+        test_auth_uri -> Test with auth and uri present.
+        test_auth_false -> Test with auth passed as False.
+        test_auth_true -> Test with auth passed as True.
         test_default -> Test with minimum number of arguments.
 
     """
@@ -75,6 +91,173 @@ class UnitTest(unittest.TestCase):
         self.auth_db = "sysmon"
         self.config = {key1 + key2: self.japd}
         self.conn_list = [self.host + ":" + str(self.port)]
+        self.conf_file = "Config file"
+
+    def test_uptime_attr(self):
+
+        """Function:  test_uptime_attr
+
+        Description:  Test uptime attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertFalse(mongo.uptime)
+
+    def test_port_attr(self):
+
+        """Function:  test_port_attr
+
+        Description:  Test port attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.port, self.port)
+
+    def test_host_attr(self):
+
+        """Function:  test_host_attr
+
+        Description:  Test host attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.host, self.host)
+
+    def test_japd_attr(self):
+
+        """Function:  test_japd_attr
+
+        Description:  Test japd attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.japd, self.japd)
+
+    def test_user_attr(self):
+
+        """Function:  test_user_attr
+
+        Description:  Test user attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.user, self.user)
+
+    def test_name_attr(self):
+
+        """Function:  test_name_attr
+
+        Description:  Test name attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.name, self.name)
+
+    def test_log_path_attr(self):
+
+        """Function:  test_log_path_attr
+
+        Description:  Test log_path attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertFalse(mongo.log_path)
+
+    def test_db_path_attr(self):
+
+        """Function:  test_db_path_attr
+
+        Description:  Test db_path attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertFalse(mongo.db_path)
+
+    def test_conn_attr(self):
+
+        """Function:  test_conn_attr
+
+        Description:  Test conn attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertFalse(mongo.conn)
+
+    def test_no_conf_file_attr(self):
+
+        """Function:  test_no_conf_file_attr
+
+        Description:  Test no conf_file attribute passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertFalse(mongo.conf_file)
+
+    def test_conf_file_attr(self):
+
+        """Function:  test_conf_file_attr
+
+        Description:  Test conf_file attribute passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            conf_file=self.conf_file)
+
+        self.assertEqual(mongo.conf_file, self.conf_file)
 
     def test_conn_list_attr(self):
 
@@ -106,6 +289,21 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(mongo.config, self.config)
 
+    def test_using_no_auth_db(self):
+
+        """Function:  test_using_no_auth_db
+
+        Description:  Test using no auth_db attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.auth_db, "admin")
+
     def test_using_auth_db(self):
 
         """Function:  test_using_auth_db
@@ -121,6 +319,21 @@ class UnitTest(unittest.TestCase):
             auth_db=self.auth_db)
 
         self.assertEqual(mongo.auth_db, self.auth_db)
+
+    def test_no_using_arg(self):
+
+        """Function:  test_no_using_arg
+
+        Description:  Test with auth and no arg present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertFalse(mongo.use_arg)
 
     def test_using_arg(self):
 
@@ -138,6 +351,21 @@ class UnitTest(unittest.TestCase):
 
         self.assertTrue(mongo.use_arg)
 
+    def test_no_auth_uri(self):
+
+        """Function:  test_no_auth_uri
+
+        Description:  Test with auth and no uri present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertFalse(mongo.use_uri)
+
     def test_using_uri(self):
 
         """Function:  test_using_uri
@@ -153,6 +381,42 @@ class UnitTest(unittest.TestCase):
             use_uri=self.use_uri)
 
         self.assertTrue(mongo.use_uri)
+
+    def test_auth_false(self):
+
+        """Function:  test_auth_false
+
+        Description:  Test with auth passed as False.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(self.name, self.user, self.japd,
+                                   host=self.host, port=self.port, auth=False)
+
+        self.assertEqual((mongo.name, mongo.user, mongo.japd, mongo.host,
+                          mongo.port, mongo.auth),
+                         (self.name, self.user, self.japd, self.host,
+                          self.port, False))
+
+    def test_auth_true(self):
+
+        """Function:  test_auth_true
+
+        Description:  Test with auth passed as True.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(self.name, self.user, self.japd,
+                                   host=self.host, port=self.port, auth=True)
+
+        self.assertEqual((mongo.name, mongo.user, mongo.japd, mongo.host,
+                          mongo.port, mongo.auth),
+                         (self.name, self.user, self.japd, self.host,
+                          self.port, True))
 
     def test_default(self):
 
