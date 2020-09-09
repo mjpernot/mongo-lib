@@ -42,6 +42,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_conn_false2 -> Test with conn set to false.
+        test_conn_false -> Test with conn set to false.
+        test_conn_true2 -> Test with conn set to true.
+        test_conn_true -> Test with conn set to true.
         test_fail_get_srv_attr2 -> Test with failed get_srv_attr call.
         test_fail_get_srv_attr -> Test with failed get_srv_attr call.
         test_auth_arg2 -> Test with auth and arg present.
@@ -78,6 +82,104 @@ class UnitTest(unittest.TestCase):
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_conn_false2(self, mock_cmd, mock_client):
+
+        """Function:  test_conn_false2
+
+        Description:  Test with conn set to False.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = (True, None)
+        mock_client.return_value = True
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            auth=True, use_arg=True)
+        mongo.conn = False
+        mongo.connect()
+
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
+             mongo.use_arg),
+            (self.name, self.user, self.japd, self.host, self.port,
+             self.use_arg))
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_conn_false(self, mock_cmd, mock_client):
+
+        """Function:  test_conn_false
+
+        Description:  Test with conn set to False.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = (True, None)
+        mock_client.return_value = True
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            auth=True, use_arg=True)
+        mongo.conn = False
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_conn_true2(self, mock_cmd, mock_client):
+
+        """Function:  test_conn_true2
+
+        Description:  Test with conn set to True.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = (True, None)
+        mock_client.return_value = True
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            auth=True, use_arg=True)
+        mongo.conn = True
+        mongo.connect()
+
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
+             mongo.use_arg),
+            (self.name, self.user, self.japd, self.host, self.port,
+             self.use_arg))
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    def test_conn_true(self, mock_cmd, mock_client):
+
+        """Function:  test_conn_true
+
+        Description:  Test with conn set to True.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = (True, None)
+        mock_client.return_value = True
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            auth=True, use_arg=True)
+        mongo.conn = True
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    @mock.patch("mongo_class.Server.get_srv_attr")
     def test_fail_get_srv_attr2(self, mock_cmd, mock_client):
 
         """Function:  test_fail_get_srv_attr2
@@ -93,6 +195,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, host=self.host, port=self.port,
             use_arg=self.use_arg)
+        mongo.connect()
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -157,6 +260,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, host=self.host, port=self.port,
             use_arg=self.use_arg)
+        mongo.connect()
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -201,6 +305,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, host=self.host, port=self.port,
             use_uri=self.use_uri)
+        mongo.connect()
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -224,6 +329,7 @@ class UnitTest(unittest.TestCase):
         mock_client.return_value = True
         mongo = mongo_class.Server(self.name, self.user, self.japd,
                                    host=self.host, port=self.port, auth=False)
+        mongo.connect()
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
