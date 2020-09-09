@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_fail_get_srv_attr2 -> Test with failed get_srv_attr call.
         test_fail_get_srv_attr -> Test with failed get_srv_attr call.
         test_auth_arg2 -> Test with auth and arg present.
         test_auth_arg -> Test with auth and arg present.
@@ -71,6 +72,65 @@ class UnitTest(unittest.TestCase):
         self.config_name = "mongo"
         self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
         self.database = "admin"
+
+    def test_db_attr2(self):
+
+        """Function:  test_db_attr2
+
+        Description:  Test db attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.DB(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
+            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    def test_db_attr(self):
+
+        """Function:  test_db_attr
+
+        Description:  Test db attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.DB(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
+            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file)
+        mongo.connect()
+
+        self.assertTrue(mongo.db)
+
+    def test_fail_get_srv_attr2(self):
+
+        """Function:  test_fail_get_srv_attr2
+
+        Description:  Test with failed get_srv_attr call.
+
+        Arguments:
+
+        """
+
+        msg = "Authentication failed."
+        errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
+
+        mongo = mongo_class.DB(
+            self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
+            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
+            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file)
+        mongo.connect()
+
+        self.assertFalse(mongo.db)
 
     def test_fail_get_srv_attr(self):
 
