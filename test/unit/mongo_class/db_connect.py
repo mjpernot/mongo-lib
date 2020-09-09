@@ -66,7 +66,13 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_db_attr2 -> Test db attribute.
+        test_db_attr -> Test db attribute.
+        test_no_conn_list1 -> Test with no connections passed.
+        test_no_conn_list -> Test with no connections passed.
+        test_fail_connection2 -> Test with failed connection.
         test_fail_connection -> Test with failed connection.
+        test_connection2 -> Test connection method.
         test_connection -> Test connection method.
 
     """
@@ -89,6 +95,88 @@ class UnitTest(unittest.TestCase):
         self.dbs = "test"
         self.db_auth = None
         self.errmsg = "Error Message"
+
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_db_attr2(self, mock_client, mock_cmd):
+
+        """Function:  test_db_attr2
+
+        Description:  Test db attribute.
+
+        Arguments:
+
+        """
+
+        mock_client.return_value = True
+        mock_cmd.return_value = (True, None)
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
+                               self.host, self.port)
+        mongo.conn = {"test": "testdb"}
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_db_attr(self, mock_client, mock_cmd):
+
+        """Function:  test_db_attr
+
+        Description:  Test db attribute.
+
+        Arguments:
+
+        """
+
+        mock_client.return_value = True
+        mock_cmd.return_value = (True, None)
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
+                               self.host, self.port)
+        mongo.conn = {"test": "testdb"}
+        mongo.connect()
+
+        self.assertEqual(mongo.db, "testdb")
+
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_no_conn_list1(self, mock_client, mock_cmd):
+
+        """Function:  test_no_conn_list1
+
+        Description:  Test with no connections passed.
+
+        Arguments:
+
+        """
+
+        mock_client.return_value = True
+        mock_cmd.return_value = (True, None)
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
+                               self.host, self.port)
+        mongo.conn = {"test": "testdb"}
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_no_conn_list(self, mock_client, mock_cmd):
+
+        """Function:  test_no_conn_list
+
+        Description:  Test with no connections passed.
+
+        Arguments:
+
+        """
+
+        mock_client.return_value = True
+        mock_cmd.return_value = (True, None)
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
+                               self.host, self.port)
+        mongo.conn = {"test": "testdb"}
+        mongo.connect()
+
+        self.assertEqual(mongo.db, "testdb")
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
