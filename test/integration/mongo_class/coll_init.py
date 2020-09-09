@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_coll_attr -> Test coll attribute.
         test_default_coll_coll -> Test using the default coll_coll attribute.
         test_using_coll_coll -> Test using the coll_coll attribute.
         test_default_coll_db -> Test using the default coll_db attribute.
@@ -82,6 +83,22 @@ class UnitTest(unittest.TestCase):
         self.conn_list = [self.cfg.host + ":" + str(self.cfg.port)]
         self.coll_db = "admin"
         self.coll_name = "system.users"
+
+    def test_coll_attr(self):
+
+        """Function:  test_coll_attr
+
+        Description:  Test coll attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Coll(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertFalse(mongo.coll)
 
     def test_default_coll_coll(self):
 
