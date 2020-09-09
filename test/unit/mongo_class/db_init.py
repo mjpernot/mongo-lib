@@ -48,9 +48,14 @@ class UnitTest(unittest.TestCase):
         test_conf_file_attr -> Test conf_file attribute passed.
         test_conn_list_attr -> Test setting the conn_list attribute.
         test_config_attr -> Test setting the config attribute.
+        test_using_no_auth_db -> Test using no auth_db attribute.
         test_using_auth_db -> Test using the auth_db attribute.
+        test_no_using_arg -> Test with auth and no arg present.
         test_using_arg -> Test with auth and arg present.
+        test_no_auth_uri -> Test with auth and no uri present.
         test_auth_uri -> Test with auth and uri present.
+        test_auth_false -> Test with auth passed as False.
+        test_auth_true -> Test with auth passed as True.
         test_no_auth -> Test with no auth present.
 
     """
