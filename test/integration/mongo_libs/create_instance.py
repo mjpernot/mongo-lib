@@ -36,39 +36,6 @@ import version
 __version__ = version.__version__
 
 
-class Cfg(object):
-
-    """Class:  Cfg
-
-    Description:  Class stub holder for Cfg class with new attributes.
-
-    Methods:
-        __init__ -> Class initialization.
-
-    """
-
-    def __init__(self):
-
-        """Function:  __init__
-
-        Description:  Class initialization.
-
-        Arguments:
-
-        """
-
-        self.name = "name"
-        self.user = "user"
-        self.japd = "userpd"
-        self.host = "host"
-        self.port = 27017
-        self.auth = True
-        self.conf_file = "conf_file"
-        self.use_uri = False
-        self.use_arg = True
-        self.auth_db = "mydatabase"
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
