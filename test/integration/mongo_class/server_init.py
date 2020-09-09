@@ -77,6 +77,150 @@ class UnitTest(unittest.TestCase):
         self.config = {key1 + key2: self.cfg.japd}
         self.conn_list = [self.cfg.host + ":" + str(self.cfg.port)]
 
+    def test_uptime_attr(self):
+
+        """Function:  test_uptime_attr
+
+        Description:  Test uptime attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertFalse(mongo.uptime)
+
+    def test_port_attr(self):
+
+        """Function:  test_port_attr
+
+        Description:  Test port attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.port, self.cfg.port)
+
+    def test_host_attr(self):
+
+        """Function:  test_host_attr
+
+        Description:  Test host attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.host, self.cfg.host)
+
+    def test_japd_attr(self):
+
+        """Function:  test_japd_attr
+
+        Description:  Test japd attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.japd, self.cfg.japd)
+
+    def test_user_attr(self):
+
+        """Function:  test_user_attr
+
+        Description:  Test user attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.user, self.cfg.user)
+
+    def test_name_attr(self):
+
+        """Function:  test_name_attr
+
+        Description:  Test name attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.name, self.cfg.name)
+
+    def test_log_path_attr(self):
+
+        """Function:  test_log_path_attr
+
+        Description:  Test log_path attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertFalse(mongo.log_path)
+
+    def test_db_path_attr(self):
+
+        """Function:  test_db_path_attr
+
+        Description:  Test db_path attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertFalse(mongo.db_path)
+
+    def test_conn_attr(self):
+
+        """Function:  test_conn_attr
+
+        Description:  Test conn attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertFalse(mongo.conn)
+
     def test_default_conf_file(self):
 
         """Function:  test_default_conf_file
