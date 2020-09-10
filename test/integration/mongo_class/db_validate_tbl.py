@@ -87,7 +87,7 @@ class UnitTest(unittest.TestCase):
         """
 
         errmsg = "ns not found"
-        status, data = self.mongo.validate_tbl(self.tbl_name2, scan=True)
+        _, data = self.mongo.validate_tbl(self.tbl_name2, scan=True)
         results = "%s" % data
 
         self.assertEqual(results, errmsg)
