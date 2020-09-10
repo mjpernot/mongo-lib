@@ -175,7 +175,6 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(cmd_line, self.cmd_result8)
 
-
     def test_is_add_cmd_dict(self):
 
         """Function:  test_is_add_cmd_dict
