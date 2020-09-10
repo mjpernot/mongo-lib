@@ -102,7 +102,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        status, data = self.mongo.validate_tbl(self.tbl_name2, scan=True)
+        status, _ = self.mongo.validate_tbl(self.tbl_name2, scan=True)
 
         self.assertFalse(status)
 
@@ -116,7 +116,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        status, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
+        _, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
 
         self.assertTrue(data["valid"])
 
@@ -130,7 +130,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        status, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
+        _, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
 
         self.assertTrue(isinstance(data, dict))
 
@@ -144,7 +144,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        status, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
+        status, _ = self.mongo.validate_tbl(self.tbl_name, scan=True)
 
         self.assertTrue(status)
 
@@ -158,7 +158,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        status, data = self.mongo.validate_tbl(self.tbl_name)
+        _, data = self.mongo.validate_tbl(self.tbl_name)
 
         self.assertTrue(data["valid"])
 
@@ -172,7 +172,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        status, data = self.mongo.validate_tbl(self.tbl_name)
+        _, data = self.mongo.validate_tbl(self.tbl_name)
 
         self.assertTrue(isinstance(data, dict))
 
@@ -186,7 +186,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        status, data = self.mongo.validate_tbl(self.tbl_name)
+        status, _ = self.mongo.validate_tbl(self.tbl_name)
 
         self.assertTrue(status)
 
