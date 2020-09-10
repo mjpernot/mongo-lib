@@ -84,7 +84,7 @@ class UnitTest(unittest.TestCase):
         key2 = "word"
         self.config = {key1 + key2: self.cfg.japd}
         self.conn_list = [self.cfg.host + ":" + str(self.cfg.port)]
-        self.db = "admin"
+        self.dbn = "admin"
         self.db_coll = "system.users"
         self.db_auth = "admin"
 
@@ -212,9 +212,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, db=self.db)
+            port=self.cfg.port, db=self.dbn)
 
-        self.assertEqual(mongo.db, self.db)
+        self.assertEqual(mongo.db, self.dbn)
 
     def test_default_conf_file(self):
 
