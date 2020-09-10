@@ -3,7 +3,8 @@
 
 """Program:  repsetcoll_coll_find.py
 
-    Description:  Integration testing of RepSetColl.coll_find in mongo_class.py.
+    Description:  Integration testing of RepSetColl.coll_find in
+        mongo_class.py.
 
     Usage:
         test/integration/mongo_class/repsetcoll_coll_find.py
