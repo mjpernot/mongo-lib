@@ -87,8 +87,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        errmsg = "Error:  This is not a Master Replication server."
-
         mongo = mongo_class.MasterRep(
             self.cfg2.name, self.cfg2.user, self.cfg2.japd,
             host=self.cfg2.host, port=self.cfg2.port,
