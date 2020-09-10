@@ -122,9 +122,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg = self.failure
-        errmsg = self.ermsg % msg
-
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
