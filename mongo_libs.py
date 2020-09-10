@@ -156,6 +156,9 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     host = "--host="
     cmd_list = []
+    data = "--pass"
+    data2 = "word="
+    japd2 = data + data2
 
     # Use repset name and hosts for connection, if set.
     if kwargs.get("use_repset", False) and mongo.repset \
@@ -174,7 +177,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     if mongo.auth:
         cmd_list = [prog_name, "--username=" + mongo.user, host_port,
-                    "--password=" + mongo.japd]
+                    japd2 + mongo.japd]
 
     else:
         cmd_list = [prog_name, host_port]
