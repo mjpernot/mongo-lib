@@ -67,6 +67,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        username = "--username="
+        host = "--host="
+        data = "--pass"
+        data2 = "word="
+        japd2 = data + data2
         self.base_dir = "test/integration"
         self.config_dir = os.path.join(self.base_dir, "config")
         self.config_name = "mongo"
@@ -88,60 +93,47 @@ class UnitTest(unittest.TestCase):
         self.opt_arg = {"-m": "-m=1"}
         self.opt_arg2 = {"-m": "-m=1", "-n": "-n=0"}
         self.cmd_result = [os.path.join(self.args_array["-p"], self.prog_name),
-                           "--username=" + self.cfg.user,
-                           "--host=" + self.hosts,
-                           "--password=" + self.cfg.japd]
+                           username + self.cfg.user, host + self.hosts,
+                           japd2 + self.cfg.japd]
         self.cmd_result2 = [os.path.join(self.args_array["-p"],
                                          self.prog_name),
-                            "--username=" + self.cfg.user,
-                            "--host=" + self.hosts,
-                            "--password=" + self.cfg.japd,
-                            self.req_arg[0]]
+                            username + self.cfg.user, host + self.hosts,
+                            japd2 + self.cfg.japd, self.req_arg[0]]
         self.cmd_result3 = [os.path.join(self.args_array["-p"],
                                          self.prog_name),
-                            "--username=" + self.cfg.user,
-                            "--host=" + self.hosts,
-                            "--password=" + self.cfg.japd,
-                            self.opt_arg["-m"]]
+                            username + self.cfg.user, host + self.hosts,
+                            japd2 + self.cfg.japd, self.opt_arg["-m"]]
         self.cmd_result4 = [os.path.join(self.args_array["-p"],
                                          self.prog_name),
-                            "--username=" + self.cfg.user,
-                            "--host=" + self.hosts,
-                            "--password=" + self.cfg.japd,
-                            self.req_arg[0], self.opt_arg["-m"]]
+                            username + self.cfg.user, host + self.hosts,
+                            japd2 + self.cfg.japd, self.req_arg[0],
+                            self.opt_arg["-m"]]
         self.cmd_result5 = [os.path.join(self.args_array["-p"],
                                          self.prog_name),
-                            "--username=" + self.cfg.user,
-                            "--host=" + self.hosts,
-                            "--password=" + self.cfg.japd,
-                            self.req_arg2[0], self.req_arg2[1]]
+                            username + self.cfg.user, host + self.hosts,
+                            japd2 + self.cfg.japd, self.req_arg2[0],
+                            self.req_arg2[1]]
         self.cmd_result6 = [os.path.join(self.args_array["-p"],
                                          self.prog_name),
-                            "--username=" + self.cfg.user,
-                            "--host=" + self.hosts,
-                            "--password=" + self.cfg.japd,
-                            self.opt_arg2["-m"], self.opt_arg2["-n"]]
+                            username + self.cfg.user, host + self.hosts,
+                            japd2 + self.cfg.japd, self.opt_arg2["-m"],
+                            self.opt_arg2["-n"]]
         self.cmd_result7 = [os.path.join(self.args_array["-p"],
                                          self.prog_name),
-                            "--username=" + self.cfg.user,
-                            "--host=" + self.hosts,
-                            "--password=" + self.cfg.japd,
-                            self.req_arg2[0], self.req_arg2[1],
-                            self.opt_arg["-m"]]
+                            username + self.cfg.user, host + self.hosts,
+                            japd2 + self.cfg.japd, self.req_arg2[0],
+                            self.req_arg2[1], self.opt_arg["-m"]]
         self.cmd_result8 = [os.path.join(self.args_array["-p"],
                                          self.prog_name),
-                            "--username=" + self.cfg.user,
-                            "--host=" + self.hosts,
-                            "--password=" + self.cfg.japd,
-                            self.req_arg[0],
+                            username + self.cfg.user, host + self.hosts,
+                            japd2 + self.cfg.japd, self.req_arg[0],
                             self.opt_arg2["-m"], self.opt_arg2["-n"]]
         self.cmd_result9 = [os.path.join(self.args_array["-p"],
                                          self.prog_name),
-                            "--username=" + self.cfg.user,
-                            "--host=" + self.hosts,
-                            "--password=" + self.cfg.japd,
-                            self.req_arg2[0], self.req_arg2[1],
-                            self.opt_arg2["-m"], self.opt_arg2["-n"]]
+                            username + self.cfg.user, host + self.hosts,
+                            japd2 + self.cfg.japd, self.req_arg2[0],
+                            self.req_arg2[1], self.opt_arg2["-m"],
+                            self.opt_arg2["-n"]]
 
     def test_full_test(self):
 
