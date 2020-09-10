@@ -91,8 +91,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        errmsg = "Error:  This is not a Slave Replication server."
-
         mongo = mongo_class.SlaveRep(
             self.cfg2.name, self.cfg2.user, self.cfg2.japd,
             host=self.cfg2.host, port=self.cfg2.port,
@@ -282,9 +280,6 @@ class UnitTest(unittest.TestCase):
         Arguments:
 
         """
-
-        msg = "Authentication failed."
-        errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
 
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
