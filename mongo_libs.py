@@ -72,9 +72,18 @@ def create_instance(cfg_file, dir_path, class_name, **kwargs):
     """Function:  create_instance
 
     Description:  Create a Mongo database instance for the class that is
-        received on the argument line.  This function is only used to create
-        one of the following classes:  Server, Rep, Master_Rep, or
-        Slave_Rep.  No other classes are allowed att.
+        received on the argument line.  This function is used to create
+        instances for the following classes:  Server, Rep, MasterRep, SlaveRep,
+        RepSet, and DB.  Can create instances for the RepSetColl and Coll
+        classes, but see Note section below for more details.
+
+    Note 1:  If an instance is created for RepSetColl, then the db_auth and db
+        attributes need to be manually set before calling the classes'
+        connect method.
+
+    Note 2:  If an instance is created for Coll, then the db and coll_coll
+        attributes need to be manually set before calling the classes'
+        connect method.
 
     Arguments:
         (input) cfg_file -> Configuration file name.
