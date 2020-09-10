@@ -74,7 +74,6 @@ class UnitTest(unittest.TestCase):
         self.database = "admin"
         self.failure = "Authentication failed."
         self.ermsg = "Error:  Auth flag or login params is incorrect: %s"
-        
 
     def test_db_attr2(self):
 
