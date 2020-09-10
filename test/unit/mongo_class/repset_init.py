@@ -376,7 +376,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd,self.host, self.port,
+            self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=False)
 
         self.assertEqual(
@@ -396,7 +396,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd,self.host, self.port,
+            self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True)
 
         self.assertEqual(
