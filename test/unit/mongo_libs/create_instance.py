@@ -45,7 +45,7 @@ class Mongo(object):
 
     """
 
-    def __init__(self, name, user, passwd, host, port, **kwargs):
+    def __init__(self, name, user, japd, host, port, **kwargs):
 
         """Function:  __init__
 
@@ -57,11 +57,14 @@ class Mongo(object):
 
         self.name = name
         self.user = user
-        self.passwd = passwd
+        self.japd = japd
         self.host = host
         self.port = port
         self.auth = kwargs.get("auth", None)
         self.conf_file = kwargs.get("conf_file", None)
+        self.use_uri = kwargs.get("use_uri", False)
+        self.use_arg = kwargs.get("use_arg", False)
+        self.auth_db = kwargs.get("auth_db", "admin")
 
 
 class Cfg(object):
@@ -87,11 +90,44 @@ class Cfg(object):
 
         self.name = "name"
         self.user = "user"
-        self.passwd = "passwd"
+        self.japd = "userpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
         self.conf_file = "conf_file"
+
+
+class Cfg2(object):
+
+    """Class:  Cfg2
+
+    Description:  Class stub holder for Cfg class with new attributes.
+
+    Methods:
+        __init__ -> Class initialization.
+
+    """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Class initialization.
+
+        Arguments:
+
+        """
+
+        self.name = "name"
+        self.user = "user"
+        self.japd = "userpd"
+        self.host = "host"
+        self.port = 27017
+        self.auth = True
+        self.conf_file = "conf_file"
+        self.use_uri = False
+        self.use_arg = True
+        self.auth_db = "mydatabase"
 
 
 class UnitTest(unittest.TestCase):
@@ -102,6 +138,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_new_attributes2 -> Test new use_uri, use_arg, & auth_db attrs.
+        test_new_attributes -> Test with new use_uri, use_arg, & auth_db attrs.
         test_create_instance -> Test create_instance function.
 
     """
@@ -118,11 +156,55 @@ class UnitTest(unittest.TestCase):
 
         self.name = "name"
         self.user = "user"
-        self.passwd = "passwd"
+        self.japd = "userpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
         self.conf_file = "conf_file"
+        self.use_uri = False
+        self.use_arg = False
+        self.auth_db = "admin"
+        self.cfg = Cfg()
+        self.cfg2 = Cfg2()
+        self.use_uri2 = False
+        self.use_arg2 = True
+        self.auth_db2 = "mydatabase"
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_new_attributes2(self, mock_load):
+
+        """Function:  test_new_attributes2
+
+        Description:  Test with new use_uri, use_arg, and auth_db attributes.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg2
+        mongo = mongo_libs.create_instance("cfg_file", "dir_path", Mongo)
+
+        self.assertEqual(
+            (mongo.use_uri, mongo.use_arg, mongo.auth_db),
+            (self.use_uri2, self.use_arg2, self.auth_db2))
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_new_attributes(self, mock_load):
+
+        """Function:  test_new_attributes
+
+        Description:  Test with new use_uri, use_arg, and auth_db attributes.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance("cfg_file", "dir_path", Mongo)
+
+        self.assertEqual(
+            (mongo.use_uri, mongo.use_arg, mongo.auth_db),
+            (self.use_uri, self.use_arg, self.auth_db))
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_create_instance(self, mock_load):
@@ -135,12 +217,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_load.return_value = Cfg()
+        mock_load.return_value = self.cfg
         mongo = mongo_libs.create_instance("cfg_file", "dir_path", Mongo)
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.auth, mongo.conf_file),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port, self.auth, self.conf_file))
+
+        self.assertEqual(
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
+             mongo.auth, mongo.conf_file),
+            (self.name, self.user, self.japd, self.host, self.port, self.auth,
+             self.conf_file))
 
 
 if __name__ == "__main__":

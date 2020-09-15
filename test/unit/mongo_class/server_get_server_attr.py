@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_get_server_attr.py
+"""Program:  server_get_server_attr.py
 
     Description:  Unit testing of Server.get_server_attr in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_get_server_attr.py
+        test/unit/mongo_class/server_get_server_attr.py
 
     Arguments:
 
@@ -58,7 +58,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -81,15 +81,11 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_cmd.return_value = True
-        mongo = mongo_class.Server(self.name, self.user, self.passwd,
-                                   self.host, self.port,
-                                   conf_file=self.conf_file)
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file)
 
-        mongo.get_srv_attr()
-        self.assertEqual((mongo.name, mongo.user, mongo.passwd, mongo.host,
-                          mongo.port, mongo.conf_file),
-                         (self.name, self.user, self.passwd, self.host,
-                          self.port, self.conf_file))
+        self.assertEqual(mongo.get_srv_attr(), (True, None))
 
 
 if __name__ == "__main__":

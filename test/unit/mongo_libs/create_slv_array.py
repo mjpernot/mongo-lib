@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_new_attributes -> Test new use_uri, use_arg, and auth_db attrs.
         test_create_slv_array -> Test create_slv_array function.
 
     """
@@ -58,14 +59,36 @@ class UnitTest(unittest.TestCase):
 
         self.name = "name"
         self.user = "user"
-        self.passwd = "passwd"
+        self.japd = "userpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
         self.conf_file = "conf_file"
-        self.cfg = [{"name": "name", "user": "user", "passwd": "passwd",
+        self.cfg = [{"name": "name", "user": "user", "japd": "userpd",
                      "host": "host", "port": 27017, "auth": True,
                      "conf_file": "conf_file"}]
+        self.cfg2 = [{"name": "name", "user": "user", "japd": "userpd",
+                      "host": "host", "port": 27017, "auth": True,
+                      "conf_file": "conf_file"},
+                     {"name": "name", "user": "user", "japd": "userpd",
+                      "host": "host", "port": 27017, "auth": True,
+                      "conf_file": "conf_file", "auth_db": "admin",
+                      "use_uri": False, "use_arg": True}]
+
+    @mock.patch("mongo_libs.mongo_class.SlaveRep")
+    def test_new_attributes(self, mock_mongo):
+
+        """Function:  test_new_attributes
+
+        Description:  Test with new use_uri, use_arg, and auth_db attributes.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = True
+
+        self.assertEqual(len(mongo_libs.create_slv_array(self.cfg2)), 2)
 
     @mock.patch("mongo_libs.mongo_class.SlaveRep")
     def test_create_slv_array(self, mock_mongo):

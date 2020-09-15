@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_fetch_svr_info.py
+"""Program:  server_fetch_svr_info.py
 
     Description:  Unit testing of Server.fetch_svr_info in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_fetch_svr_info.py
+        test/unit/mongo_class/server_fetch_svr_info.py
 
     Arguments:
 
@@ -81,7 +81,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -99,7 +99,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.Server(self.name, self.user, self.passwd,
+        mongo = mongo_class.Server(self.name, self.user, self.japd,
                                    self.host, self.port)
         mongo.conn = ServerInfo()
 

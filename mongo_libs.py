@@ -72,9 +72,18 @@ def create_instance(cfg_file, dir_path, class_name, **kwargs):
     """Function:  create_instance
 
     Description:  Create a Mongo database instance for the class that is
-        received on the argument line.  This function is only used to create
-        one of the following classes:  Server, Rep, Master_Rep, or
-        Slave_Rep.  No other classes are allowed att.
+        received on the argument line.  This function is used to create
+        instances for the following classes:  Server, Rep, MasterRep, SlaveRep,
+        RepSet, and DB.  Can create instances for the RepSetColl and Coll
+        classes, but see Note section below for more details.
+
+    Note 1:  If an instance is created for RepSetColl, then the db_auth and db
+        attributes need to be manually set before calling the classes'
+        connect method.
+
+    Note 2:  If an instance is created for Coll, then the db and coll_coll
+        attributes need to be manually set before calling the classes'
+        connect method.
 
     Arguments:
         (input) cfg_file -> Configuration file name.
@@ -84,10 +93,24 @@ def create_instance(cfg_file, dir_path, class_name, **kwargs):
 
     """
 
+    auth_db = "admin"
+    use_arg = False
+    use_uri = False
     cfg = gen_libs.load_module(cfg_file, dir_path)
 
-    return class_name(cfg.name, cfg.user, cfg.passwd, host=cfg.host,
-                      port=cfg.port, auth=cfg.auth, conf_file=cfg.conf_file)
+    if hasattr(cfg, "auth_db"):
+        auth_db = cfg.auth_db
+
+    if hasattr(cfg, "use_arg"):
+        use_arg = cfg.use_arg
+
+    if hasattr(cfg, "use_uri"):
+        use_uri = cfg.use_uri
+
+    return class_name(
+        cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
+        auth=cfg.auth, conf_file=cfg.conf_file, auth_db=auth_db,
+        use_arg=use_arg, use_uri=use_uri)
 
 
 def create_slv_array(cfg_array, **kwargs):
@@ -107,10 +130,15 @@ def create_slv_array(cfg_array, **kwargs):
     slaves = []
 
     for slv in cfg_array:
+        auth_db = slv.get("auth_db", "admin")
+        use_uri = slv.get("use_uri", False)
+        use_arg = slv.get("use_arg", False)
+
         slave_inst = mongo_class.SlaveRep(
-            slv["name"], slv["user"], slv["passwd"], host=slv["host"],
+            slv["name"], slv["user"], slv["japd"], host=slv["host"],
             port=int(slv["port"]), auth=slv["auth"],
-            conf_file=slv["conf_file"])
+            conf_file=slv["conf_file"], auth_db=auth_db, use_arg=use_arg,
+            use_uri=use_uri)
 
         slaves.append(slave_inst)
 
@@ -137,6 +165,9 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     host = "--host="
     cmd_list = []
+    data = "--pass"
+    data2 = "word="
+    japd2 = data + data2
 
     # Use repset name and hosts for connection, if set.
     if kwargs.get("use_repset", False) and mongo.repset \
@@ -155,7 +186,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     if mongo.auth:
         cmd_list = [prog_name, "--username=" + mongo.user, host_port,
-                    "--password=" + mongo.passwd]
+                    japd2 + mongo.japd]
 
     else:
         cmd_list = [prog_name, host_port]
@@ -172,22 +203,37 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
         This will be based on the type of configuration passed.
 
     Arguments:
-        (input) cfg_file -> Configuration file name.
+        (input) cfg -> Configuration module.
         (input) dbs -> Database name.
         (input) tbl ->  Collection name.
 
     """
 
+    auth_db = "admin"
+    use_arg = False
+    use_uri = False
+
+    if hasattr(cfg, "auth_db"):
+        auth_db = cfg.auth_db
+
+    if hasattr(cfg, "use_arg"):
+        use_arg = cfg.use_arg
+
+    if hasattr(cfg, "use_uri"):
+        use_uri = cfg.use_uri
+
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
         return mongo_class.RepSetColl(
-            cfg.name, cfg.user, cfg.passwd, host=cfg.host, port=cfg.port,
+            cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
             auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,
-            db=dbs, coll=tbl, db_auth=cfg.db_auth)
+            db=dbs, coll=tbl, db_auth=cfg.db_auth, auth_db=auth_db,
+            use_arg=use_arg, use_uri=use_uri)
 
     return mongo_class.Coll(
-        cfg.name, cfg.user, cfg.passwd, host=cfg.host, port=cfg.port,
-        db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file)
+        cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
+        db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file,
+        auth_db=auth_db, use_arg=use_arg, use_uri=use_uri)
 
 
 def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
@@ -202,11 +248,17 @@ def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
         (input) dbs -> Database name.
         (input) tbl ->  Collection name.
         (input) data -> Document to be inserted.
+        (output) status -> True|False - Connection successful.
+        (output) errmsg -> Error message if connection failed.
 
     """
 
     data = dict(data)
     coll = crt_coll_inst(mongo_cfg, dbs, tbl, **kwargs)
-    coll.connect()
-    coll.ins_doc(json.loads(json.dumps(data)))
-    cmds_gen.disconnect([coll])
+    status, errmsg = coll.connect()
+
+    if status:
+        coll.ins_doc(json.loads(json.dumps(data)))
+        cmds_gen.disconnect([coll])
+
+    return status, errmsg

@@ -47,17 +47,19 @@ class Mongo(object):
 
     """
 
-    def __init__(self):
+    def __init__(self, success):
 
         """Function:  __init__
 
         Description:  Class initialization.
 
         Arguments:
+         (input) success -> True|False - Connection is successful.
 
         """
 
         self.doc = None
+        self.success = success
 
     def connect(self):
 
@@ -69,7 +71,10 @@ class Mongo(object):
 
         """
 
-        return True
+        if self.success:
+            return True, None
+
+        return False, "Error message"
 
     def ins_doc(self, doc):
 
@@ -95,6 +100,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_fail_connection -> Test with failed connection.
         test_ins_doc -> Test ins_doc function.
 
     """
@@ -114,6 +120,23 @@ class UnitTest(unittest.TestCase):
         self.tbl = "TableName"
         self.data = {"key": "value"}
 
+    @mock.patch("mongo_libs.crt_coll_inst")
+    def test_fail_connection(self, mock_inst):
+
+        """Function:  test_fail_connection
+
+        Description:  Test with failed connection.
+
+        Arguments:
+
+        """
+
+        mock_inst.return_value = Mongo(success=False)
+
+        self.assertEqual(
+            mongo_libs.ins_doc(self.mongo_cfg, self.dbs, self.tbl, self.data),
+            (False, "Error message"))
+
     @mock.patch("mongo_libs.cmds_gen.disconnect")
     @mock.patch("mongo_libs.crt_coll_inst")
     def test_ins_doc(self, mock_inst, mock_cmd):
@@ -126,10 +149,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_inst.return_value = Mongo()
+        mock_inst.return_value = Mongo(success=True)
         mock_cmd.return_value = True
-        self.assertFalse(mongo_libs.ins_doc(self.mongo_cfg, self.dbs, self.tbl,
-                                            self.data))
+
+        self.assertEqual(
+            mongo_libs.ins_doc(self.mongo_cfg, self.dbs, self.tbl, self.data),
+            (True, None))
 
 
 if __name__ == "__main__":

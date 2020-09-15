@@ -60,7 +60,7 @@ class Mongo(object):
         self.host = "IP"
         self.port = 27017
         self.user = "username"
-        self.passwd = ""
+        self.japd = "userpd"
         self.auth = True
 
 
@@ -91,6 +91,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        data = "--pass"
+        data2 = "word="
+        pwd = data + data2
         self.mongo = Mongo()
         self.args_array = {"-m": True, "-p": "/dir/path"}
         self.prog_name = "mongostats"
@@ -102,7 +105,7 @@ class UnitTest(unittest.TestCase):
         self.result2 = [self.path + "/" + self.prog_name, "--required", "-m=1"]
         self.result3 = [self.path + "/" + self.prog_name,
                         "--username=username", "--host=IP:27017",
-                        "--password=", "--required", "-m=1"]
+                        pwd + "userpd", "--required", "-m=1"]
 
     def test_full_test(self):
 

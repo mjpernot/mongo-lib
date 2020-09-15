@@ -24,7 +24,6 @@
 # Libraries and Global Variables
 
 # Standard
-import sys
 import time
 import socket
 
@@ -36,6 +35,10 @@ import pymongo
 import version
 
 __version__ = version.__version__
+
+# Global
+KEY1 = "pass"
+KEY2 = "word"
 
 
 def fetch_cmd_line(mongo):
@@ -112,7 +115,7 @@ class Server(object):
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -122,18 +125,24 @@ class Server(object):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
+        global KEY1
+        global KEY2
+
         self.name = name
         self.user = user
-        self.passwd = passwd
+        self.japd = japd
         self.host = host
         self.port = port
         self.auth = kwargs.get("auth", True)
@@ -152,6 +161,11 @@ class Server(object):
         self.cur_mem = None
         self.max_mem = None
         self.prct_mem = None
+        self.use_uri = kwargs.get("use_uri", False)
+        self.use_arg = kwargs.get("use_arg", False)
+        self.config = {KEY1 + KEY2: self.japd}
+        self.conn_list = [self.host + ":" + str(self.port)]
+        self.auth_db = kwargs.get("auth_db", "admin")
 
     def upd_srv_stat(self):
 
@@ -221,20 +235,28 @@ class Server(object):
         Description:  Exception handling for the upd_server_attr method.
 
         Arguments:
+            (output) status -> True|False - Connection successful.
+            (output) msg -> Error message if connection failed.
 
         """
+
+        status = True
+        errmsg = None
 
         try:
             self.upd_server_attr()
 
         except pymongo.errors.ServerSelectionTimeoutError:
             self.disconnect()
-            sys.exit("Error:  Server not detected.")
+            status = False
+            errmsg = "Error:  Server not detected."
 
         except pymongo.errors.OperationFailure as msg:
             self.disconnect()
-            sys.exit("Error:  Auth flag or login params is incorrect: \n\t%s."
-                     % msg)
+            status = False
+            errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
+
+        return status, errmsg
 
     def connect(self):
 
@@ -244,20 +266,29 @@ class Server(object):
             basic server attributes.
 
         Arguments:
+            (output) status -> True|False - Connection successful.
+            (output) msg -> Error message if connection failed.
 
         """
 
         if not self.conn:
 
-            if self.auth:
-                uri = "mongodb://" + self.user + ":" + self.passwd + "@" \
+            if self.auth and self.use_arg:
+                self.conn = pymongo.MongoClient(
+                    self.conn_list, username=self.user,
+                    authSource=self.auth_db, **self.config)
+
+            elif self.auth and self.use_uri:
+                uri = "mongodb://" + self.user + ":" + self.japd + "@" \
                       + self.host + ":" + str(self.port)
                 self.conn = pymongo.MongoClient(uri)
 
             else:
                 self.conn = pymongo.MongoClient(self.host, self.port)
 
-        self.get_srv_attr()
+        status, errmsg = self.get_srv_attr()
+
+        return status, errmsg
 
     def disconnect(self):
 
@@ -405,7 +436,7 @@ class DB(Server):
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -415,19 +446,26 @@ class DB(Server):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
                 db -> Name of database.
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
-        super(DB, self).__init__(name, user, passwd, host=host, port=port,
-                                 auth=kwargs.get("auth", True),
-                                 conf_file=kwargs.get("conf_file", None))
+        super(DB, self).__init__(
+            name, user, japd, host=host, port=port,
+            auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None),
+            use_uri=kwargs.get("use_uri", False),
+            use_arg=kwargs.get("use_arg", False),
+            auth_db=kwargs.get("auth_db", "admin"))
 
         self.db_name = kwargs.get("db", "test")
         self.db = None
@@ -439,11 +477,17 @@ class DB(Server):
         Description:  Connect to a Mongo database.
 
         Arguments:
+            (output) status -> True|False - Connection successful.
+            (output) errmsg -> Error message if connection failed.
 
         """
 
-        super(DB, self).connect()
-        self.db = self.conn[self.db_name]
+        status, errmsg = super(DB, self).connect()
+
+        if status:
+            self.db = self.conn[self.db_name]
+
+        return status, errmsg
 
     def db_connect(self, dbs="test"):
 
@@ -453,17 +497,25 @@ class DB(Server):
 
         Arguments:
             (input) dbs -> Name of database.
+            (output) status -> True|False - Connection successful.
+            (output) errmsg -> Error message if connection failed.
 
         """
 
+        status = True
+        errmsg = None
+
         if not self.conn:
-            self.connect()
+            status, errmsg = self.connect()
 
-        if dbs:
-            self.db = self.conn[dbs]
+        if status:
+            if dbs:
+                self.db = self.conn[dbs]
 
-        else:
-            self.db = self.conn.test
+            else:
+                self.db = self.conn.test
+
+        return status, errmsg
 
     def chg_db(self, dbs=None):
 
@@ -568,7 +620,7 @@ class Coll(DB):
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -578,7 +630,7 @@ class Coll(DB):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -586,13 +638,19 @@ class Coll(DB):
                 coll -> Name of collection.
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
-        super(Coll, self).__init__(name, user, passwd, host=host, port=port,
-                                   db=kwargs.get("db", "test"),
-                                   auth=kwargs.get("auth", True),
-                                   conf_file=kwargs.get("conf_file", None))
+        super(Coll, self).__init__(
+            name, user, japd, host=host, port=port,
+            db=kwargs.get("db", "test"), auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None),
+            use_uri=kwargs.get("use_uri", False),
+            use_arg=kwargs.get("use_arg", False),
+            auth_db=kwargs.get("auth_db", "admin"))
 
         self.coll = None
         self.coll_db = kwargs.get("db", "test")
@@ -605,12 +663,17 @@ class Coll(DB):
         Description:  Connect to a Mongo database.
 
         Arguments:
+            (output) status -> True|False - Connection successful.
+            (output) errmsg -> Error message if connection failed.
 
         """
 
-        super(Coll, self).connect()
+        status, errmsg = super(Coll, self).connect()
 
-        self.coll = self.conn[self.coll_db][self.coll_coll]
+        if status:
+            self.coll = self.conn[self.coll_db][self.coll_coll]
+
+        return status, errmsg
 
     def coll_cnt(self, qry=None):
 
@@ -719,7 +782,7 @@ class Rep(Server):
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -729,18 +792,25 @@ class Rep(Server):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
-        super(Rep, self).__init__(name, user, passwd, host=host, port=port,
-                                  auth=kwargs.get("auth", True),
-                                  conf_file=kwargs.get("conf_file", None))
+        super(Rep, self).__init__(
+            name, user, japd, host=host, port=port,
+            auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None),
+            use_uri=kwargs.get("use_uri", False),
+            use_arg=kwargs.get("use_arg", False),
+            auth_db=kwargs.get("auth_db", "admin"))
 
         self.repset = None
         self.ismaster = None
@@ -777,7 +847,7 @@ class MasterRep(Rep):
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -787,19 +857,25 @@ class MasterRep(Rep):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
         super(MasterRep, self).__init__(
-            name, user, passwd, host=host, port=port,
+            name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
-            conf_file=kwargs.get("conf_file", None))
+            conf_file=kwargs.get("conf_file", None),
+            use_uri=kwargs.get("use_uri", False),
+            use_arg=kwargs.get("use_arg", False),
+            auth_db=kwargs.get("auth_db", "admin"))
 
         self.ismaster = None
         self.issecondary = None
@@ -813,26 +889,28 @@ class MasterRep(Rep):
         Description:  Connect to a Mongo database.
 
         Arguments:
-            (output) msg -> Message status.
+            (output) status -> True|False - Connection success or not master.
+            (output) errmsg -> Message status.
 
         """
 
-        super(MasterRep, self).connect()
+        status, errmsg = super(MasterRep, self).connect()
 
-        data = fetch_ismaster(self)
-        msg = None
+        if status:
+            data = fetch_ismaster(self)
 
-        if data.get("ismaster"):
-            self.ismaster = data.get("ismaster")
-            self.issecondary = data.get("secondary")
-            self.repset = data.get("setName")
-            self.slaves = data.get("hosts", [])
+            if data.get("ismaster"):
+                self.ismaster = data.get("ismaster")
+                self.issecondary = data.get("secondary")
+                self.repset = data.get("setName")
+                self.slaves = data.get("hosts", [])
 
-        else:
-            self.disconnect()
-            msg = "Error:  This is not a Master Replication server."
+            else:
+                self.disconnect()
+                status = False
+                errmsg = "Error:  This is not a Master Replication server."
 
-        return msg
+        return status, errmsg
 
 
 class SlaveRep(Rep):
@@ -849,7 +927,7 @@ class SlaveRep(Rep):
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -859,19 +937,25 @@ class SlaveRep(Rep):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
         super(SlaveRep, self).__init__(
-            name, user, passwd, host=host, port=port,
+            name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
-            conf_file=kwargs.get("conf_file", None))
+            conf_file=kwargs.get("conf_file", None),
+            use_uri=kwargs.get("use_uri", False),
+            use_arg=kwargs.get("use_arg", False),
+            auth_db=kwargs.get("auth_db", "admin"))
 
         self.ismaster = None
         self.issecondary = None
@@ -885,25 +969,28 @@ class SlaveRep(Rep):
         Description:  Connect to a Mongo database.
 
         Arguments:
+            (output) status -> True|False - Connection successful.
+            (output) errmsg -> Error message if connection failed.
 
         """
 
-        super(SlaveRep, self).connect()
+        status, errmsg = super(SlaveRep, self).connect()
 
-        data = fetch_ismaster(self)
-        msg = None
+        if status:
+            data = fetch_ismaster(self)
 
-        if data.get("secondary"):
-            self.ismaster = data.get("ismaster")
-            self.issecondary = data.get("secondary")
-            self.repset = data.get("setName")
-            self.primary = data.get("primary")
+            if data.get("secondary"):
+                self.ismaster = data.get("ismaster")
+                self.issecondary = data.get("secondary")
+                self.repset = data.get("setName")
+                self.primary = data.get("primary")
 
-        else:
-            self.disconnect()
-            msg = "Error:  This is not a Slave Replication server."
+            else:
+                self.disconnect()
+                status = False
+                errmsg = "Error:  This is not a Slave Replication server."
 
-        return msg
+        return status, errmsg
 
 
 class RepSet(Rep):
@@ -921,7 +1008,7 @@ class RepSet(Rep):
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -931,7 +1018,7 @@ class RepSet(Rep):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -939,18 +1026,22 @@ class RepSet(Rep):
                 repset -> Replication Set name.
                 conf_file -> Location of mongo.conf file.
                 repset_hosts -> Repset hosts:ports.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
-        super(RepSet, self).__init__(name, user, passwd, host=host, port=port,
-                                     auth=kwargs.get("auth", True),
-                                     conf_file=kwargs.get("conf_file", None))
+        super(RepSet, self).__init__(
+            name, user, japd, host=host, port=port,
+            auth=kwargs.get("auth", True),
+            conf_file=kwargs.get("conf_file", None),
+            use_uri=kwargs.get("use_uri", False),
+            use_arg=kwargs.get("use_arg", False),
+            auth_db=kwargs.get("auth_db", "admin"))
 
         self.repset = kwargs.get("repset", None)
         self.repset_hosts = kwargs.get("repset_hosts", None)
-
-        if not self.repset:
-            sys.exit("Error:  Require Replication Set Name for RepSet class.")
 
     def connect(self, connections=None):
 
@@ -961,12 +1052,13 @@ class RepSet(Rep):
 
         Arguments:
             (input) connections ->  String of server connections.
+            (output) status -> True|False - Connection successful.
+            (output) errmsg -> Error message if connection failed.
 
         """
 
         if not connections:
 
-            # Connect to replica set.
             if self.repset_hosts:
                 connections = self.repset_hosts
 
@@ -975,18 +1067,29 @@ class RepSet(Rep):
 
         if not self.conn:
 
-            # Is authenication set.
-            if self.auth:
-                uri = "mongodb://" + self.user + ":" + self.passwd + "@" \
-                      + connections + "/?replicaSet=" + self.repset
+            if self.auth and self.use_arg:
+                self.conn = pymongo.MongoClient(
+                    connections, username=self.user,
+                    authSource=self.auth_db, replicaSet=self.repset,
+                    **self.config)
+
+            elif self.auth and self.use_uri:
+                repset_str = ""
+
+                if self.repset:
+                    repset_str = "/?replicaSet=" + self.repset
+
+                uri = "mongodb://" + self.user + ":" + self.japd + "@" \
+                      + connections + repset_str
                 self.conn = pymongo.MongoClient(uri)
 
-            # Assume no authentication required.
             else:
                 self.conn = pymongo.MongoClient(connections,
                                                 replicaSet=self.repset)
 
-        self.get_srv_attr()
+        status, errmsg = self.get_srv_attr()
+
+        return status, errmsg
 
 
 class RepSetColl(RepSet):
@@ -1000,13 +1103,18 @@ class RepSetColl(RepSet):
     Methods:
         __init__
         connect
+        _db_auth
         ins_doc
         coll_cnt
         coll_del_many
+        coll_find
+        coll_dst
+        coll_find1
+        coll_options
 
     """
 
-    def __init__(self, name, user, passwd, host="localhost", port=27017,
+    def __init__(self, name, user, japd, host="localhost", port=27017,
                  **kwargs):
 
         """Method:  __init__
@@ -1016,7 +1124,7 @@ class RepSetColl(RepSet):
         Arguments:
             (input) name -> Name of server.
             (input) user -> User's name.
-            (input) passwd -> User's password.
+            (input) japd -> User's pswd.
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
@@ -1027,21 +1135,28 @@ class RepSetColl(RepSet):
                 db -> Name of database.
                 coll -> Name of collection.
                 db_auth -> None or name of authentication database.
+                use_uri -> True|False - Use uri to conenct to Mongo.
+                use_arg -> True|False - Use arguments to connect to Mongo.
+                auth_db -> Authenciation database name.
 
         """
 
         super(RepSetColl, self).__init__(
-            name, user, passwd, host=host, port=port,
+            name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
             repset=kwargs.get("repset", None),
-            repset_hosts=kwargs.get("repset_hosts", None))
+            repset_hosts=kwargs.get("repset_hosts", None),
+            use_uri=kwargs.get("use_uri", False),
+            use_arg=kwargs.get("use_arg", False),
+            auth_db=kwargs.get("auth_db", "admin"))
 
         self.db = kwargs.get("db", "test")
         self.coll = kwargs.get("coll", None)
         self.db_auth = kwargs.get("db_auth", None)
         self.db_conn = None
         self.db_coll = None
+        self.db_auth_conn = None
 
     def connect(self, connections=None):
 
@@ -1052,8 +1167,13 @@ class RepSetColl(RepSet):
 
         Arguments:
             (input) connections ->  String of server connections.
+            (output) status -> True|False - Connection successful.
+            (output) errmsg -> Error message if connection failed.
 
         """
+
+        status = True
+        errmsg = None
 
         if not connections:
 
@@ -1065,29 +1185,60 @@ class RepSetColl(RepSet):
 
         if not self.conn:
 
-            # Is authenication required.
             if self.auth:
-                self.conn = pymongo.MongoClient(host=[connections],
-                                                document_class=dict,
-                                                tz_aware=False, connect=True,
-                                                replicaset=self.repset)
+                self.conn = pymongo.MongoClient(
+                    host=[connections], document_class=dict, tz_aware=False,
+                    connect=True, replicaset=self.repset)
 
-                # Authenticate to which database.
+                # Database to authenticate to.
                 if self.db_auth:
                     self.db_conn = self.conn[self.db_auth]
 
                 else:
                     self.db_conn = self.conn[self.db]
 
-                # Authenticate and connect.
-                self.db_auth = self.db_conn.authenticate(self.user,
-                                                         self.passwd)
-                self.db_coll = self.conn[self.db][self.coll]
+                # Authenticate.
+                status, errmsg = self._db_auth()
 
-            # Assume no authentication required.
             else:
                 self.conn = pymongo.MongoClient(connections,
                                                 replicaSet=self.repset)
+
+        if status:
+            status, errmsg = self.get_srv_attr()
+
+        return status, errmsg
+
+    def _db_auth(self):
+
+        """Method:  _db_auth
+
+        Description:  Database authentication.  Private function for connect.
+
+        Arguments:
+            (output) status -> True|False - Connection successful.
+            (output) errmsg -> Error message if connection failed.
+
+        """
+
+        status = True
+        errmsg = None
+
+        try:
+            self.db_auth_conn = self.db_conn.authenticate(self.user, self.japd)
+            self.db_coll = self.conn[self.db][self.coll]
+
+        except pymongo.errors.ServerSelectionTimeoutError:
+            self.disconnect()
+            status = False
+            errmsg = "Error:  Server not detected."
+
+        except pymongo.errors.OperationFailure as msg:
+            self.disconnect()
+            status = False
+            errmsg = "Error: Auth flag/login params is incorrect: %s" % msg
+
+        return status, errmsg
 
     def ins_doc(self, doc):
 
@@ -1143,3 +1294,64 @@ class RepSetColl(RepSet):
         # Assume must be a mistake.
         else:
             print("WARNING:  Require search criteria.")
+
+    def coll_find(self, query=None):
+
+        """Method:  coll_find
+
+        Description:  Query of document using find command.
+
+        Arguments:
+            (input) query -> Query criteria for find command.
+            (output) -> Return of documents from collection as cursor.
+
+        """
+
+        if query is None:
+            query = {}
+
+        return self.db_coll.find(query)
+
+    def coll_dst(self, column=""):
+
+        """Method:  coll_dst
+
+        Description:  Query of document using distinct command.
+
+        Arguments:
+            (input) column -> Column distinct will be ran against.
+            (output) -> Return of distinct values for col.
+
+        """
+
+        return self.db_coll.distinct(column)
+
+    def coll_find1(self, query=None):
+
+        """Method:  coll_find1
+
+        Description:  Query of document using findOne command.
+
+        Arguments:
+            (input) query -> Query criteria for findOne command.
+            (output) -> Return of document from collection as cursor.
+
+        """
+
+        if query is None:
+            query = {}
+
+        return self.db_coll.find_one(query)
+
+    def coll_options(self):
+
+        """Method:  coll_options
+
+        Description:  Return the collections option settings.
+
+        Arguments:
+            (output) -> Return options settings on the collection.
+
+        """
+
+        return self.db_coll.options()

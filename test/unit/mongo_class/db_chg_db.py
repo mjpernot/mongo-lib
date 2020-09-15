@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_chg_db.py
+"""Program:  db_chg_db.py
 
     Description:  Unit testing of DB.chg_db in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_chg_db.py
+        test/unit/mongo_class/db_chg_db.py
 
     Arguments:
 
@@ -58,7 +58,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -74,7 +74,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.conn = {"testdb": "testdb"}
         mongo.chg_db("testdb")
@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.conn = {"test": "testdb"}
         mongo.chg_db()
