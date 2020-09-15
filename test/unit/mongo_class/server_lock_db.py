@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_lock_db.py
+"""Program:  server_lock_db.py
 
     Description:  Unit testing of Server.lock_db in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_lock_db.py
+        test/unit/mongo_class/server_lock_db.py
 
     Arguments:
 
@@ -97,7 +97,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -115,7 +115,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.Server(self.name, self.user, self.passwd,
+        mongo = mongo_class.Server(self.name, self.user, self.japd,
                                    self.host, self.port)
         mongo.conn = LockDb()
 

@@ -4,6 +4,53 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.0.0] - 2020-08-17
+Breaking Change.
+
+### Fixed
+- mongo_class.RepSetColl.\_db_auth:  Changed db_auth to db_auth_conn to avoid overwrite of attribute.
+
+### Added
+- mongo_class.RepSetColl.coll_options:  Return the collections option settings.
+- mongo_class.RepSetColl.coll_find1:  Query of document using findOne command.
+- mongo_class.RepSetColl.coll_dst:  Query of document using distinct command.
+- mongo_class.RepSetColl.coll_find:  Query of document using find command.
+- mongo_class.RepSetColl.\_db_auth:  Database authentication, private function for connect method.
+
+### Changed
+- mongo_class.RepSetColl.\_\_init\_\_:  Added db_auth_conn attribute.
+- mongo_class.RepSetColl.connect:  Added try/exception on authentication to database.
+- mongo_libs.ins_doc:  Captured return status from connect, added check for return status and returned status.
+- mongo_class.RepSetColl.connect:  Added get_srv_attr call and return status to calling function.
+- mongo_class.SlaveRep.connect:  Captured return status from connect, added check for return status and returned status.
+- mongo_class.MasterRep.connect:  Captured return status from connect, added check for return status and returned status.
+- mongo_class.Coll.connect:  Captured return status from connect, added check for return status and returned status.
+- mongo_class.DB.db_connect:  Captured return status from connect, added check for return status and returned status.
+- mongo_class.DB.connect:  Captured return status from connect, added check for return status and returned status.
+- mongo_class.RepSet.connect:  Captured return status from get_srv_attr and returned status.
+- mongo_class.Server.connect:  Captured return status from get_srv_attr and returned status.
+- mongo_class.Server.get_srv_attr:  Removed sys.exit and replaced with status message return.
+- mongo_class.RepSet.\_\_init\_\_:  Removed sys.exit on checking existence of repset attribute.
+- mongo_class.RepSet.connect:  Changed uri connection to handle a null repset attribute setting.
+- mongo_libs.crt_coll_inst:  Added in new class attributes to instance call.
+- mongo_libs.create_slv_array:  Added in new class attributes to instance call.
+- mongo_libs.create_instance:  Added in new class attributes to instance call.
+- mongo_class.RepSetColl.\_\_init\_\_:  Passed new attributes to super command for the RepSet class.
+- mongo_class.RepSet.connect:  Added capability to connect into Mongo using arguments.
+- mongo_class.RepSet.\_\_init\_\_:  Passed new attributes to super command for the Rep class.
+- mongo_class.SlaveRep.\_\_init\_\_:  Passed new attributes to super command for the Rep class.
+- mongo_class.MasterRep.\_\_init\_\_:  Passed new attributes to super command for the Rep class.
+- mongo_class.Rep.\_\_init\_\_:  Passed new attributes to super command for the Server class.
+- mongo_class.Coll.\_\_init\_\_:  Passed new attributes to super command for the DB class.
+- mongo_class.DB.\_\_init\_\_:  Passed new attributes to super command for the Server class.
+- mongo_class.Server.connect:  Added capability to connect into Mongo using arguments.
+- mongo_class.Server.\_\_init\_\_:  Added a number of new attributes to handle connecting into Mongo using arguments.
+- Documentation updates.
+
+### Removed
+- mongo_class:  Removed sys module.
+
+
 ## [3.1.0] - 2020-07-09
 ### Fixed
 - mongo_class.RepSetColl.\_\_init\_\_:  Initialized db_conn and db_coll attributes.

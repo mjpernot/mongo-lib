@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_ins_doc.py
+"""Program:  repsetcoll_ins_doc.py
 
     Description:  Unit testing of RepSetColl.ins_doc in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_ins_doc.py
+        test/unit/mongo_class/repsetcoll_ins_doc.py
 
     Arguments:
 
@@ -97,7 +97,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -116,9 +116,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset)
         mongo.db_coll = InsDoc()
 
         self.assertFalse(mongo.ins_doc(self.doc))

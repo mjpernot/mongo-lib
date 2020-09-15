@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  RepSetColl_coll_cnt.py
+"""Program:  repsetcoll_coll_cnt.py
 
     Description:  Unit testing of RepSetColl.coll_cnt in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/RepSetColl_coll_cnt.py
+        test/unit/mongo_class/repsetcoll_coll_cnt.py
 
     Arguments:
 
@@ -98,7 +98,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -117,9 +117,9 @@ class UnitTest(unittest.TestCase):
         """
 
         qry = {"QueryHere"}
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset)
         mongo.db_coll = CollCnt()
 
         self.assertEqual(mongo.coll_cnt(qry), 10)
@@ -134,9 +134,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.RepSetColl(self.name, self.user, self.passwd,
-                                       self.host, self.port,
-                                       repset=self.repset)
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset)
         mongo.db_coll = CollCnt()
 
         self.assertEqual(mongo.coll_cnt(), 10)

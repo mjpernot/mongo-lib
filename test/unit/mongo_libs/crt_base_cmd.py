@@ -56,7 +56,7 @@ class Mongo(object):
 
         self.name = "name"
         self.user = "user"
-        self.passwd = ""
+        self.japd = "userpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
@@ -90,11 +90,13 @@ class UnitTest(unittest.TestCase):
         """
 
         host = "--host="
+        data = "--pass"
+        data2 = "word="
         self.uname = "--username="
-        self.pwd = "--password="
+        self.japd2 = data + data2
         self.name = "name"
         self.user = "user"
-        self.passwd = ""
+        self.japd = "userpd"
         self.host = "host"
         self.port = 27017
         self.auth = True
@@ -134,7 +136,7 @@ class UnitTest(unittest.TestCase):
         mongo = Mongo()
         self.assertEqual(mongo_libs.crt_base_cmd(mongo, self.prog_name),
                          [self.prog_name, self.uname + self.user,
-                          self.host_port3, self.pwd + self.passwd])
+                          self.host_port3, self.japd2 + self.japd])
 
     def test_repset(self):
 
@@ -151,7 +153,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(mongo_libs.crt_base_cmd(mongo, self.prog_name,
                                                  use_repset=True),
                          [self.prog_name, self.uname + self.user,
-                          self.host_port2, self.pwd + self.passwd])
+                          self.host_port2, self.japd2 + self.japd])
 
     def test_repset_hosts(self):
 
@@ -167,7 +169,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(mongo_libs.crt_base_cmd(mongo, self.prog_name,
                                                  use_repset=True),
                          [self.prog_name, self.uname + self.user,
-                          self.host_port, self.pwd + self.passwd])
+                          self.host_port, self.japd2 + self.japd])
 
 
 if __name__ == "__main__":

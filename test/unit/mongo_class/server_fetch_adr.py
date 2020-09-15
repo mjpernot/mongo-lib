@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_fetch_adr.py
+"""Program:  server_fetch_adr.py
 
     Description:  Unit testing of Server.fetch_adr in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_fetch_adr.py
+        test/unit/mongo_class/server_fetch_adr.py
 
     Arguments:
 
@@ -81,7 +81,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -98,7 +98,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.Rep(self.name, self.user, self.passwd, self.host,
+        mongo = mongo_class.Rep(self.name, self.user, self.japd, self.host,
                                 self.port)
         mongo.conn = Conn()
 

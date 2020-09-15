@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Server_is_primary.py
+"""Program:  server_is_primary.py
 
     Description:  Unit testing of Server.is_primary in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Server_is_primary.py
+        test/unit/mongo_class/server_is_primary.py
 
     Arguments:
 
@@ -81,7 +81,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -100,7 +100,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.Rep(self.name, self.user, self.passwd, self.host,
+        mongo = mongo_class.Rep(self.name, self.user, self.japd, self.host,
                                 self.port)
         mongo.conn = Conn()
 

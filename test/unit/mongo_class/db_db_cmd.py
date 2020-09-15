@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  DB_db_cmd.py
+"""Program:  db_db_cmd.py
 
     Description:  Unit testing of DB.db_cmd in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/DB_db_cmd.py
+        test/unit/mongo_class/db_db_cmd.py
 
     Arguments:
 
@@ -102,7 +102,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -118,7 +118,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.db = DBValidate()
 
@@ -134,7 +134,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(self.name, self.user, self.passwd,
+        mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
         mongo.db = DBValidate()
 

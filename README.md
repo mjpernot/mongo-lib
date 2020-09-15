@@ -8,8 +8,11 @@
 ###  This README file is broken down into the following sections:
  * Prerequisites
  * Installation
+   - Pip Installation
+   - Git Installation
  * Testing
    - Unit
+   - Integration
 
 
 # Prerequisites:
@@ -157,5 +160,89 @@ test/unit/mongodb_lib/unit_test_run.sh
 cd {Python_Project}/mongo-lib
 test/unit/mongodb_class/code_coverage.sh
 test/unit/mongodb_lib/code_coverage.sh
+```
+
+# Integration Testing:
+
+NOTE:  Integration testing will require access to a Mongo database server which is part of a replica set.
+
+### Installation:
+
+Install the project using git.
+  * Replace **{Python_Project}** with the baseline path of the python program.
+  * Replace **{Branch_Name}** with the name of the Git branch being tested.  See Git Merge Request.
+
+```
+umask 022
+cd {Python_Project}
+git clone --branch {Branch_Name} git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/mongo-lib.git
+```
+
+Install/upgrade system modules.
+
+```
+cd mongo-lib
+sudo bash
+umask 022
+pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
+exit
+```
+
+### Configuration:
+
+Create Mongo configuration files.
+
+Two configuration files will be created, one with master as main connection and one with slave as main connection.
+
+Make the appropriate change to the environment.
+  * Change these entries in the Mongo setup:
+    - user = "USER"
+    - passwd = "PASSWORD"
+    - host = "IP_ADDRESS"
+    - name = "HOSTNAME"
+    - port = 27017
+    - conf_file = None
+    - auth = True
+
+  * Connecting to a Mongo replica set.
+    - repset = "REPLICA_SET_NAME"
+    - repset_hosts = "HOST_1:PORT, HOST_2:PORT, ..."
+    - db_auth = "AUTHENTICATION_DATABASE"
+
+```
+cd test/integration/config
+cp mongo.py.TEMPLATE mongo.py
+vim mongo.py
+chmod 600 mongo.py
+cp mongo.py.TEMPLATE slave_mongo.py
+vim slave_mongo.py
+chmod 600 slave_mongo.py
+```
+
+### Testing mongo_class.py
+
+```
+cd {Python_Project}/mongo-lib
+test/integration/mongo_class/integration_test_run.sh
+```
+
+### Code Coverage mongo_class.py:
+
+```
+cd {Python_Project}/mongo-lib
+test/integration/mongo_class/code_coverage.sh
+```
+
+### Testing mongo--lib.py:
+
+```
+cd {Python_Project}/mongo-lib
+test/integration/mongo_libs/integration_test_run.sh
+```
+
+### Code Coverage mongo-lib.py:
+```
+cd {Python_Project}/mongo-lib
+test/integration/mongo_libs/code_coverage.sh
 ```
 

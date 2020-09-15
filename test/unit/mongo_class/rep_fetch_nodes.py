@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Rep_fetch_nodes.py
+"""Program:  rep_fetch_nodes.py
 
     Description:  Unit testing of Rep.fetch_nodes in mongo_class.py.
 
     Usage:
-        test/unit/mongo_class/Rep_fetch_nodes.py
+        test/unit/mongo_class/rep_fetch_nodes.py
 
     Arguments:
 
@@ -81,7 +81,7 @@ class UnitTest(unittest.TestCase):
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
-        self.passwd = "mongo_pwd"
+        self.japd = "mongo_pd"
         self.host = "host_server"
         self.port = 27017
         self.dbs = "test"
@@ -100,7 +100,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.Rep(self.name, self.user, self.passwd, self.host,
+        mongo = mongo_class.Rep(self.name, self.user, self.japd, self.host,
                                 self.port)
         mongo.conn = Conn()
 

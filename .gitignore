@@ -1,6 +1,7 @@
 *.HOLD
 *.swp
 *.pyc
+test/integration/config/*.py
 .coverage
 coverage.xml
 lib
