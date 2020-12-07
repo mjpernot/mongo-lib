@@ -5,8 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.1.0] - 2020-12-01
-- Update to use pymongo v3.8.0.
-- Update to be used in FIPS environment.
+- Updated to use pymongo v3.8.0.
+- Updated to be used in FIPS environment.
 
 
 ## [4.0.0] - 2020-08-17
