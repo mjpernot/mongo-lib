@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Added authentication mechanism to connection methods.
 
 ### Changed
+- mongo_class.MasterRep.\_\_init\_\_:  Added auth_mech argument to super class function call.
 - mongo_class.Rep.\_\_init\_\_:  Added auth_mech argument to super class function call.
 - mongo_class.Coll.\_\_init\_\_:  Added auth_mech argument to super class function call.
 - mongo_class.DB.\_\_init\_\_:  Added auth_mech argument to super class function call.
