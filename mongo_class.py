@@ -1043,7 +1043,8 @@ class RepSet(Rep):
                 repset_hosts -> Repset hosts:ports.
                 use_uri -> True|False - Use uri to conenct to Mongo.
                 use_arg -> True|False - Use arguments to connect to Mongo.
-                auth_db -> Authenciation database name.
+                auth_db -> Authentication database name.
+                auth_mech -> Authentication mechanism for connecting.
 
         """
 
@@ -1053,7 +1054,8 @@ class RepSet(Rep):
             conf_file=kwargs.get("conf_file", None),
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
-            auth_db=kwargs.get("auth_db", "admin"))
+            auth_db=kwargs.get("auth_db", "admin"),
+            auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1"))
 
         self.repset = kwargs.get("repset", None)
         self.repset_hosts = kwargs.get("repset_hosts", None)
