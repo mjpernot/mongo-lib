@@ -31,6 +31,7 @@
     - Locate the auth.py file python installed packages on the system in the pymongo package directory.
     - Edit the file and locate the \_password_digest function.
     - In the \_password_digest function there is an line that should match: "md5hash = hashlib.md5()".  Change it to "md5hash = hashlib.md5(usedforsecurity=False)".
+    - Lastly, it will require the configuration file entry auth_mech to be set to: SCRAM-SHA-1 or SCRAM-SHA-256.
 
 
 # Installation:
@@ -146,17 +147,24 @@ exit
 Create Mongo configuration files.  Two configuration files will be created, one with master as main connection and one with slave as main connection.  Make the appropriate change to the environment.
   * Change these entries in the Mongo setup:
     - user = "USER"
-    - japd = "PWORD"
-    - host = "IP_ADDRESS"
+    - japd = "PSWORD"
+    - host = "HOST_IP"
     - name = "HOSTNAME"
     - port = 27017
     - conf_file = None
     - auth = True
+    - auth_db = "admin"
+    - auth_mech = "SCRAM-SHA-1"
 
   * Connecting to a Mongo replica set.
     - repset = "REPLICA_SET_NAME"
     - repset_hosts = "HOST_1:PORT, HOST_2:PORT, ..."
     - db_auth = "AUTHENTICATION_DATABASE"
+
+  * Notes for auth_mech configuration entry:
+    - NOTE 1:  SCRAM-SHA-256 only works for Mongodb 4.0 and better.
+    - NOTE 2:  FIPS 140-2 environment requires SCRAM-SHA-1 or SCRAM-SHA-256.
+    - NOTE 3:  MONGODB-CR is not suppoerted in Mongodb 4.0 and better.
 
 ```
 cd test/integration/config
