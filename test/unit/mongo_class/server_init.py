@@ -41,6 +41,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_config_attr3 -> Test with SCRAM-SHA-1 setting.
+        test_config_attr2 -> Test with MONGODB-CR setting.
         test_auth_mech -> Test passing arg to auth_mech attribute.
         test_default_auth_mech -> Test auth_mech default setting.
         test_uptime_attr -> Test uptime attribute.
@@ -96,6 +98,56 @@ class UnitTest(unittest.TestCase):
         self.conf_file = "Config file"
         self.auth_mech = "MONGODB-CR"
         self.auth_mech2 = "SCRAM-SHA-1"
+        self.config2 = {key1 + key2: self.japd,
+                        "authMechanism": self.auth_mech2}
+
+    def test_config_attr3(self):
+
+        """Function:  test_config_attr3
+
+        Description:  Test with SCRAM-SHA-1 setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            auth_mech=self.auth_mech2)
+
+        self.assertEqual(mongo.config, self.config2)
+
+    def test_config_attr2(self):
+
+        """Function:  test_config_attr2
+
+        Description:  Test with MONGODB-CR setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            auth_mech=self.auth_mech)
+
+        self.assertEqual(mongo.config, self.config)
+
+    def test_auth_mech2(self):
+
+        """Function:  test_auth_mech
+
+        Description:  Test passing arg to auth_mech attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            auth_mech=self.auth_mech)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
 
     def test_auth_mech(self):
 
@@ -126,7 +178,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, host=self.host, port=self.port)
 
-        self.assertEqual(mongo.auth_mech, self.auth_mech)
+        self.assertEqual(mongo.auth_mech, self.auth_mech2)
 
     def test_uptime_attr(self):
 
@@ -322,7 +374,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, host=self.host, port=self.port)
 
-        self.assertEqual(mongo.config, self.config)
+        self.assertEqual(mongo.config, self.config2)
 
     def test_using_no_auth_db(self):
 
