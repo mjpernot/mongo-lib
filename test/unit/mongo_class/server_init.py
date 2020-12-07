@@ -41,6 +41,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_auth_mech -> Test passing arg to auth_mech attribute.
+        test_default_auth_mech -> Test auth_mech default setting.
         test_uptime_attr -> Test uptime attribute.
         test_port_attr -> Test port attribute.
         test_host_attr -> Test host attribute.
@@ -92,6 +94,39 @@ class UnitTest(unittest.TestCase):
         self.config = {key1 + key2: self.japd}
         self.conn_list = [self.host + ":" + str(self.port)]
         self.conf_file = "Config file"
+        self.auth_mech = "MONGODB-CR"
+        self.auth_mech2 = "SCRAM-SHA-1"
+
+    def test_auth_mech(self):
+
+        """Function:  test_auth_mech
+
+        Description:  Test passing arg to auth_mech attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            auth_mech=self.auth_mech2)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech2)
+
+    def test_default_auth_mech(self):
+
+        """Function:  test_default_auth_mech
+
+        Description:  Test auth_mech default setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
 
     def test_uptime_attr(self):
 
