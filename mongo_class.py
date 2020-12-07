@@ -169,6 +169,9 @@ class Server(object):
         self.auth_db = kwargs.get("auth_db", "admin")
         self.auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1")
 
+        if self.auth_mech != "MONGODB-CR":
+            self.config["authMechanism"] = self.auth_mech
+
     def upd_srv_stat(self):
 
         """Method:  upd_srv_stat
