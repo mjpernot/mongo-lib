@@ -6,7 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [4.1.0] - 2020-12-01
 - Updated to use pymongo v3.8.0.
-- Updated to be used in FIPS environment.
+- Updated to be used in FIPS 140-2 environment.
 - Added authentication mechanism to connection methods.
 
 ### Changed
