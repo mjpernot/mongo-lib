@@ -129,11 +129,12 @@ class Server(object):
             (input) host -> 'localhost' or host name or IP.
             (input) port -> '27017' or port for Mongo.
             (input) kwargs:
-                auth -> True|False - Authenication on.
+                auth -> True|False - Authentication on.
                 conf_file -> Location of mongo.conf file.
                 use_uri -> True|False - Use uri to conenct to Mongo.
                 use_arg -> True|False - Use arguments to connect to Mongo.
-                auth_db -> Authenciation database name.
+                auth_db -> Authentication database name.
+                auth_mech -> Authentication mechanism for connecting.
 
         """
 
@@ -166,6 +167,7 @@ class Server(object):
         self.config = {KEY1 + KEY2: self.japd}
         self.conn_list = [self.host + ":" + str(self.port)]
         self.auth_db = kwargs.get("auth_db", "admin")
+        self.auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1")
 
     def upd_srv_stat(self):
 

@@ -7,6 +7,10 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [4.1.0] - 2020-12-01
 - Updated to use pymongo v3.8.0.
 - Updated to be used in FIPS environment.
+- Added authenitcation mechanism to connection methods.
+
+### Changed
+- mongo_class.Server.\_\_init\_\_:  Added authentication mechanism attribute to class.
 
 
 ## [4.0.0] - 2020-08-17
