@@ -241,6 +241,30 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
         auth_db=auth_db, use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech)
 
 
+def disconnect(*args):
+
+    """Function:  disconnect
+
+    Description:  Disconnects a class database connection.  Will check to see
+        if an argument is an array; if so will loop on the array to disconnect
+        all connections.  Will require a disconnect method within the class.
+        The disconnect method will be particular to that class.
+
+    Arguments:
+        (input) *arg -> One or more connection instances.
+
+    """
+
+    for server in args:
+
+        if isinstance(server, list):
+            for srv in server:
+                srv.disconnect()
+
+        else:
+            server.disconnect()
+
+
 def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
 
     """Function:  ins_doc

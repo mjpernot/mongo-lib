@@ -10,6 +10,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Added authentication mechanism to connection methods.
 - Replaced pymongo.MongoClient.authenticate as it is being deprecated from the library module.
 
+### Added
+- mongo_libs.disconnect:  Disconnects a class database connection.
+
 ### Changed
 - mongo_class.RepSetColl.connect:  Refactored method to remove the use of pymongo.MongoClient.authenticate.
 - mongo_libs.crt_coll_inst:  Add authentication mechanism to the Coll and RepSetColl class arguments.
