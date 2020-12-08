@@ -1190,9 +1190,6 @@ class RepSetColl(RepSet):
 
         """
 
-        status = True
-        errmsg = None
-
         if not connections:
 
             if self.repset_hosts:
@@ -1205,25 +1202,19 @@ class RepSetColl(RepSet):
 
             if self.auth:
                 self.conn = pymongo.MongoClient(
-                    host=[connections], document_class=dict, tz_aware=False,
-                    connect=True, replicaset=self.repset)
+                    host=[connections], username=self.user,
+                    authSource=self.auth_db, document_class=dict,
+                    tz_aware=False, connect=True, replicaSet=self.repset,
+                    **self.config)
 
-                # Database to authenticate to.
-                if self.db_auth:
-                    self.db_conn = self.conn[self.db_auth]
-
-                else:
-                    self.db_conn = self.conn[self.db]
-
-                # Authenticate.
-                status, errmsg = self._db_auth()
+                if self.conn:
+                    self.db_coll = self.conn[self.db][self.coll]
 
             else:
                 self.conn = pymongo.MongoClient(connections,
                                                 replicaSet=self.repset)
 
-        if status:
-            status, errmsg = self.get_srv_attr()
+        status, errmsg = self.get_srv_attr()
 
         return status, errmsg
 
