@@ -213,6 +213,7 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
     auth_db = "admin"
     use_arg = False
     use_uri = False
+    auth_mech = "SCRAM-SHA-1"
 
     if hasattr(cfg, "auth_db"):
         auth_db = cfg.auth_db
@@ -223,18 +224,21 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
     if hasattr(cfg, "use_uri"):
         use_uri = cfg.use_uri
 
+    if hasattr(cfg, "auth_mech"):
+        auth_mech = cfg.auth_mech
+
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
         return mongo_class.RepSetColl(
             cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
             auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,
             db=dbs, coll=tbl, db_auth=cfg.db_auth, auth_db=auth_db,
-            use_arg=use_arg, use_uri=use_uri)
+            use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech)
 
     return mongo_class.Coll(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file,
-        auth_db=auth_db, use_arg=use_arg, use_uri=use_uri)
+        auth_db=auth_db, use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech)
 
 
 def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
