@@ -260,9 +260,10 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_uri=True, auth_db=True,
-            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
-            coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
+            port=self.cfg.port, auth=True, use_uri=True,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
+            db=self.dbs)
         mongo.connect()
 
         self.assertTrue(mongo.use_uri)
@@ -279,9 +280,10 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_uri=True, auth_db=True,
-            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
-            coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
+            port=self.cfg.port, auth=True, use_uri=True,
+            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
+            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
+            db=self.dbs)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -374,7 +376,7 @@ class UnitTest(unittest.TestCase):
         """
 
         msg = "Authentication failed."
-        errmsg = "Error: Auth flag/login params is incorrect: %s" % msg
+        errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
