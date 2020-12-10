@@ -15,7 +15,7 @@ pipeline {
                 virtualenv test_env
                 source test_env/bin/activate
                 pip2 install mock==2.0.0 --user
-                pip2 install pymongo==3.2.0 --user
+                pip2 install pymongo==3.8.0 --user
                 ./test/unit/mongo_class/fetch_cmd_line.py
                 ./test/unit/mongo_class/fetch_db_info.py
                 ./test/unit/mongo_class/fetch_ismaster.py
@@ -71,6 +71,7 @@ pipeline {
                 ./test/unit/mongo_libs/create_slv_array.py
                 ./test/unit/mongo_libs/crt_base_cmd.py
                 ./test/unit/mongo_libs/crt_coll_inst.py
+                ./test/unit/mongo_libs/disconnect.py
                 ./test/unit/mongo_libs/ins_doc.py
                 deactivate
                 rm -rf test_env

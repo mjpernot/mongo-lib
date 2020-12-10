@@ -137,7 +137,7 @@ class UnitTest(unittest.TestCase):
             mongo_libs.ins_doc(self.mongo_cfg, self.dbs, self.tbl, self.data),
             (False, "Error message"))
 
-    @mock.patch("mongo_libs.cmds_gen.disconnect")
+    @mock.patch("mongo_libs.disconnect")
     @mock.patch("mongo_libs.crt_coll_inst")
     def test_ins_doc(self, mock_inst, mock_cmd):
 

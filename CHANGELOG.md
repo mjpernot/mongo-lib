@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.1.0] - 2020-12-01
+- Updated to use pymongo v3.8.0.
+- Updated to be used in FIPS 140-2 environment.
+- Added authentication mechanism to connection methods.
+- Replaced pymongo.MongoClient.authenticate as it is being deprecated from the library module.
+
+### Added
+- mongo_libs.disconnect:  Disconnects a class database connection.
+
+### Changed
+- mongo_libs.ins_doc:  Replaced cmds_gen.disconnect with internal call to disconnect function.
+- mongo_class.RepSetColl.connect:  Refactored method to remove the use of pymongo.MongoClient.authenticate.
+- mongo_libs.crt_coll_inst:  Add authentication mechanism to the Coll and RepSetColl class arguments.
+- mongo_libs.create_slv_array:  Add authentication mechanism to the SlaveRep class arguments.
+- mongo_class.RepSetColl.\_\_init\_\_:  Added auth_mech argument to super class function call.
+- mongo_class.RepSet.\_\_init\_\_:  Added auth_mech argument to super class function call.
+- mongo_class.SlaveRep.\_\_init\_\_:  Added auth_mech argument to super class function call.
+- mongo_class.MasterRep.\_\_init\_\_:  Added auth_mech argument to super class function call.
+- mongo_class.Rep.\_\_init\_\_:  Added auth_mech argument to super class function call.
+- mongo_class.Coll.\_\_init\_\_:  Added auth_mech argument to super class function call.
+- mongo_class.DB.\_\_init\_\_:  Added auth_mech argument to super class function call.
+- mongo_class.Server.\_\_init\_\_:  Added authMechanism to config attribute if not MONGODB-CR authentication mechanism.
+- mongo_class.Server.\_\_init\_\_:  Added authentication mechanism attribute to class.
+- Documentation updates.
+
+### Deprecated
+- mongo_class.RepSetColl.\_db_auth:  Method is being replaced due to the deprecation of pymongo.MongoClient.authenticate.
+
+
 ## [4.0.0] - 2020-08-17
 Breaking Change.
 

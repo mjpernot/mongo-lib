@@ -42,6 +42,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_auth_mech -> Test with authentication mechanism passed.
+        test_no_auth_mech -> Test with no authentication mechanism passed.
         test_new_attributes -> Test new use_uri, use_arg, and auth_db attrs.
         test_create_slv_array -> Test create_slv_array function.
 
@@ -74,6 +76,44 @@ class UnitTest(unittest.TestCase):
                       "host": "host", "port": 27017, "auth": True,
                       "conf_file": "conf_file", "auth_db": "admin",
                       "use_uri": False, "use_arg": True}]
+        self.cfg3 = [{"name": "name", "user": "user", "japd": "userpd",
+                      "host": "host", "port": 27017, "auth": True,
+                      "conf_file": "conf_file", "mech_auth": "SCRAM-SHA-1"},
+                     {"name": "name", "user": "user", "japd": "userpd",
+                      "host": "host", "port": 27017, "auth": True,
+                      "conf_file": "conf_file", "auth_db": "admin",
+                      "use_uri": False, "use_arg": True,
+                      "mech_auth": "SCRAM-SHA-1"}]
+
+    @mock.patch("mongo_libs.mongo_class.SlaveRep")
+    def test_auth_mech(self, mock_mongo):
+
+        """Function:  test_auth_mech
+
+        Description:  Test with authentication mechanism passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = True
+
+        self.assertEqual(len(mongo_libs.create_slv_array(self.cfg3)), 2)
+
+    @mock.patch("mongo_libs.mongo_class.SlaveRep")
+    def test_no_auth_mech(self, mock_mongo):
+
+        """Function:  test_no_auth_mech
+
+        Description:  Test with no authentication mechanism passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = True
+
+        self.assertEqual(len(mongo_libs.create_slv_array(self.cfg)), 1)
 
     @mock.patch("mongo_libs.mongo_class.SlaveRep")
     def test_new_attributes(self, mock_mongo):

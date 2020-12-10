@@ -85,6 +85,12 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_auth_mech4 -> Test with authenticate mechanism passed.
+        test_auth_mech3 -> Test with authenticate mechanism passed.
+        test_auth_mech2 -> Test with authenticate mechanism passed.
+        test_auth_mech -> Test with authenticate mechanism passed.
+        test_no_auth_mech2 -> Test with no authenticate mechanism passed.
+        test_no_auth_mech -> Test with no authenticate mechanism passed.
         test_db_auth_passed2 -> Test with db_auth passed.
         test_db_auth_passed -> Test with db_auth passed.
         test_coll_passed2 -> Test with coll passed.
@@ -144,6 +150,153 @@ class UnitTest(unittest.TestCase):
         self.conn = "Mongo_Connection"
         self.conn2 = {"db_name": RepSetColl(), "test": {"coll_name": True}}
         self.dbn = "MyDatabase"
+        self.auth_mech = "SCRAM-SHA-1"
+        self.auth_mech2 = "MONGODB-CR"
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_auth_mech4(self, mock_mongo):
+
+        """Function:  test_auth_mech4
+
+        Description:  Test with authenticate mechanism passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri,
+            auth_mech=self.auth_mech2)
+        mongo.connect()
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech2)
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_auth_mech3(self, mock_mongo):
+
+        """Function:  test_auth_mech3
+
+        Description:  Test with authenticate mechanism passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri,
+            auth_mech=self.auth_mech2)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_auth_mech2(self, mock_mongo):
+
+        """Function:  test_auth_mech2
+
+        Description:  Test with authenticate mechanism passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri,
+            auth_mech=self.auth_mech)
+        mongo.connect()
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_auth_mech(self, mock_mongo):
+
+        """Function:  test_auth_mech
+
+        Description:  Test with authenticate mechanism passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri,
+            auth_mech=self.auth_mech)
+
+        self.assertEqual(mongo.connect(), (True, None))
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_no_auth_mech2(self, mock_mongo):
+
+        """Function:  test_no_auth_mech2
+
+        Description:  Test with no authenticate mechanism passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri)
+        mongo.connect()
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
+
+    @mock.patch("mongo_class.Server.get_srv_attr",
+                mock.Mock(return_value=(True, None)))
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_no_auth_mech(self, mock_mongo):
+
+        """Function:  test_no_auth_mech
+
+        Description:  Test with no authenticate mechanism passed.
+
+        Arguments:
+
+        """
+
+        mock_mongo.return_value = {"db_name": RepSetColl(),
+                                   "test": {"coll_name": True}}
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
+            db=self.dbs, auth=True, use_uri=self.use_uri)
+
+        self.assertEqual(mongo.connect(), (True, None))
 
     @mock.patch("mongo_class.Server.get_srv_attr",
                 mock.Mock(return_value=(True, None)))

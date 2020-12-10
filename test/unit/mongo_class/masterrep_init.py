@@ -41,6 +41,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_config_attr3 -> Test with SCRAM-SHA-1 setting.
+        test_config_attr2 -> Test with MONGODB-CR setting.
         test_slaves_attr -> Test slaves attribute.
         test_repset_attr -> Test repset attribute.
         test_issecondary_attr -> Test issecondary attribute.
@@ -88,6 +90,42 @@ class UnitTest(unittest.TestCase):
         self.config = {key1 + key2: self.japd}
         self.conn_list = [self.host + ":" + str(self.port)]
         self.conf_file = "Config file"
+        self.auth_mech = "MONGODB-CR"
+        self.auth_mech2 = "SCRAM-SHA-1"
+        self.config2 = {key1 + key2: self.japd,
+                        "authMechanism": self.auth_mech2}
+
+    def test_config_attr3(self):
+
+        """Function:  test_config_attr3
+
+        Description:  Test with SCRAM-SHA-1 setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.MasterRep(
+            self.name, self.user, self.japd, self.host, self.port,
+            auth_mech=self.auth_mech2)
+
+        self.assertEqual(mongo.config, self.config2)
+
+    def test_config_attr2(self):
+
+        """Function:  test_config_attr2
+
+        Description:  Test with MONGODB-CR setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.MasterRep(
+            self.name, self.user, self.japd, self.host, self.port,
+            auth_mech=self.auth_mech)
+
+        self.assertEqual(mongo.config, self.config)
 
     def test_slaves_attr(self):
 
@@ -213,7 +251,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.MasterRep(self.name, self.user, self.japd,
                                       self.host, self.port)
 
-        self.assertEqual(mongo.config, self.config)
+        self.assertEqual(mongo.config, self.config2)
 
     def test_using_no_auth_db(self):
 

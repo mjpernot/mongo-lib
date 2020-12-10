@@ -2,14 +2,14 @@
 # Classification (U)
 
 # Description:
-  This project consists of a number of Python files that are common function libraries and classes for connecting to and operating in a Mongo database.  These programs are not standalone programs, but are available for python programs to utilize.
+  This library module consists of a number of Python files that are common function libraries and classes for connecting to and operating in a Mongo database/replica set.
 
 
 ###  This README file is broken down into the following sections:
  * Prerequisites
+   - FIPS Environment
  * Installation
    - Pip Installation
-   - Git Installation
  * Testing
    - Unit
    - Integration
@@ -26,46 +26,33 @@
     - lib/gen_libs
     - lib/cmds_gen
 
+  * FIPS Environment
+    If operating in a FIPS 104-2 environment, this package will require at least a minimum of pymongo==3.8.0 or better.  It will also require a manual change to the auth.py module in the pymongo package.  See below for changes to auth.py.
+    - Locate the auth.py file python installed packages on the system in the pymongo package directory.
+    - Edit the file and locate the \_password_digest function.
+    - In the \_password_digest function there is an line that should match: "md5hash = hashlib.md5()".  Change it to "md5hash = hashlib.md5(usedforsecurity=False)".
+    - Lastly, it will require the configuration file entry auth_mech to be set to: SCRAM-SHA-1 or SCRAM-SHA-256.
+
 
 # Installation:
-  There are two types of installs: pip and git.
 
 ### Pip Installation:
+  * Replace **{Python_Project}** with the baseline path of the python program.
   * Replace **{Other_Python_Project}** with the baseline path of another python program.
 
 ##### Create requirements file in another program's project to install mongo-lib as a library module.
 
-Create requirements-mongo-lib.txt file:
+Create requirements-mongo-lib.txt and requirements-python-lib.txt files:
 
 ```
-vim {Other_Python_Project}/requirements-mongo-lib.txt
-```
-
-Add the following lines to the requirements-mongo-lib.txt file:
-
-```
-git+ssh://git@sc.appdev.proj.coe.ic.gov/JAC-DSXD/mongo-lib.git#egg=mongo-lib
-```
-
-Create requirements-python-lib.txt file:
-```
-vim {Other_Python_Project}/requirements-python-lib.txt
-```
-
-Add the following lines to the requirements-python-lib.txt file:
-
-```
-git+ssh://git@sc.appdev.proj.coe.ic.gov/JAC-DSXD/python-lib.git#egg=python-lib
+cd {Python_Project}
+cp requirements-mongo-lib.txt > {Other_Python_Project}/requirements-mongo-lib.txt
+cp requirements-python-lib.txt > {Other_Python_Project}/requirements-python-lib.txt
 ```
 
 ##### Modify the other program's README.md file to add the pip commands under the "Install supporting classes and libraries" section.
 
-Modify the README.md file:
-```
-vim {Other_Python_Project}/README.md
-```
-
-Add the following lines under the "Install supporting classes and libraries" section.
+Modify the {Other_Python_Project}/README.md file:
 
 ```
    pip install -r requirements-mongo-lib.txt --target mongo_lib --trusted-host pypi.appdev.proj.coe.ic.gov
@@ -74,45 +61,12 @@ Add the following lines under the "Install supporting classes and libraries" sec
 
 ##### Add the general Mongo-Lib requirements to the other program's requirements.txt file.  Remove any duplicates.
 
-Modify the requirements.txt file:
-
-```
-vim {Other_Python_Project}/requirements.txt
-```
-
-Add the following lines to the requirements.txt file:
+Add/modify the following lines to the {Other_Python_Project}/requirements.txt file:
 
 ```
 psutil==5.4.3
-pymongo==3.2.0
+pymongo==3.8.0
 simplejson==2.0.9
-```
-
-
-### Git Installation:
-
-Install general Mongo libraries and classes using git.
-  * Replace **{Python_Project}** with the baseline path of the python program.
-
-```
-cd {Python_Project}
-git clone git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/mongo-lib.git
-```
-
-Install/upgrade system modules.
-
-```
-cd mongo-lib
-sudo bash
-umask 022
-pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
-exit
-```
-
-Install supporting classes and libraries
-
-```
-pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 
@@ -190,33 +144,34 @@ exit
 
 ### Configuration:
 
-Create Mongo configuration files.
-
-Two configuration files will be created, one with master as main connection and one with slave as main connection.
-
-Make the appropriate change to the environment.
+Create Mongo configuration files.  Two configuration files will be created, one with master as main connection and one with slave as main connection.  Make the appropriate change to the environment.
   * Change these entries in the Mongo setup:
     - user = "USER"
-    - passwd = "PASSWORD"
-    - host = "IP_ADDRESS"
+    - japd = "PSWORD"
+    - host = "HOST_IP"
     - name = "HOSTNAME"
     - port = 27017
     - conf_file = None
     - auth = True
+    - auth_db = "admin"
+    - auth_mech = "SCRAM-SHA-1"
 
   * Connecting to a Mongo replica set.
     - repset = "REPLICA_SET_NAME"
     - repset_hosts = "HOST_1:PORT, HOST_2:PORT, ..."
     - db_auth = "AUTHENTICATION_DATABASE"
 
+  * Notes for auth_mech configuration entry:
+    - NOTE 1:  SCRAM-SHA-256 only works for Mongodb 4.0 and better.
+    - NOTE 2:  FIPS 140-2 environment requires SCRAM-SHA-1 or SCRAM-SHA-256.
+    - NOTE 3:  MONGODB-CR is not suppoerted in Mongodb 4.0 and better.
+
 ```
 cd test/integration/config
 cp mongo.py.TEMPLATE mongo.py
-vim mongo.py
-chmod 600 mongo.py
 cp mongo.py.TEMPLATE slave_mongo.py
-vim slave_mongo.py
-chmod 600 slave_mongo.py
+chmod 600 mongo.py slave_mongo.py
+vim mongo.py slave_mongo.py
 ```
 
 ### Testing mongo_class.py
@@ -224,12 +179,6 @@ chmod 600 slave_mongo.py
 ```
 cd {Python_Project}/mongo-lib
 test/integration/mongo_class/integration_test_run.sh
-```
-
-### Code Coverage mongo_class.py:
-
-```
-cd {Python_Project}/mongo-lib
 test/integration/mongo_class/code_coverage.sh
 ```
 
@@ -238,11 +187,6 @@ test/integration/mongo_class/code_coverage.sh
 ```
 cd {Python_Project}/mongo-lib
 test/integration/mongo_libs/integration_test_run.sh
-```
-
-### Code Coverage mongo-lib.py:
-```
-cd {Python_Project}/mongo-lib
 test/integration/mongo_libs/code_coverage.sh
 ```
 

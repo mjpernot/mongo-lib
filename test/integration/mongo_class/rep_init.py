@@ -42,6 +42,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_config_attr3 -> Test with SCRAM-SHA-1 setting.
+        test_config_attr2 -> Test with MONGODB-CR setting.
         test_isslave_attr -> Test isslave attribute.
         test_ismaster_attr -> Test ismaster attribute.
         test_repset_attr -> Test repset attribute.
@@ -77,8 +79,44 @@ class UnitTest(unittest.TestCase):
         self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
         key1 = "pass"
         key2 = "word"
+        self.auth_mech = "MONGODB-CR"
+        self.auth_mech2 = "SCRAM-SHA-1"
         self.config = {key1 + key2: self.cfg.japd}
+        self.config2 = {key1 + key2: self.cfg.japd,
+                        "authMechanism": self.auth_mech2}
         self.conn_list = [self.cfg.host + ":" + str(self.cfg.port)]
+
+    def test_config_attr3(self):
+
+        """Function:  test_config_attr3
+
+        Description:  Test with SCRAM-SHA-1 setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Rep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth_mech=self.auth_mech2)
+
+        self.assertEqual(mongo.config, self.config2)
+
+    def test_config_attr2(self):
+
+        """Function:  test_config_attr2
+
+        Description:  Test with MONGODB-CR setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Rep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth_mech=self.auth_mech)
+
+        self.assertEqual(mongo.config, self.config)
 
     def test_isslave_attr(self):
 
@@ -220,7 +258,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Rep(self.cfg.name, self.cfg.user, self.cfg.japd,
                                 host=self.cfg.host, port=self.cfg.port)
 
-        self.assertEqual(mongo.config, self.config)
+        self.assertEqual(mongo.config, self.config2)
 
     def test_default_auth_db(self):
 
