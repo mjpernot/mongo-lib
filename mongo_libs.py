@@ -10,6 +10,7 @@
         create_slv_array
         crt_base_cmd
         crt_coll_inst
+        disconnect
         ins_doc
 
 """
@@ -133,12 +134,13 @@ def create_slv_array(cfg_array, **kwargs):
         auth_db = slv.get("auth_db", "admin")
         use_uri = slv.get("use_uri", False)
         use_arg = slv.get("use_arg", False)
+        auth_mech = slv.get("auth_mech", "SCRAM-SHA-1")
 
         slave_inst = mongo_class.SlaveRep(
             slv["name"], slv["user"], slv["japd"], host=slv["host"],
             port=int(slv["port"]), auth=slv["auth"],
             conf_file=slv["conf_file"], auth_db=auth_db, use_arg=use_arg,
-            use_uri=use_uri)
+            use_uri=use_uri, auth_mech=auth_mech)
 
         slaves.append(slave_inst)
 
@@ -212,6 +214,7 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
     auth_db = "admin"
     use_arg = False
     use_uri = False
+    auth_mech = "SCRAM-SHA-1"
 
     if hasattr(cfg, "auth_db"):
         auth_db = cfg.auth_db
@@ -222,18 +225,45 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
     if hasattr(cfg, "use_uri"):
         use_uri = cfg.use_uri
 
+    if hasattr(cfg, "auth_mech"):
+        auth_mech = cfg.auth_mech
+
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
         return mongo_class.RepSetColl(
             cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
             auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,
             db=dbs, coll=tbl, db_auth=cfg.db_auth, auth_db=auth_db,
-            use_arg=use_arg, use_uri=use_uri)
+            use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech)
 
     return mongo_class.Coll(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file,
-        auth_db=auth_db, use_arg=use_arg, use_uri=use_uri)
+        auth_db=auth_db, use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech)
+
+
+def disconnect(*args):
+
+    """Function:  disconnect
+
+    Description:  Disconnects a class database connection.  Will check to see
+        if an argument is an array; if so will loop on the array to disconnect
+        all connections.  Will require a disconnect method within the class.
+        The disconnect method will be particular to that class.
+
+    Arguments:
+        (input) *arg -> One or more connection instances.
+
+    """
+
+    for server in args:
+
+        if isinstance(server, list):
+            for srv in server:
+                srv.disconnect()
+
+        else:
+            server.disconnect()
 
 
 def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
@@ -259,6 +289,6 @@ def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
 
     if status:
         coll.ins_doc(json.loads(json.dumps(data)))
-        cmds_gen.disconnect([coll])
+        disconnect([coll])
 
     return status, errmsg

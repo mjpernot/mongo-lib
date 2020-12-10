@@ -41,6 +41,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_config_attr3 -> Test with SCRAM-SHA-1 setting.
+        test_config_attr2 -> Test with MONGODB-CR setting.
         test_db_auth_conn_attr -> Test db_auth_conn attribute.
         test_db_coll_attr -> Test db_coll attribute.
         test_db_conn_attr -> Test db_conn attribute.
@@ -101,6 +103,42 @@ class UnitTest(unittest.TestCase):
         self.conn_list = [self.host + ":" + str(self.port)]
         self.conf_file = "Config File"
         self.repset_hosts = ["host1:port", "host2:port"]
+        self.auth_mech = "MONGODB-CR"
+        self.auth_mech2 = "SCRAM-SHA-1"
+        self.config2 = {key1 + key2: self.japd,
+                        "authMechanism": self.auth_mech2}
+
+    def test_config_attr3(self):
+
+        """Function:  test_config_attr3
+
+        Description:  Test with SCRAM-SHA-1 setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, auth_mech=self.auth_mech2)
+
+        self.assertEqual(mongo.config, self.config2)
+
+    def test_config_attr2(self):
+
+        """Function:  test_config_attr2
+
+        Description:  Test with MONGODB-CR setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSetColl(
+            self.name, self.user, self.japd, self.host, self.port,
+            repset=self.repset, auth_mech=self.auth_mech)
+
+        self.assertEqual(mongo.config, self.config)
 
     def test_db_auth_conn_attr(self):
 
@@ -418,7 +456,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset)
 
-        self.assertEqual(mongo.config, self.config)
+        self.assertEqual(mongo.config, self.config2)
 
     def test_using_no_auth_db(self):
 
