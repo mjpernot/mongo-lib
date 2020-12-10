@@ -10,6 +10,7 @@
         create_slv_array
         crt_base_cmd
         crt_coll_inst
+        disconnect
         ins_doc
 
 """
@@ -288,6 +289,6 @@ def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
 
     if status:
         coll.ins_doc(json.loads(json.dumps(data)))
-        cmds_gen.disconnect([coll])
+        disconnect([coll])
 
     return status, errmsg

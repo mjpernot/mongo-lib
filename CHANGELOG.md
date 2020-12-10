@@ -14,6 +14,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_libs.disconnect:  Disconnects a class database connection.
 
 ### Changed
+- mongo_libs.ins_doc:  Replaced cmds_gen.disconnect with internal call to disconnect function.
 - mongo_class.RepSetColl.connect:  Refactored method to remove the use of pymongo.MongoClient.authenticate.
 - mongo_libs.crt_coll_inst:  Add authentication mechanism to the Coll and RepSetColl class arguments.
 - mongo_libs.create_slv_array:  Add authentication mechanism to the SlaveRep class arguments.
