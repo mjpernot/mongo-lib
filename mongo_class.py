@@ -472,7 +472,7 @@ class DB(Server):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
 
         self.db_name = kwargs.get("db", "test")
         self.db = None
@@ -659,7 +659,7 @@ class Coll(DB):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
 
         self.coll = None
         self.coll_db = kwargs.get("db", "test")
@@ -821,7 +821,7 @@ class Rep(Server):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
 
         self.repset = None
         self.ismaster = None
@@ -888,7 +888,7 @@ class MasterRep(Rep):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
 
         self.ismaster = None
         self.issecondary = None
@@ -970,7 +970,7 @@ class SlaveRep(Rep):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
 
         self.ismaster = None
         self.issecondary = None
@@ -1055,7 +1055,7 @@ class RepSet(Rep):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
 
         self.repset = kwargs.get("repset", None)
         self.repset_hosts = kwargs.get("repset_hosts", None)
@@ -1167,7 +1167,7 @@ class RepSetColl(RepSet):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
 
         self.db = kwargs.get("db", "test")
         self.coll = kwargs.get("coll", None)
