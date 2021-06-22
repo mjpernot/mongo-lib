@@ -144,7 +144,6 @@ class Server(object):
 
         self.name = name
         self.user = user
-        self.japd = japd
         self.host = host
         self.port = port
         self.auth = kwargs.get("auth", True)
@@ -165,10 +164,14 @@ class Server(object):
         self.prct_mem = None
         self.use_uri = kwargs.get("use_uri", False)
         self.use_arg = kwargs.get("use_arg", False)
-        self.config = {KEY1 + KEY2: self.japd}
         self.conn_list = [self.host + ":" + str(self.port)]
         self.auth_db = kwargs.get("auth_db", "admin")
         self.auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1")
+
+        # Passwd configuration setup
+        self.config= {}
+        self.japd = japd
+        self.set_pass_config()
 
         if self.auth_mech != "MONGODB-CR":
             self.config["authMechanism"] = self.auth_mech

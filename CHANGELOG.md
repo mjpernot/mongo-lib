@@ -10,6 +10,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Added
 - mongo_class.Server.set_pass_config:  Set the passwd config attributes.
 
+### Changed
+- mongo_class.\_\_init\_\_:  Moved setting of config attribute to set_pass_config method.
+
 
 ## [4.1.0] - 2020-12-01
 - Updated to use pymongo v3.8.0.
