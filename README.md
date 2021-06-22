@@ -182,7 +182,7 @@ test/integration/mongo_class/integration_test_run.sh
 test/integration/mongo_class/code_coverage.sh
 ```
 
-### Testing mongo--lib.py:
+### Testing mongo_lib.py:
 
 ```
 cd {Python_Project}/mongo-lib
