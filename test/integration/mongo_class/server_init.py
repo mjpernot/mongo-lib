@@ -42,20 +42,42 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_ssl_client_phrase2 -> Test with ssl_client_phrase attribute.
+        test_ssl_client_phrase -> Test with ssl_client_phrase attribute.
+        test_ssl_client_cert2 -> Test with ssl_client_cert attribute.
+        test_ssl_client_cert -> Test with ssl_client_cert attribute.
+        test_ssl_client_key2 -> Test with ssl_client_key attribute.
+        test_ssl_client_key -> Test with ssl_client_key attribute.
+        test_ssl_client_ca2 -> Test with ssl_client_ca attribute.
+        test_ssl_client_ca -> Test with ssl_client_ca attribute.
+        test_set_pass -> Test with default config settings.
         test_config_attr3 -> Test with SCRAM-SHA-1 setting.
         test_config_attr2 -> Test with MONGODB-CR setting.
-        test_default_conf_file -> Test using the default conf_file setting.
-        test_using_conf_file -> Test using the conf_file connection.
+        test_auth_mech -> Test passing arg to auth_mech attribute.
+        test_default_auth_mech -> Test auth_mech default setting.
+        test_uptime_attr -> Test uptime attribute.
+        test_port_attr -> Test port attribute.
+        test_host_attr -> Test host attribute.
+        test_japd_attr -> Test japd attribute.
+        test_user_attr -> Test user attribute.
+        test_name_attr -> Test name attribute.
+        test_log_path_attr -> Test log_path attribute.
+        test_db_path_attr -> Test db_path attribute.
+        test_conn_attr -> Test conn attribute.
+        test_no_conf_file_attr -> Test no conf_file attribute passed.
+        test_conf_file_attr -> Test conf_file attribute passed.
         test_default_auth -> Test using the default auth setting.
         test_using_auth -> Test using the auth connection.
         test_conn_list_attr -> Test setting the conn_list attribute.
         test_config_attr -> Test setting the config attribute.
-        test_default_auth_db -> Test using the default auth_db setting.
+        test_using_no_auth_db -> Test using no auth_db attribute.
         test_using_auth_db -> Test using the auth_db attribute.
-        test_default_arg -> Test using the default arg setting.
+        test_no_using_arg -> Test with auth and no arg present.
         test_using_arg -> Test using the arg connection.
-        test_default_uri -> Test using the default uri setting.
+        test_no_auth_uri -> Test with auth and no uri present.
         test_using_uri -> Test using the uri connection.
+        test_auth_false -> Test with auth passed as False.
+        test_auth_true -> Test with auth passed as True.
         test_default -> Test with minimum number of arguments.
 
     """
@@ -82,6 +104,150 @@ class UnitTest(unittest.TestCase):
         self.config2 = {key1 + key2: self.cfg.japd,
                         "authMechanism": self.auth_mech2}
         self.conn_list = [self.cfg.host + ":" + str(self.cfg.port)]
+
+    def test_ssl_client_phrase2(self):
+
+        """Function:  test_ssl_client_phrase2
+
+        Description:  Test with ssl_client_phrase attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, ssl_client_phrase="Phrase")
+
+        self.assertEqual(mongo.ssl_client_phrase, "Phrase")
+
+    def test_ssl_client_phrase(self):
+
+        """Function:  test_ssl_client_phrase
+
+        Description:  Test with ssl_client_phrase attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.ssl_client_phrase, None)
+
+    def test_ssl_client_cert2(self):
+
+        """Function:  test_ssl_client_cert2
+
+        Description:  Test with ssl_client_cert attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, ssl_client_cert="CertFile")
+
+        self.assertEqual(mongo.ssl_client_cert, "CertFile")
+
+    def test_ssl_client_cert(self):
+
+        """Function:  test_ssl_client_cert
+
+        Description:  Test with ssl_client_cert attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.ssl_client_cert, None)
+
+    def test_ssl_client_key2(self):
+
+        """Function:  test_ssl_client_key2
+
+        Description:  Test with ssl_client_key attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, ssl_client_key="KeyFile")
+
+        self.assertEqual(mongo.ssl_client_key, "KeyFile")
+
+    def test_test_ssl_client_key(self):
+
+        """Function:  test_test_ssl_client_key
+
+        Description:  Test with ssl_client_key attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.ssl_client_key, None)
+
+    def test_ssl_client_ca2(self):
+
+        """Function:  test_ssl_client_ca2
+
+        Description:  Test with ssl_client_ca attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, ssl_client_ca="CAFile")
+
+        self.assertEqual(mongo.ssl_client_ca, "CAFile")
+
+    def test_ssl_client_ca(self):
+
+        """Function:  test_ssl_client_ca
+
+        Description:  Test with ssl_client_ca attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.ssl_client_ca, None)
+
+    def test_set_pass(self):
+
+        """Function:  test_set_pass
+
+        Description:  Test setting configuration settings.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.config, self.config2)
 
     def test_config_attr3(self):
 
@@ -114,6 +280,38 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, auth_mech=self.auth_mech)
 
         self.assertEqual(mongo.config, self.config)
+
+    def test_auth_mech(self):
+
+        """Function:  test_auth_mech
+
+        Description:  Test passing arg to auth_mech attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth_mech=self.auth_mech2)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech2)
+
+    def test_default_auth_mech(self):
+
+        """Function:  test_default_auth_mech
+
+        Description:  Test auth_mech default setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech2)
 
     def test_uptime_attr(self):
 
@@ -259,11 +457,11 @@ class UnitTest(unittest.TestCase):
 
         self.assertFalse(mongo.conn)
 
-    def test_default_conf_file(self):
+    def test_no_conf_file_attr(self):
 
-        """Function:  test_default_conf_file
+        """Function:  test_no_conf_file_attr
 
-        Description:  Test using the default conf_file setting.
+        Description:  Test no conf_file attribute passed.
 
         Arguments:
 
@@ -275,11 +473,11 @@ class UnitTest(unittest.TestCase):
 
         self.assertFalse(mongo.conf_file)
 
-    def test_using_conf_file(self):
+    def test_conf_file_attr(self):
 
-        """Function:  test_using_conf_file
+        """Function:  test_conf_file_attr
 
-        Description:  Test using the conf_file connection.
+        Description:  Test conf_file attribute passed.
 
         Arguments:
 
@@ -355,11 +553,11 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(mongo.config, self.config2)
 
-    def test_default_auth_db(self):
+    def test_using_no_auth_db(self):
 
-        """Function:  test_default_auth_db
+        """Function:  test_using_no_auth_db
 
-        Description:  Test using the default auth_db setting.
+        Description:  Test using no auth_db attribute.
 
         Arguments:
 
@@ -387,11 +585,11 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(mongo.auth_db, self.cfg.auth_db)
 
-    def test_default_arg(self):
+    def test_no_using_arg(self):
 
-        """Function:  test_default_arg
+        """Function:  test_no_using_arg
 
-        Description:  Test using the default arg setting.
+        Description:  Test with auth and no arg present.
 
         Arguments:
 
@@ -419,11 +617,11 @@ class UnitTest(unittest.TestCase):
 
         self.assertTrue(mongo.use_arg)
 
-    def test_default_uri(self):
+    def test_no_auth_uri(self):
 
-        """Function:  test_default_uri
+        """Function:  test_no_auth_uri
 
-        Description:  Test using the default uri setting.
+        Description:  Test with auth and no uri present.
 
         Arguments:
 
@@ -450,6 +648,44 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, use_uri=True)
 
         self.assertTrue(mongo.use_uri)
+
+    def test_auth_false(self):
+
+        """Function:  test_auth_false
+
+        Description:  Test with auth passed as False.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth=False)
+
+        self.assertEqual((mongo.name, mongo.user, mongo.japd, mongo.host,
+                          mongo.port, mongo.auth),
+                         (self.cfg.name, self.cfg.user, self.cfg.japd,
+                          self.cfg.host, self.cfg.port, False))
+
+    def test_auth_true(self):
+
+        """Function:  test_auth_true
+
+        Description:  Test with auth passed as True.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertEqual((mongo.name, mongo.user, mongo.japd, mongo.host,
+                          mongo.port, mongo.auth),
+                         (self.cfg.name, self.cfg.user, self.cfg.japd,
+                          self.cfg.host, self.cfg.port, True))
 
     def test_default(self):
 
