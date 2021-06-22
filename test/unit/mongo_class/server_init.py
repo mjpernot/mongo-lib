@@ -45,6 +45,14 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_ssl_client_phrase2 -> Test with ssl_client_phrase attribute.
+        test_ssl_client_phrase -> Test with ssl_client_phrase attribute.
+        test_ssl_client_cert2 -> Test with ssl_client_cert attribute.
+        test_ssl_client_cert -> Test with ssl_client_cert attribute.
+        test_ssl_client_key2 -> Test with ssl_client_key attribute.
+        test_ssl_client_key -> Test with ssl_client_key attribute.
+        test_ssl_client_ca2 -> Test with ssl_client_ca attribute.
+        test_ssl_client_ca -> Test with ssl_client_ca attribute.
         test_set_pass -> Test with default config settings.
         test_config_attr3 -> Test with SCRAM-SHA-1 setting.
         test_config_attr2 -> Test with MONGODB-CR setting.
@@ -68,7 +76,7 @@ class UnitTest(unittest.TestCase):
         test_no_using_arg -> Test with auth and no arg present.
         test_using_arg -> Test with auth and arg present.
         test_no_auth_uri -> Test with auth and no uri present.
-        test_auth_uri -> Test with auth and uri present.
+        test_using_uri -> Test using the uri connection.
         test_auth_false -> Test with auth passed as False.
         test_auth_true -> Test with auth passed as True.
         test_default -> Test with minimum number of arguments.
@@ -106,6 +114,130 @@ class UnitTest(unittest.TestCase):
         self.auth_mech2 = "SCRAM-SHA-1"
         self.config2 = {KEY1 + KEY2: self.japd,
                         "authMechanism": self.auth_mech2}
+
+    def test_ssl_client_phrase2(self):
+
+        """Function:  test_ssl_client_phrase2
+
+        Description:  Test with ssl_client_phrase attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            ssl_client_phrase="Phrase")
+
+        self.assertEqual(mongo.ssl_client_phrase, "Phrase")
+
+    def test_ssl_client_phrase(self):
+
+        """Function:  test_ssl_client_phrase
+
+        Description:  Test with ssl_client_phrase attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.ssl_client_phrase, None)
+
+    def test_ssl_client_cert2(self):
+
+        """Function:  test_ssl_client_cert2
+
+        Description:  Test with ssl_client_cert attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            ssl_client_cert="CertFile")
+
+        self.assertEqual(mongo.ssl_client_cert, "CertFile")
+
+    def test_ssl_client_cert(self):
+
+        """Function:  test_ssl_client_cert
+
+        Description:  Test with ssl_client_cert attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.ssl_client_cert, None)
+
+    def test_ssl_client_key2(self):
+
+        """Function:  test_ssl_client_key2
+
+        Description:  Test with ssl_client_key attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            ssl_client_key="KeyFile")
+
+        self.assertEqual(mongo.ssl_client_key, "KeyFile")
+
+    def test_test_ssl_client_key(self):
+
+        """Function:  test_test_ssl_client_key
+
+        Description:  Test with ssl_client_key attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.ssl_client_key, None)
+
+    def test_ssl_client_ca2(self):
+
+        """Function:  test_ssl_client_ca2
+
+        Description:  Test with ssl_client_ca attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            ssl_client_ca="CAFile")
+
+        self.assertEqual(mongo.ssl_client_ca, "CAFile")
+
+    def test_ssl_client_ca(self):
+
+        """Function:  test_ssl_client_ca
+
+        Description:  Test with ssl_client_ca attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, host=self.host, port=self.port)
+
+        self.assertEqual(mongo.ssl_client_ca, None)
 
     def test_set_pass(self):
 
