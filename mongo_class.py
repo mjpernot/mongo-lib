@@ -112,6 +112,7 @@ class Server(object):
         unlock_db
         lock_db
         is_locked
+        set_pass_config
 
     """
 
@@ -419,6 +420,21 @@ class Server(object):
         """
 
         return self.conn.is_locked
+
+    def set_pass_config(self):
+
+        """Method:  set_pass_config
+
+        Description:  Set the passwd config attributes.
+
+        Arguments:
+
+        """
+
+        global KEY1
+        global KEY2
+
+        self.config[KEY1 + KEY2] = self.japd
 
 
 class DB(Server):

@@ -5,6 +5,10 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.2.0] - 2021-06-22
+- Added SSL connection capability to the Mongo classes.
+
+### Added
+- mongo_class.Server.set_pass_config:  Set the passwd config attributes.
 
 
 ## [4.1.0] - 2020-12-01
