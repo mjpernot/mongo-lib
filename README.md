@@ -56,7 +56,7 @@ Modify the {Other_Python_Project}/README.md file:
 
 ```
    pip install -r requirements-mongo-lib.txt --target mongo_lib --trusted-host pypi.appdev.proj.coe.ic.gov
-   pip install -r requirements-python-lib.txt --target mysql_lib/lib --trusted-host pypi.appdev.proj.coe.ic.gov
+   pip install -r requirements-python-lib.txt --target mongo_lib/lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 ##### Add the general Mongo-Lib requirements to the other program's requirements.txt file.  Remove any duplicates.
@@ -164,7 +164,7 @@ Create Mongo configuration files.  Two configuration files will be created, one 
   * Notes for auth_mech configuration entry:
     - NOTE 1:  SCRAM-SHA-256 only works for Mongodb 4.0 and better.
     - NOTE 2:  FIPS 140-2 environment requires SCRAM-SHA-1 or SCRAM-SHA-256.
-    - NOTE 3:  MONGODB-CR is not suppoerted in Mongodb 4.0 and better.
+    - NOTE 3:  MONGODB-CR is not supported in Mongodb 4.0 and better.
 
 ```
 cd test/integration/config
