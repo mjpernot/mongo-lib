@@ -136,6 +136,10 @@ class Server(object):
                 use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
+                ssl_client_ca -> SSL certificate authority file.
+                ssl_client_key -> SSL key pem file.
+                ssl_client_cert -> SSL certificate pem file.
+                ssl_client_phrase -> SSL client pass phrase to key file.
 
         """
 
@@ -175,6 +179,12 @@ class Server(object):
 
         if self.auth_mech != "MONGODB-CR":
             self.config["authMechanism"] = self.auth_mech
+
+        # SSL configuration settings
+        self.ssl_client_ca = kwargs.get("ssl_client_ca", None)
+        self.ssl_client_key = kwargs.get("ssl_client_key", None)
+        self.ssl_client_cert = kwargs.get("ssl_client_cert", None)
+        self.ssl_client_phrase = kwargs.get("ssl_client_phrase", None)
 
     def upd_srv_stat(self):
 
