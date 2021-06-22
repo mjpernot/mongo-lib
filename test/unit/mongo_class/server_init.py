@@ -32,6 +32,10 @@ import version
 
 __version__ = version.__version__
 
+# Global
+KEY1 = "pass"
+KEY2 = "word"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -41,6 +45,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_set_pass -> Test with default config settings.
         test_config_attr3 -> Test with SCRAM-SHA-1 setting.
         test_config_attr2 -> Test with MONGODB-CR setting.
         test_auth_mech -> Test passing arg to auth_mech attribute.
@@ -80,8 +85,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        key1 = "pass"
-        key2 = "word"
+        global KEY1
+        global KEY2
+
         self.name = "Mongo_Server"
         self.user = "mongo_user"
         self.japd = "mongo_pd"
@@ -93,13 +99,34 @@ class UnitTest(unittest.TestCase):
         self.use_uri = True
         self.use_arg = True
         self.auth_db = "sysmon"
-        self.config = {key1 + key2: self.japd}
+        self.config = {KEY1 + KEY2: self.japd}
         self.conn_list = [self.host + ":" + str(self.port)]
         self.conf_file = "Config file"
         self.auth_mech = "MONGODB-CR"
         self.auth_mech2 = "SCRAM-SHA-1"
-        self.config2 = {key1 + key2: self.japd,
+        self.config2 = {KEY1 + KEY2: self.japd,
                         "authMechanism": self.auth_mech2}
+
+    def test_set_pass(self):
+
+        """Function:  test_set_pass
+
+        Description:  Test setting configuration settings.
+
+        Arguments:
+
+        """
+
+        global KEY1
+        global KEY2
+
+        config = {KEY1 + KEY2: self.japd}
+        config["authMechanism"] = "SCRAM-SHA-1"
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file)
+
+        self.assertEqual(mongo.config, config)
 
     def test_config_attr3(self):
 
