@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Added SSL connection capability to the Mongo classes.
 
 ### Added
+- mongo_class.Server.set_ssl_config:  Append SSL attributes to config.
 - mongo_class.Server.set_pass_config:  Set the passwd config attributes.
 
 ### Changed
