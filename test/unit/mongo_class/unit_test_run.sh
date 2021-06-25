@@ -52,6 +52,7 @@ test/unit/mongo_class/server_is_primary.py
 test/unit/mongo_class/server_fetch_svr_info.py
 test/unit/mongo_class/server_lock_db.py
 test/unit/mongo_class/server_set_pass_config.py
+test/unit/mongo_class/server_set_ssl_config
 test/unit/mongo_class/server_unlock_db.py
 test/unit/mongo_class/server_upd_server_attr.py
 test/unit/mongo_class/server_upd_srv_stat.py
