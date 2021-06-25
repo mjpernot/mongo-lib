@@ -129,39 +129,39 @@ class UnitTest(unittest.TestCase):
         self.ssl_client_phrase = "MyPhrase"
 
         self.config = {}
-        self.config[KEY1 + KEY2] = self.japd
+        self.config[KEY1 + KEY2] = self.cfg.japd
 
         self.config2 = {}
-        self.config2[KEY1 + KEY2] = self.japd
+        self.config2[KEY1 + KEY2] = self.cfg.japd
         self.config2["authMechanism"] = self.auth_mech2
 
         self.config3 = {}
-        self.config3[KEY1 + KEY2] = self.japd
+        self.config3[KEY1 + KEY2] = self.cfg.japd
         self.config3["authMechanism"] = self.auth_mech2
         self.config3["ssl_ca_certs"] = self.ssl_client_ca
 
         self.config4 = {}
-        self.config4[KEY1 + KEY2] = self.japd
+        self.config4[KEY1 + KEY2] = self.cfg.japd
         self.config4["authMechanism"] = self.auth_mech2
         self.config4["ssl_keyfile"] = self.ssl_client_key
         self.config4["ssl_certfile"] = self.ssl_client_cert
 
         self.config5 = {}
-        self.config5[KEY1 + KEY2] = self.japd
+        self.config5[KEY1 + KEY2] = self.cfg.japd
         self.config5["authMechanism"] = self.auth_mech2
         self.config5["ssl_keyfile"] = self.ssl_client_key
         self.config5["ssl_certfile"] = self.ssl_client_cert
         self.config5["ssl_pem_passphrase"] = self.ssl_client_phrase
 
         self.config6 = {}
-        self.config6[KEY1 + KEY2] = self.japd
+        self.config6[KEY1 + KEY2] = self.cfg.japd
         self.config6["authMechanism"] = self.auth_mech2
         self.config6["ssl_ca_certs"] = self.ssl_client_ca
         self.config6["ssl_keyfile"] = self.ssl_client_key
         self.config6["ssl_certfile"] = self.ssl_client_cert
 
         self.config7 = {}
-        self.config7[KEY1 + KEY2] = self.japd
+        self.config7[KEY1 + KEY2] = self.cfg.japd
         self.config7["authMechanism"] = self.auth_mech2
         self.config7["ssl_ca_certs"] = self.ssl_client_ca
         self.config7["ssl_keyfile"] = self.ssl_client_key
@@ -205,9 +205,9 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.ssl_client_phrase)
 
         self.assertEqual(
-            (mongo.ssl_client_key, mongo.ssl_client_cert, mongo.ssl_client_sa,
+            (mongo.ssl_client_key, mongo.ssl_client_cert, mongo.ssl_client_ca,
             mongo.ssl_client_phrase),
-            (self.ssl_client_key, self.ssl_client_cert, self.ssl_client_sa,
+            (self.ssl_client_key, self.ssl_client_cert, self.ssl_client_ca,
             self.ssl_client_phrase))
 
     def test_ssl_all2(self):
