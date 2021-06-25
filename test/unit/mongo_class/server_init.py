@@ -71,6 +71,7 @@ class UnitTest(unittest.TestCase):
         test_set_pass -> Test with default config settings.
         test_config_attr3 -> Test with SCRAM-SHA-1 setting.
         test_config_attr2 -> Test with MONGODB-CR setting.
+        test_auth_mech2 -> Test passing arg to auth_mech attribute.
         test_auth_mech -> Test passing arg to auth_mech attribute.
         test_default_auth_mech -> Test auth_mech default setting.
         test_uptime_attr -> Test uptime attribute.
