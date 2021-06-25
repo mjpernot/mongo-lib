@@ -113,6 +113,7 @@ class Server(object):
         lock_db
         is_locked
         set_pass_config
+        set_ssl_config
 
     """
 
@@ -448,6 +449,30 @@ class Server(object):
         global KEY2
 
         self.config[KEY1 + KEY2] = self.japd
+
+    def set_ssl_config(self):
+
+        """Method:  set_ssl_config
+
+        Description:  Append SSL attributes to config.
+
+        Arguments:
+
+        """
+
+        if self.ssl_client_ca or self.ssl_client_cert:
+
+            if self.ssl_client_ca:
+                self.config["ssl_ca_certs"] = self.ssl_client_ca
+
+            if self.ccl_client_cert:
+                self.config["ssl_certfile"] = self.ssl_ca_cert
+
+            if self.ssl_client_key and self.ssl_client_cert:
+                self.config["ssl_keyfile"] = self.ssl_client_key
+
+            if self.ssl_client_phrase and self.ssl_client_cert:
+                self.config["ssl_pem_passphrase"] = self.ssl_client_phrase
 
 
 class DB(Server):
