@@ -71,7 +71,7 @@ class UnitTest(unittest.TestCase):
         """
 
         key1 = "pass"
-        key2 = "wd"
+        key2 = "word"
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
@@ -135,9 +135,9 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.ssl_client_phrase)
 
         self.assertEqual(
-            (mongo.ssl_client_key, mongo.ssl_client_cert, mongo.ssl_client_sa,
+            (mongo.ssl_client_key, mongo.ssl_client_cert, mongo.ssl_client_ca,
             mongo.ssl_client_phrase),
-            (self.ssl_client_key, self.ssl_client_cert, self.ssl_client_sa,
+            (self.ssl_client_key, self.ssl_client_cert, self.ssl_client_ca,
             self.ssl_client_phrase))
 
     def test_ssl_all2(self):
