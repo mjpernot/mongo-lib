@@ -466,8 +466,8 @@ class Server(object):
             if self.ssl_client_ca:
                 self.config["ssl_ca_certs"] = self.ssl_client_ca
 
-            if self.ccl_client_cert:
-                self.config["ssl_certfile"] = self.ssl_ca_cert
+            if self.ssl_client_cert:
+                self.config["ssl_certfile"] = self.ssl_client_cert
 
             if self.ssl_client_key and self.ssl_client_cert:
                 self.config["ssl_keyfile"] = self.ssl_client_key
