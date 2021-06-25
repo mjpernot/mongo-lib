@@ -186,6 +186,7 @@ class Server(object):
         self.ssl_client_key = kwargs.get("ssl_client_key", None)
         self.ssl_client_cert = kwargs.get("ssl_client_cert", None)
         self.ssl_client_phrase = kwargs.get("ssl_client_phrase", None)
+        self.set_ssl_config()
 
     def upd_srv_stat(self):
 
