@@ -517,6 +517,10 @@ class DB(Server):
                 use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
+                ssl_client_ca -> SSL certificate authority file.
+                ssl_client_key -> SSL key pem file.
+                ssl_client_cert -> SSL certificate pem file.
+                ssl_client_phrase -> SSL client pass phrase to key file.
 
         """
 
@@ -527,7 +531,11 @@ class DB(Server):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
+            ssl_client_ca=kwargs.get("ssl_client_ca", None),
+            ssl_client_key=kwargs.get("ssl_client_key", None),
+            ssl_client_cert=kwargs.get("ssl_client_cert", None),
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
 
         self.db_name = kwargs.get("db", "test")
         self.db = None
