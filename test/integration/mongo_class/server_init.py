@@ -122,11 +122,7 @@ class UnitTest(unittest.TestCase):
         key2 = "word"
         self.auth_mech = "MONGODB-CR"
         self.auth_mech2 = "SCRAM-SHA-1"
-        self.config = {key1 + key2: self.cfg.japd}
-        self.config2 = {key1 + key2: self.cfg.japd,
-                        "authMechanism": self.auth_mech2}
         self.conn_list = [self.cfg.host + ":" + str(self.cfg.port)]
-
         self.ssl_client_ca = "CAFile"
         self.ssl_client_cert = "CertFile"
         self.ssl_client_key = "KeyFile"
@@ -142,35 +138,35 @@ class UnitTest(unittest.TestCase):
         self.config3 = {}
         self.config3[KEY1 + KEY2] = self.japd
         self.config3["authMechanism"] = self.auth_mech2
-        self.config3["ssl_ca_certs"] = "CAFile"
+        self.config3["ssl_ca_certs"] = self.ssl_client_ca
 
         self.config4 = {}
         self.config4[KEY1 + KEY2] = self.japd
-        self.config4["authMechanism"] = "SCRAM-SHA-1"
-        self.config4["ssl_keyfile"] = "KeyFile"
-        self.config4["ssl_certfile"] = "CertFile"
+        self.config4["authMechanism"] = self.auth_mech2
+        self.config4["ssl_keyfile"] = self.ssl_client_key
+        self.config4["ssl_certfile"] = self.ssl_client_cert
 
         self.config5 = {}
         self.config5[KEY1 + KEY2] = self.japd
-        self.config5["authMechanism"] = "SCRAM-SHA-1"
-        self.config5["ssl_keyfile"] = "KeyFile"
-        self.config5["ssl_certfile"] = "CertFile"
-        self.config5["ssl_pem_passphrase"] = "MyPhrase"
+        self.config5["authMechanism"] = self.auth_mech2
+        self.config5["ssl_keyfile"] = self.ssl_client_key
+        self.config5["ssl_certfile"] = self.ssl_client_cert
+        self.config5["ssl_pem_passphrase"] = self.ssl_client_phrase
 
         self.config6 = {}
         self.config6[KEY1 + KEY2] = self.japd
-        self.config6["authMechanism"] = "SCRAM-SHA-1"
-        self.config6["ssl_ca_certs"] = "CAFile"
-        self.config6["ssl_keyfile"] = "KeyFile"
-        self.config6["ssl_certfile"] = "CertFile"
+        self.config6["authMechanism"] = self.auth_mech2
+        self.config6["ssl_ca_certs"] = self.ssl_client_ca
+        self.config6["ssl_keyfile"] = self.ssl_client_key
+        self.config6["ssl_certfile"] = self.ssl_client_cert
 
         self.config7 = {}
         self.config7[KEY1 + KEY2] = self.japd
-        self.config7["authMechanism"] = "SCRAM-SHA-1"
-        self.config7["ssl_ca_certs"] = "CAFile"
-        self.config7["ssl_keyfile"] = "KeyFile"
-        self.config7["ssl_certfile"] = "CertFile"
-        self.config7["ssl_pem_passphrase"] = "MyPhrase"
+        self.config7["authMechanism"] = self.auth_mech2
+        self.config7["ssl_ca_certs"] = self.ssl_client_ca
+        self.config7["ssl_keyfile"] = self.ssl_client_key
+        self.config7["ssl_certfile"] = self.ssl_client_cert
+        self.config7["ssl_pem_passphrase"] = self.ssl_client_phrase
 
     def test_ssl_all_phrase2(self):
 
@@ -488,9 +484,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Server(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, ssl_client_cert="CertFile")
+            port=self.cfg.port, ssl_client_cert=self.ssl_client_cert)
 
-        self.assertEqual(mongo.ssl_client_cert, "CertFile")
+        self.assertEqual(mongo.ssl_client_cert, self.ssl_client_cert)
 
     def test_ssl_client_cert(self):
 
@@ -520,9 +516,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Server(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, ssl_client_key="KeyFile")
+            port=self.cfg.port, ssl_client_key=self.ssl_client_key)
 
-        self.assertEqual(mongo.ssl_client_key, "KeyFile")
+        self.assertEqual(mongo.ssl_client_key, self.ssl_client_key)
 
     def test_test_ssl_client_key(self):
 
@@ -552,9 +548,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Server(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, ssl_client_ca="CAFile")
+            port=self.cfg.port, ssl_client_ca=self.ssl_client_ca)
 
-        self.assertEqual(mongo.ssl_client_ca, "CAFile")
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
     def test_ssl_client_ca(self):
 
