@@ -171,6 +171,25 @@ class UnitTest(unittest.TestCase):
         self.config7["ssl_certfile"] = "CertFile"
         self.config7["ssl_pem_passphrase"] = "MyPhrase"
 
+    def test_ssl_all_phrase2(self):
+
+        """Function:  test_ssl_all_phrase2
+
+        Description:  Test with all ssl arguments and phrase present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file, ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_ca=self.ssl_client_ca,
+            ssl_client_phrase=self.ssl_client_phrase)
+
+        self.assertEqual(mongo.config, self.config7)
+
     def test_ssl_all_phrase(self):
 
         """Function:  test_ssl_all_phrase
@@ -210,7 +229,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.ssl_client_cert,
             ssl_client_ca=self.ssl_client_ca)
 
-        self.assertEqual(mongo.config, self.config4)
+        self.assertEqual(mongo.config, self.config6)
 
     def test_ssl_all(self):
 
@@ -248,7 +267,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.ssl_client_cert,
             ssl_client_phrase=self.ssl_client_phrase)
 
-        self.assertEqual(mongo.config, self.config3)
+        self.assertEqual(mongo.config, self.config5)
 
     def test_ssl_client_key_phrase(self):
 
@@ -283,7 +302,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.conf_file, ssl_client_key=self.ssl_client_key,
             ssl_client_cert=self.ssl_client_cert)
 
-        self.assertEqual(mongo.config, self.config2)
+        self.assertEqual(mongo.config, self.config4)
 
     def test_ssl_client_key_cert2(self):
 
@@ -338,7 +357,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.ssl_client_key,
             ssl_client_phrase=self.ssl_client_phrase)
 
-        self.assertEqual(mongo.config, self.config)
+        self.assertEqual(mongo.config, self.config3)
 
     def test_ssl_client_ca7(self):
 
@@ -355,7 +374,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca,
             ssl_client_phrase=self.ssl_client_phrase)
 
-        self.assertEqual(mongo.config, self.config)
+        self.assertEqual(mongo.config, self.config3)
 
     def test_ssl_client_ca6(self):
 
@@ -372,7 +391,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca,
             ssl_client_key=self.ssl_client_key)
 
-        self.assertEqual(mongo.config, self.config)
+        self.assertEqual(mongo.config, self.config3)
 
     def test_ssl_client_ca5(self):
 
@@ -388,7 +407,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca)
 
-        self.assertEqual(mongo.config, self.config)
+        self.assertEqual(mongo.config, self.config3)
 
     def test_ssl_client_ca4(self):
 
