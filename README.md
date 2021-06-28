@@ -171,7 +171,7 @@ Create Mongo configuration files.  Two configuration files will be created, one 
     - NOTE 2:  FIPS 140-2 environment requires SCRAM-SHA-1 or SCRAM-SHA-256.
     - NOTE 3:  MONGODB-CR is not supported in Mongodb 4.0 and better.
 
-  * If the Mongo replica set is set to use SSL connections, then one or more of the following entries will need to be completed to connect using SSL protocols.  Note:  Read the configuration file (mongo.py.TEMPLATE) to determine which entries will need to be set.
+  * If the Mongo set is set to use SSL connections, then one or more of the following entries will need to be completed to connect using SSL protocols.  Note:  Read the configuration file (mongo.py.TEMPLATE) to determine which entries will need to be set.
     - ssl_client_ca = None
     - ssl_client_key = None
     - ssl_client_cert = None
