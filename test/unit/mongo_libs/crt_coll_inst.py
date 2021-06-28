@@ -156,23 +156,23 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_coll_set_ssl -> Test mongo_class.Coll class with SSL set.
-        test_rep_set_ssl -> Test mongo_class.RepSetColl class with SSL set.
-        test_coll_none_ssl -> Test mongo_class.Coll class with SSL set to none.
-        test_rep_none_ssl -> Test RepSetColl class with SSL set to none.
-        test_coll_no_ssl -> Test the mongo_class.Coll class with no ssl.
-        test_rep_no_ssl -> Test the mongo_class.RepSetColl class with no ssl.
-        test_coll_mech_auth -> Test with authentication mechanism passed.
-        test_coll_no_mech_auth -> Test with no authentication mechanism passed.
-        test_repset_mech_auth -> Test with authentication mechanism passed.
-        test_repset_no_mech_auth -> Test with no auth mechanism passed.
-        test_coll_new_attrs2 -> Test new use_uri, use_arg, & auth_db attrs.
-        test_repsetcoll_new_attrs2 -> Test new use_uri, use_arg, auth_db attr.
-        test_coll_new_attrs -> Test with new use_uri, use_arg, & auth_db attrs.
-        test_repsetcoll_new_attrs -> Test new use_uri, use_arg, & auth_db attr.
-        test_coll -> Test the mongo_class.Coll class.
-        test_repsetcoll -> Test the mongo_class.RepSetColl class.
+        setUp
+        test_coll_set_ssl
+        test_rep_set_ssl
+        test_coll_none_ssl
+        test_rep_none_ssl
+        test_coll_no_ssl
+        test_rep_no_ssl
+        test_coll_mech_auth
+        test_coll_no_mech_auth
+        test_repset_mech_auth
+        test_repset_no_mech_auth
+        test_coll_new_attrs2
+        test_repsetcoll_new_attrs2
+        test_coll_new_attrs
+        test_repsetcoll_new_attrs
+        test_coll
+        test_repsetcoll
 
     """
 
