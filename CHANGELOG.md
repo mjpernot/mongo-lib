@@ -16,6 +16,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class.RepSetColl.\_\_init\_\_, mongo_class.RepSet.\_\_init\_\_, mongo_class.SlaveRep.\_\_init\_\_, mongo_class.MasterRep.\_\_init\_\_, mongo_class.Rep.\_\_init\_\_, mongo_class.Coll.\_\_init\_\_, mongo_class.DB.\_\_init\_\_:  Added capability to allow SSL attributes to be set.
 - mongo_class.Server.\_\_init\_\_:  Moved setting of config attribute to set_pass_config method and added call to set_pass_config.
 - mongo_class.Server.\_\_init\_\_: Added SSL attributes and added call to set_ssl_config.
+- Documentation updates.
 
 
 ## [4.1.0] - 2020-12-01

@@ -205,7 +205,7 @@ def crt_coll_inst(cfg, dbs, tbl):
         This will be based on the type of configuration passed.
 
     Arguments:
-        (input) cfg -> Configuration module.
+        (input) cfg -> Mongo instance or mongo config module.
         (input) dbs -> Database name.
         (input) tbl ->  Collection name.
 
@@ -294,7 +294,7 @@ def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
         document to JSON, and insert document into the database.
 
     Arguments:
-        (input) mongo_cfg -> Mongo database configuration.
+        (input) mongo_cfg -> Mongo instance or mongo config module.
         (input) dbs -> Database name.
         (input) tbl ->  Collection name.
         (input) data -> Document to be inserted.
