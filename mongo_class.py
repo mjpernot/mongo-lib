@@ -174,7 +174,7 @@ class Server(object):
         self.auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1")
 
         # Passwd configuration setup
-        self.config= {}
+        self.config = {}
         self.japd = japd
         self.set_pass_config()
 
