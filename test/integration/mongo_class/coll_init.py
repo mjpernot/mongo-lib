@@ -183,7 +183,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_key=self.ssl_client_key,
@@ -203,7 +203,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_key=self.ssl_client_key,
@@ -227,7 +227,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_key=self.ssl_client_key,
@@ -246,7 +246,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_key=self.ssl_client_key,
@@ -267,7 +267,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_key=self.ssl_client_key,
@@ -286,7 +286,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_key=self.ssl_client_key,
@@ -305,7 +305,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_key=self.ssl_client_key,
@@ -323,7 +323,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_key=self.ssl_client_key,
@@ -342,7 +342,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_key=self.ssl_client_key,
@@ -362,7 +362,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_ca=self.ssl_client_ca,
@@ -381,7 +381,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_ca=self.ssl_client_ca,
@@ -399,7 +399,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_ca=self.ssl_client_ca,
@@ -417,7 +417,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_ca=self.ssl_client_ca, coll=self.coll_name)
@@ -434,7 +434,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_ca=self.ssl_client_ca, coll=self.coll_name)
@@ -453,7 +453,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             ssl_client_ca=self.ssl_client_ca, coll=self.coll_name)
@@ -470,7 +470,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, ssl_client_phrase=self.ssl_client_phrase,
             coll=self.coll_name)
@@ -487,7 +487,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -503,7 +503,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, ssl_client_cert=self.ssl_client_cert,
             coll=self.coll_name)
@@ -520,7 +520,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -536,7 +536,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, ssl_client_key=self.ssl_client_key,
             coll=self.coll_name)
@@ -553,7 +553,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -569,7 +569,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, ssl_client_ca=self.ssl_client_ca,
             coll=self.coll_name)
@@ -586,7 +586,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -607,7 +607,7 @@ class UnitTest(unittest.TestCase):
 
         config = {KEY1 + KEY2: self.cfg.japd}
         config["authMechanism"] = self.auth_mech2
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.cfg.conf_file,
             coll=self.coll_name)
@@ -624,7 +624,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_mech=self.auth_mech, coll=self.coll_name)
 
@@ -640,7 +640,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_mech=self.auth_mech2, coll=self.coll_name)
 
@@ -656,7 +656,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -672,7 +672,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -688,7 +688,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -704,7 +704,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -720,7 +720,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -736,7 +736,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -752,7 +752,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -768,7 +768,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -784,7 +784,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
@@ -800,7 +800,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.DB(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
