@@ -114,7 +114,7 @@ def create_instance(cfg_file, dir_path, class_name, **kwargs):
         use_arg=use_arg, use_uri=use_uri)
 
 
-def create_slv_array(cfg_array, **kwargs):
+def create_slv_array(cfg_array):
 
     """Function:  create_slv_array
 

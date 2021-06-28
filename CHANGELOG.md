@@ -12,6 +12,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class.Server.set_pass_config:  Set the passwd config attributes.
 
 ### Changed
+- mongo_libs.create_slv_array:  Removed unused \*\*kwargs.
 - mongo_libs.crt_coll_inst:  Added checks for SSL arguments and pass to class instance calls.
 - mongo_class.RepSetColl.\_\_init\_\_, mongo_class.RepSet.\_\_init\_\_, mongo_class.SlaveRep.\_\_init\_\_, mongo_class.MasterRep.\_\_init\_\_, mongo_class.Rep.\_\_init\_\_, mongo_class.Coll.\_\_init\_\_, mongo_class.DB.\_\_init\_\_:  Added capability to allow SSL attributes to be set.
 - mongo_class.Server.\_\_init\_\_:  Moved setting of config attribute to set_pass_config method and added call to set_pass_config.
