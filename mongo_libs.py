@@ -68,7 +68,7 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
                                dict(kwargs.get("opt_arg", {})))
 
 
-def create_instance(cfg_file, dir_path, class_name, **kwargs):
+def create_instance(cfg_file, dir_path, class_name):
 
     """Function:  create_instance
 
@@ -90,13 +90,18 @@ def create_instance(cfg_file, dir_path, class_name, **kwargs):
         (input) cfg_file -> Configuration file name.
         (input) dir_path -> Directory path.
         (input) class_name -> Reference to a Class type.
-        (output) -> Class type instance.
+        (output) -> Mongo class instance.
 
     """
 
     auth_db = "admin"
     use_arg = False
     use_uri = False
+    auth_mech = "SCRAM-SHA-1"
+    ssl_client_ca = None
+    ssl_client_cert = None
+    ssl_client_key = None
+    ssl_client_phrase = None
     cfg = gen_libs.load_module(cfg_file, dir_path)
 
     if hasattr(cfg, "auth_db"):
@@ -108,10 +113,27 @@ def create_instance(cfg_file, dir_path, class_name, **kwargs):
     if hasattr(cfg, "use_uri"):
         use_uri = cfg.use_uri
 
+    if hasattr(cfg, "auth_mech"):
+        auth_mech = cfg.auth_mech
+
+    if hasattr(cfg, "ssl_client_ca"):
+        ssl_client_ca = cfg.ssl_client_ca
+
+    if hasattr(cfg, "ssl_client_cert"):
+        ssl_client_cert = cfg.ssl_client_cert
+
+    if hasattr(cfg, "ssl_client_key"):
+        ssl_client_key = cfg.ssl_client_key
+
+    if hasattr(cfg, "ssl_client_phrase"):
+        ssl_client_phrase = cfg.ssl_client_phrase
+
     return class_name(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         auth=cfg.auth, conf_file=cfg.conf_file, auth_db=auth_db,
-        use_arg=use_arg, use_uri=use_uri)
+        use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech,
+        ssl_client_ca=ssl_client_ca, ssl_client_cert=ssl_client_cert,
+        ssl_client_key=ssl_client_key, ssl_client_phrase=ssl_client_phrase)
 
 
 def create_slv_array(cfg_array):
