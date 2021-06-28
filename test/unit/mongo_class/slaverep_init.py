@@ -193,7 +193,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.conf_file, ssl_client_key=self.ssl_client_key,
             ssl_client_cert=self.ssl_client_cert,
             ssl_client_ca=self.ssl_client_ca,
-            ssl_client_phrase=self.ssl_client_phrase, coll=self.coll)
+            ssl_client_phrase=self.ssl_client_phrase)
 
         self.assertEqual(mongo.config, self.config7)
 
@@ -212,7 +212,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.conf_file, ssl_client_key=self.ssl_client_key,
             ssl_client_cert=self.ssl_client_cert,
             ssl_client_ca=self.ssl_client_ca,
-            ssl_client_phrase=self.ssl_client_phrase, coll=self.coll)
+            ssl_client_phrase=self.ssl_client_phrase)
 
         self.assertEqual(
             (mongo.ssl_client_key, mongo.ssl_client_cert, mongo.ssl_client_ca,
@@ -234,7 +234,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file, ssl_client_key=self.ssl_client_key,
             ssl_client_cert=self.ssl_client_cert,
-            ssl_client_ca=self.ssl_client_ca, coll=self.coll)
+            ssl_client_ca=self.ssl_client_ca)
 
         self.assertEqual(mongo.config, self.config6)
 
@@ -252,7 +252,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file, ssl_client_key=self.ssl_client_key,
             ssl_client_cert=self.ssl_client_cert,
-            ssl_client_ca=self.ssl_client_ca, coll=self.coll)
+            ssl_client_ca=self.ssl_client_ca)
 
         self.assertEqual(
             (mongo.ssl_client_ca, mongo.ssl_client_key, mongo.ssl_client_cert),
@@ -272,7 +272,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file, ssl_client_key=self.ssl_client_key,
             ssl_client_cert=self.ssl_client_cert,
-            ssl_client_phrase=self.ssl_client_phrase, coll=self.coll)
+            ssl_client_phrase=self.ssl_client_phrase)
 
         self.assertEqual(mongo.config, self.config5)
 
@@ -290,7 +290,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file, ssl_client_key=self.ssl_client_key,
             ssl_client_cert=self.ssl_client_cert,
-            ssl_client_phrase=self.ssl_client_phrase, coll=self.coll)
+            ssl_client_phrase=self.ssl_client_phrase)
 
         self.assertEqual(mongo.ssl_client_phrase, self.ssl_client_phrase)
 
@@ -307,7 +307,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file, ssl_client_key=self.ssl_client_key,
-            ssl_client_cert=self.ssl_client_cert, coll=self.coll)
+            ssl_client_cert=self.ssl_client_cert)
 
         self.assertEqual(mongo.config, self.config4)
 
@@ -324,7 +324,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file, ssl_client_key=self.ssl_client_key,
-            ssl_client_cert=self.ssl_client_cert, coll=self.coll)
+            ssl_client_cert=self.ssl_client_cert)
 
         self.assertEqual(
             (mongo.ssl_client_ca, mongo.ssl_client_phrase), (None, None))
@@ -342,7 +342,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file, ssl_client_key=self.ssl_client_key,
-            ssl_client_cert=self.ssl_client_cert, coll=self.coll)
+            ssl_client_cert=self.ssl_client_cert)
 
         self.assertEqual(
             (mongo.ssl_client_key, mongo.ssl_client_cert),
@@ -362,7 +362,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca,
             ssl_client_key=self.ssl_client_key,
-            ssl_client_phrase=self.ssl_client_phrase, coll=self.coll)
+            ssl_client_phrase=self.ssl_client_phrase)
 
         self.assertEqual(mongo.config, self.config3)
 
@@ -379,7 +379,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca,
-            ssl_client_phrase=self.ssl_client_phrase, coll=self.coll)
+            ssl_client_phrase=self.ssl_client_phrase)
 
         self.assertEqual(mongo.config, self.config3)
 
@@ -396,7 +396,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca,
-            ssl_client_key=self.ssl_client_key, coll=self.coll)
+            ssl_client_key=self.ssl_client_key)
 
         self.assertEqual(mongo.config, self.config3)
 
@@ -412,8 +412,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca,
-            coll=self.coll)
+            conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca)
 
         self.assertEqual(mongo.config, self.config3)
 
@@ -429,8 +428,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca,
-            coll=self.coll)
+            conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca)
 
         self.assertEqual(
             (mongo.ssl_client_key, mongo.ssl_client_cert,
@@ -448,8 +446,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca,
-            coll=self.coll)
+            conf_file=self.conf_file, ssl_client_ca=self.ssl_client_ca)
 
         self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
@@ -465,7 +462,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, host=self.host, port=self.port,
-            ssl_client_phrase="Phrase", coll=self.coll)
+            ssl_client_phrase="Phrase")
 
         self.assertEqual(mongo.ssl_client_phrase, "Phrase")
 
@@ -480,8 +477,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertEqual(mongo.ssl_client_phrase, None)
 
@@ -497,7 +493,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, host=self.host, port=self.port,
-            ssl_client_cert=self.ssl_client_cert, coll=self.coll)
+            ssl_client_cert=self.ssl_client_cert)
 
         self.assertEqual(mongo.ssl_client_cert, self.ssl_client_cert)
 
@@ -512,8 +508,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertEqual(mongo.ssl_client_cert, None)
 
@@ -529,7 +524,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, host=self.host, port=self.port,
-            ssl_client_key=self.ssl_client_key, coll=self.coll)
+            ssl_client_key=self.ssl_client_key)
 
         self.assertEqual(mongo.ssl_client_key, self.ssl_client_key)
 
@@ -544,8 +539,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertEqual(mongo.ssl_client_key, None)
 
@@ -561,7 +555,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, host=self.host, port=self.port,
-            ssl_client_ca=self.ssl_client_ca, coll=self.coll)
+            ssl_client_ca=self.ssl_client_ca)
 
         self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
@@ -576,8 +570,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertEqual(mongo.ssl_client_ca, None)
 
@@ -598,7 +591,7 @@ class UnitTest(unittest.TestCase):
         config["authMechanism"] = self.auth_mech2
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, coll=self.coll)
+            conf_file=self.conf_file)
 
         self.assertEqual(mongo.config, config)
 
@@ -614,7 +607,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, host=self.host, port=self.port,
-            auth_mech=self.auth_mech, coll=self.coll)
+            auth_mech=self.auth_mech)
 
         self.assertEqual(mongo.auth_mech, self.auth_mech)
 
@@ -630,7 +623,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, host=self.host, port=self.port,
-            auth_mech=self.auth_mech2, coll=self.coll)
+            auth_mech=self.auth_mech2)
 
         self.assertEqual(mongo.auth_mech, self.auth_mech2)
 
@@ -646,7 +639,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            )
 
         self.assertEqual(mongo.auth_mech, self.auth_mech2)
 
@@ -661,8 +654,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertFalse(mongo.uptime)
 
@@ -677,8 +669,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertEqual(mongo.port, self.port)
 
@@ -693,8 +684,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertEqual(mongo.host, self.host)
 
@@ -709,8 +699,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertEqual(mongo.japd, self.japd)
 
@@ -725,8 +714,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertEqual(mongo.user, self.user)
 
@@ -742,7 +730,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            )
 
         self.assertEqual(mongo.name, self.name)
 
@@ -757,8 +745,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertFalse(mongo.log_path)
 
@@ -773,8 +760,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertFalse(mongo.db_path)
 
@@ -789,8 +775,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            coll=self.coll)
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertFalse(mongo.conn)
 
