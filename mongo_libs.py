@@ -196,7 +196,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
     return cmd_list
 
 
-def crt_coll_inst(cfg, dbs, tbl, **kwargs):
+def crt_coll_inst(cfg, dbs, tbl):
 
     """Function:  crt_coll_inst
 
@@ -215,6 +215,10 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
     use_arg = False
     use_uri = False
     auth_mech = "SCRAM-SHA-1"
+    ssl_client_ca = None
+    ssl_client_cert = None
+    ssl_client_key = None
+    ssl_client_phrase = None
 
     if hasattr(cfg, "auth_db"):
         auth_db = cfg.auth_db
@@ -228,18 +232,34 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
     if hasattr(cfg, "auth_mech"):
         auth_mech = cfg.auth_mech
 
+    if hasattr(cfg, "ssl_client_ca"):
+        ssl_client_ca = cfg.ssl_client_ca
+
+    if hasattr(cfg, "ssl_client_cert"):
+        ssl_client_cert = cfg.ssl_client_cert
+
+    if hasattr(cfg, "ssl_client_key"):
+        ssl_client_key = cfg.ssl_client_key
+
+    if hasattr(cfg, "ssl_client_phrase"):
+        ssl_client_phrase = cfg.ssl_client_phrase
+
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
         return mongo_class.RepSetColl(
             cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
             auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,
             db=dbs, coll=tbl, db_auth=cfg.db_auth, auth_db=auth_db,
-            use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech)
+            use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech,
+            ssl_client_ca=ssl_client_ca, ssl_client_cert=ssl_client_cert,
+            ssl_client_key=ssl_client_key, ssl_client_phrase=ssl_client_phrase)
 
     return mongo_class.Coll(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file,
-        auth_db=auth_db, use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech)
+        auth_db=auth_db, use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech,
+        ssl_client_ca=ssl_client_ca, ssl_client_cert=ssl_client_cert,
+        ssl_client_key=ssl_client_key, ssl_client_phrase=ssl_client_phrase)
 
 
 def disconnect(*args):
