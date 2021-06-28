@@ -82,7 +82,6 @@ class UnitTest(unittest.TestCase):
         test_log_path_attr -> Test log_path attribute.
         test_db_path_attr -> Test db_path attribute.
         test_conn_attr -> Test conn attribute.
-
         test_config_attr3 -> Test with SCRAM-SHA-1 setting.
         test_config_attr2 -> Test with MONGODB-CR setting.
         test_no_db_name_attr -> Test no db_name attribute passed.
