@@ -8,6 +8,7 @@
 ###  This README file is broken down into the following sections:
  * Prerequisites
    - FIPS Environment
+   - SSL Usage
  * Installation
    - Pip Installation
  * Testing
@@ -32,6 +33,9 @@
     - Edit the file and locate the \_password_digest function.
     - In the \_password_digest function there is an line that should match: "md5hash = hashlib.md5()".  Change it to "md5hash = hashlib.md5(usedforsecurity=False)".
     - Lastly, it will require the configuration file entry auth_mech to be set to: SCRAM-SHA-1 or SCRAM-SHA-256.
+
+  * SSL Usage
+    -  The use of SSL arguments will only be applicable when using the "use_arg" option.  URI connections are not able to use the SSL arguments in the connection.
 
 
 # Installation:
