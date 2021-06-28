@@ -12,6 +12,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class.Server.set_pass_config:  Set the passwd config attributes.
 
 ### Changed
+- mongo_class.SlaveRep.\_\_init\_\_:  Added capability to allow SSL attributes to be set.
 - mongo_class.MasterRep.\_\_init\_\_:  Added capability to allow SSL attributes to be set.
 - mongo_class.Rep.\_\_init\_\_:  Added capability to allow SSL attributes to be set.
 - mongo_class.Coll.\_\_init\_\_:  Added capability to allow SSL attributes to be set.
