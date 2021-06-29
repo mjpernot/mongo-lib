@@ -69,13 +69,20 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd,
             host=self.cfg.host, port=self.cfg.port, auth=self.cfg.auth,
             conf_file=self.cfg.conf_file, auth_db=self.cfg.auth_db,
-            use_arg=self.cfg.use_arg, use_uri=self.cfg.use_uri)
+            use_arg=self.cfg.use_arg, use_uri=self.cfg.use_uri,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         self.mongorep = mongo_class.RepSet(
             self.cfg.name, self.cfg.user, self.cfg.japd,
             host=self.cfg.host, port=self.cfg.port, auth=self.cfg.auth,
             conf_file=self.cfg.conf_file, auth_db=self.cfg.auth_db,
             use_arg=self.cfg.use_arg, use_uri=self.cfg.use_uri,
-            repset=self.cfg.repset)
+            repset=self.cfg.repset, ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         host = "--host="
         data = "--pass"
         data2 = "word="
