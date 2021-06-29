@@ -40,7 +40,7 @@ class FetchAdr(object):
     Description:  Class stub holder for Server class.
 
     Methods:
-        database_names -> Stub holder for Server.conn.database_names method.
+        database_names
 
     """
 
@@ -64,8 +64,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_fetch_dbs -> Test fetch_dbs method.
+        setUp
+        test_fetch_dbs
 
     """
 

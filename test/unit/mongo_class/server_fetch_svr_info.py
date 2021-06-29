@@ -40,7 +40,7 @@ class ServerInfo(object):
     Description:  Class stub holder for Server class.
 
     Methods:
-        server_info -> Stub holder for Server.conn.server_info method.
+        server_info
 
     """
 
@@ -64,8 +64,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_fetch_svr_info -> Test fetch_svr_info method.
+        setUp
+        test_fetch_svr_info
 
     """
 

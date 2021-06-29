@@ -40,7 +40,7 @@ class Conn(object):
     Description:  Class stub holder for Rep class.
 
     Methods:
-        __init__ -> Class intialization.
+        __init__
 
     """
 
@@ -64,8 +64,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_is_primary -> Test is_primary method.
+        setUp
+        test_is_primary
 
     """
 

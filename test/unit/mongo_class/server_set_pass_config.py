@@ -46,10 +46,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_change_pass -> Test change passwd and update config.
-        test_call_set_pass_config -> Test config settings with direct call.
-        test_set_pass_config -> Test setting configuration settings.
+        setUp
+        test_change_pass
+        test_call_set_pass_config
+        test_set_pass_config
 
     """
 

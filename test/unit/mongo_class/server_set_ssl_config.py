@@ -41,22 +41,22 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_ssl_all_phrase2 -> Test with all ssl arguments and phrase present.
-        test_ssl_all_phrase -> Test with all ssl arguments and phrase present.
-        test_ssl_all2 -> Test with all ssl arguments present.
-        test_ssl_all -> Test with all ssl arguments present.
-        test_ssl_client_key_phrase2 -> Test with cert, key and phrase present.
-        test_ssl_client_key_phrase -> Test with cert, key and phrase present.
-        test_ssl_client_key_cert3 -> Test with both cert and key present.
-        test_ssl_client_key_cert2 -> Test with both cert and key present.
-        test_ssl_client_key_cert -> Test with both cert and key present.
-        test_ssl_client_ca6 -> Test with ssl_client_ca only present.
-        test_ssl_client_ca5 -> Test with ssl_client_ca only present.
-        test_ssl_client_ca4 -> Test with ssl_client_ca only present.
-        test_ssl_client_ca3 -> Test with ssl_client_ca only present.
-        test_ssl_client_ca2 -> Test with ssl_client_ca only present.
-        test_ssl_client_ca -> Test with ssl_client_ca only present.
+        setUp
+        test_ssl_all_phrase2
+        test_ssl_all_phrase
+        test_ssl_all2
+        test_ssl_all
+        test_ssl_client_key_phrase2
+        test_ssl_client_key_phrase
+        test_ssl_client_key_cert3
+        test_ssl_client_key_cert2
+        test_ssl_client_key_cert
+        test_ssl_client_ca6
+        test_ssl_client_ca5
+        test_ssl_client_ca4
+        test_ssl_client_ca3
+        test_ssl_client_ca2
+        test_ssl_client_ca
 
     """
 
