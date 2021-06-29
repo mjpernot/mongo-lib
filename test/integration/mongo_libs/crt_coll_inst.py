@@ -100,11 +100,9 @@ class UnitTest(unittest.TestCase):
         """
 
         self.cfg.repset_hosts = None
-        self.cfg.ssl_client_ca = "CAFile"
         mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
-        self.cfg.ssl_client_ca = None
 
-        self.assertEqual(mongo.ssl_client_ca, "CAFile")
+        self.assertEqual(mongo.ssl_client_ca, self.cfg.ssl_client_ca)
 
     def test_rep_set_ssl(self):
 
@@ -116,11 +114,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.cfg.ssl_client_ca = "CAFile"
         mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
-        self.cfg.ssl_client_ca = None
 
-        self.assertEqual(mongo.ssl_client_ca, "CAFile")
+        self.assertEqual(mongo.ssl_client_ca, self.cfg.ssl_client_ca)
 
     def test_coll_none_ssl(self):
 
@@ -133,7 +129,10 @@ class UnitTest(unittest.TestCase):
         """
 
         self.cfg.repset_hosts = None
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
         mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
+        self.cfg.ssl_client_ca = tmp
 
         self.assertFalse(mongo.ssl_client_ca)
 
@@ -147,7 +146,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
         mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
+        self.cfg.ssl_client_ca = tmp
 
         self.assertFalse(mongo.ssl_client_ca)
 
