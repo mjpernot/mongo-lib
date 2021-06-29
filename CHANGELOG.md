@@ -23,6 +23,11 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class.Server.\_\_init\_\_: Added SSL attributes and added call to set_ssl_config.
 - Documentation updates.
 
+### Deprecated
+- mongo_class.Server.\_\_init\_\_:  Removal of use_uri and use_arg attributes.
+- mongo_class.Server.connect:  Removal of URI connection method.
+- mongo_class.RepSet.connect:  Removal of URI connection method.
+
 
 ## [4.1.0] - 2020-12-01
 - Updated to use pymongo v3.8.0.
