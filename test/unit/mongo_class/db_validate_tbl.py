@@ -41,8 +41,8 @@ class DBValidate2(object):
     Description:  Class stub holder for DB class.
 
     Methods:
-        __init__ -> Class initialization.
-        validate_collection -> Stub for DB.db.validate_collection method.
+        __init__
+        validate_collection
 
     """
 
@@ -66,8 +66,8 @@ class DBValidate2(object):
         Description:  Stub for DB.db.validate_collection method.
 
         Arguments:
-            (input) tbl_name -> Table name.
-            (input) full -> True|False - Do full scan.
+            (input) tbl_name
+            (input) full
 
         """
 
@@ -84,8 +84,8 @@ class DBValidate(object):
     Description:  Class stub holder for DB class.
 
     Methods:
-        __init__ -> Class initialization.
-        validate_collection -> Stub for DB.db.validate_collection method.
+        __init__
+        validate_collection
 
     """
 
@@ -109,8 +109,8 @@ class DBValidate(object):
         Description:  Stub for DB.db.validate_collection method.
 
         Arguments:
-            (input) tbl_name -> Table name.
-            (input) full -> True|False - Do full scan.
+            (input) tbl_name
+            (input) full
 
         """
 
@@ -127,10 +127,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_raise_exception2 -> Test the raise exception in pymongo==3.2.0.
-        test_raise_exception -> Test the raise exception.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_raise_exception2
+        test_raise_exception
+        test_default
 
     """
 

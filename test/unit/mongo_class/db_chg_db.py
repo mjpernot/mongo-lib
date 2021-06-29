@@ -40,9 +40,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_database_passed -> Test with database passed.
-        test_no_database -> Test with no database passed.
+        setUp
+        test_database_passed
+        test_no_database
 
     """
 
