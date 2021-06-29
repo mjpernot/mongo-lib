@@ -41,13 +41,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_pass_false2 -> Test pass False to include system tables.
-        test_pass_false -> Test pass False to include system tables.
-        test_pass_true2 -> Test pass True to include system tables.
-        test_pass_true -> Test pass True to include system tables.
-        test_default2 -> Test with minimum number of arguments.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_pass_false2
+        test_pass_false
+        test_pass_true2
+        test_pass_true
+        test_default2
+        test_default
 
     """
 

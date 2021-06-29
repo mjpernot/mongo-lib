@@ -41,19 +41,19 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_fail_get_srv_attr2 -> Test with failed get_srv_attr call.
-        test_fail_get_srv_attr -> Test with failed get_srv_attr call.
-        test_auth_arg2 -> Test with auth and arg present.
-        test_auth_arg -> Test with auth and arg present.
-        test_auth_uri2 -> Test with auth and uri present.
-        test_auth_uri -> Test with auth and uri present.
-        test_no_auth2 -> Test with no auth present.
-        test_no_auth -> Test with no auth present.
-        test_fail_connection2 -> Test with failed connection.
-        test_fail_connection -> Test with failed connection.
-        test_connection2 -> Test connection method.
-        test_connection -> Test connection method.
+        setUp
+        test_fail_get_srv_attr2
+        test_fail_get_srv_attr
+        test_auth_arg2
+        test_auth_arg
+        test_auth_uri2
+        test_auth_uri
+        test_no_auth2
+        test_no_auth
+        test_fail_connection2
+        test_fail_connection
+        test_connection2
+        test_connection
 
     """
 
