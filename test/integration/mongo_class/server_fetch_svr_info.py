@@ -42,11 +42,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_fetch_svr_info4 -> Test fetch_svr_info method.
-        test_fetch_svr_info3 -> Test fetch_svr_info method.
-        test_fetch_svr_info2 -> Test fetch_svr_info method.
-        test_fetch_svr_info -> Test fetch_svr_info method.
+        setUp
+        test_fetch_svr_info4
+        test_fetch_svr_info3
+        test_fetch_svr_info2
+        test_fetch_svr_info
 
     """
 

@@ -41,9 +41,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_fetch_adr2 -> Test fetch_adr method.
-        test_fetch_adr -> Test fetch_adr method.
+        setUp
+        test_fetch_adr2
+        test_fetch_adr
 
     """
 

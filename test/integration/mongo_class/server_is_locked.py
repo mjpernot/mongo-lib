@@ -41,8 +41,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_is_locked -> Test is_locked method.
+        setUp
+        test_is_locked
 
     """
 
@@ -56,15 +56,17 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.base_dir = "test/integration"
-        self.config_dir = os.path.join(self.base_dir, "config")
-        self.config_name = "mongo"
-        self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
+        base_dir = "test/integration"
+        config_dir = os.path.join(base_dir, "config")
+        config_name = "mongo"
+        cfg = gen_libs.load_module(config_name, config_dir)
         self.mongo = mongo_class.Server(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
+            use_uri=cfg.use_uri, auth=cfg.auth, use_arg=cfg.use_arg,
+            auth_db=cfg.auth_db, conf_file=cfg.conf_file,
+            ssl_client_ca=cfg.ssl_client_ca, ssl_client_key=cfg.ssl_client_key,
+            ssl_client_cert=cfg.ssl_client_cert,
+            ssl_client_phrase=cfg.ssl_client_phrase)
         self.mongo.connect()
 
     def test_is_locked(self):

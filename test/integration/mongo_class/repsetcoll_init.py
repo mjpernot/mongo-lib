@@ -45,66 +45,66 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_ssl_all_phrase2 -> Test with all ssl arguments and phrase present.
-        test_ssl_all_phrase -> Test with all ssl arguments and phrase present.
-        test_ssl_all2 -> Test with all ssl arguments present.
-        test_ssl_all -> Test with all ssl arguments present.
-        test_ssl_client_key_phrase2 -> Test with cert, key and phrase present.
-        test_ssl_client_key_phrase -> Test with cert, key and phrase present.
-        test_ssl_client_key_cert3 -> Test with both cert and key present.
-        test_ssl_client_key_cert2 -> Test with both cert and key present.
-        test_ssl_client_key_cert -> Test with both cert and key present.
-        test_ssl_client_ca8 -> Test with ssl_client_ca only present.
-        test_ssl_client_ca7 -> Test with ssl_client_ca only present.
-        test_ssl_client_ca6 -> Test with ssl_client_ca only present.
-        test_ssl_client_ca5 -> Test with ssl_client_ca only present.
-        test_ssl_client_ca4 -> Test with ssl_client_ca only present.
-        test_ssl_client_ca3 -> Test with ssl_client_ca only present.
-        test_ssl_client_phrase2 -> Test with ssl_client_phrase attribute.
-        test_ssl_client_phrase -> Test with ssl_client_phrase attribute.
-        test_ssl_client_cert2 -> Test with ssl_client_cert attribute.
-        test_ssl_client_cert -> Test with ssl_client_cert attribute.
-        test_ssl_client_key2 -> Test with ssl_client_key attribute.
-        test_ssl_client_key -> Test with ssl_client_key attribute.
-        test_ssl_client_ca2 -> Test with ssl_client_ca attribute.
-        test_ssl_client_ca -> Test with ssl_client_ca attribute.
-        test_set_pass -> Test with default config settings.
-        test_auth_mech2 -> Test passing arg to auth_mech attribute.
-        test_auth_mech -> Test passing arg to auth_mech attribute.
-        test_default_auth_mech -> Test auth_mech default setting.
-        test_uptime_attr -> Test uptime attribute.
-        test_port_attr -> Test port attribute.
-        test_host_attr -> Test host attribute.
-        test_japd_attr -> Test japd attribute.
-        test_user_attr -> Test user attribute.
-        test_name_attr -> Test name attribute.
-        test_log_path_attr -> Test log_path attribute.
-        test_db_path_attr -> Test db_path attribute.
-        test_conn_attr -> Test conn attribute.
-        test_config_attr3 -> Test with SCRAM-SHA-1 setting.
-        test_config_attr2 -> Test with MONGODB-CR setting.
-        test_db_coll_attr -> Test db_coll attribute.
-        test_db_conn_attr -> Test db_conn attribute.
-        test_db_auth_attr2 -> Test db_auth attribute.
-        test_db_auth_attr -> Test db_auth attribute.
-        test_coll_attr2 -> Test coll attribute.
-        test_coll_attr -> Test coll attribute.
-        test_db_attr2 -> Test db attribute.
-        test_db_attr -> Test db attribute.
-        test_default_conf_file -> Test using the default conf_file setting.
-        test_using_conf_file -> Test using the conf_file connection.
-        test_default_auth -> Test using the default auth setting.
-        test_using_auth -> Test using the auth connection.
-        test_conn_list_attr -> Test setting the conn_list attribute.
-        test_config_attr -> Test setting the config attribute.
-        test_default_auth_db -> Test using the default auth_db setting.
-        test_using_auth_db -> Test using the auth_db attribute.
-        test_default_arg -> Test using the default arg setting.
-        test_using_arg -> Test using the arg connection.
-        test_default_uri -> Test using the default uri setting.
-        test_using_uri -> Test using the uri connection.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_ssl_all_phrase2
+        test_ssl_all_phrase
+        test_ssl_all2
+        test_ssl_all
+        test_ssl_client_key_phrase2
+        test_ssl_client_key_phrase
+        test_ssl_client_key_cert3
+        test_ssl_client_key_cert2
+        test_ssl_client_key_cert
+        test_ssl_client_ca8
+        test_ssl_client_ca7
+        test_ssl_client_ca6
+        test_ssl_client_ca5
+        test_ssl_client_ca4
+        test_ssl_client_ca3
+        test_ssl_client_phrase2
+        test_ssl_client_phrase
+        test_ssl_client_cert2
+        test_ssl_client_cert
+        test_ssl_client_key2
+        test_ssl_client_key
+        test_ssl_client_ca2
+        test_ssl_client_ca
+        test_set_pass
+        test_auth_mech2
+        test_auth_mech
+        test_default_auth_mech
+        test_uptime_attr
+        test_port_attr
+        test_host_attr
+        test_japd_attr
+        test_user_attr
+        test_name_attr
+        test_log_path_attr
+        test_db_path_attr
+        test_conn_attr
+        test_config_attr3
+        test_config_attr2
+        test_db_coll_attr
+        test_db_conn_attr
+        test_db_auth_attr2
+        test_db_auth_attr
+        test_coll_attr2
+        test_coll_attr
+        test_db_attr2
+        test_db_attr
+        test_default_conf_file
+        test_using_conf_file
+        test_default_auth
+        test_using_auth
+        test_conn_list_attr
+        test_config_attr
+        test_default_auth_db
+        test_using_auth_db
+        test_default_arg
+        test_using_arg
+        test_default_uri
+        test_using_uri
+        test_default
 
     """
 

@@ -41,10 +41,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_arg2 -> Test with argument passed.
-        test_arg -> Test with argument passed.
-        test_adm_cmd -> Test adm_cmd method.
+        setUp
+        test_arg2
+        test_arg
+        test_adm_cmd
 
     """
 
