@@ -24,7 +24,6 @@ else:
     import unittest
 
 # Third-party
-import pymongo
 
 # Local
 sys.path.append(os.getcwd())
