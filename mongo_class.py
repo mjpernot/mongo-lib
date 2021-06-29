@@ -463,7 +463,7 @@ class Server(object):
 
         """
 
-        global KEY2
+        global KEY1
         global KEY3
         global KEY4
 
@@ -480,7 +480,7 @@ class Server(object):
                 self.config["ssl_keyfile"] = self.ssl_client_key
 
             if self.ssl_client_phrase and self.ssl_client_cert:
-                self.config[KEY3 + KEY2 + KEY4] = self.ssl_client_phrase
+                self.config[KEY3 + KEY1 + KEY4] = self.ssl_client_phrase
 
 
 class DB(Server):
