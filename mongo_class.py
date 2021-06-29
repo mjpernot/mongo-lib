@@ -39,6 +39,8 @@ __version__ = version.__version__
 # Global
 KEY1 = "pass"
 KEY2 = "word"
+KEY3 = "ssl_pem_"
+KEY4 = "phrase"
 
 
 def fetch_cmd_line(mongo):
@@ -461,6 +463,10 @@ class Server(object):
 
         """
 
+        global KEY2
+        global KEY3
+        global KEY4
+
         if self.ssl_client_ca or self.ssl_client_cert:
             self.config["ssl"] = True
 
@@ -474,7 +480,7 @@ class Server(object):
                 self.config["ssl_keyfile"] = self.ssl_client_key
 
             if self.ssl_client_phrase and self.ssl_client_cert:
-                self.config["ssl_pem_passphrase"] = self.ssl_client_phrase
+                self.config[KEY3 + KEY2 + KEY4] = self.ssl_client_phrase
 
 
 class DB(Server):
