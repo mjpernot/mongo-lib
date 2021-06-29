@@ -149,10 +149,8 @@ class UnitTest(unittest.TestCase):
         self.config_dir = os.path.join(self.base_dir, "config")
         self.config_name = "mongo"
         self.auth_mech = "SCRAM-SHA-1"
-        self.ssl_client_ca = None
-        self.ssl_client_ca2 = "CAFile"
-
         self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
+        self.ssl_client_ca = self.cfg.ssl_client_ca
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl8(self, mock_load):
@@ -166,13 +164,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        tmp = self.cfg.ssl_client_ca
-        self.cfg.ssl_client_ca = self.ssl_client_ca2
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.RepSetColl)
-        self.cfg.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca2)
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl7(self, mock_load):
@@ -186,13 +181,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        tmp = self.cfg.ssl_client_ca
-        self.cfg.ssl_client_ca = self.ssl_client_ca2
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.RepSet)
-        self.cfg.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca2)
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl6(self, mock_load):
@@ -206,13 +198,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        tmp = self.cfg.ssl_client_ca
-        self.cfg.ssl_client_ca = self.ssl_client_ca2
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.SlaveRep)
-        self.cfg.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca2)
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl5(self, mock_load):
@@ -226,13 +215,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        tmp = self.cfg.ssl_client_ca
-        self.cfg.ssl_client_ca = self.ssl_client_ca2
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.MasterRep)
-        self.cfg.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca2)
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl4(self, mock_load):
@@ -246,13 +232,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        tmp = self.cfg.ssl_client_ca
-        self.cfg.ssl_client_ca = self.ssl_client_ca2
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Rep)
-        self.cfg.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca2)
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl3(self, mock_load):
@@ -266,13 +249,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        tmp = self.cfg.ssl_client_ca
-        self.cfg.ssl_client_ca = self.ssl_client_ca2
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Coll)
-        self.cfg.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca2)
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl2(self, mock_load):
@@ -286,13 +266,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        tmp = self.cfg.ssl_client_ca
-        self.cfg.ssl_client_ca = self.ssl_client_ca2
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.DB)
-        self.cfg.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca2)
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl(self, mock_load):
@@ -306,13 +283,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        tmp = self.cfg.ssl_client_ca
-        self.cfg.ssl_client_ca = self.ssl_client_ca2
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Server)
-        self.cfg.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca2)
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl8(self, mock_load):
@@ -326,10 +300,13 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.RepSetColl)
+        self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+        self.assertEqual(mongo.ssl_client_ca, None)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl7(self, mock_load):
@@ -343,10 +320,13 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.RepSet)
+        self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+        self.assertEqual(mongo.ssl_client_ca, None)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl6(self, mock_load):
@@ -360,10 +340,13 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.SlaveRep)
+        self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+        self.assertEqual(mongo.ssl_client_ca, None)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl5(self, mock_load):
@@ -377,10 +360,13 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.MasterRep)
+        self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+        self.assertEqual(mongo.ssl_client_ca, None)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl4(self, mock_load):
@@ -394,10 +380,13 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Rep)
+        self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+        self.assertEqual(mongo.ssl_client_ca, None)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl3(self, mock_load):
@@ -411,10 +400,13 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Coll)
+        self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+        self.assertEqual(mongo.ssl_client_ca, None)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl2(self, mock_load):
@@ -428,10 +420,13 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.DB)
+        self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+        self.assertEqual(mongo.ssl_client_ca, None)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl(self, mock_load):
@@ -445,10 +440,13 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Server)
+        self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+        self.assertEqual(mongo.ssl_client_ca, None)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_auth_mech8(self, mock_load):
