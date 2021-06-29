@@ -25,6 +25,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Documentation updates.
 
 ### Deprecated
+- mongo_class.RepSetColl.\_\_init\_\_:  Removal of db_auth_conn attribute.
+- mongo_class.RepSetColl.\_db_auth:  Removal private method, no longer required.
 - mongo_class.Server.\_\_init\_\_:  Removal of use_uri and use_arg attributes.
 - mongo_class.Server.connect:  Removal of URI connection method.
 - mongo_class.RepSet.connect:  Removal of URI connection method.
