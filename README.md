@@ -123,7 +123,7 @@ test/unit/mongodb_lib/code_coverage.sh
 
 # Integration Testing:
 
-NOTE:  Integration testing will require access to a Mongo database server which is part of a replica set.
+NOTE:  Part of the Integration testing will require access to a Mongo database server which is part of a replica set.  If this is not the case, then do not run this part of the testing.
 
 ### Installation:
 
@@ -149,7 +149,10 @@ exit
 
 ### Configuration:
 
-Create Mongo configuration files.  Two configuration files will be created, one with master as the main connection and one with slave as the main connection.  Make the appropriate change to the environment.
+Create Mongo configuration files.
+  Make the appropriate change to the environment.
+  Note 1:  There will be three configuration files created for testing.  One for a standalone Mongo database and two will be created that require the Mongo databases to be part of a replica set.  One of these will be the master_mongo.py and the other one will be the slave_mongo.py.
+  NOTE 2:  Even if testing only the replication side, the testing files will still require the mongo.py to be setup.
   * Change these entries in the Mongo setup:
     - user = "USER"
     - japd = "PSWORD"
@@ -162,6 +165,7 @@ Create Mongo configuration files.  Two configuration files will be created, one 
     - auth_mech = "SCRAM-SHA-1"
 
   * Connecting to a Mongo replica set.
+    Note:  These will only be in the master_mongo.py and slave_mongo.py files.
     - repset = "REPLICA_SET_NAME"
     - repset_hosts = "HOST_1:PORT, HOST_2:PORT, ..."
     - db_auth = "AUTHENTICATION_DATABASE"
@@ -171,7 +175,7 @@ Create Mongo configuration files.  Two configuration files will be created, one 
     - NOTE 2:  FIPS 140-2 environment requires SCRAM-SHA-1 or SCRAM-SHA-256.
     - NOTE 3:  MONGODB-CR is not supported in Mongodb 4.0 and better.
 
-  * If the Mongo set is set to use SSL connections, then one or more of the following entries will need to be completed to connect using SSL protocols.  Note:  Read the configuration file (mongo.py.TEMPLATE) to determine which entries will need to be set.
+  * If Mongo is set to use SSL connections, then one or more of the following entries will need to be completed to connect using SSL protocols.  Note:  Read the configuration file (mongo.py.TEMPLATE) to determine which entries will need to be set.
     - ssl_client_ca = None
     - ssl_client_key = None
     - ssl_client_cert = None
@@ -180,12 +184,13 @@ Create Mongo configuration files.  Two configuration files will be created, one 
 ```
 cd test/integration/config
 cp mongo.py.TEMPLATE mongo.py
+cp mongo.py.TEMPLATE master_mongo.py
 cp mongo.py.TEMPLATE slave_mongo.py
-chmod 600 mongo.py slave_mongo.py
-vim mongo.py slave_mongo.py
+chmod 600 mongo.py master_mongo.py slave_mongo.py
+vim mongo.py master_mongo.py slave_mongo.py
 ```
 
-### Testing mongo_class.py
+### Testing mongo_class.py - Mongo Stand Alone
 
 ```
 cd {Python_Project}/mongo-lib
@@ -199,5 +204,13 @@ test/integration/mongo_class/code_coverage.sh
 cd {Python_Project}/mongo-lib
 test/integration/mongo_libs/integration_test_run.sh
 test/integration/mongo_libs/code_coverage.sh
+```
+
+### Testing mongo_class.py - Mongo Replica Set
+
+```
+cd {Python_Project}/mongo-lib
+test/integration/mongo_class/replica_integration_test_run.sh
+test/integration/mongo_class/replica_code_coverage.sh
 ```
 
