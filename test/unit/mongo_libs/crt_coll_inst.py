@@ -41,7 +41,7 @@ class Cfg(object):
     Description:  Class stub holder for Cfg class.
 
     Methods:
-        __init__ -> Class initialization.
+        __init__
 
     """
 
@@ -74,7 +74,7 @@ class Cfg2(object):
     Description:  Class stub holder for Cfg class with new attributes.
 
     Methods:
-        __init__ -> Class initialization.
+        __init__
 
     """
 
@@ -115,7 +115,7 @@ class Cfg3(object):
     Description:  Class stub holder for Cfg class with new attributes.
 
     Methods:
-        __init__ -> Class initialization.
+        __init__
 
     """
 

@@ -41,7 +41,7 @@ class Mongo(object):
     Description:  Class stub holder for Mongo class.
 
     Methods:
-        __init__ -> Class initialization.
+        __init__
 
     """
 
@@ -71,13 +71,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_full_test -> Test with all external calls.
-        test_crt_base_cmd -> Test with crt_base_cmd call.
-        test_add_cmd_list -> Test with list.
-        test_add_cmd_empty -> Test with empty list.
-        test_is_add_cmd -> Test with is_add_cmd call.
-        test_default -> Test with default settings.
+        setUp
+        test_full_test
+        test_crt_base_cmd
+        test_add_cmd_list
+        test_add_cmd_empty
+        test_is_add_cmd
+        test_default
 
     """
 
