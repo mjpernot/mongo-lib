@@ -462,6 +462,7 @@ class Server(object):
         """
 
         if self.ssl_client_ca or self.ssl_client_cert:
+            self.config["ssl"] = True
 
             if self.ssl_client_ca:
                 self.config["ssl_ca_certs"] = self.ssl_client_ca
