@@ -42,6 +42,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_miss_coll_coll2
+        test_miss_coll_coll
         test_coll_attr2
         test_coll_attr
         test_no_conn_list1
@@ -72,6 +74,49 @@ class UnitTest(unittest.TestCase):
         self.coll = "coll_name"
         self.db_auth = None
         self.errmsg = "Error Message"
+        self.errmsg2 = "Error:  Unable to connect, no collection passed."
+
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_miss_coll_coll2(self, mock_client, mock_cmd):
+
+        """Function:  test_miss_coll_coll2
+
+        Description:  Test with no Collection passed.
+
+        Arguments:
+
+        """
+
+        mock_client.return_value = True
+        mock_cmd.return_value = (True, None)
+
+        mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
+                                 self.port)
+        mongo.conn = {"test": {"coll_name": None}}
+
+        self.assertEqual(mongo.coll_coll, None)
+
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_miss_coll_coll(self, mock_client, mock_cmd):
+
+        """Function:  test_miss_coll_coll
+
+        Description:  Test with no Collection passed.
+
+        Arguments:
+
+        """
+
+        mock_client.return_value = True
+        mock_cmd.return_value = (True, None)
+
+        mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
+                                 self.port)
+        mongo.conn = {"test": {"coll_name": None}}
+
+        self.assertEqual(mongo.connect(), (False, self.errmsg2))
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
