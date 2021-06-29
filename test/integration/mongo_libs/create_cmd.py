@@ -42,18 +42,18 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_full_test -> Test with all external calls.
-        test_crt_base_cmd2 -> Test with combinations.
-        test_crt_base_cmd -> Test with combinations.
-        test_is_add_cmd_dict -> Test with multiple dictionary.
-        test_add_cmd_list -> Test with multiple list.
-        test_is_add_cmd_empty -> Test with empty dictionary.
-        test_add_cmd_empty -> Test with empty list.
-        test_is_and_add_cmd -> Test with is_add_cmd and add_cmd calls.
-        test_is_add_cmd -> Test with is_add_cmd call.
-        test_add_cmd -> Test with add_cmd call.
-        test_default -> Test with default settings.
+        setUp
+        test_full_test
+        test_crt_base_cmd2
+        test_crt_base_cmd
+        test_is_add_cmd_dict
+        test_add_cmd_list
+        test_is_add_cmd_empty
+        test_add_cmd_empty
+        test_is_and_add_cmd
+        test_is_add_cmd
+        test_add_cmd
+        test_default
 
     """
 

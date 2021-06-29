@@ -43,7 +43,7 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
+        setUp
         test_set_ssl8
         test_set_ssl7
         test_set_ssl6

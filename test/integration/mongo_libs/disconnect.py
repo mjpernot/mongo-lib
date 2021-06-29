@@ -42,12 +42,12 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_combo_servers -> Test with in a combination of servers and list.
-        test_multiple_list_servers -> Test with multiple servers in a list.
-        test_single_list_server -> Test with one server in list.
-        test_multiple_servers -> Test creating Server class instance.
-        test_single_server -> Test with one server.
+        setUp
+        test_combo_servers
+        test_multiple_list_servers
+        test_single_list_server
+        test_multiple_servers
+        test_single_server
 
     """
 
