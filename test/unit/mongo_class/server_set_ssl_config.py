@@ -110,7 +110,7 @@ class UnitTest(unittest.TestCase):
         self.config3["ssl"] = True
         self.config3["ssl_keyfile"] = "KeyFile"
         self.config3["ssl_certfile"] = "CertFile"
-        self.config3[KEY3 + KEY2 + KEY4] = "MyPhrase"
+        self.config3[KEY3 + KEY1 + KEY4] = "MyPhrase"
 
         self.config4 = {}
         self.config4[KEY1 + KEY2] = self.japd
@@ -127,7 +127,7 @@ class UnitTest(unittest.TestCase):
         self.config5["ssl_ca_certs"] = "CAFile"
         self.config5["ssl_keyfile"] = "KeyFile"
         self.config5["ssl_certfile"] = "CertFile"
-        self.config5[KEY3 + KEY2 + KEY4] = "MyPhrase"
+        self.config5[KEY3 + KEY1 + KEY4] = "MyPhrase"
 
     def test_ssl_all_phrase(self):
 
