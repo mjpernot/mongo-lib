@@ -74,6 +74,7 @@ class UnitTest(unittest.TestCase):
         self.database = "admin"
         self.failure = "Authentication failed."
         self.ermsg = "Error:  Auth flag or login params is incorrect: %s"
+        self.errmsg2 = "Error:  Server not detected."
 
     def test_db_attr2(self):
 
@@ -89,7 +90,11 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -107,7 +112,11 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
 
         self.assertTrue(mongo.db)
@@ -126,7 +135,11 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
 
         self.assertFalse(mongo.db)
@@ -148,7 +161,11 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.connect(), (False, errmsg))
 
@@ -166,7 +183,11 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -184,7 +205,11 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
 
         self.assertEqual(
@@ -206,7 +231,11 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=False, auth_db=True, conf_file=self.cfg.conf_file)
+            use_arg=False, auth_db=True, conf_file=self.cfg.conf_file,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
 
         self.assertEqual(
@@ -228,9 +257,13 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=False, auth_db=True, conf_file=self.cfg.conf_file)
+            use_arg=False, auth_db=True, conf_file=self.cfg.conf_file,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertEqual(mongo.connect(), (True, None))
+        self.assertEqual(mongo.connect(), (False, self.errmsg2))
 
     def test_no_auth2(self):
 
@@ -246,7 +279,11 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
 
         self.assertEqual(
@@ -268,9 +305,13 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertEqual(mongo.connect(), (True, None))
+        self.assertEqual(mongo.connect(), (False, self.errmsg2))
 
     def test_fail_connection2(self):
 
@@ -284,7 +325,11 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
-            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg)
+            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
 
         self.assertFalse(mongo.db)
@@ -304,7 +349,11 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
-            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg)
+            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.connect(), (False, errmsg))
 
@@ -320,7 +369,11 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg)
+            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -336,7 +389,11 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg)
+            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
 
         self.assertEqual(mongo.db_name, self.database)
