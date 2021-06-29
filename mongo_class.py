@@ -752,7 +752,12 @@ class Coll(DB):
         status, errmsg = super(Coll, self).connect()
 
         if status:
-            self.coll = self.conn[self.coll_db][self.coll_coll]
+            if self.coll_coll:
+                self.coll = self.conn[self.coll_db][self.coll_coll]
+
+            else:
+                status = False
+                errmsg = "Error:  Unable to connect, no collection passed."
 
         return status, errmsg
 

@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Added SSL connection capability to the Mongo classes.
 
 ### Fixed
+- mongo_class.Coll.connect:  Added exception handler if no collection is passed to class.
 - mongo_libs.create_instance:  Added auth_mech argument to instance call.
 
 ### Added
