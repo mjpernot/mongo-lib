@@ -118,8 +118,6 @@ class UnitTest(unittest.TestCase):
         self.config_dir = os.path.join(self.base_dir, "config")
         self.config_name = "mongo"
         self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
-        key1 = "pass"
-        key2 = "word"
         self.auth_mech = "MONGODB-CR"
         self.auth_mech2 = "SCRAM-SHA-1"
         self.conn_list = [self.cfg.host + ":" + str(self.cfg.port)]
