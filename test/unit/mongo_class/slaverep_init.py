@@ -221,9 +221,9 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(
             (mongo.ssl_client_key, mongo.ssl_client_cert, mongo.ssl_client_ca,
-            mongo.ssl_client_phrase),
+             mongo.ssl_client_phrase),
             (self.ssl_client_key, self.ssl_client_cert, self.ssl_client_ca,
-            self.ssl_client_phrase))
+             self.ssl_client_phrase))
 
     def test_ssl_all2(self):
 
@@ -643,8 +643,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            )
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertEqual(mongo.auth_mech, self.auth_mech2)
 
@@ -734,8 +733,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.SlaveRep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            )
+            self.name, self.user, self.japd, host=self.host, port=self.port)
 
         self.assertEqual(mongo.name, self.name)
 
