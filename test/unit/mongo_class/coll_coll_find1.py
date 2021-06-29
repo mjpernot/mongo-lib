@@ -40,8 +40,8 @@ class CollFind(object):
     Description:  Class stub holder for Coll class.
 
     Methods:
-        __init__ -> Class initialization.
-        find_one -> Stub for Coll.coll_find1 method.
+        __init__
+        find_one
 
     """
 
@@ -64,7 +64,7 @@ class CollFind(object):
         Description:  Stub for Coll.coll_find1 method.
 
         Arguments:
-            (input) qry -> Query command.
+            (input) qry
 
         """
 
@@ -80,10 +80,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_query -> Test with query command.
-        test_empty_query -> Test with empty query command.
-        test_no_query -> Test with no query command.
+        setUp
+        test_query
+        test_empty_query
+        test_no_query
 
     """
 
