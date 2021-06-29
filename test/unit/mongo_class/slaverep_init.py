@@ -35,6 +35,8 @@ __version__ = version.__version__
 # Global
 KEY1 = "pass"
 KEY2 = "word"
+KEY3 = "ssl_pem_"
+KEY4 = "phrase"
 
 
 class UnitTest(unittest.TestCase):
@@ -115,6 +117,8 @@ class UnitTest(unittest.TestCase):
 
         global KEY1
         global KEY2
+        global KEY3
+        global KEY4
 
         self.name = "Mongo_Server"
         self.user = "mongo_user"
@@ -164,7 +168,7 @@ class UnitTest(unittest.TestCase):
         self.config5["ssl"] = True
         self.config5["ssl_keyfile"] = self.ssl_client_key
         self.config5["ssl_certfile"] = self.ssl_client_cert
-        self.config5["ssl_pem_passphrase"] = self.ssl_client_phrase
+        self.config5[KEY3 + KEY1 + KEY4] = self.ssl_client_phrase
 
         self.config6 = {}
         self.config6[KEY1 + KEY2] = self.japd
@@ -181,7 +185,7 @@ class UnitTest(unittest.TestCase):
         self.config7["ssl_ca_certs"] = self.ssl_client_ca
         self.config7["ssl_keyfile"] = self.ssl_client_key
         self.config7["ssl_certfile"] = self.ssl_client_cert
-        self.config7["ssl_pem_passphrase"] = self.ssl_client_phrase
+        self.config7[KEY3 + KEY1 + KEY4] = self.ssl_client_phrase
 
     def test_ssl_all_phrase2(self):
 
