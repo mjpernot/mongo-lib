@@ -29,7 +29,6 @@ else:
 # Local
 sys.path.append(os.getcwd())
 import mongo_class
-import lib.machine as machine
 import version
 
 __version__ = version.__version__
