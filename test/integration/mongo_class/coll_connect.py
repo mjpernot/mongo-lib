@@ -42,6 +42,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_miss_coll_coll2
+        test_miss_coll_coll
         test_fail_get_srv_attr2
         test_fail_get_srv_attr
         test_auth_arg2
@@ -74,6 +76,48 @@ class UnitTest(unittest.TestCase):
         self.database = "admin"
         self.coll = "system.users"
         self.errmsg = "Error:  Server not detected."
+        self.errmsg2 = "Error:  Unable to connect, no collection passed."
+
+    def test_miss_coll_coll2(self):
+
+        """Function:  test_miss_coll_coll2
+
+        Description:  Test with no Collection passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Coll(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
+        mongo.connect()
+
+        self.assertFalse(mongo.coll)
+
+    def test_miss_coll_coll(self):
+
+        """Function:  test_miss_coll_coll
+
+        Description:  Test with no Collection passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Coll(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
+
+        self.assertEqual(mongo.connect(), (False, self.errmsg2))
 
     def test_fail_get_srv_attr2(self):
 
