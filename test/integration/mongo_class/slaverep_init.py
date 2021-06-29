@@ -119,7 +119,7 @@ class UnitTest(unittest.TestCase):
 
         self.base_dir = "test/integration"
         self.config_dir = os.path.join(self.base_dir, "config")
-        self.config_name = "slave_mongo"
+        self.config_name = "mongo"
         self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
         self.auth_mech = "MONGODB-CR"
         self.auth_mech2 = "SCRAM-SHA-1"
