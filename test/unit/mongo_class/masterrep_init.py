@@ -147,17 +147,20 @@ class UnitTest(unittest.TestCase):
         self.config3 = {}
         self.config3[KEY1 + KEY2] = self.japd
         self.config3["authMechanism"] = self.auth_mech2
+        self.config3["ssl"] = True
         self.config3["ssl_ca_certs"] = self.ssl_client_ca
 
         self.config4 = {}
         self.config4[KEY1 + KEY2] = self.japd
         self.config4["authMechanism"] = self.auth_mech2
+        self.config4["ssl"] = True
         self.config4["ssl_keyfile"] = self.ssl_client_key
         self.config4["ssl_certfile"] = self.ssl_client_cert
 
         self.config5 = {}
         self.config5[KEY1 + KEY2] = self.japd
         self.config5["authMechanism"] = self.auth_mech2
+        self.config5["ssl"] = True
         self.config5["ssl_keyfile"] = self.ssl_client_key
         self.config5["ssl_certfile"] = self.ssl_client_cert
         self.config5["ssl_pem_passphrase"] = self.ssl_client_phrase
@@ -165,6 +168,7 @@ class UnitTest(unittest.TestCase):
         self.config6 = {}
         self.config6[KEY1 + KEY2] = self.japd
         self.config6["authMechanism"] = self.auth_mech2
+        self.config6["ssl"] = True
         self.config6["ssl_ca_certs"] = self.ssl_client_ca
         self.config6["ssl_keyfile"] = self.ssl_client_key
         self.config6["ssl_certfile"] = self.ssl_client_cert
@@ -172,6 +176,7 @@ class UnitTest(unittest.TestCase):
         self.config7 = {}
         self.config7[KEY1 + KEY2] = self.japd
         self.config7["authMechanism"] = self.auth_mech2
+        self.config7["ssl"] = True
         self.config7["ssl_ca_certs"] = self.ssl_client_ca
         self.config7["ssl_keyfile"] = self.ssl_client_key
         self.config7["ssl_certfile"] = self.ssl_client_cert
