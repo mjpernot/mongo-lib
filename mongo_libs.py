@@ -51,6 +51,7 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
             opt_arg -> Dictionary of additional options to add.
             use_repset -> True|False - Use repset name connection.
                 (i.e. repset_name/host1,host2,...)
+            no_pass -> True|False - Turn off --password= option.
         (output) -> Mongo utility command line.
 
     """
