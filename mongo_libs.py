@@ -184,6 +184,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
         (input) **kwargs:
             use_repset -> True|False - Use repset name connection.
                 (i.e. repset_name/host1,host2,...)
+            no_pass -> True|False - Turn off --password= option.
         (output) -> List of basic Mongo utility command line.
 
     """
@@ -209,7 +210,10 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
     else:
         host_port = host + mongo.host + ":" + str(mongo.port)
 
-    if mongo.auth:
+    if mongo.auth and kwargs.get("no_pass", False):
+        cmd_list = [prog_name, "--username=" + mongo.user, host_port]
+
+    elif mongo.auth:
         cmd_list = [prog_name, "--username=" + mongo.user, host_port,
                     japd2 + mongo.japd]
 

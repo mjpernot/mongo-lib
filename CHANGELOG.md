@@ -16,6 +16,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class.Server.set_pass_config:  Set the passwd config attributes.
 
 ### Changed
+- mongo_libs.crt_base_cmd:  Add check for no_pass option to determine usage of \-\-password= option.
 - mongo_libs.create_instance:  Added checks for SSL arguments and pass to class instance calls.
 - mongo_libs.create_slv_array:  Removed unused \*\*kwargs.
 - mongo_libs.crt_coll_inst:  Added checks for SSL arguments and pass to class instance calls.
