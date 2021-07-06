@@ -33,6 +33,11 @@ import version
 
 __version__ = version.__version__
 
+# Global
+KEY1 = "--pass"
+KEY2 = "word="
+HOST = "--host="
+
 
 def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
 
@@ -51,6 +56,7 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
             opt_arg -> Dictionary of additional options to add.
             use_repset -> True|False - Use repset name connection.
                 (i.e. repset_name/host1,host2,...)
+            no_pass -> True|False - Turn off --password= option.
         (output) -> Mongo utility command line.
 
     """
@@ -183,34 +189,38 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
         (input) **kwargs:
             use_repset -> True|False - Use repset name connection.
                 (i.e. repset_name/host1,host2,...)
+            no_pass -> True|False - Turn off --password= option.
         (output) -> List of basic Mongo utility command line.
 
     """
 
-    host = "--host="
+    global KEY1
+    global KEY2
+    global HOST
+
     cmd_list = []
-    data = "--pass"
-    data2 = "word="
-    japd2 = data + data2
 
     # Use repset name and hosts for connection, if set.
     if kwargs.get("use_repset", False) and mongo.repset \
             and mongo.repset_hosts:
 
-        host_port = host + mongo.repset + "/" + mongo.repset_hosts
+        host_port = HOST + mongo.repset + "/" + mongo.repset_hosts
 
     # Use repset name for connection, if set.
     elif kwargs.get("use_repset", False) and mongo.repset:
-        host_port = host + mongo.repset + "/" + mongo.host + ":" \
+        host_port = HOST + mongo.repset + "/" + mongo.host + ":" \
                     + str(mongo.port)
 
     # Assume just host and port.
     else:
-        host_port = host + mongo.host + ":" + str(mongo.port)
+        host_port = HOST + mongo.host + ":" + str(mongo.port)
 
-    if mongo.auth:
+    if mongo.auth and kwargs.get("no_pass", False):
+        cmd_list = [prog_name, "--username=" + mongo.user, host_port]
+
+    elif mongo.auth:
         cmd_list = [prog_name, "--username=" + mongo.user, host_port,
-                    japd2 + mongo.japd]
+                    KEY1 + KEY2 + mongo.japd]
 
     else:
         cmd_list = [prog_name, host_port]

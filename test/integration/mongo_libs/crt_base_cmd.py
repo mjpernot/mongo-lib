@@ -43,6 +43,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_auth_no_pass
+        test_auth_pass
         test_auth
         test_no_auth
         test_host
@@ -100,6 +102,38 @@ class UnitTest(unittest.TestCase):
         self.results3 = [self.prog_name, self.uname + self.cfg.user,
                          self.host_port_uri, self.japd2 + self.cfg.japd]
         self.results4 = [self.prog_name, self.host_str]
+        self.results5 = [self.prog_name, self.uname + self.cfg.user,
+                         self.host_str]
+
+    def test_auth_no_pass(self):
+
+        """Function:  test_auth_no_pass
+
+        Description:  Test with auth and no_pass set to True.
+
+        Arguments:
+
+        """
+
+        cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name,
+                                          no_pass=True)
+
+        self.assertEqual(cmdline, self.results5)
+
+    def test_auth_pass(self):
+
+        """Function:  test_auth_pass
+
+        Description:  Test with auth and no_pass set to False.
+
+        Arguments:
+
+        """
+
+        cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name,
+                                          no_pass=False)
+
+        self.assertEqual(cmdline, self.results)
 
     def test_auth(self):
 
