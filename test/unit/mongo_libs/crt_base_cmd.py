@@ -62,6 +62,7 @@ class Mongo(object):
         self.auth = True
         self.repset = "repset_name"
         self.repset_hosts = "host:27017"
+        self.config = {}
 
 
 class UnitTest(unittest.TestCase):
