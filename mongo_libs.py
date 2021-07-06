@@ -240,7 +240,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
             cmd_list.append(
                 "--sslPEMKeyFile=" + mongo.config.get("ssl_keyfile"))
 
-            if mongo.config.get("ssl_keyfile"):
+            if mongo.config.get(KEY3 + KEY1 + KEY4):
                 cmd_list.append(
                     "--sslPEMKeyPass" + KEY2 + "="
                     + mongo.config.get(KEY3 + KEY1 + KEY4))
