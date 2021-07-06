@@ -34,8 +34,10 @@ import version
 __version__ = version.__version__
 
 # Global
-KEY1 = "--pass"
-KEY2 = "word="
+KEY1 = "pass"
+KEY2 = "word"
+KEY3 = "ssl_pem_"
+KEY4 = "phrase"
 HOST = "--host="
 
 
@@ -196,34 +198,52 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     global KEY1
     global KEY2
+    global KEY3
+    global KEY4
     global HOST
 
     cmd_list = []
 
-    # Use repset name and hosts for connection, if set.
+    # Use repset name and hosts for connection
     if kwargs.get("use_repset", False) and mongo.repset \
             and mongo.repset_hosts:
 
         host_port = HOST + mongo.repset + "/" + mongo.repset_hosts
 
-    # Use repset name for connection, if set.
+    # Use repset name for connection
     elif kwargs.get("use_repset", False) and mongo.repset:
         host_port = HOST + mongo.repset + "/" + mongo.host + ":" \
                     + str(mongo.port)
 
-    # Assume just host and port.
+    # Assume just host and port
     else:
         host_port = HOST + mongo.host + ":" + str(mongo.port)
 
+    # Determine the type of user parameters to add
     if mongo.auth and kwargs.get("no_pass", False):
         cmd_list = [prog_name, "--username=" + mongo.user, host_port]
 
     elif mongo.auth:
         cmd_list = [prog_name, "--username=" + mongo.user, host_port,
-                    KEY1 + KEY2 + mongo.japd]
+                    "--" + KEY1 + KEY2 + "=" + mongo.japd]
 
     else:
         cmd_list = [prog_name, host_port]
+
+    if mongo.config.get("ssl", False):
+        cmd_list.append("--ssl")
+
+        if mongo.config.get("ssl_ca_certs"):
+            cmd_list.append("--sslCAFile=" + mongo.config.get("ssl_ca_certs"))
+
+        if mongo.config.get("ssl_keyfile"):
+            cmd_list.append(
+                "--sslPEMKeyFile=" + mongo.config.get("ssl_keyfile"))
+
+            if mongo.config.get("ssl_keyfile"):
+                cmd_list.append(
+                    "--sslPEMKeyPass" + KEY2 + "="
+                    + mongo.config.get(KEY3 + KEY1 + KEY4))
 
     return cmd_list
 
