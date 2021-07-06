@@ -62,6 +62,7 @@ class Mongo(object):
         self.user = "username"
         self.japd = "userpd"
         self.auth = True
+        self.config = {}
 
 
 class UnitTest(unittest.TestCase):
