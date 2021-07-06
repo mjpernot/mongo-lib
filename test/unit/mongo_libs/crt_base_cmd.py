@@ -72,6 +72,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_auth_no_pass
+        test_auth_pass
         test_no_auth
         test_host
         test_repset
@@ -108,6 +110,37 @@ class UnitTest(unittest.TestCase):
             host + self.repset + "/" + self.host + ":" + str(self.port)
         self.host_port3 = host + self.host + ":" + str(self.port)
 
+    def test_auth_no_pass(self):
+
+        """Function:  test_auth_no_pass
+
+        Description:  Test with auth and no_pass set to True.
+
+        Arguments:
+
+        """
+
+        mongo = Mongo()
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name, no_pass=True),
+            [self.prog_name, self.uname + self.user, self.host_port3])
+
+    def test_auth_pass(self):
+
+        """Function:  test_auth_pass
+
+        Description:  Test with auth and no_pass set to False.
+
+        Arguments:
+
+        """
+
+        mongo = Mongo()
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name, no_pass=False),
+            [self.prog_name, self.uname + self.user, self.host_port3,
+             self.japd2 + self.japd])
+
     def test_no_auth(self):
 
         """Function:  test_no_auth
@@ -134,9 +167,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = Mongo()
-        self.assertEqual(mongo_libs.crt_base_cmd(mongo, self.prog_name),
-                         [self.prog_name, self.uname + self.user,
-                          self.host_port3, self.japd2 + self.japd])
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name),
+            [self.prog_name, self.uname + self.user, self.host_port3,
+             self.japd2 + self.japd])
 
     def test_repset(self):
 
@@ -150,10 +184,10 @@ class UnitTest(unittest.TestCase):
 
         mongo = Mongo()
         mongo.repset_hosts = None
-        self.assertEqual(mongo_libs.crt_base_cmd(mongo, self.prog_name,
-                                                 use_repset=True),
-                         [self.prog_name, self.uname + self.user,
-                          self.host_port2, self.japd2 + self.japd])
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name, use_repset=True),
+            [self.prog_name, self.uname + self.user, self.host_port2,
+             self.japd2 + self.japd])
 
     def test_repset_hosts(self):
 
@@ -166,10 +200,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = Mongo()
-        self.assertEqual(mongo_libs.crt_base_cmd(mongo, self.prog_name,
-                                                 use_repset=True),
-                         [self.prog_name, self.uname + self.user,
-                          self.host_port, self.japd2 + self.japd])
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name, use_repset=True),
+            [self.prog_name, self.uname + self.user, self.host_port,
+             self.japd2 + self.japd])
 
 
 if __name__ == "__main__":
