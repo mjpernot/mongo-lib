@@ -105,6 +105,9 @@ class UnitTest(unittest.TestCase):
         self.mongo2.config["ssl"] = True
         self.cmd_line = ["program_name"]
         self.ssl = "--ssl"
+        self.ssl_ca = "--sslCAFile="
+        self.ssl_key = "--sslPEMKeyFile="
+        self.ssl_phrase = "--sslPEMKeyPass"
         self.ca_file = "CAFile"
         self.key_file = "KeyFile"
         self.key_phrase = "KeyPhraseFile"
@@ -129,9 +132,9 @@ class UnitTest(unittest.TestCase):
         self.mongo2.config["ssl_ca_certs"] = self.ca_file
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
-        result_cmd.append("--sslCAFile=" + self.ca_file)
-        result_cmd.append("--sslPEMKeyFile=" + self.key_file)
-        result_cmd.append("--sslPEMKeyPass" + KEY2 + "=" + self.key_phrase)
+        result_cmd.append(self.ssl_ca + self.ca_file)
+        result_cmd.append(self.ssl_key + self.key_file)
+        result_cmd.append(self.ssl_phrase + KEY2 + "=" + self.key_phrase)
 
         self.assertEqual(
             mongo_libs.crt_base_cmd(self.mongo2, self.cmd_line), result_cmd)
@@ -150,8 +153,8 @@ class UnitTest(unittest.TestCase):
         self.mongo2.config[KEY3 + KEY1 + KEY4] = self.key_phrase
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
-        result_cmd.append("--sslPEMKeyFile=" + self.key_file)
-        result_cmd.append("--sslPEMKeyPass" + KEY2 + "=" + self.key_phrase)
+        result_cmd.append(self.ssl_key + self.key_file)
+        result_cmd.append(self.ssl_phrase + KEY2 + "=" + self.key_phrase)
 
         self.assertEqual(
             mongo_libs.crt_base_cmd(self.mongo2, self.cmd_line), result_cmd)
@@ -170,8 +173,8 @@ class UnitTest(unittest.TestCase):
         self.mongo2.config["ssl_ca_certs"] = self.ca_file
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
-        result_cmd.append("--sslCAFile=" + self.ca_file)
-        result_cmd.append("--sslPEMKeyFile=" + self.key_file)
+        result_cmd.append(self.ssl_ca + self.ca_file)
+        result_cmd.append(self.ssl_key + self.key_file)
 
         self.assertEqual(
             mongo_libs.crt_base_cmd(self.mongo2, self.cmd_line), result_cmd)
@@ -189,7 +192,7 @@ class UnitTest(unittest.TestCase):
         self.mongo2.config["ssl_keyfile"] = self.key_file
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
-        result_cmd.append("--sslPEMKeyFile=" + self.key_file)
+        result_cmd.append(self.ssl_key + self.key_file)
 
         self.assertEqual(
             mongo_libs.crt_base_cmd(self.mongo2, self.cmd_line), result_cmd)
@@ -207,7 +210,7 @@ class UnitTest(unittest.TestCase):
         self.mongo2.config["ssl_ca_certs"] = self.ca_file
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
-        result_cmd.append("--sslCAFile=" + self.ca_file)
+        result_cmd.append(self.ssl_ca + self.ca_file)
 
         self.assertEqual(
             mongo_libs.crt_base_cmd(self.mongo2, self.cmd_line), result_cmd)
@@ -222,7 +225,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.mongo.config["ssl"] = False
+        self.mongo.config["ssl"] = True
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
 
