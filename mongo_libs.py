@@ -270,19 +270,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
         cmd_list = [prog_name, host_port]
 
     if mongo.config.get("ssl", False):
-        cmd_list.append("--ssl")
-
-        if mongo.config.get("ssl_ca_certs"):
-            cmd_list.append("--sslCAFile=" + mongo.config.get("ssl_ca_certs"))
-
-        if mongo.config.get("ssl_keyfile"):
-            cmd_list.append(
-                "--sslPEMKeyFile=" + mongo.config.get("ssl_keyfile"))
-
-            if mongo.config.get(KEY3 + KEY1 + KEY4):
-                cmd_list.append(
-                    "--sslPEMKeyPass" + KEY2 + "="
-                    + mongo.config.get(KEY3 + KEY1 + KEY4))
+        cmd_list = add_ssl_cmd(mongo, cmd_list)
 
     return cmd_list
 
