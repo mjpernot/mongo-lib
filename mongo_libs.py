@@ -154,14 +154,14 @@ def create_instance(cfg_file, dir_path, class_name):
     if hasattr(cfg, "auth_db"):
         auth_db = cfg.auth_db
 
+    if hasattr(cfg, "auth_mech"):
+        auth_mech = cfg.auth_mech
+
     if hasattr(cfg, "use_arg"):
         use_arg = cfg.use_arg
 
     if hasattr(cfg, "use_uri"):
         use_uri = cfg.use_uri
-
-    if hasattr(cfg, "auth_mech"):
-        auth_mech = cfg.auth_mech
 
     if hasattr(cfg, "ssl_client_ca"):
         ssl_client_ca = cfg.ssl_client_ca
