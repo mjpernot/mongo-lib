@@ -137,7 +137,7 @@ class UnitTest(unittest.TestCase):
         result_cmd.append(self.ssl_phrase + KEY2 + "=" + self.key_phrase)
 
         self.assertEqual(
-            mongo_libs.crt_base_cmd(self.mongo2, self.cmd_line), result_cmd)
+            mongo_libs.add_ssl_cmd(self.mongo2, self.cmd_line), result_cmd)
 
     def ssl_phrase(self):
 
@@ -157,7 +157,7 @@ class UnitTest(unittest.TestCase):
         result_cmd.append(self.ssl_phrase + KEY2 + "=" + self.key_phrase)
 
         self.assertEqual(
-            mongo_libs.crt_base_cmd(self.mongo2, self.cmd_line), result_cmd)
+            mongo_libs.add_ssl_cmd(self.mongo2, self.cmd_line), result_cmd)
 
     def test_ssl_ca_key(self):
 
@@ -177,7 +177,7 @@ class UnitTest(unittest.TestCase):
         result_cmd.append(self.ssl_key + self.key_file)
 
         self.assertEqual(
-            mongo_libs.crt_base_cmd(self.mongo2, self.cmd_line), result_cmd)
+            mongo_libs.add_ssl_cmd(self.mongo2, self.cmd_line), result_cmd)
 
     def test_ssl_key(self):
 
@@ -195,7 +195,7 @@ class UnitTest(unittest.TestCase):
         result_cmd.append(self.ssl_key + self.key_file)
 
         self.assertEqual(
-            mongo_libs.crt_base_cmd(self.mongo2, self.cmd_line), result_cmd)
+            mongo_libs.add_ssl_cmd(self.mongo2, self.cmd_line), result_cmd)
 
     def test_ssl_ca(self):
 
@@ -213,7 +213,7 @@ class UnitTest(unittest.TestCase):
         result_cmd.append(self.ssl_ca + self.ca_file)
 
         self.assertEqual(
-            mongo_libs.crt_base_cmd(self.mongo2, self.cmd_line), result_cmd)
+            mongo_libs.add_ssl_cmd(self.mongo2, self.cmd_line), result_cmd)
 
     def test_ssl_true(self):
 
@@ -230,7 +230,7 @@ class UnitTest(unittest.TestCase):
         result_cmd.append(self.ssl)
 
         self.assertEqual(
-            mongo_libs.crt_base_cmd(self.mongo, self.cmd_line), result_cmd)
+            mongo_libs.add_ssl_cmd(self.mongo, self.cmd_line), result_cmd)
 
     def test_ssl_false(self):
 
@@ -246,7 +246,7 @@ class UnitTest(unittest.TestCase):
         result_cmd = list(self.cmd_line)
 
         self.assertEqual(
-            mongo_libs.crt_base_cmd(self.mongo, self.cmd_line), result_cmd)
+            mongo_libs.add_ssl_cmd(self.mongo, self.cmd_line), result_cmd)
 
     def test_no_ssl(self):
 
