@@ -41,15 +41,15 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_raise_exception2 -> Test with raising exception.
-        test_raise_exception -> Test with raising exception.
-        test_full_scan3 -> Test validate_tbl method with full scan argument.
-        test_full_scan2 -> Test validate_tbl method with full scan argument.
-        test_full_scan -> Test validate_tbl method with full scan argument.
-        test_table3 -> Test validate_tbl method with default arguments.
-        test_table2 -> Test validate_tbl method with default arguments.
-        test_table -> Test validate_tbl method with default arguments.
+        setUp
+        test_raise_exception2
+        test_raise_exception
+        test_full_scan3
+        test_full_scan2
+        test_full_scan
+        test_table3
+        test_table2
+        test_table
 
     """
 
@@ -72,7 +72,11 @@ class UnitTest(unittest.TestCase):
         self.tbl_name2 = "no_table_exists"
         self.mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg)
+            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         self.mongo.connect()
         self.mongo.chg_db(self.database)
 

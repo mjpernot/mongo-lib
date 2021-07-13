@@ -41,11 +41,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_auth_mech -> Test with authentication mechanism passed.
-        test_no_auth_mech -> Test with no authentication mechanism passed.
-        test_new_attributes -> Test new use_uri, use_arg, and auth_db attrs.
-        test_create_slv_array -> Test create_slv_array function.
+        setUp
+        test_auth_mech
+        test_no_auth_mech
+        test_new_attributes
+        test_create_slv_array
 
     """
 

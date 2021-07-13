@@ -40,8 +40,8 @@ class RepSetColl(object):
     Description:  Class stub holder for RepSetColl class.
 
     Methods:
-        __init__ -> Class initialization.
-        authenticate -> Stub for method.
+        __init__
+        authenticate
 
     """
 
@@ -65,8 +65,8 @@ class RepSetColl(object):
         Description:  Stub for method.
 
         Arguments:
-            (input) user -> User name.
-            (input) japd -> User pd.
+            (input) user
+            (input) japd
 
         """
 
@@ -83,8 +83,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_auth_true -> Test with auth set to true.
+        setUp
+        test_auth_true
 
     """
 

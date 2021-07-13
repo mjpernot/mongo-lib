@@ -16,6 +16,7 @@ pipeline {
                 source test_env/bin/activate
                 pip2 install mock==2.0.0 --user
                 pip2 install pymongo==3.8.0 --user
+                pip2 install psutil==5.4.3 --user
                 ./test/unit/mongo_class/fetch_cmd_line.py
                 ./test/unit/mongo_class/fetch_db_info.py
                 ./test/unit/mongo_class/fetch_ismaster.py
@@ -61,11 +62,14 @@ pipeline {
                 ./test/unit/mongo_class/server_is_locked.py
                 ./test/unit/mongo_class/server_is_primary.py
                 ./test/unit/mongo_class/server_lock_db.py
+                ./test/unit/mongo_class/server_set_pass_config.py
+                ./test/unit/mongo_class/server_set_ssl_config.py
                 ./test/unit/mongo_class/server_unlock_db.py
                 ./test/unit/mongo_class/server_upd_server_attr.py
                 ./test/unit/mongo_class/server_upd_srv_stat.py
                 ./test/unit/mongo_class/slaverep_connect.py
                 ./test/unit/mongo_class/slaverep_init.py
+                ./test/unit/mongo_libs/add_ssl_cmd.py
                 ./test/unit/mongo_libs/create_cmd.py
                 ./test/unit/mongo_libs/create_instance.py
                 ./test/unit/mongo_libs/create_slv_array.py

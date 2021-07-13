@@ -40,7 +40,7 @@ class Conn(object):
     Description:  Class stub holder for Rep class.
 
     Methods:
-        insert_one -> Stub holder for Rep.conn.nodes attribute.
+        insert_one
 
     """
 
@@ -64,8 +64,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_fetch_nodes -> Test fetch_nodes method.
+        setUp
+        test_fetch_nodes
 
     """
 

@@ -40,8 +40,8 @@ class LockDb(object):
     Description:  Class stub holder for Server class.
 
     Methods:
-        __init__ -> Class intialization.
-        fsync -> Stub holder for Server.conn.fsync method.
+        __init__
+        fsync
 
     """
 
@@ -64,7 +64,7 @@ class LockDb(object):
         Description:  Stub holder for Server.conn.fsync method.
 
         Arguments:
-            (input) lock -> Lock database.
+            (input) lock
 
         """
 
@@ -80,8 +80,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_lock_db -> Test lock_db method.
+        setUp
+        test_lock_db
 
     """
 

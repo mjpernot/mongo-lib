@@ -41,7 +41,7 @@ class DBConn(object):
     Description:  Class stub holder for DB class.
 
     Methods:
-        __init__ -> Class initialization.
+        __init__
 
     """
 
@@ -65,15 +65,15 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_db_attr2 -> Test db attribute.
-        test_db_attr -> Test db attribute.
-        test_no_conn_list1 -> Test with no connections passed.
-        test_no_conn_list -> Test with no connections passed.
-        test_fail_connection2 -> Test with failed connection.
-        test_fail_connection -> Test with failed connection.
-        test_connection2 -> Test connection method.
-        test_connection -> Test connection method.
+        setUp
+        test_db_attr2
+        test_db_attr
+        test_no_conn_list1
+        test_no_conn_list
+        test_fail_connection2
+        test_fail_connection
+        test_connection2
+        test_connection
 
     """
 

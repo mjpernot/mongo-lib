@@ -40,7 +40,7 @@ class Mongo(object):
     Description:  Class stub holder for Mongo class.
 
     Methods:
-        __init__ -> Class initialization.
+        __init__
 
     """
 
@@ -62,6 +62,7 @@ class Mongo(object):
         self.auth = True
         self.repset = "repset_name"
         self.repset_hosts = "host:27017"
+        self.config = {}
 
 
 class UnitTest(unittest.TestCase):
@@ -71,11 +72,16 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_no_auth -> Test with no authority needed.
-        test_host -> Test with host name for connection.
-        test_repset -> Test with repset name for connection.
-        test_repset_hosts -> Test with repset name and hosts for connection.
+        setUp
+        test_ssl_true
+        test_ssl_false2
+        test_ssl_false
+        test_auth_no_pass
+        test_auth_pass
+        test_no_auth
+        test_host
+        test_repset
+        test_repset_hosts
 
     """
 
@@ -107,6 +113,88 @@ class UnitTest(unittest.TestCase):
         self.host_port2 = \
             host + self.repset + "/" + self.host + ":" + str(self.port)
         self.host_port3 = host + self.host + ":" + str(self.port)
+        self.ssl = "--ssl"
+
+    def test_ssl_true(self):
+
+        """Function:  test_ssl_true
+
+        Description:  Test with SSL option set to True.
+
+        Arguments:
+
+        """
+
+        mongo = Mongo()
+        mongo.config["ssl"] = True
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name),
+            [self.prog_name, self.uname + self.user, self.host_port3,
+             self.japd2 + self.japd, self.ssl])
+
+    def test_ssl_false2(self):
+
+        """Function:  test_ssl_false2
+
+        Description:  Test with SSL option set to False.
+
+        Arguments:
+
+        """
+
+        mongo = Mongo()
+        mongo.config["ssl"] = False
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name),
+            [self.prog_name, self.uname + self.user, self.host_port3,
+             self.japd2 + self.japd])
+
+    def test_ssl_false(self):
+
+        """Function:  test_ssl_false
+
+        Description:  Test with no SSL option present.
+
+        Arguments:
+
+        """
+
+        mongo = Mongo()
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name),
+            [self.prog_name, self.uname + self.user, self.host_port3,
+             self.japd2 + self.japd])
+
+    def test_auth_no_pass(self):
+
+        """Function:  test_auth_no_pass
+
+        Description:  Test with auth and no_pass set to True.
+
+        Arguments:
+
+        """
+
+        mongo = Mongo()
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name, no_pass=True),
+            [self.prog_name, self.uname + self.user, self.host_port3])
+
+    def test_auth_pass(self):
+
+        """Function:  test_auth_pass
+
+        Description:  Test with auth and no_pass set to False.
+
+        Arguments:
+
+        """
+
+        mongo = Mongo()
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name, no_pass=False),
+            [self.prog_name, self.uname + self.user, self.host_port3,
+             self.japd2 + self.japd])
 
     def test_no_auth(self):
 
@@ -134,9 +222,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = Mongo()
-        self.assertEqual(mongo_libs.crt_base_cmd(mongo, self.prog_name),
-                         [self.prog_name, self.uname + self.user,
-                          self.host_port3, self.japd2 + self.japd])
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name),
+            [self.prog_name, self.uname + self.user, self.host_port3,
+             self.japd2 + self.japd])
 
     def test_repset(self):
 
@@ -150,10 +239,10 @@ class UnitTest(unittest.TestCase):
 
         mongo = Mongo()
         mongo.repset_hosts = None
-        self.assertEqual(mongo_libs.crt_base_cmd(mongo, self.prog_name,
-                                                 use_repset=True),
-                         [self.prog_name, self.uname + self.user,
-                          self.host_port2, self.japd2 + self.japd])
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name, use_repset=True),
+            [self.prog_name, self.uname + self.user, self.host_port2,
+             self.japd2 + self.japd])
 
     def test_repset_hosts(self):
 
@@ -166,10 +255,10 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = Mongo()
-        self.assertEqual(mongo_libs.crt_base_cmd(mongo, self.prog_name,
-                                                 use_repset=True),
-                         [self.prog_name, self.uname + self.user,
-                          self.host_port, self.japd2 + self.japd])
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name, use_repset=True),
+            [self.prog_name, self.uname + self.user, self.host_port,
+             self.japd2 + self.japd])
 
 
 if __name__ == "__main__":

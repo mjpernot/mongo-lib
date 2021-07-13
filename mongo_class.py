@@ -39,6 +39,8 @@ __version__ = version.__version__
 # Global
 KEY1 = "pass"
 KEY2 = "word"
+KEY3 = "ssl_pem_"
+KEY4 = "phrase"
 
 
 def fetch_cmd_line(mongo):
@@ -112,6 +114,8 @@ class Server(object):
         unlock_db
         lock_db
         is_locked
+        set_pass_config
+        set_ssl_config
 
     """
 
@@ -135,6 +139,10 @@ class Server(object):
                 use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
+                ssl_client_ca -> SSL certificate authority file.
+                ssl_client_key -> SSL key pem file.
+                ssl_client_cert -> SSL certificate pem file.
+                ssl_client_phrase -> SSL client pass phrase to key file.
 
         """
 
@@ -143,7 +151,6 @@ class Server(object):
 
         self.name = name
         self.user = user
-        self.japd = japd
         self.host = host
         self.port = port
         self.auth = kwargs.get("auth", True)
@@ -164,13 +171,24 @@ class Server(object):
         self.prct_mem = None
         self.use_uri = kwargs.get("use_uri", False)
         self.use_arg = kwargs.get("use_arg", False)
-        self.config = {KEY1 + KEY2: self.japd}
         self.conn_list = [self.host + ":" + str(self.port)]
         self.auth_db = kwargs.get("auth_db", "admin")
         self.auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1")
 
+        # Passwd configuration setup
+        self.config = {}
+        self.japd = japd
+        self.set_pass_config()
+
         if self.auth_mech != "MONGODB-CR":
             self.config["authMechanism"] = self.auth_mech
+
+        # SSL configuration settings
+        self.ssl_client_ca = kwargs.get("ssl_client_ca", None)
+        self.ssl_client_key = kwargs.get("ssl_client_key", None)
+        self.ssl_client_cert = kwargs.get("ssl_client_cert", None)
+        self.ssl_client_phrase = kwargs.get("ssl_client_phrase", None)
+        self.set_ssl_config()
 
     def upd_srv_stat(self):
 
@@ -420,6 +438,50 @@ class Server(object):
 
         return self.conn.is_locked
 
+    def set_pass_config(self):
+
+        """Method:  set_pass_config
+
+        Description:  Set the passwd config attributes.
+
+        Arguments:
+
+        """
+
+        global KEY1
+        global KEY2
+
+        self.config[KEY1 + KEY2] = self.japd
+
+    def set_ssl_config(self):
+
+        """Method:  set_ssl_config
+
+        Description:  Append SSL attributes to config.
+
+        Arguments:
+
+        """
+
+        global KEY1
+        global KEY3
+        global KEY4
+
+        if self.ssl_client_ca or self.ssl_client_cert:
+            self.config["ssl"] = True
+
+            if self.ssl_client_ca:
+                self.config["ssl_ca_certs"] = self.ssl_client_ca
+
+            if self.ssl_client_cert:
+                self.config["ssl_certfile"] = self.ssl_client_cert
+
+            if self.ssl_client_key and self.ssl_client_cert:
+                self.config["ssl_keyfile"] = self.ssl_client_key
+
+            if self.ssl_client_phrase and self.ssl_client_cert:
+                self.config[KEY3 + KEY1 + KEY4] = self.ssl_client_phrase
+
 
 class DB(Server):
 
@@ -462,6 +524,10 @@ class DB(Server):
                 use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
+                ssl_client_ca -> SSL certificate authority file.
+                ssl_client_key -> SSL key pem file.
+                ssl_client_cert -> SSL certificate pem file.
+                ssl_client_phrase -> SSL client pass phrase to key file.
 
         """
 
@@ -472,7 +538,11 @@ class DB(Server):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
+            ssl_client_ca=kwargs.get("ssl_client_ca", None),
+            ssl_client_key=kwargs.get("ssl_client_key", None),
+            ssl_client_cert=kwargs.get("ssl_client_cert", None),
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
 
         self.db_name = kwargs.get("db", "test")
         self.db = None
@@ -649,6 +719,10 @@ class Coll(DB):
                 use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
+                ssl_client_ca -> SSL certificate authority file.
+                ssl_client_key -> SSL key pem file.
+                ssl_client_cert -> SSL certificate pem file.
+                ssl_client_phrase -> SSL client pass phrase to key file.
 
         """
 
@@ -659,7 +733,11 @@ class Coll(DB):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
+            ssl_client_ca=kwargs.get("ssl_client_ca", None),
+            ssl_client_key=kwargs.get("ssl_client_key", None),
+            ssl_client_cert=kwargs.get("ssl_client_cert", None),
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
 
         self.coll = None
         self.coll_db = kwargs.get("db", "test")
@@ -680,7 +758,12 @@ class Coll(DB):
         status, errmsg = super(Coll, self).connect()
 
         if status:
-            self.coll = self.conn[self.coll_db][self.coll_coll]
+            if self.coll_coll:
+                self.coll = self.conn[self.coll_db][self.coll_coll]
+
+            else:
+                status = False
+                errmsg = "Error:  Unable to connect, no collection passed."
 
         return status, errmsg
 
@@ -811,6 +894,10 @@ class Rep(Server):
                 use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
+                ssl_client_ca -> SSL certificate authority file.
+                ssl_client_key -> SSL key pem file.
+                ssl_client_cert -> SSL certificate pem file.
+                ssl_client_phrase -> SSL client pass phrase to key file.
 
         """
 
@@ -821,7 +908,11 @@ class Rep(Server):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
+            ssl_client_ca=kwargs.get("ssl_client_ca", None),
+            ssl_client_cert=kwargs.get("ssl_client_cert", None),
+            ssl_client_key=kwargs.get("ssl_client_key", None),
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
 
         self.repset = None
         self.ismaster = None
@@ -878,6 +969,10 @@ class MasterRep(Rep):
                 use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
+                ssl_client_ca -> SSL certificate authority file.
+                ssl_client_key -> SSL key pem file.
+                ssl_client_cert -> SSL certificate pem file.
+                ssl_client_phrase -> SSL client pass phrase to key file.
 
         """
 
@@ -885,10 +980,14 @@ class MasterRep(Rep):
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
-            use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
+            use_uri=kwargs.get("use_uri", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
+            ssl_client_ca=kwargs.get("ssl_client_ca", None),
+            ssl_client_key=kwargs.get("ssl_client_key", None),
+            ssl_client_cert=kwargs.get("ssl_client_cert", None),
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
 
         self.ismaster = None
         self.issecondary = None
@@ -960,6 +1059,10 @@ class SlaveRep(Rep):
                 use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
+                ssl_client_ca -> SSL certificate authority file.
+                ssl_client_key -> SSL key pem file.
+                ssl_client_cert -> SSL certificate pem file.
+                ssl_client_phrase -> SSL client pass phrase to key file.
 
         """
 
@@ -969,8 +1072,12 @@ class SlaveRep(Rep):
             conf_file=kwargs.get("conf_file", None),
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            ssl_client_ca=kwargs.get("ssl_client_ca", None),
+            ssl_client_key=kwargs.get("ssl_client_key", None),
+            ssl_client_cert=kwargs.get("ssl_client_cert", None),
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
 
         self.ismaster = None
         self.issecondary = None
@@ -1045,6 +1152,10 @@ class RepSet(Rep):
                 use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
+                ssl_client_ca -> SSL certificate authority file.
+                ssl_client_key -> SSL key pem file.
+                ssl_client_cert -> SSL certificate pem file.
+                ssl_client_phrase -> SSL client pass phrase to key file.
 
         """
 
@@ -1052,10 +1163,14 @@ class RepSet(Rep):
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
+            auth_db=kwargs.get("auth_db", "admin"),
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
-            auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
+            ssl_client_ca=kwargs.get("ssl_client_ca", None),
+            ssl_client_key=kwargs.get("ssl_client_key", None),
+            ssl_client_cert=kwargs.get("ssl_client_cert", None),
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
 
         self.repset = kwargs.get("repset", None)
         self.repset_hosts = kwargs.get("repset_hosts", None)
@@ -1155,6 +1270,10 @@ class RepSetColl(RepSet):
                 use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
+                ssl_client_ca -> SSL certificate authority file.
+                ssl_client_key -> SSL key pem file.
+                ssl_client_cert -> SSL certificate pem file.
+                ssl_client_phrase -> SSL client pass phrase to key file.
 
         """
 
@@ -1167,7 +1286,11 @@ class RepSetColl(RepSet):
             use_uri=kwargs.get("use_uri", False),
             use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
-            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"))
+            auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
+            ssl_client_ca=kwargs.get("ssl_client_ca", None),
+            ssl_client_key=kwargs.get("ssl_client_key", None),
+            ssl_client_cert=kwargs.get("ssl_client_cert", None),
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
 
         self.db = kwargs.get("db", "test")
         self.coll = kwargs.get("coll", None)

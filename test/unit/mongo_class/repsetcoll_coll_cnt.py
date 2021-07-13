@@ -40,8 +40,8 @@ class CollCnt(object):
     Description:  Class stub holder for RepSetColl class.
 
     Methods:
-        __init__ -> Class initialization.
-        count -> Stub holder for RepSetColl.db_coll.count method.
+        __init__
+        count
 
     """
 
@@ -64,7 +64,7 @@ class CollCnt(object):
         Description:  Stub holder for RepSetColl.db_coll.count method.
 
         Arguments:
-            (input) qry -> Mongo query statement.
+            (input) qry
 
         """
 
@@ -80,9 +80,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_qry -> Test with query passed.
-        test_no_qry -> Test with no query passed.
+        setUp
+        test_qry
+        test_no_qry
 
     """
 

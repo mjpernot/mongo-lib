@@ -41,9 +41,9 @@ class Mongo(object):
     Description:  Class stub holder for Mongo.Coll class.
 
     Methods:
-        __init__ -> Class initialization.
-        connect -> Stub holder for Mongo.Coll.connect method.
-        ins_doc -> Stub holder for Mongo.Coll.ins_doc method.
+        __init__
+        connect
+        ins_doc
 
     """
 
@@ -54,7 +54,7 @@ class Mongo(object):
         Description:  Class initialization.
 
         Arguments:
-         (input) success -> True|False - Connection is successful.
+         (input) success
 
         """
 
@@ -83,7 +83,7 @@ class Mongo(object):
         Description:  Stub holder for Mongo.Coll.ins_doc method.
 
         Arguments:
-            (input) doc -> Document.
+            (input) doc
 
         """
 
@@ -99,9 +99,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_fail_connection -> Test with failed connection.
-        test_ins_doc -> Test ins_doc function.
+        setUp
+        test_fail_connection
+        test_ins_doc
 
     """
 

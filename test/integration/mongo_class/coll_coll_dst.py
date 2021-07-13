@@ -41,10 +41,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_query -> Test with query command.
-        test_empty_query -> Test with empty query command.
-        test_no_query -> Test with no query command.
+        setUp
+        test_query
+        test_empty_query
+        test_no_query
 
     """
 
@@ -68,7 +68,11 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file, db=self.database, coll=self.coll)
+            conf_file=self.cfg.conf_file, db=self.database, coll=self.coll,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         self.mongo.connect()
 
     def test_query2(self):

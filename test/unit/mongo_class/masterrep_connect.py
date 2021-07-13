@@ -41,25 +41,25 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_slaves_attr4 -> Test slaves attribute.
-        test_slaves_attr3 -> Test slaves attribute.
-        test_slaves_attr2 -> Test slaves attribute.
-        test_slaves_attr -> Test slaves attribute.
-        test_repset_attr2 -> Test repset attribute.
-        test_repset_attr -> Test repset attribute.
-        test_issecondary_attr2 -> Test issecondary attribute.
-        test_issecondary_attr -> Test issecondary attribute.
-        test_ismaster_attr2 -> Test ismaster attribute.
-        test_ismaster_attr -> Test ismaster attribute.
-        test_no_conn_list1 -> Test with no connections passed.
-        test_no_conn_list -> Test with no connections passed.
-        test_fail_connection2 -> Test with failed connection.
-        test_fail_connection -> Test with failed connection.
-        test_no_data2 -> Test with no data returned.
-        test_no_data -> Test with no data returned.
-        test_default2 -> Test with minimum number of arguments.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_slaves_attr4
+        test_slaves_attr3
+        test_slaves_attr2
+        test_slaves_attr
+        test_repset_attr2
+        test_repset_attr
+        test_issecondary_attr2
+        test_issecondary_attr
+        test_ismaster_attr2
+        test_ismaster_attr
+        test_no_conn_list1
+        test_no_conn_list
+        test_fail_connection2
+        test_fail_connection
+        test_no_data2
+        test_no_data
+        test_default2
+        test_default
 
     """
 

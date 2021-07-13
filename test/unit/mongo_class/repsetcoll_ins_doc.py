@@ -40,8 +40,8 @@ class InsDoc(object):
     Description:  Class stub holder for RepSetColl class.
 
     Methods:
-        __init__ -> Class initialization.
-        insert_one -> Stub holder for RepSetColl.db_coll.insert_one method.
+        __init__
+        insert_one
 
     """
 
@@ -80,8 +80,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_ins_doc -> Test ins_doc method.
+        setUp
+        test_ins_doc
 
     """
 

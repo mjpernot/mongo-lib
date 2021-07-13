@@ -41,13 +41,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_pass_false2 -> Test pass False to include system tables.
-        test_pass_false -> Test pass False to include system tables.
-        test_pass_true2 -> Test pass True to include system tables.
-        test_pass_true -> Test pass True to include system tables.
-        test_default2 -> Test with minimum number of arguments.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_pass_false2
+        test_pass_false
+        test_pass_true2
+        test_pass_true
+        test_default2
+        test_default
 
     """
 
@@ -69,7 +69,11 @@ class UnitTest(unittest.TestCase):
         self.tbl_name = "system.users"
         self.mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg)
+            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         self.mongo.connect()
         self.mongo.chg_db(self.database)
 
