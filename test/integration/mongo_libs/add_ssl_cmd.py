@@ -49,8 +49,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        ssl_ca_phrase
-        ssl_phrase
+        test_ssl_ca_phrase
+        test_ssl_phrase
         test_ssl_ca_key
         test_ssl_key
         test_ssl_ca
@@ -93,9 +93,9 @@ class UnitTest(unittest.TestCase):
         self.key_file = "KeyFile"
         self.key_phrase = "KeyPhraseFile"
 
-    def ssl_ca_phrase(self):
+    def test_ssl_ca_phrase(self):
 
-        """Function:  ssl_ca_phrase
+        """Function:  test_ssl_ca_phrase
 
         Description:  Test with CA File and PEMKey phrase file.
 
@@ -124,9 +124,9 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(
             mongo_libs.add_ssl_cmd(self.mongo, self.cmd_line), result_cmd)
 
-    def ssl_phrase(self):
+    def test_ssl_phrase(self):
 
-        """Function:  ssl_phrase
+        """Function:  test_ssl_phrase
 
         Description:  Test with PEMKey phrase file.
 
@@ -284,11 +284,10 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config.pop("ssl", None)
         result_cmd = list(self.cmd_line)
-       
+
         self.assertEqual(
             mongo_libs.add_ssl_cmd(self.mongo, self.cmd_line), result_cmd)
 
 
 if __name__ == "__main__":
     unittest.main()
-
