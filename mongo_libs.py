@@ -48,7 +48,7 @@ def add_ssl_cmd(mongo, cmd_list):
 
     Description:  Determine if SSL options are present and add to the command
         line.
-    
+
     Arguments:
         (input) mongo -> Database instance
         (input) cmd_line -> Basic Mongo utility command line in list format.
