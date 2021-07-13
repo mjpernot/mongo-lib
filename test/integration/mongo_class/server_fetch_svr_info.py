@@ -42,11 +42,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_fetch_svr_info4 -> Test fetch_svr_info method.
-        test_fetch_svr_info3 -> Test fetch_svr_info method.
-        test_fetch_svr_info2 -> Test fetch_svr_info method.
-        test_fetch_svr_info -> Test fetch_svr_info method.
+        setUp
+        test_fetch_svr_info4
+        test_fetch_svr_info3
+        test_fetch_svr_info2
+        test_fetch_svr_info
 
     """
 
@@ -68,7 +68,11 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
             use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         self.mongo.connect()
 
     def test_fetch_svr_info4(self):

@@ -42,36 +42,36 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_db_auth_passed2 -> Test with db_auth passed.
-        test_db_auth_passed -> Test with db_auth passed.
-        test_coll_passed2 -> Test with coll passed.
-        test_coll_passed -> Test with coll passed.
-        test_db_not_passed2 -> Test with db not passed.
-        test_db_not_passed -> Test with db not passed.
-        test_db_passed2 -> Test with db passed.
-        test_db_passed -> Test with db passed.
-        test_auth_uri2 -> Test with auth and uri present.
-        test_auth_uri -> Test with auth and uri present.
-        test_auth_arg2 -> Test with auth and arg present.
-        test_auth_arg -> Test with auth and arg present.
-        test_auth_false -> Test with auth set to false.
-        test_fail_get_srv_attr2 -> Test with failed get_srv_attr call.
-        test_fail_get_srv_attr -> Test with failed get_srv_attr call.
-        test_auth_true2 -> Test with auth set to true.
-        test_auth_true -> Test with auth set to true.
-        test_no_auth2 -> Test with auth set to false.
-        test_no_auth -> Test with auth set to false.
-        test_conn_false2 -> Test with conn set to false.
-        test_conn_false -> Test with conn set to false.
-        test_conn_true2 -> Test with conn set to true.
-        test_conn_true -> Test with conn set to true.
-        test_connections_passed2 -> Test with connections passed.
-        test_connections_passed -> Test with connections passed.
-        test_no_conn_list3 -> Test no conn_list passed, set by repset_hosts.
-        test_no_conn_list2 -> Test no conn_list passed, set by repset_hosts.
-        test_no_conn_list1 -> Test with no conn_list passed.
-        test_no_conn_list -> Test with no conn_list passed.
+        setUp
+        test_db_auth_passed2
+        test_db_auth_passed
+        test_coll_passed2
+        test_coll_passed
+        test_db_not_passed2
+        test_db_not_passed
+        test_db_passed2
+        test_db_passed
+        test_auth_uri2
+        test_auth_uri
+        test_auth_arg2
+        test_auth_arg
+        test_auth_false
+        test_fail_get_srv_attr2
+        test_fail_get_srv_attr
+        test_auth_true2
+        test_auth_true
+        test_no_auth2
+        test_no_auth
+        test_conn_false2
+        test_conn_false
+        test_conn_true2
+        test_conn_true
+        test_connections_passed2
+        test_connections_passed
+        test_no_conn_list3
+        test_no_conn_list2
+        test_no_conn_list1
+        test_no_conn_list
 
     """
 

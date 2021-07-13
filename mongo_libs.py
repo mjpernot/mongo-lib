@@ -5,6 +5,7 @@
     Description:  Library of function calls for a Mongo database system.
 
     Functions:
+        add_ssl_cmd
         create_cmd
         create_instance
         create_slv_array
@@ -33,6 +34,51 @@ import version
 
 __version__ = version.__version__
 
+# Global
+KEY1 = "pass"
+KEY2 = "word"
+KEY3 = "ssl_pem_"
+KEY4 = "phrase"
+HOST = "--host="
+
+
+def add_ssl_cmd(mongo, cmd_list):
+
+    """Function:  add_ssl_cmd
+
+    Description:  Determine if SSL options are present and add to the command
+        line.
+
+    Arguments:
+        (input) mongo -> Database instance
+        (input) cmd_line -> Basic Mongo utility command line in list format.
+        (output) cmd_line -> Basic Mongo utility command line in list format.
+    """
+
+    global KEY1
+    global KEY2
+    global KEY3
+    global KEY4
+
+    cmd_list = list(cmd_list)
+
+    if mongo.config.get("ssl", False):
+        cmd_list.append("--ssl")
+
+        if mongo.config.get("ssl_ca_certs"):
+            cmd_list.append("--sslCAFile=" + mongo.config.get("ssl_ca_certs"))
+
+        if mongo.config.get("ssl_keyfile"):
+            cmd_list.append(
+                "--sslPEMKeyFile=" + mongo.config.get("ssl_keyfile"))
+
+            if mongo.config.get(KEY3 + KEY1 + KEY4):
+                cmd_list.append(
+                    "--sslPEMKeyPass" + KEY2 + "="
+                    + mongo.config.get(KEY3 + KEY1 + KEY4))
+
+    return cmd_list
+
 
 def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
 
@@ -51,6 +97,7 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
             opt_arg -> Dictionary of additional options to add.
             use_repset -> True|False - Use repset name connection.
                 (i.e. repset_name/host1,host2,...)
+            no_pass -> True|False - Turn off --password= option.
         (output) -> Mongo utility command line.
 
     """
@@ -68,7 +115,7 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
                                dict(kwargs.get("opt_arg", {})))
 
 
-def create_instance(cfg_file, dir_path, class_name, **kwargs):
+def create_instance(cfg_file, dir_path, class_name):
 
     """Function:  create_instance
 
@@ -90,17 +137,25 @@ def create_instance(cfg_file, dir_path, class_name, **kwargs):
         (input) cfg_file -> Configuration file name.
         (input) dir_path -> Directory path.
         (input) class_name -> Reference to a Class type.
-        (output) -> Class type instance.
+        (output) -> Mongo class instance.
 
     """
 
     auth_db = "admin"
     use_arg = False
     use_uri = False
+    auth_mech = "SCRAM-SHA-1"
+    ssl_client_ca = None
+    ssl_client_cert = None
+    ssl_client_key = None
+    ssl_client_phrase = None
     cfg = gen_libs.load_module(cfg_file, dir_path)
 
     if hasattr(cfg, "auth_db"):
         auth_db = cfg.auth_db
+
+    if hasattr(cfg, "auth_mech"):
+        auth_mech = cfg.auth_mech
 
     if hasattr(cfg, "use_arg"):
         use_arg = cfg.use_arg
@@ -108,13 +163,27 @@ def create_instance(cfg_file, dir_path, class_name, **kwargs):
     if hasattr(cfg, "use_uri"):
         use_uri = cfg.use_uri
 
+    if hasattr(cfg, "ssl_client_ca"):
+        ssl_client_ca = cfg.ssl_client_ca
+
+    if hasattr(cfg, "ssl_client_cert"):
+        ssl_client_cert = cfg.ssl_client_cert
+
+    if hasattr(cfg, "ssl_client_key"):
+        ssl_client_key = cfg.ssl_client_key
+
+    if hasattr(cfg, "ssl_client_phrase"):
+        ssl_client_phrase = cfg.ssl_client_phrase
+
     return class_name(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         auth=cfg.auth, conf_file=cfg.conf_file, auth_db=auth_db,
-        use_arg=use_arg, use_uri=use_uri)
+        use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech,
+        ssl_client_ca=ssl_client_ca, ssl_client_cert=ssl_client_cert,
+        ssl_client_key=ssl_client_key, ssl_client_phrase=ssl_client_phrase)
 
 
-def create_slv_array(cfg_array, **kwargs):
+def create_slv_array(cfg_array):
 
     """Function:  create_slv_array
 
@@ -161,42 +230,52 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
         (input) **kwargs:
             use_repset -> True|False - Use repset name connection.
                 (i.e. repset_name/host1,host2,...)
-        (output) -> List of basic Mongo utility command line.
+            no_pass -> True|False - Turn off --password= option.
+        (output) cmd_line -> Basic Mongo utility command line in list format.
 
     """
 
-    host = "--host="
-    cmd_list = []
-    data = "--pass"
-    data2 = "word="
-    japd2 = data + data2
+    global KEY1
+    global KEY2
+    global KEY3
+    global KEY4
+    global HOST
 
-    # Use repset name and hosts for connection, if set.
+    cmd_list = []
+
+    # Use repset name and hosts for connection
     if kwargs.get("use_repset", False) and mongo.repset \
             and mongo.repset_hosts:
 
-        host_port = host + mongo.repset + "/" + mongo.repset_hosts
+        host_port = HOST + mongo.repset + "/" + mongo.repset_hosts
 
-    # Use repset name for connection, if set.
+    # Use repset name for connection
     elif kwargs.get("use_repset", False) and mongo.repset:
-        host_port = host + mongo.repset + "/" + mongo.host + ":" \
+        host_port = HOST + mongo.repset + "/" + mongo.host + ":" \
                     + str(mongo.port)
 
-    # Assume just host and port.
+    # Assume just host and port
     else:
-        host_port = host + mongo.host + ":" + str(mongo.port)
+        host_port = HOST + mongo.host + ":" + str(mongo.port)
 
-    if mongo.auth:
+    # Determine the type of user parameters to add
+    if mongo.auth and kwargs.get("no_pass", False):
+        cmd_list = [prog_name, "--username=" + mongo.user, host_port]
+
+    elif mongo.auth:
         cmd_list = [prog_name, "--username=" + mongo.user, host_port,
-                    japd2 + mongo.japd]
+                    "--" + KEY1 + KEY2 + "=" + mongo.japd]
 
     else:
         cmd_list = [prog_name, host_port]
 
+    if mongo.config.get("ssl", False):
+        cmd_list = add_ssl_cmd(mongo, cmd_list)
+
     return cmd_list
 
 
-def crt_coll_inst(cfg, dbs, tbl, **kwargs):
+def crt_coll_inst(cfg, dbs, tbl):
 
     """Function:  crt_coll_inst
 
@@ -205,7 +284,7 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
         This will be based on the type of configuration passed.
 
     Arguments:
-        (input) cfg -> Configuration module.
+        (input) cfg -> Mongo instance or mongo config module.
         (input) dbs -> Database name.
         (input) tbl ->  Collection name.
 
@@ -215,6 +294,10 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
     use_arg = False
     use_uri = False
     auth_mech = "SCRAM-SHA-1"
+    ssl_client_ca = None
+    ssl_client_cert = None
+    ssl_client_key = None
+    ssl_client_phrase = None
 
     if hasattr(cfg, "auth_db"):
         auth_db = cfg.auth_db
@@ -228,18 +311,34 @@ def crt_coll_inst(cfg, dbs, tbl, **kwargs):
     if hasattr(cfg, "auth_mech"):
         auth_mech = cfg.auth_mech
 
+    if hasattr(cfg, "ssl_client_ca"):
+        ssl_client_ca = cfg.ssl_client_ca
+
+    if hasattr(cfg, "ssl_client_cert"):
+        ssl_client_cert = cfg.ssl_client_cert
+
+    if hasattr(cfg, "ssl_client_key"):
+        ssl_client_key = cfg.ssl_client_key
+
+    if hasattr(cfg, "ssl_client_phrase"):
+        ssl_client_phrase = cfg.ssl_client_phrase
+
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
         return mongo_class.RepSetColl(
             cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
             auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,
             db=dbs, coll=tbl, db_auth=cfg.db_auth, auth_db=auth_db,
-            use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech)
+            use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech,
+            ssl_client_ca=ssl_client_ca, ssl_client_cert=ssl_client_cert,
+            ssl_client_key=ssl_client_key, ssl_client_phrase=ssl_client_phrase)
 
     return mongo_class.Coll(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file,
-        auth_db=auth_db, use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech)
+        auth_db=auth_db, use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech,
+        ssl_client_ca=ssl_client_ca, ssl_client_cert=ssl_client_cert,
+        ssl_client_key=ssl_client_key, ssl_client_phrase=ssl_client_phrase)
 
 
 def disconnect(*args):
@@ -274,7 +373,7 @@ def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
         document to JSON, and insert document into the database.
 
     Arguments:
-        (input) mongo_cfg -> Mongo database configuration.
+        (input) mongo_cfg -> Mongo instance or mongo config module.
         (input) dbs -> Database name.
         (input) tbl ->  Collection name.
         (input) data -> Document to be inserted.

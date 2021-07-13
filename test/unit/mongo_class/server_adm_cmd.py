@@ -40,8 +40,8 @@ class Command1(object):
     Description:  Class stub holder for command class.
 
     Methods:
-        __init__ ->  Initialization of class.
-        command -> Stub holder for Server.conn.admin.command method.
+        __init__
+        command
 
     """
 
@@ -81,7 +81,7 @@ class Admin1(object):
     Description:  Class stub holder for admin class.
 
     Methods:
-        __init__ ->  Initialization of class.
+        __init__
 
     """
 
@@ -105,9 +105,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_arg -> Test with argument passed.
-        test_adm_cmd -> Test adm_cmd method.
+        setUp
+        test_arg
+        test_adm_cmd
 
     """
 

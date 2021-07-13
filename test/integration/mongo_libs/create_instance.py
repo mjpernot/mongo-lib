@@ -43,71 +43,95 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_auth_db_repsetcoll2 -> Test RepSetColl class w/ auth_db attribute.
-        test_auth_db_repsetcoll -> Test RepSetColl class w/ auth_db attribute.
-        test_auth_db_repset2 -> Test RepSet class with auth_db attribute.
-        test_auth_db_repset -> Test RepSet class with auth_db attribute.
-        test_auth_db_coll2 -> Test Coll class with auth_db attribute.
-        test_auth_db_coll -> Test Coll class with auth_db attribute.
-        test_auth_db_db2 -> Test DB class with auth_db attribute.
-        test_auth_db_db -> Test DB class with auth_db attribute.
-        test_auth_db_slaverep2 -> Test SlaveRep class with auth_db attribute.
-        test_auth_db_slaverep -> Test SlaveRep class with auth_db attribute.
-        test_auth_db_masterrep2 -> Test MasterRep class with auth_db attribute.
-        test_auth_db_masterrep -> Test MasterRep class with auth_db attribute.
-        test_auth_db_rep2 -> Test Rep class with auth_db attribute.
-        test_auth_db_rep -> Test Rep class with auth_db attribute.
-        test_auth_db_server2 -> Test Server class with auth_db attribute.
-        test_auth_db_server -> Test Server class with auth_db attribute.
-        test_use_uri_repsetcoll2 -> Test RepSetColl class w/ use_uri attribute.
-        test_use_uri_repsetcoll -> Test RepSetColl class w/ use_uri attribute.
-        test_use_uri_repset2 -> Test RepSet class with use_uri attribute.
-        test_use_uri_repset -> Test RepSet class with use_uri attribute.
-        test_use_uri_coll2 -> Test Coll class with use_uri attribute.
-        test_use_uri_coll -> Test Coll class with use_uri attribute.
-        test_use_uri_db2 -> Test DB class with use_uri attribute.
-        test_use_uri_db -> Test DB class with use_uri attribute.
-        test_use_uri_slaverep2 -> Test SlaveRep class with use_uri attribute.
-        test_use_uri_slaverep -> Test SlaveRep class with use_uri attribute.
-        test_use_uri_masterrep2 -> Test MasterRep class with use_uri attribute.
-        test_use_uri_masterrep -> Test MasterRep class with use_uri attribute.
-        test_use_uri_rep2 -> Test Rep class with use_uri attribute.
-        test_use_uri_rep -> Test Rep class with use_uri attribute.
-        test_use_uri_server2 -> Test Server class with use_uri attribute.
-        test_use_uri_server -> Test Server class with use_uri attribute.
-        test_use_arg_repsetcoll2 -> Test RepSetColl class w/ use_arg attribute.
-        test_use_arg_repsetcoll -> Test RepSetColl class w/ use_arg attribute.
-        test_use_arg_repset2 -> Test RepSet class with use_arg attribute.
-        test_use_arg_repset -> Test RepSet class with use_arg attribute.
-        test_use_arg_coll2 -> Test Coll class with use_arg attribute.
-        test_use_arg_coll -> Test Coll class with use_arg attribute.
-        test_use_arg_db2 -> Test DB class with use_arg attribute.
-        test_use_arg_db -> Test DB class with use_arg attribute.
-        test_use_arg_slaverep2 -> Test SlaveRep class with use_arg attribute.
-        test_use_arg_slaverep -> Test SlaveRep class with use_arg attribute.
-        test_use_arg_masterrep2 -> Test MasterRep class with use_arg attribute.
-        test_use_arg_masterrep -> Test MasterRep class with use_arg attribute.
-        test_use_arg_rep2 -> Test Rep class with use_arg attribute.
-        test_use_arg_rep -> Test Rep class with use_arg attribute.
-        test_use_arg_server2 -> Test Server class with use_arg attribute.
-        test_use_arg_server -> Test Server class with use_arg attribute.
-        test_create_repsetcoll2 -> Test creating RepSetColl class instance.
-        test_create_repsetcoll -> Test creating RepSetColl class instance.
-        test_create_repset2 -> Test creating RepSet class instance.
-        test_create_repset -> Test creating RepSet class instance.
-        test_create_coll2 -> Test creating Coll class instance.
-        test_create_coll -> Test creating Coll class instance.
-        test_create_db2 -> Test creating DB class instance.
-        test_create_db -> Test creating DB class instance.
-        test_create_slaverep2 -> Test creating SlaveRep class instance.
-        test_create_slaverep -> Test creating SlaveRep class instance.
-        test_create_masterrep2 -> Test creating MasterRep class instance.
-        test_create_masterrep -> Test creating MasterRep class instance.
-        test_create_rep2 -> Test creating Rep class instance.
-        test_create_rep -> Test creating Rep class instance.
-        test_create_server2 -> Test creating Server class instance.
-        test_create_server -> Test creating Server class instance.
+        setUp
+        test_set_ssl8
+        test_set_ssl7
+        test_set_ssl6
+        test_set_ssl5
+        test_set_ssl4
+        test_set_ssl3
+        test_set_ssl2
+        test_set_ssl
+        test_none_ssl8
+        test_none_ssl7
+        test_none_ssl6
+        test_none_ssl5
+        test_none_ssl4
+        test_none_ssl3
+        test_none_ssl2
+        test_none_ssl
+        test_auth_mech8
+        test_auth_mech7
+        test_auth_mech6
+        test_auth_mech5
+        test_auth_mech4
+        test_auth_mech3
+        test_auth_mech2
+        test_auth_mech
+        test_auth_db_repsetcoll2
+        test_auth_db_repsetcoll
+        test_auth_db_repset2
+        test_auth_db_repset
+        test_auth_db_coll2
+        test_auth_db_coll
+        test_auth_db_db2
+        test_auth_db_db
+        test_auth_db_slaverep2
+        test_auth_db_slaverep
+        test_auth_db_masterrep2
+        test_auth_db_masterrep
+        test_auth_db_rep2
+        test_auth_db_rep
+        test_auth_db_server2
+        test_auth_db_server
+        test_use_uri_repsetcoll2
+        test_use_uri_repsetcoll
+        test_use_uri_repset2
+        test_use_uri_repset
+        test_use_uri_coll2
+        test_use_uri_coll
+        test_use_uri_db2
+        test_use_uri_db
+        test_use_uri_slaverep2
+        test_use_uri_slaverep
+        test_use_uri_masterrep2
+        test_use_uri_masterrep
+        test_use_uri_rep2
+        test_use_uri_rep
+        test_use_uri_server2
+        test_use_uri_server
+        test_use_arg_repsetcoll2
+        test_use_arg_repsetcoll
+        test_use_arg_repset2
+        test_use_arg_repset
+        test_use_arg_coll2
+        test_use_arg_coll
+        test_use_arg_db2
+        test_use_arg_db
+        test_use_arg_slaverep2
+        test_use_arg_slaverep
+        test_use_arg_masterrep2
+        test_use_arg_masterrep
+        test_use_arg_rep2
+        test_use_arg_rep
+        test_use_arg_server2
+        test_use_arg_server
+        test_create_repsetcoll2
+        test_create_repsetcoll
+        test_create_repset2
+        test_create_repset
+        test_create_coll2
+        test_create_coll
+        test_create_db2
+        test_create_db
+        test_create_slaverep2
+        test_create_slaverep
+        test_create_masterrep2
+        test_create_masterrep
+        test_create_rep2
+        test_create_rep
+        test_create_server2
+        test_create_server
 
     """
 
@@ -124,8 +148,441 @@ class UnitTest(unittest.TestCase):
         self.base_dir = "test/integration"
         self.config_dir = os.path.join(self.base_dir, "config")
         self.config_name = "mongo"
-
+        self.auth_mech = "SCRAM-SHA-1"
         self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
+        self.ssl_client_ca = self.cfg.ssl_client_ca
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_ssl8(self, mock_load):
+
+        """Function:  test_none_ssl8
+
+        Description:  Test Server class with SSL attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.RepSetColl)
+
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_ssl7(self, mock_load):
+
+        """Function:  test_none_ssl7
+
+        Description:  Test Server class with SSL attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.RepSet)
+
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_ssl6(self, mock_load):
+
+        """Function:  test_none_ssl6
+
+        Description:  Test Server class with SSL attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.SlaveRep)
+
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_ssl5(self, mock_load):
+
+        """Function:  test_none_ssl5
+
+        Description:  Test Server class with SSL attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.MasterRep)
+
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_ssl4(self, mock_load):
+
+        """Function:  test_none_ssl4
+
+        Description:  Test Server class with SSL attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.Rep)
+
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_ssl3(self, mock_load):
+
+        """Function:  test_none_ssl3
+
+        Description:  Test Server class with SSL attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.Coll)
+
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_ssl2(self, mock_load):
+
+        """Function:  test_none_ssl2
+
+        Description:  Test Server class with SSL attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.DB)
+
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_ssl(self, mock_load):
+
+        """Function:  test_none_ssl
+
+        Description:  Test Server class with SSL attribute set to none.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.Server)
+
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_none_ssl8(self, mock_load):
+
+        """Function:  test_none_ssl8
+
+        Description:  Test Server class with SSL attribute set to none.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.RepSetColl)
+        self.ssl_client_ca = tmp
+
+        self.assertEqual(mongo.ssl_client_ca, None)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_none_ssl7(self, mock_load):
+
+        """Function:  test_none_ssl7
+
+        Description:  Test Server class with SSL attribute set to none.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.RepSet)
+        self.ssl_client_ca = tmp
+
+        self.assertEqual(mongo.ssl_client_ca, None)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_none_ssl6(self, mock_load):
+
+        """Function:  test_none_ssl6
+
+        Description:  Test Server class with SSL attribute set to none.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.SlaveRep)
+        self.ssl_client_ca = tmp
+
+        self.assertEqual(mongo.ssl_client_ca, None)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_none_ssl5(self, mock_load):
+
+        """Function:  test_none_ssl5
+
+        Description:  Test Server class with SSL attribute set to none.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.MasterRep)
+        self.ssl_client_ca = tmp
+
+        self.assertEqual(mongo.ssl_client_ca, None)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_none_ssl4(self, mock_load):
+
+        """Function:  test_none_ssl4
+
+        Description:  Test Server class with SSL attribute set to none.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.Rep)
+        self.ssl_client_ca = tmp
+
+        self.assertEqual(mongo.ssl_client_ca, None)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_none_ssl3(self, mock_load):
+
+        """Function:  test_none_ssl3
+
+        Description:  Test Server class with SSL attribute set to none.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.Coll)
+        self.ssl_client_ca = tmp
+
+        self.assertEqual(mongo.ssl_client_ca, None)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_none_ssl2(self, mock_load):
+
+        """Function:  test_none_ssl2
+
+        Description:  Test Server class with SSL attribute set to none.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.DB)
+        self.ssl_client_ca = tmp
+
+        self.assertEqual(mongo.ssl_client_ca, None)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_none_ssl(self, mock_load):
+
+        """Function:  test_none_ssl
+
+        Description:  Test Server class with SSL attribute set to none.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.Server)
+        self.ssl_client_ca = tmp
+
+        self.assertEqual(mongo.ssl_client_ca, None)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_auth_mech8(self, mock_load):
+
+        """Function:  test_auth_mech8
+
+        Description:  Test Server class with auth_mech attribute.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.RepSetColl)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_auth_mech7(self, mock_load):
+
+        """Function:  test_auth_mech7
+
+        Description:  Test Server class with auth_mech attribute.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.RepSet)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_auth_mech6(self, mock_load):
+
+        """Function:  test_auth_mech6
+
+        Description:  Test Server class with auth_mech attribute.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.SlaveRep)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_auth_mech5(self, mock_load):
+
+        """Function:  test_auth_mech5
+
+        Description:  Test Server class with auth_mech attribute.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.MasterRep)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_auth_mech4(self, mock_load):
+
+        """Function:  test_auth_mech4
+
+        Description:  Test Server class with auth_mech attribute.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.Rep)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_auth_mech3(self, mock_load):
+
+        """Function:  test_auth_mech3
+
+        Description:  Test Server class with auth_mech attribute.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.Coll)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_auth_mech2(self, mock_load):
+
+        """Function:  test_auth_mech2
+
+        Description:  Test Server class with auth_mech attribute.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.DB)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_auth_mech(self, mock_load):
+
+        """Function:  test_auth_mech
+
+        Description:  Test Server class with auth_mech attribute.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
+                                           mongo_class.Server)
+
+        self.assertEqual(mongo.auth_mech, self.auth_mech)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_auth_db_repsetcoll2(self, mock_load):

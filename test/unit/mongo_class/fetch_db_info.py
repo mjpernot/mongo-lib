@@ -40,8 +40,8 @@ class Mongo(object):
     Description:  Class stub holder for Mongo class.
 
     Methods:
-        __init__ -> Class initialization.
-        adm_cmd -> Stub holder for mongo_class.adm_cmd attribute.
+        __init__
+        adm_cmd
 
     """
 
@@ -64,7 +64,7 @@ class Mongo(object):
         Description:  Stub holder for mongo_class.adm_cmd method.
 
         Arguments:
-            (input) mongo -> Mongo class.
+            (input) mongo
 
         """
 
@@ -80,8 +80,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_fetch_db_info -> Test fetch_db_info method.
+        setUp
+        test_fetch_db_info
 
     """
 

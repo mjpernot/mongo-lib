@@ -41,15 +41,17 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_coll_attr2 -> Test coll attribute.
-        test_coll_attr -> Test coll attribute.
-        test_no_conn_list1 -> Test with no connections passed.
-        test_no_conn_list -> Test with no connections passed.
-        test_fail_connection2 -> Test with failed connection.
-        test_fail_connection -> Test with failed connection.
-        test_default2 -> Test with minimum number of arguments.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_miss_coll_coll2
+        test_miss_coll_coll
+        test_coll_attr2
+        test_coll_attr
+        test_no_conn_list1
+        test_no_conn_list
+        test_fail_connection2
+        test_fail_connection
+        test_default2
+        test_default
 
     """
 
@@ -72,6 +74,49 @@ class UnitTest(unittest.TestCase):
         self.coll = "coll_name"
         self.db_auth = None
         self.errmsg = "Error Message"
+        self.errmsg2 = "Error:  Unable to connect, no collection passed."
+
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_miss_coll_coll2(self, mock_client, mock_cmd):
+
+        """Function:  test_miss_coll_coll2
+
+        Description:  Test with no Collection passed.
+
+        Arguments:
+
+        """
+
+        mock_client.return_value = True
+        mock_cmd.return_value = (True, None)
+
+        mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
+                                 self.port)
+        mongo.conn = {"test": {"coll_name": None}}
+
+        self.assertEqual(mongo.coll_coll, None)
+
+    @mock.patch("mongo_class.Server.get_srv_attr")
+    @mock.patch("mongo_class.pymongo.MongoClient")
+    def test_miss_coll_coll(self, mock_client, mock_cmd):
+
+        """Function:  test_miss_coll_coll
+
+        Description:  Test with no Collection passed.
+
+        Arguments:
+
+        """
+
+        mock_client.return_value = True
+        mock_cmd.return_value = (True, None)
+
+        mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
+                                 self.port)
+        mongo.conn = {"test": {"coll_name": None}}
+
+        self.assertEqual(mongo.connect(), (False, self.errmsg2))
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")

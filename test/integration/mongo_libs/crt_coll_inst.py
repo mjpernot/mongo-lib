@@ -42,17 +42,33 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_coll_auth_mech3 -> Test with authentication mechanism MONGODB-CR.
-        test_coll_auth_mech2 -> Test with authentication mechanism.
-        test_coll_auth_mech -> Test with authentication mechanism.
-        test_repset_auth_mech3 -> Test with auth mechanism - MONGODB-CR.
-        test_repset_auth_mech2 -> Test with authentication mechanism.
-        test_repset_auth_mech -> Test with authentication mechanism.
-        test_coll2 -> Test the mongo_class.Coll class.
-        test_coll -> Test the mongo_class.Coll class.
-        test_repsetcoll2 -> Test the mongo_class.RepSetColl class.
-        test_repsetcoll -> Test the mongo_class.RepSetColl class.
+        setUp
+        test_coll_set_ssl
+        test_rep_set_ssl
+        test_coll_none_ssl
+        test_rep_none_ssl
+        test_coll_auth_mech3
+        test_coll_auth_mech2
+        test_coll_auth_mech
+        test_repset_auth_mech3
+        test_repset_auth_mech2
+        test_repset_auth_mech
+        test_auth_db_coll2
+        test_auth_db_coll
+        test_auth_db_repsetcoll2
+        test_auth_db_repsetcoll
+        test_use_uri_coll2
+        test_use_uri_coll
+        test_use_uri_repsetcoll2
+        test_use_uri_repsetcoll
+        test_use_arg_coll2
+        test_use_arg_coll
+        test_use_arg_repsetcoll2
+        test_use_arg_repsetcoll
+        test_coll2
+        test_coll
+        test_repsetcoll2
+        test_repsetcoll
 
     """
 
@@ -72,6 +88,70 @@ class UnitTest(unittest.TestCase):
         self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
         self.dbn = "admin"
         self.coll = "system.users"
+
+    def test_coll_set_ssl(self):
+
+        """Function:  test_coll_set_ssl
+
+        Description:  Test mongo_class.Coll class with SSL set.
+
+        Arguments:
+
+        """
+
+        self.cfg.repset_hosts = None
+        mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
+
+        self.assertEqual(mongo.ssl_client_ca, self.cfg.ssl_client_ca)
+
+    def test_rep_set_ssl(self):
+
+        """Function:  test_rep_set_ssl
+
+        Description:  Test mongo_class.RepSetColl class with SSL set.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
+
+        self.assertEqual(mongo.ssl_client_ca, self.cfg.ssl_client_ca)
+
+    def test_coll_none_ssl(self):
+
+        """Function:  test_coll_none_ssl
+
+        Description:  Test mongo_class.Coll class with SSL set to none.
+
+        Arguments:
+
+        """
+
+        self.cfg.repset_hosts = None
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
+        mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
+        self.cfg.ssl_client_ca = tmp
+
+        self.assertFalse(mongo.ssl_client_ca)
+
+    def test_rep_none_ssl(self):
+
+        """Function:  test_rep_none_ssl
+
+        Description:  Test mongo_class.RepSetColl class with SSL set to none.
+
+        Arguments:
+
+        """
+
+        tmp = self.cfg.ssl_client_ca
+        self.cfg.ssl_client_ca = None
+        mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
+        self.cfg.ssl_client_ca = tmp
+
+        self.assertFalse(mongo.ssl_client_ca)
 
     def test_coll_auth_mech3(self):
 

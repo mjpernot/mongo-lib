@@ -41,25 +41,25 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_is_not_slave2 -> Test with connecting to master node.
-        test_is_not_slave -> Test with connecting to master node.
-        test_primary2 -> Test primary attribute.
-        test_primary -> Test primary attribute.
-        test_repset2 -> Test repset attribute.
-        test_repset -> Test repset attribute.
-        test_issecondary2 -> Test issecondary attribute.
-        test_issecondary -> Test issecondary attribute.
-        test_ismaster2 -> Test ismaster attribute.
-        test_ismaster -> Test ismaster attribute.
-        test_fail_get_srv_attr2 -> Test with failed get_srv_attr call.
-        test_fail_get_srv_attr -> Test with failed get_srv_attr call.
-        test_auth_arg2 -> Test with auth and arg present.
-        test_auth_arg -> Test with auth and arg present.
-        test_auth_uri2 -> Test with auth and uri present.
-        test_auth_uri -> Test with auth and uri present.
-        test_no_auth2 -> Test with no auth present.
-        test_no_auth -> Test with no auth present.
+        setUp
+        test_is_not_slave2
+        test_is_not_slave
+        test_primary2
+        test_primary
+        test_repset2
+        test_repset
+        test_issecondary2
+        test_issecondary
+        test_ismaster2
+        test_ismaster
+        test_fail_get_srv_attr2
+        test_fail_get_srv_attr
+        test_auth_arg2
+        test_auth_arg
+        test_auth_uri2
+        test_auth_uri
+        test_no_auth2
+        test_no_auth
 
     """
 

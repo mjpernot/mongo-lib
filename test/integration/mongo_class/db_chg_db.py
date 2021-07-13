@@ -41,9 +41,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_database_passed -> Test with database passed.
-        test_no_database -> Test with no database passed.
+        setUp
+        test_database_passed
+        test_no_database
 
     """
 
@@ -75,7 +75,11 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_arg=self.cfg.use_arg)
+            port=self.cfg.port, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
         mongo.chg_db(self.database)
 
@@ -93,7 +97,11 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_arg=self.cfg.use_arg)
+            port=self.cfg.port, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
         mongo.chg_db(dbs=self.database)
 
@@ -111,7 +119,11 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_arg=self.cfg.use_arg)
+            port=self.cfg.port, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
         mongo.chg_db()
 
@@ -129,7 +141,11 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_arg=self.cfg.use_arg)
+            port=self.cfg.port, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
         mongo.chg_db()
 

@@ -40,8 +40,8 @@ class CollIns(object):
     Description:  Class stub holder for Coll class.
 
     Methods:
-        __init__ -> Class initialization.
-        insert_one -> Stub for Coll.ins_doc method.
+        __init__
+        insert_one
 
     """
 
@@ -64,7 +64,7 @@ class CollIns(object):
         Description:  Stub for Coll.ins_doc method.
 
         Arguments:
-            (input) doc -> Document.
+            (input) doc
 
         """
 
@@ -80,9 +80,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_query -> Test with query command.
-        test_empty_doc -> Test with empty document.
+        setUp
+        test_query
+        test_empty_doc
 
     """
 

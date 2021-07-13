@@ -40,8 +40,8 @@ class DBValidate(object):
     Description:  Class stub holder for DB class.
 
     Methods:
-        __init__ -> Class initialization.
-        collection_names -> Stub for DB.db.collection_names method.
+        __init__
+        collection_names
 
     """
 
@@ -81,8 +81,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_default
 
     """
 

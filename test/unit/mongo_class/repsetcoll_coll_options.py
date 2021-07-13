@@ -40,7 +40,7 @@ class CollOpts(object):
     Description:  Class stub holder for Coll class.
 
     Methods:
-        options -> Stub for Coll.coll_options method.
+        options
 
     """
 
@@ -64,8 +64,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_query -> Test method.
+        setUp
+        test_query
 
     """
 

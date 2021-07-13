@@ -41,11 +41,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_object2 -> Test with object passed to method.
-        test_object -> Test with object passed to method.
-        test_base_cmd2 -> Test with base command.
-        test_base_cmd -> Test with base command.
+        setUp
+        test_object2
+        test_object
+        test_base_cmd2
+        test_base_cmd
 
     """
 
@@ -67,7 +67,11 @@ class UnitTest(unittest.TestCase):
         self.tbl_name = "system.users"
         self.mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg)
+            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            ssl_client_ca=self.cfg.ssl_client_ca,
+            ssl_client_key=self.cfg.ssl_client_key,
+            ssl_client_cert=self.cfg.ssl_client_cert,
+            ssl_client_phrase=self.cfg.ssl_client_phrase)
         self.mongo.connect()
         self.mongo.chg_db(self.database)
 

@@ -40,7 +40,7 @@ class UnlockDb(object):
     Description:  Class stub holder for Server class.
 
     Methods:
-        unlock_db -> Stub holder for Server.conn.unlock_db method.
+        unlock_db
 
     """
 
@@ -64,8 +64,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_unlock_db -> Test unlock_db method.
+        setUp
+        test_unlock_db
 
     """
 

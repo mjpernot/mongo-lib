@@ -40,8 +40,8 @@ class Disconnect(object):
     Description:  Class is a representation of disconnect class.
 
     Methods:
-        __init__ -> Initialize configuration environment.
-        disconnect -> Method is representation of disconnect method.
+        __init__
+        disconnect
 
     """
 
@@ -77,9 +77,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_list_entry -> Test with disconnect in list.
-        test_single_entry -> Test with single disconnect.
+        setUp
+        test_list_entry
+        test_single_entry
 
     """
 
