@@ -183,6 +183,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name,
                                           no_pass=True)
 
@@ -198,6 +199,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name,
                                           no_pass=False)
 
@@ -213,6 +215,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name)
 
         self.assertEqual(cmdline, self.results)
@@ -228,7 +231,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.mongo.auth = False
-
+        self.mongo.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name)
 
         self.assertEqual(cmdline, self.results4)
@@ -243,6 +246,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name)
 
         self.assertEqual(cmdline, self.results)
@@ -257,6 +261,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongorep.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongorep, self.prog_name,
                                           use_repset=True)
 
@@ -273,6 +278,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.mongorep.repset_hosts = self.host_port
+        self.mongorep.config["ssl"] = False
 
         cmdline = mongo_libs.crt_base_cmd(self.mongorep, self.prog_name,
                                           use_repset=True)
