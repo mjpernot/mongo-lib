@@ -34,6 +34,11 @@ import version
 
 __version__ = version.__version__
 
+# Global
+KEY1 = "pass"
+KEY3 = "ssl_pem_"
+KEY4 = "phrase"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -43,6 +48,9 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_ssl_true
+        test_ssl_false2
+        test_ssl_false
         test_auth_no_pass
         test_auth_pass
         test_auth
@@ -104,6 +112,66 @@ class UnitTest(unittest.TestCase):
         self.results4 = [self.prog_name, self.host_str]
         self.results5 = [self.prog_name, self.uname + self.cfg.user,
                          self.host_str]
+        self.ssl = "--ssl"
+        self.ssl_ca = "--sslCAFile="
+        self.ssl_key = "--sslPEMKeyFile="
+        self.ssl_phrase = "--sslPEMKeyPass"
+        self.results6 = [self.prog_name, self.uname + self.cfg.user,
+                         self.host_str, self.japd2 + self.cfg.japd, self.ssl]
+
+    def test_ssl_true(self):
+
+        """Function:  test_ssl_true
+
+        Description:  Test with SSL option set to True.
+
+        Arguments:
+
+        """
+
+        global KEY1
+        global KEY3
+        global KEY4
+
+        self.mongo.config["ssl"] = True
+        self.mongo.config.pop("ssl_ca_certs", None)
+        self.mongo.config.pop("ssl_keyfile", None)
+        self.mongo.config.pop(KEY3 + KEY1 + KEY4, None)
+
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(self.mongo, self.prog_name),
+            self.results6)
+
+
+    def test_ssl_false2(self):
+
+        """Function:  test_ssl_false2
+
+        Description:  Test with SSL option set to False.
+
+        Arguments:
+
+        """
+
+        self.mongo.config["ssl"] = False
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(self.mongo, self.prog_name),
+            self.results)
+
+    def test_ssl_false(self):
+
+        """Function:  test_ssl_false
+
+        Description:  Test with no SSL option present.
+
+        Arguments:
+
+        """
+
+        self.mongo.config.pop("ssl", None)
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(self.mongo, self.prog_name),
+            self.results)
 
     def test_auth_no_pass(self):
 
@@ -115,6 +183,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name,
                                           no_pass=True)
 
@@ -130,6 +199,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name,
                                           no_pass=False)
 
@@ -145,6 +215,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name)
 
         self.assertEqual(cmdline, self.results)
@@ -160,7 +231,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.mongo.auth = False
-
+        self.mongo.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name)
 
         self.assertEqual(cmdline, self.results4)
@@ -175,6 +246,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name)
 
         self.assertEqual(cmdline, self.results)
@@ -189,6 +261,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongorep.config["ssl"] = False
         cmdline = mongo_libs.crt_base_cmd(self.mongorep, self.prog_name,
                                           use_repset=True)
 
@@ -205,6 +278,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.mongorep.repset_hosts = self.host_port
+        self.mongorep.config["ssl"] = False
 
         cmdline = mongo_libs.crt_base_cmd(self.mongorep, self.prog_name,
                                           use_repset=True)

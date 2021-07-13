@@ -148,6 +148,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args_array3, self.prog_name, self.path_opt,
             req_arg=self.req_arg2, opt_arg=self.opt_arg2)
@@ -164,6 +165,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args_array3, self.prog_name, self.path_opt,
             req_arg=self.req_arg, opt_arg=self.opt_arg2)
@@ -180,6 +182,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args_array3, self.prog_name, self.path_opt,
             opt_arg=self.opt_arg2)
@@ -196,6 +199,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args_array, self.prog_name, self.path_opt,
             req_arg=self.req_arg2)
@@ -212,6 +216,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args_array, self.prog_name, self.path_opt,
             opt_arg={})
@@ -228,6 +233,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args_array, self.prog_name, self.path_opt,
             req_arg=[])
@@ -244,6 +250,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args_array2, self.prog_name, self.path_opt,
             opt_arg=self.opt_arg, req_arg=self.req_arg)
@@ -260,6 +267,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args_array2, self.prog_name, self.path_opt,
             opt_arg=self.opt_arg)
@@ -276,6 +284,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args_array, self.prog_name, self.path_opt,
             req_arg=self.req_arg)
@@ -292,6 +301,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args_array, self.prog_name, self.path_opt)
 

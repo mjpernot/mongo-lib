@@ -69,6 +69,7 @@ pipeline {
                 ./test/unit/mongo_class/server_upd_srv_stat.py
                 ./test/unit/mongo_class/slaverep_connect.py
                 ./test/unit/mongo_class/slaverep_init.py
+                ./test/unit/mongo_libs/add_ssl_cmd.py
                 ./test/unit/mongo_libs/create_cmd.py
                 ./test/unit/mongo_libs/create_instance.py
                 ./test/unit/mongo_libs/create_slv_array.py

@@ -5,6 +5,7 @@
     Description:  Library of function calls for a Mongo database system.
 
     Functions:
+        add_ssl_cmd
         create_cmd
         create_instance
         create_slv_array
@@ -39,6 +40,44 @@ KEY2 = "word"
 KEY3 = "ssl_pem_"
 KEY4 = "phrase"
 HOST = "--host="
+
+
+def add_ssl_cmd(mongo, cmd_list):
+
+    """Function:  add_ssl_cmd
+
+    Description:  Determine if SSL options are present and add to the command
+        line.
+    
+    Arguments:
+        (input) mongo -> Database instance
+        (input) cmd_line -> Basic Mongo utility command line in list format.
+        (output) cmd_line -> Basic Mongo utility command line in list format.
+    """
+
+    global KEY1
+    global KEY2
+    global KEY3
+    global KEY4
+
+    cmd_list = list(cmd_list)
+
+    if mongo.config.get("ssl", False):
+        cmd_list.append("--ssl")
+
+        if mongo.config.get("ssl_ca_certs"):
+            cmd_list.append("--sslCAFile=" + mongo.config.get("ssl_ca_certs"))
+
+        if mongo.config.get("ssl_keyfile"):
+            cmd_list.append(
+                "--sslPEMKeyFile=" + mongo.config.get("ssl_keyfile"))
+
+            if mongo.config.get(KEY3 + KEY1 + KEY4):
+                cmd_list.append(
+                    "--sslPEMKeyPass" + KEY2 + "="
+                    + mongo.config.get(KEY3 + KEY1 + KEY4))
+
+    return cmd_list
 
 
 def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
@@ -192,7 +231,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
             use_repset -> True|False - Use repset name connection.
                 (i.e. repset_name/host1,host2,...)
             no_pass -> True|False - Turn off --password= option.
-        (output) -> List of basic Mongo utility command line.
+        (output) cmd_line -> Basic Mongo utility command line in list format.
 
     """
 
@@ -231,19 +270,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
         cmd_list = [prog_name, host_port]
 
     if mongo.config.get("ssl", False):
-        cmd_list.append("--ssl")
-
-        if mongo.config.get("ssl_ca_certs"):
-            cmd_list.append("--sslCAFile=" + mongo.config.get("ssl_ca_certs"))
-
-        if mongo.config.get("ssl_keyfile"):
-            cmd_list.append(
-                "--sslPEMKeyFile=" + mongo.config.get("ssl_keyfile"))
-
-            if mongo.config.get(KEY3 + KEY1 + KEY4):
-                cmd_list.append(
-                    "--sslPEMKeyPass" + KEY2 + "="
-                    + mongo.config.get(KEY3 + KEY1 + KEY4))
+        cmd_list = add_ssl_cmd(mongo, cmd_list)
 
     return cmd_list
 

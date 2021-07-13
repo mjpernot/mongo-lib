@@ -12,6 +12,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_libs.create_instance:  Added auth_mech argument to instance call.
 
 ### Added
+- mongo_libs.add_ssl_cmd:  Determine if SSL options are present and add to the command line.
 - mongo_class.Server.set_ssl_config:  Append SSL attributes to config.
 - mongo_class.Server.set_pass_config:  Set the passwd config attributes.
 

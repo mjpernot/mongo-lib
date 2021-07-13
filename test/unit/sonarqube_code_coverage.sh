@@ -60,6 +60,7 @@ coverage run -a --source=mongo_class test/unit/mongo_class/server_upd_server_att
 coverage run -a --source=mongo_class test/unit/mongo_class/server_upd_srv_stat.py
 coverage run -a --source=mongo_class test/unit/mongo_class/slaverep_connect.py
 coverage run -a --source=mongo_class test/unit/mongo_class/slaverep_init.py
+coverage run -a --source=mongo_libs test/unit/mongo_libs/add_ssl_cmd.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/create_cmd.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/create_instance.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/create_slv_array.py
