@@ -142,7 +142,6 @@ class UnitTest(unittest.TestCase):
             mongo_libs.crt_base_cmd(self.mongo, self.prog_name),
             self.results6)
 
-
     def test_ssl_false2(self):
 
         """Function:  test_ssl_false2
