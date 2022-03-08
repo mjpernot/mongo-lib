@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.2.1] - 2022-03-08
+
+
 ## [4.2.0] - 2021-06-22
 - Added SSL connection capability to the Mongo classes.
 
