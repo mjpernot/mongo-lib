@@ -296,15 +296,10 @@ class Server(object):
 
         if not self.conn:
 
-            if self.auth and self.use_arg:
+            if self.auth:
                 self.conn = pymongo.MongoClient(
                     self.conn_list, username=self.user,
                     authSource=self.auth_db, **self.config)
-
-            elif self.auth and self.use_uri:
-                uri = "mongodb://" + self.user + ":" + self.japd + "@" \
-                      + self.host + ":" + str(self.port)
-                self.conn = pymongo.MongoClient(uri)
 
             else:
                 self.conn = pymongo.MongoClient(self.host, self.port)
@@ -1199,24 +1194,14 @@ class RepSet(Rep):
 
         if not self.conn:
 
-            if self.auth and self.use_arg:
+            if self.auth:
                 self.conn = pymongo.MongoClient(
                     connections, username=self.user, authSource=self.auth_db,
                     replicaSet=self.repset, **self.config)
 
-            elif self.auth and self.use_uri:
-                repset_str = ""
-
-                if self.repset:
-                    repset_str = "/?replicaSet=" + self.repset
-
-                uri = "mongodb://" + self.user + ":" + self.japd + "@" \
-                      + connections + repset_str
-                self.conn = pymongo.MongoClient(uri)
-
             else:
-                self.conn = pymongo.MongoClient(connections,
-                                                replicaSet=self.repset)
+                self.conn = pymongo.MongoClient(
+                    connections, replicaSet=self.repset)
 
         status, errmsg = self.get_srv_attr()
 

@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.2.1] - 2022-03-08
+### Changed
+- mongo_class.Server.connect, mongo_class.RepSet.connect: Removed the uri connection capability.
+- mongo_libs.create_cmd: Changed cmds_gen.add_cmd to gen_libs.add_cmd and cmds_gen.is_add_cmd to gen_libs.is_add_cmd.
+
+
 ## [4.2.0] - 2021-06-22
 - Added SSL connection capability to the Mongo classes.
 

@@ -28,7 +28,6 @@ import json
 # Local
 import lib.arg_parser as arg_parser
 import lib.gen_libs as gen_libs
-import lib.cmds_gen as cmds_gen
 import mongo_class
 import version
 
@@ -108,10 +107,10 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
 
     # Process required arguments.
     for arg in list(kwargs.get("req_arg", [])):
-        cmd = cmds_gen.add_cmd(cmd, arg=arg)
+        cmd = gen_libs.add_cmd(cmd, arg=arg)
 
     # Process optional arguments.
-    return cmds_gen.is_add_cmd(args_array, cmd,
+    return gen_libs.is_add_cmd(args_array, cmd,
                                dict(kwargs.get("opt_arg", {})))
 
 

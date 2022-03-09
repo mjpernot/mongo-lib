@@ -54,8 +54,6 @@ class UnitTest(unittest.TestCase):
         test_uri_repset
         test_auth_arg2
         test_auth_arg
-        test_auth_uri2
-        test_auth_uri
         test_auth_true2
         test_auth_true
         test_no_auth2
@@ -95,8 +93,6 @@ class UnitTest(unittest.TestCase):
         self.repset_hosts = "host1:27017, host2:27107"
         self.db_auth = None
         self.conf_file = "Conf_File"
-        self.use_uri = True
-        self.use_arg = True
         self.connections = ["mongo1:27017", "mongo2:27017", "mongo3:27017"]
         self.conn = "Mongo_Connection"
         self.errmsg = "Error Message"
@@ -356,49 +352,6 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, auth=True, use_arg=True)
-
-        self.assertEqual(mongo.connect(), (True, None))
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_auth_uri2(self, mock_get, mock_mongo):
-
-        """Function:  test_auth_uri2
-
-        Description:  Test with auth and uri present.
-
-        Arguments:
-
-        """
-
-        mock_get.return_value = (True, None)
-        mock_mongo.return_value = self.conn
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, auth=True, use_uri=True)
-        mongo.connect()
-
-        self.assertTrue(mongo.use_uri)
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_auth_uri(self, mock_get, mock_mongo):
-
-        """Function:  test_auth_uri
-
-        Description:  Test with auth and uri present.
-
-        Arguments:
-
-        """
-
-        mock_get.return_value = (True, None)
-        mock_mongo.return_value = self.conn
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, auth=True, use_uri=True)
 
         self.assertEqual(mongo.connect(), (True, None))
 
