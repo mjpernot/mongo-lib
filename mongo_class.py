@@ -296,15 +296,10 @@ class Server(object):
 
         if not self.conn:
 
-            if self.auth and self.use_arg:
+            if self.auth:
                 self.conn = pymongo.MongoClient(
                     self.conn_list, username=self.user,
                     authSource=self.auth_db, **self.config)
-
-            elif self.auth and self.use_uri:
-                uri = "mongodb://" + self.user + ":" + self.japd + "@" \
-                      + self.host + ":" + str(self.port)
-                self.conn = pymongo.MongoClient(uri)
 
             else:
                 self.conn = pymongo.MongoClient(self.host, self.port)
