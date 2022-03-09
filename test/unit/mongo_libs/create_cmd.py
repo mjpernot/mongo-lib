@@ -200,8 +200,8 @@ class UnitTest(unittest.TestCase):
                                                opt_arg=self.opt_arg),
                          self.result)
 
-    @mock.patch("mongo_libs.cmds_gen.is_add_cmd")
-    @mock.patch("mongo_libs.cmds_gen.add_cmd")
+    @mock.patch("mongo_libs.gen_libs.is_add_cmd")
+    @mock.patch("mongo_libs.gen_libs.add_cmd")
     @mock.patch("mongo_libs.crt_base_cmd")
     @mock.patch("mongo_libs.arg_parser.arg_set_path")
     def test_default(self, mock_arg, mock_cmd, mock_add, mock_is_add):
