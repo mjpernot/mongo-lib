@@ -6,7 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [4.2.1] - 2022-03-08
 ### Changed
-- mongo_libs.crt_coll_inst:  Refactored function.
+- mongo_libs.crt_coll_inst, mongo_libs.create_instance:  Refactored function.
 - mongo_libs: Remove use_arg and use_uri from all Mongo library functions.
 - mongo_class: Removed use_arg and use_uri attributes from all Mongo classes.
 - mongo_class.Server.connect, mongo_class.RepSet.connect: Removed the uri connection capability.
