@@ -278,30 +278,16 @@ def crt_coll_inst(cfg, dbs, tbl):
 
     """
 
-    auth_db = "admin"
-    auth_mech = "SCRAM-SHA-1"
-    ssl_client_ca = None
-    ssl_client_cert = None
-    ssl_client_key = None
-    ssl_client_phrase = None
-
-    if hasattr(cfg, "auth_db"):
-        auth_db = cfg.auth_db
-
-    if hasattr(cfg, "auth_mech"):
-        auth_mech = cfg.auth_mech
-
-    if hasattr(cfg, "ssl_client_ca"):
-        ssl_client_ca = cfg.ssl_client_ca
-
-    if hasattr(cfg, "ssl_client_cert"):
-        ssl_client_cert = cfg.ssl_client_cert
-
-    if hasattr(cfg, "ssl_client_key"):
-        ssl_client_key = cfg.ssl_client_key
-
-    if hasattr(cfg, "ssl_client_phrase"):
-        ssl_client_phrase = cfg.ssl_client_phrase
+    auth_db = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
+    auth_mech = cfg.auth_mech if hasattr(cfg, "auth_mech") else "SCRAM-SHA-1"
+    ssl_client_ca = cfg.ssl_client_ca if hasattr(
+        cfg, "ssl_client_ca") else None
+    ssl_client_cert = cfg.ssl_client_cert if hasattr(
+        cfg, "ssl_client_cert") else None
+    ssl_client_key = cfg.ssl_client_key if hasattr(
+        cfg, "ssl_client_key") else None
+    ssl_client_phrase = cfg.ssl_client_phrase if hasattr(
+        cfg, "ssl_client_phrase") else None
 
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
