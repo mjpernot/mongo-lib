@@ -42,18 +42,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_arg_no_repset2
-        test_arg_no_repset
-        test_arg_repset2
-        test_arg_repset
-        test_fail_get_srv_attr2
+        test_repset
         test_fail_get_srv_attr
-        test_uri_no_repset2
-        test_uri_no_repset
-        test_uri_repset2
-        test_uri_repset
-        test_auth_arg2
-        test_auth_arg
+        test_no_repset
+        test_arg
         test_auth_true2
         test_auth_true
         test_no_auth2
@@ -99,33 +91,11 @@ class UnitTest(unittest.TestCase):
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_arg_no_repset2(self, mock_get, mock_mongo):
+    def test_repset(self, mock_get, mock_mongo):
 
-        """Function:  test_arg_no_repset2
+        """Function:  test_repset
 
-        Description:  Test with uri and no repset present.
-
-        Arguments:
-
-        """
-
-        mock_get.return_value = (True, None)
-        mock_mongo.return_value = self.conn
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset2, auth=True, use_arg=True)
-        mongo.connect()
-
-        self.assertTrue(mongo.use_arg)
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_arg_no_repset(self, mock_get, mock_mongo):
-
-        """Function:  test_arg_no_repset
-
-        Description:  Test with arg and no repset present.
+        Description:  Test with repset present.
 
         Arguments:
 
@@ -136,74 +106,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset2, auth=True, use_arg=True)
+            repset=self.repset, auth=True)
 
         self.assertEqual(mongo.connect(), (True, None))
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_arg_repset2(self, mock_get, mock_mongo):
-
-        """Function:  test_arg_repset2
-
-        Description:  Test with arg and repset present.
-
-        Arguments:
-
-        """
-
-        mock_get.return_value = (True, None)
-        mock_mongo.return_value = self.conn
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, auth=True, use_arg=True)
-        mongo.connect()
-
-        self.assertTrue(mongo.use_arg)
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_arg_repset(self, mock_get, mock_mongo):
-
-        """Function:  test_arg_repset
-
-        Description:  Test with arg and repset present.
-
-        Arguments:
-
-        """
-
-        mock_get.return_value = (True, None)
-        mock_mongo.return_value = self.conn
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, auth=True, use_arg=True)
-
-        self.assertEqual(mongo.connect(), (True, None))
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_fail_get_srv_attr2(self, mock_get, mock_mongo):
-
-        """Function:  test_fail_get_srv_attr2
-
-        Description:  Test with failed get_srv_attr call.
-
-        Arguments:
-
-        """
-
-        mock_get.return_value = (False, self.errmsg)
-        mock_mongo.return_value = self.conn
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, auth=True, use_uri=True)
-        mongo.connect()
-
-        self.assertTrue(mongo.use_uri)
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
@@ -222,39 +127,17 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, auth=True, use_uri=True)
+            repset=self.repset, auth=True)
 
         self.assertEqual(mongo.connect(), (False, self.errmsg))
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_uri_no_repset2(self, mock_get, mock_mongo):
+    def test_no_repset(self, mock_get, mock_mongo):
 
-        """Function:  test_uri_no_repset2
+        """Function:  test_no_repset
 
-        Description:  Test with uri and no repset present.
-
-        Arguments:
-
-        """
-
-        mock_get.return_value = (True, None)
-        mock_mongo.return_value = self.conn
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset2, auth=True, use_uri=True)
-        mongo.connect()
-
-        self.assertTrue(mongo.use_uri)
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_uri_no_repset(self, mock_get, mock_mongo):
-
-        """Function:  test_uri_no_repset
-
-        Description:  Test with uri and no repset present.
+        Description:  Test with no repset present.
 
         Arguments:
 
@@ -265,39 +148,17 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset2, auth=True, use_uri=True)
+            repset=self.repset2, auth=True)
 
         self.assertEqual(mongo.connect(), (True, None))
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_uri_repset2(self, mock_get, mock_mongo):
+    def test_arg(self, mock_get, mock_mongo):
 
-        """Function:  test_uri_repset2
+        """Function:  test_arg
 
-        Description:  Test with uri and repset present.
-
-        Arguments:
-
-        """
-
-        mock_get.return_value = (True, None)
-        mock_mongo.return_value = self.conn
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, auth=True, use_uri=True)
-        mongo.connect()
-
-        self.assertTrue(mongo.use_uri)
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_uri_repset(self, mock_get, mock_mongo):
-
-        """Function:  test_uri_repset
-
-        Description:  Test with uri and repset present.
+        Description:  Test with arg present.
 
         Arguments:
 
@@ -308,50 +169,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSet(
             self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, auth=True, use_uri=True)
-
-        self.assertEqual(mongo.connect(), (True, None))
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_auth_arg2(self, mock_get, mock_mongo):
-
-        """Function:  test_auth_arg2
-
-        Description:  Test with auth and arg present.
-
-        Arguments:
-
-        """
-
-        mock_get.return_value = (True, None)
-        mock_mongo.return_value = self.conn
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, auth=True, use_arg=True)
-        mongo.connect()
-
-        self.assertTrue(mongo.use_arg)
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_auth_arg(self, mock_get, mock_mongo):
-
-        """Function:  test_auth_arg
-
-        Description:  Test with auth and arg present.
-
-        Arguments:
-
-        """
-
-        mock_get.return_value = (True, None)
-        mock_mongo.return_value = self.conn
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, auth=True, use_arg=True)
+            repset=self.repset, auth=True)
 
         self.assertEqual(mongo.connect(), (True, None))
 
