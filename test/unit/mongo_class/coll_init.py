@@ -96,10 +96,6 @@ class UnitTest(unittest.TestCase):
         test_config_attr
         test_using_no_auth_db
         test_using_auth_db
-        test_no_using_arg
-        test_using_arg
-        test_no_auth_uri
-        test_auth_uri
         test_auth_false
         test_auth_true
         test_no_auth
@@ -129,8 +125,6 @@ class UnitTest(unittest.TestCase):
         self.dbs = "test"
         self.coll = "coll_name"
         self.db_auth = None
-        self.use_uri = True
-        self.use_arg = True
         self.auth_db = "sysmon"
         self.conn_list = [self.host + ":" + str(self.port)]
         self.conf_file = "Config file"
@@ -1007,70 +1001,6 @@ class UnitTest(unittest.TestCase):
             coll=self.coll, auth_db=self.auth_db)
 
         self.assertEqual(mongo.auth_db, self.auth_db)
-
-    def test_no_using_arg(self):
-
-        """Function:  test_no_using_arg
-
-        Description:  Test with auth and no arg present.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.Coll(
-            self.name, self.user, self.japd, self.host, self.port,
-            coll=self.coll)
-
-        self.assertFalse(mongo.use_arg)
-
-    def test_using_arg(self):
-
-        """Function:  test_using_arg
-
-        Description:  Test with auth and arg present.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.Coll(
-            self.name, self.user, self.japd, self.host, self.port,
-            coll=self.coll, use_arg=self.use_arg)
-
-        self.assertTrue(mongo.use_arg)
-
-    def test_no_auth_uri(self):
-
-        """Function:  test_no_auth_uri
-
-        Description:  Test with auth and no uri present.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.Coll(
-            self.name, self.user, self.japd, self.host, self.port,
-            coll=self.coll)
-
-        self.assertFalse(mongo.use_uri)
-
-    def test_auth_uri(self):
-
-        """Function:  test_auth_uri
-
-        Description:  Test with auth and uri present.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.Coll(
-            self.name, self.user, self.japd, self.host, self.port,
-            coll=self.coll, use_uri=self.use_uri)
-
-        self.assertTrue(mongo.use_uri)
 
     def test_auth_false(self):
 
