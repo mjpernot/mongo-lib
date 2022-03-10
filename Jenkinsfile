@@ -44,7 +44,6 @@ pipeline {
                 ./test/unit/mongo_class/repsetcoll_coll_find1.py
                 ./test/unit/mongo_class/repsetcoll_coll_options.py
                 ./test/unit/mongo_class/repsetcoll_connect.py
-                ./test/unit/mongo_class/repsetcoll_db_auth.py
                 ./test/unit/mongo_class/repsetcoll_init.py
                 ./test/unit/mongo_class/repsetcoll_ins_doc.py
                 ./test/unit/mongo_class/repset_connect.py

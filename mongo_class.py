@@ -135,8 +135,6 @@ class Server(object):
             (input) kwargs:
                 auth -> True|False - Authentication on.
                 conf_file -> Location of mongo.conf file.
-                use_uri -> True|False - Use uri to conenct to Mongo.
-                use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
                 ssl_client_ca -> SSL certificate authority file.
@@ -169,8 +167,6 @@ class Server(object):
         self.cur_mem = None
         self.max_mem = None
         self.prct_mem = None
-        self.use_uri = kwargs.get("use_uri", False)
-        self.use_arg = kwargs.get("use_arg", False)
         self.conn_list = [self.host + ":" + str(self.port)]
         self.auth_db = kwargs.get("auth_db", "admin")
         self.auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1")
@@ -515,8 +511,6 @@ class DB(Server):
                 db -> Name of database.
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
-                use_uri -> True|False - Use uri to conenct to Mongo.
-                use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
                 ssl_client_ca -> SSL certificate authority file.
@@ -530,8 +524,6 @@ class DB(Server):
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
-            use_uri=kwargs.get("use_uri", False),
-            use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
@@ -710,8 +702,6 @@ class Coll(DB):
                 coll -> Name of collection.
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
-                use_uri -> True|False - Use uri to conenct to Mongo.
-                use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
                 ssl_client_ca -> SSL certificate authority file.
@@ -725,8 +715,6 @@ class Coll(DB):
             name, user, japd, host=host, port=port,
             db=kwargs.get("db", "test"), auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
-            use_uri=kwargs.get("use_uri", False),
-            use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
@@ -885,8 +873,6 @@ class Rep(Server):
             (input) kwargs:
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
-                use_uri -> True|False - Use uri to conenct to Mongo.
-                use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
                 ssl_client_ca -> SSL certificate authority file.
@@ -900,8 +886,6 @@ class Rep(Server):
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
-            use_uri=kwargs.get("use_uri", False),
-            use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
@@ -960,8 +944,6 @@ class MasterRep(Rep):
             (input) kwargs:
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
-                use_uri -> True|False - Use uri to conenct to Mongo.
-                use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
                 ssl_client_ca -> SSL certificate authority file.
@@ -975,8 +957,6 @@ class MasterRep(Rep):
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
-            use_arg=kwargs.get("use_arg", False),
-            use_uri=kwargs.get("use_uri", False),
             auth_db=kwargs.get("auth_db", "admin"),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
@@ -1050,8 +1030,6 @@ class SlaveRep(Rep):
             (input) kwargs:
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
-                use_uri -> True|False - Use uri to conenct to Mongo.
-                use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
                 ssl_client_ca -> SSL certificate authority file.
@@ -1065,8 +1043,6 @@ class SlaveRep(Rep):
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
-            use_uri=kwargs.get("use_uri", False),
-            use_arg=kwargs.get("use_arg", False),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             auth_db=kwargs.get("auth_db", "admin"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
@@ -1143,8 +1119,6 @@ class RepSet(Rep):
                 repset -> Replication Set name.
                 conf_file -> Location of mongo.conf file.
                 repset_hosts -> Repset hosts:ports.
-                use_uri -> True|False - Use uri to conenct to Mongo.
-                use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
                 ssl_client_ca -> SSL certificate authority file.
@@ -1159,8 +1133,6 @@ class RepSet(Rep):
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
             auth_db=kwargs.get("auth_db", "admin"),
-            use_uri=kwargs.get("use_uri", False),
-            use_arg=kwargs.get("use_arg", False),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
@@ -1219,7 +1191,6 @@ class RepSetColl(RepSet):
     Methods:
         __init__
         connect
-        _db_auth
         ins_doc
         coll_cnt
         coll_del_many
@@ -1251,8 +1222,6 @@ class RepSetColl(RepSet):
                 db -> Name of database.
                 coll -> Name of collection.
                 db_auth -> None or name of authentication database.
-                use_uri -> True|False - Use uri to conenct to Mongo.
-                use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
                 ssl_client_ca -> SSL certificate authority file.
@@ -1268,8 +1237,6 @@ class RepSetColl(RepSet):
             conf_file=kwargs.get("conf_file", None),
             repset=kwargs.get("repset", None),
             repset_hosts=kwargs.get("repset_hosts", None),
-            use_uri=kwargs.get("use_uri", False),
-            use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
@@ -1323,37 +1290,6 @@ class RepSetColl(RepSet):
                                                 replicaSet=self.repset)
 
         status, errmsg = self.get_srv_attr()
-
-        return status, errmsg
-
-    def _db_auth(self):
-
-        """Method:  _db_auth
-
-        Description:  Database authentication.  Private function for connect.
-
-        Arguments:
-            (output) status -> True|False - Connection successful.
-            (output) errmsg -> Error message if connection failed.
-
-        """
-
-        status = True
-        errmsg = None
-
-        try:
-            self.db_auth_conn = self.db_conn.authenticate(self.user, self.japd)
-            self.db_coll = self.conn[self.db][self.coll]
-
-        except pymongo.errors.ServerSelectionTimeoutError:
-            self.disconnect()
-            status = False
-            errmsg = "Error:  Server not detected."
-
-        except pymongo.errors.OperationFailure as msg:
-            self.disconnect()
-            status = False
-            errmsg = "Error: Auth flag/login params is incorrect: %s" % msg
 
         return status, errmsg
 

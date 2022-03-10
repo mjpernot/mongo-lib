@@ -6,8 +6,17 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [4.2.1] - 2022-03-08
 ### Changed
+- mongo_libs.crt_coll_inst, mongo_libs.create_instance:  Refactored function.
+- mongo_libs: Remove use_arg and use_uri from all Mongo library functions.
+- mongo_class: Removed use_arg and use_uri attributes from all Mongo classes.
 - mongo_class.Server.connect, mongo_class.RepSet.connect: Removed the uri connection capability.
 - mongo_libs.create_cmd: Changed cmds_gen.add_cmd to gen_libs.add_cmd and cmds_gen.is_add_cmd to gen_libs.is_add_cmd.
+
+### Deprecated
+- mongo_libs.create_slv_array:  Not required.
+
+### Removed
+- mongo_class.RepSetColl.\_db_auth method
 
 
 ## [4.2.0] - 2021-06-22
