@@ -12,6 +12,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class.Server.connect, mongo_class.RepSet.connect: Removed the uri connection capability.
 - mongo_libs.create_cmd: Changed cmds_gen.add_cmd to gen_libs.add_cmd and cmds_gen.is_add_cmd to gen_libs.is_add_cmd.
 
+### Deprecated
+- mongo_libs.create_slv_array:  Not required.
+
 ### Removed
 - mongo_class.RepSetColl.\_db_auth method
 
