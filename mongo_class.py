@@ -1191,7 +1191,6 @@ class RepSetColl(RepSet):
     Methods:
         __init__
         connect
-        _db_auth
         ins_doc
         coll_cnt
         coll_del_many
@@ -1291,37 +1290,6 @@ class RepSetColl(RepSet):
                                                 replicaSet=self.repset)
 
         status, errmsg = self.get_srv_attr()
-
-        return status, errmsg
-
-    def _db_auth(self):
-
-        """Method:  _db_auth
-
-        Description:  Database authentication.  Private function for connect.
-
-        Arguments:
-            (output) status -> True|False - Connection successful.
-            (output) errmsg -> Error message if connection failed.
-
-        """
-
-        status = True
-        errmsg = None
-
-        try:
-            self.db_auth_conn = self.db_conn.authenticate(self.user, self.japd)
-            self.db_coll = self.conn[self.db][self.coll]
-
-        except pymongo.errors.ServerSelectionTimeoutError:
-            self.disconnect()
-            status = False
-            errmsg = "Error:  Server not detected."
-
-        except pymongo.errors.OperationFailure as msg:
-            self.disconnect()
-            status = False
-            errmsg = "Error: Auth flag/login params is incorrect: %s" % msg
 
         return status, errmsg
 
