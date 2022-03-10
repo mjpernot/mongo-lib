@@ -141,8 +141,6 @@ def create_instance(cfg_file, dir_path, class_name):
     """
 
     auth_db = "admin"
-    use_arg = False
-    use_uri = False
     auth_mech = "SCRAM-SHA-1"
     ssl_client_ca = None
     ssl_client_cert = None
@@ -155,12 +153,6 @@ def create_instance(cfg_file, dir_path, class_name):
 
     if hasattr(cfg, "auth_mech"):
         auth_mech = cfg.auth_mech
-
-    if hasattr(cfg, "use_arg"):
-        use_arg = cfg.use_arg
-
-    if hasattr(cfg, "use_uri"):
-        use_uri = cfg.use_uri
 
     if hasattr(cfg, "ssl_client_ca"):
         ssl_client_ca = cfg.ssl_client_ca
@@ -177,9 +169,9 @@ def create_instance(cfg_file, dir_path, class_name):
     return class_name(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         auth=cfg.auth, conf_file=cfg.conf_file, auth_db=auth_db,
-        use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech,
-        ssl_client_ca=ssl_client_ca, ssl_client_cert=ssl_client_cert,
-        ssl_client_key=ssl_client_key, ssl_client_phrase=ssl_client_phrase)
+        auth_mech=auth_mech, ssl_client_ca=ssl_client_ca,
+        ssl_client_cert=ssl_client_cert, ssl_client_key=ssl_client_key,
+        ssl_client_phrase=ssl_client_phrase)
 
 
 def create_slv_array(cfg_array):
