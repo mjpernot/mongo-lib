@@ -98,8 +98,6 @@ class Cfg2(object):
         self.conf_file = "conf_file"
         self.repset_hosts = repset_hosts
         self.db_auth = "db_name"
-        self.use_uri = False
-        self.use_arg = True
         self.auth_db = "mydatabase"
         self.auth_mech = "SCRAM-SHA-1"
         self.ssl_client_ca = None
@@ -139,8 +137,6 @@ class Cfg3(object):
         self.conf_file = "conf_file"
         self.repset_hosts = repset_hosts
         self.db_auth = "db_name"
-        self.use_uri = False
-        self.use_arg = True
         self.auth_db = "mydatabase"
         self.auth_mech = "SCRAM-SHA-1"
         self.ssl_client_ca = "CAFile"
@@ -347,7 +343,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_coll_new_attrs2
 
-        Description:  Test with new use_uri, use_arg, and auth_db attrs.
+        Description:  Test with auth_db attrs.
 
         Arguments:
 
@@ -363,7 +359,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_repsetcoll_new_attrs2
 
-        Description:  Test with new use_uri, use_arg, and auth_db attrs.
+        Description:  Test with auth_db attrs.
 
         Arguments:
 
@@ -379,7 +375,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_coll_new_attrs
 
-        Description:  Test with new use_uri, use_arg, and auth_db attrs.
+        Description:  Test with auth_db attrs.
 
         Arguments:
 
@@ -395,7 +391,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_repsetcoll_new_attrs
 
-        Description:  Test with new use_uri, use_arg, and auth_db attrs.
+        Description:  Test with auth_db attrs.
 
         Arguments:
 
