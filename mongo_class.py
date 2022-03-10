@@ -1050,8 +1050,6 @@ class SlaveRep(Rep):
             (input) kwargs:
                 auth -> True|False - Authenication on.
                 conf_file -> Location of mongo.conf file.
-                use_uri -> True|False - Use uri to conenct to Mongo.
-                use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
                 ssl_client_ca -> SSL certificate authority file.
@@ -1065,8 +1063,6 @@ class SlaveRep(Rep):
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
-            use_uri=kwargs.get("use_uri", False),
-            use_arg=kwargs.get("use_arg", False),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             auth_db=kwargs.get("auth_db", "admin"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
