@@ -1143,8 +1143,6 @@ class RepSet(Rep):
                 repset -> Replication Set name.
                 conf_file -> Location of mongo.conf file.
                 repset_hosts -> Repset hosts:ports.
-                use_uri -> True|False - Use uri to conenct to Mongo.
-                use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
                 ssl_client_ca -> SSL certificate authority file.
@@ -1159,8 +1157,6 @@ class RepSet(Rep):
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
             auth_db=kwargs.get("auth_db", "admin"),
-            use_uri=kwargs.get("use_uri", False),
-            use_arg=kwargs.get("use_arg", False),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
