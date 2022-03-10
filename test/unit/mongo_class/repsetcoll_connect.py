@@ -499,8 +499,6 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(mongo.connect(), (True, None))
 
-    @mock.patch("mongo_class.RepSetColl._db_auth",
-                mock.Mock(return_value=(True, None)))
     @mock.patch("mongo_class.Server.get_srv_attr",
                 mock.Mock(return_value=(True, None)))
     @mock.patch("mongo_class.pymongo.MongoClient")
