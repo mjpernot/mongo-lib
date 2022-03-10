@@ -73,8 +73,8 @@ def add_ssl_cmd(mongo, cmd_list):
 
             if mongo.config.get(KEY3 + KEY1 + KEY4):
                 cmd_list.append(
-                    "--sslPEMKeyPass" + KEY2 + "="
-                    + mongo.config.get(KEY3 + KEY1 + KEY4))
+                    "--sslPEMKeyPass" + KEY2 + "=" +
+                    mongo.config.get(KEY3 + KEY1 + KEY4))
 
     return cmd_list
 
@@ -102,8 +102,9 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
     """
 
     args_array = dict(args_array)
-    cmd = crt_base_cmd(mongo, arg_parser.arg_set_path(args_array, path_opt)
-                       + prog_name, **kwargs)
+    cmd = crt_base_cmd(
+        mongo, arg_parser.arg_set_path(args_array, path_opt) + prog_name,
+        **kwargs)
 
     # Process required arguments.
     for arg in list(kwargs.get("req_arg", [])):
@@ -225,8 +226,8 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     # Use repset name for connection
     elif kwargs.get("use_repset", False) and mongo.repset:
-        host_port = HOST + mongo.repset + "/" + mongo.host + ":" \
-                    + str(mongo.port)
+        host_port = HOST + mongo.repset + "/" + mongo.host + ":" + str(
+            mongo.port)
 
     # Assume just host and port
     else:
