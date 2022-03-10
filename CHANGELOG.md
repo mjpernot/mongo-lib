@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [4.2.1] - 2022-03-08
 ### Changed
+- mongo_class.RepSetColl.\_\_init\_\_: Removed use_arg and use_uri attributes.
 - mongo_class.Server.connect, mongo_class.RepSet.connect: Removed the uri connection capability.
 - mongo_libs.create_cmd: Changed cmds_gen.add_cmd to gen_libs.add_cmd and cmds_gen.is_add_cmd to gen_libs.is_add_cmd.
 

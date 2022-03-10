@@ -1251,8 +1251,6 @@ class RepSetColl(RepSet):
                 db -> Name of database.
                 coll -> Name of collection.
                 db_auth -> None or name of authentication database.
-                use_uri -> True|False - Use uri to conenct to Mongo.
-                use_arg -> True|False - Use arguments to connect to Mongo.
                 auth_db -> Authentication database name.
                 auth_mech -> Authentication mechanism for connecting.
                 ssl_client_ca -> SSL certificate authority file.
@@ -1268,8 +1266,6 @@ class RepSetColl(RepSet):
             conf_file=kwargs.get("conf_file", None),
             repset=kwargs.get("repset", None),
             repset_hosts=kwargs.get("repset_hosts", None),
-            use_uri=kwargs.get("use_uri", False),
-            use_arg=kwargs.get("use_arg", False),
             auth_db=kwargs.get("auth_db", "admin"),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
