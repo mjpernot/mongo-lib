@@ -90,7 +90,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            port=self.cfg.port, db=self.database,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
@@ -111,7 +111,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            port=self.cfg.port, db=self.database,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
@@ -131,8 +131,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, db=self.database, coll=self.coll,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
@@ -157,8 +156,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, db=self.database, coll=self.coll,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
@@ -179,8 +177,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, db=self.database, coll=self.coll,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
@@ -201,8 +198,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, db=self.database, coll=self.coll,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
@@ -211,10 +207,9 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertEqual(
-            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
-             mongo.use_arg),
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
-             self.cfg.port, self.cfg.use_arg))
+             self.cfg.port))
 
     def test_auth_uri2(self):
 
@@ -228,9 +223,8 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=False, auth_db=True, conf_file=self.cfg.conf_file,
-            db=self.database, coll=self.coll,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=True,
+            conf_file=self.cfg.conf_file, db=self.database, coll=self.coll,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
@@ -238,10 +232,9 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertEqual(
-            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
-             mongo.use_uri),
+            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
-             self.cfg.port, self.cfg.use_uri))
+             self.cfg.port))
 
     def test_auth_uri(self):
 
@@ -255,9 +248,8 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=False, auth_db=True, conf_file=self.cfg.conf_file,
-            db=self.database, coll=self.coll,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=True,
+            conf_file=self.cfg.conf_file, db=self.database, coll=self.coll,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
@@ -277,8 +269,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, db=self.database, coll=self.coll,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
@@ -303,8 +294,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, db=self.database, coll=self.coll,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
@@ -326,7 +316,6 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, db=self.database, coll=self.coll,
-            use_arg=self.cfg.use_arg,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
@@ -351,7 +340,6 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, db=self.database, coll=self.coll,
-            use_arg=self.cfg.use_arg,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
@@ -372,7 +360,6 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, db=self.database, coll=self.coll,
-            use_arg=self.cfg.use_arg,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
@@ -394,7 +381,6 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, db=self.database, coll=self.coll,
-            use_arg=self.cfg.use_arg,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
