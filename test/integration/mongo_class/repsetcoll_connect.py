@@ -54,7 +54,7 @@ class UnitTest(unittest.TestCase):
         test_auth_uri2
         test_auth_uri
         test_auth_arg2
-        test_auth_arg
+        test_auth
         test_auth_false
         test_fail_get_srv_attr2
         test_fail_get_srv_attr
@@ -106,10 +106,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
-            db=self.dbs)
+            port=self.cfg.port, auth=True, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
+            coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
         mongo.connect()
 
         self.assertTrue(mongo.db_auth, self.cfg.auth_db)
@@ -126,10 +125,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
-            db=self.dbs)
+            port=self.cfg.port, auth=True, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
+            coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -145,10 +143,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
-            db=self.dbs)
+            port=self.cfg.port, auth=True, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
+            coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
         mongo.connect()
 
         self.assertTrue(mongo.coll, self.coll)
@@ -165,10 +162,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
-            db=self.dbs)
+            port=self.cfg.port, auth=True, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
+            coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -184,9 +180,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db)
+            port=self.cfg.port, auth=True, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
+            coll=self.coll, db_auth=self.cfg.auth_db)
         mongo.connect()
 
         self.assertTrue(mongo.db, "test")
@@ -203,9 +199,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db)
+            port=self.cfg.port, auth=True, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
+            coll=self.coll, db_auth=self.cfg.auth_db)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -221,10 +217,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
-            db=self.dbs)
+            port=self.cfg.port, auth=True, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
+            coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
         mongo.connect()
 
         self.assertTrue(mongo.db, self.dbs)
@@ -241,38 +236,17 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
-            db=self.dbs)
+            port=self.cfg.port, auth=True, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
+            coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
 
         self.assertEqual(mongo.connect(), (True, None))
 
-    def test_auth_uri2(self):
+    def test_auth(self):
 
-        """Function:  test_auth_uri2
+        """Function:  test_auth
 
-        Description:  Test with auth and uri present.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.RepSetColl(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_uri=True,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
-            db=self.dbs)
-        mongo.connect()
-
-        self.assertTrue(mongo.use_uri)
-
-    def test_auth_uri(self):
-
-        """Function:  test_auth_uri
-
-        Description:  Test with auth and uri present.
+        Description:  Test with auth.
 
         Arguments:
 
@@ -280,49 +254,9 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_uri=True,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
-            db=self.dbs)
-
-        self.assertEqual(mongo.connect(), (True, None))
-
-    def test_auth_arg2(self):
-
-        """Function:  test_auth_arg2
-
-        Description:  Test with auth and arg present.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.RepSetColl(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
-            db=self.dbs)
-        mongo.connect()
-
-        self.assertTrue(mongo.use_arg)
-
-    def test_auth_arg(self):
-
-        """Function:  test_auth_arg
-
-        Description:  Test with auth and arg present.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.RepSetColl(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=True, use_arg=self.cfg.use_arg,
-            auth_db=self.cfg.auth_db, conf_file=self.cfg.conf_file,
-            repset=self.cfg.repset, coll=self.coll, db_auth=self.cfg.auth_db,
-            db=self.dbs)
+            port=self.cfg.port, auth=True, auth_db=self.cfg.auth_db,
+            conf_file=self.cfg.conf_file, repset=self.cfg.repset,
+            coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -338,8 +272,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=None, db=self.dbs)
 
@@ -357,8 +290,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
@@ -380,8 +312,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
 
@@ -399,8 +330,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
@@ -419,8 +349,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
 
@@ -438,8 +367,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
@@ -458,8 +386,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
 
@@ -477,8 +404,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
@@ -497,8 +423,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
 
@@ -516,8 +441,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
@@ -537,8 +461,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=False,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
@@ -557,8 +480,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
 
@@ -580,8 +502,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
 
@@ -600,8 +521,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             repset_hosts=self.cfg.repset_hosts, coll=self.coll,
             db_auth=self.db_auth, db=self.dbs)
@@ -625,8 +545,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             repset_hosts=self.cfg.repset_hosts, coll=self.coll,
             db_auth=self.db_auth, db=self.dbs)
@@ -645,8 +564,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
@@ -669,8 +587,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
 
