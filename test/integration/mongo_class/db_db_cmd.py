@@ -67,7 +67,7 @@ class UnitTest(unittest.TestCase):
         self.tbl_name = "system.users"
         self.mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, db=self.database, use_arg=self.cfg.use_arg,
+            port=self.cfg.port, db=self.database,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
