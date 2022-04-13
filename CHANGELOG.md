@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.2.1] - 2022-03-08
+- Upgraded python-lib to v2.8.6
+
 ### Changed
 - mongo_libs.crt_coll_inst, mongo_libs.create_instance:  Refactored function.
 - mongo_libs: Remove use_arg and use_uri from all Mongo library functions.
