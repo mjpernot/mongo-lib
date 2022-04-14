@@ -70,8 +70,7 @@ class UnitTest(unittest.TestCase):
         self.coll = "system.users"
         self.mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=self.cfg.use_uri, auth=self.cfg.auth,
-            use_arg=self.cfg.use_arg, auth_db=self.cfg.auth_db,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, db=self.database, coll=self.coll,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
