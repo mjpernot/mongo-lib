@@ -102,10 +102,6 @@ class UnitTest(unittest.TestCase):
         test_config_attr
         test_default_auth_db
         test_using_auth_db
-        test_default_arg
-        test_using_arg
-        test_default_uri
-        test_using_uri
         test_default
 
     """
@@ -1138,70 +1134,6 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, auth_db=self.cfg.auth_db)
 
         self.assertEqual(mongo.auth_db, self.cfg.auth_db)
-
-    def test_default_arg(self):
-
-        """Function:  test_default_arg
-
-        Description:  Test using the default arg setting.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.RepSetColl(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port)
-
-        self.assertFalse(mongo.use_arg)
-
-    def test_using_arg(self):
-
-        """Function:  test_using_arg
-
-        Description:  Test using the arg connection.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.RepSetColl(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_arg=self.cfg.use_arg)
-
-        self.assertTrue(mongo.use_arg)
-
-    def test_default_uri(self):
-
-        """Function:  test_default_uri
-
-        Description:  Test using the default uri setting.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.RepSetColl(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port)
-
-        self.assertFalse(mongo.use_uri)
-
-    def test_using_uri(self):
-
-        """Function:  test_using_uri
-
-        Description:  Test using the uri connection.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.RepSetColl(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=True)
-
-        self.assertTrue(mongo.use_uri)
 
     def test_default(self):
 

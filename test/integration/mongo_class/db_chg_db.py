@@ -75,8 +75,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_arg=self.cfg.use_arg,
-            ssl_client_ca=self.cfg.ssl_client_ca,
+            port=self.cfg.port, ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
@@ -97,8 +96,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_arg=self.cfg.use_arg,
-            ssl_client_ca=self.cfg.ssl_client_ca,
+            port=self.cfg.port, ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
@@ -119,8 +117,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_arg=self.cfg.use_arg,
-            ssl_client_ca=self.cfg.ssl_client_ca,
+            port=self.cfg.port, ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
@@ -141,8 +138,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_arg=self.cfg.use_arg,
-            ssl_client_ca=self.cfg.ssl_client_ca,
+            port=self.cfg.port, ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)

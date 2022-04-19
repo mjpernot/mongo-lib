@@ -93,8 +93,6 @@ class Cfg2(object):
         self.port = 27017
         self.auth = True
         self.conf_file = "conf_file"
-        self.use_uri = False
-        self.use_arg = True
         self.auth_db = "mydatabase"
         self.auth_mech = "SCRAM-SHA-1"
         self.ssl_client_ca = None
@@ -134,8 +132,6 @@ class Cfg3(object):
         self.conf_file = "conf_file"
         self.repset_hosts = repset_hosts
         self.db_auth = "db_name"
-        self.use_uri = False
-        self.use_arg = True
         self.auth_db = "mydatabase"
         self.auth_mech = "SCRAM-SHA-1"
         self.ssl_client_ca = "CAFile"
@@ -194,14 +190,10 @@ class UnitTest(unittest.TestCase):
         self.port = 27017
         self.auth = True
         self.conf_file = "conf_file"
-        self.use_uri = False
-        self.use_arg = False
         self.auth_db = "admin"
         self.cfg = Cfg()
         self.cfg2 = Cfg2()
         self.cfg3 = Cfg3()
-        self.use_uri2 = False
-        self.use_arg2 = True
         self.auth_db2 = "mydatabase"
         self.auth_meth = "SCRAM-SHA-1"
         self.ssl_client_ca = "CAFile"
@@ -218,8 +210,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg3
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.MasterRep)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.MasterRep)
 
         self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
@@ -235,8 +227,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg3
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.Server)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
 
         self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
 
@@ -252,8 +244,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg2
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.MasterRep)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.MasterRep)
 
         self.assertFalse(mongo.ssl_client_ca)
 
@@ -269,8 +261,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg2
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.Server)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
 
         self.assertFalse(mongo.ssl_client_ca)
 
@@ -286,8 +278,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.MasterRep)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.MasterRep)
 
         self.assertFalse(mongo.ssl_client_ca)
 
@@ -303,8 +295,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.Server)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
 
         self.assertFalse(mongo.ssl_client_ca)
 
@@ -320,8 +312,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg2
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.MasterRep)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.MasterRep)
 
         self.assertEqual(mongo.auth_mech, self.cfg2.auth_mech)
 
@@ -337,8 +329,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg2
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.Server)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
 
         self.assertEqual(mongo.auth_mech, self.cfg2.auth_mech)
 
@@ -354,8 +346,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.MasterRep)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.MasterRep)
 
         self.assertEqual(mongo.auth_mech, self.auth_meth)
 
@@ -371,8 +363,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.Server)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
 
         self.assertEqual(mongo.auth_mech, self.auth_meth)
 
@@ -381,76 +373,68 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_new_attributes4
 
-        Description:  Test with new use_uri, use_arg, and auth_db attributes.
+        Description:  Test with auth_db attributes.
 
         Arguments:
 
         """
 
         mock_load.return_value = self.cfg2
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.MasterRep)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.MasterRep)
 
-        self.assertEqual(
-            (mongo.use_uri, mongo.use_arg, mongo.auth_db),
-            (self.use_uri2, self.use_arg2, self.auth_db2))
+        self.assertEqual(mongo.auth_db, self.auth_db2)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_new_attributes3(self, mock_load):
 
         """Function:  test_new_attributes3
 
-        Description:  Test with new use_uri, use_arg, and auth_db attributes.
+        Description:  Test with kauth_db attributes.
 
         Arguments:
 
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.MasterRep)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.MasterRep)
 
-        self.assertEqual(
-            (mongo.use_uri, mongo.use_arg, mongo.auth_db),
-            (self.use_uri, self.use_arg, self.auth_db))
+        self.assertEqual(mongo.auth_db, self.auth_db)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_new_attributes2(self, mock_load):
 
         """Function:  test_new_attributes2
 
-        Description:  Test with new use_uri, use_arg, and auth_db attributes.
+        Description:  Test with auth_db attributes.
 
         Arguments:
 
         """
 
         mock_load.return_value = self.cfg2
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.Server)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
 
-        self.assertEqual(
-            (mongo.use_uri, mongo.use_arg, mongo.auth_db),
-            (self.use_uri2, self.use_arg2, self.auth_db2))
+        self.assertEqual(mongo.auth_db, self.auth_db2)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_new_attributes(self, mock_load):
 
         """Function:  test_new_attributes
 
-        Description:  Test with new use_uri, use_arg, and auth_db attributes.
+        Description:  Test with auth_db attributes.
 
         Arguments:
 
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.Server)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
 
-        self.assertEqual(
-            (mongo.use_uri, mongo.use_arg, mongo.auth_db),
-            (self.use_uri, self.use_arg, self.auth_db))
+        self.assertEqual(mongo.auth_db, self.auth_db)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_repsetcoll_instance(self, mock_load):
@@ -464,8 +448,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.RepSetColl)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.RepSetColl)
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -485,8 +469,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.RepSet)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.RepSet)
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -506,8 +490,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.SlaveRep)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.SlaveRep)
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -527,8 +511,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.MasterRep)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.MasterRep)
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -548,8 +532,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.Rep)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Rep)
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -569,8 +553,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.Coll)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Coll)
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -590,8 +574,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.DB)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.DB)
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
@@ -611,8 +595,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_load.return_value = self.cfg
-        mongo = mongo_libs.create_instance("cfg_file", "dir_path",
-                                           mongo_class.Server)
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,

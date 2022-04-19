@@ -99,10 +99,7 @@ class UnitTest(unittest.TestCase):
         test_db_not_passed
         test_db_passed2
         test_db_passed
-        test_auth_uri2
-        test_auth_uri
-        test_auth_arg2
-        test_auth_arg
+        test_auth
         test_auth_false
         test_fail_get_srv_attr2
         test_fail_get_srv_attr
@@ -144,8 +141,6 @@ class UnitTest(unittest.TestCase):
         self.repset = "mongo_repset"
         self.repset_hosts = "host1:27017, host2:27107"
         self.conf_file = "Conf_File"
-        self.use_uri = True
-        self.use_arg = True
         self.connections = ["mongo1:27017", "mongo2:27017", "mongo3:27017"]
         self.conn = "Mongo_Connection"
         self.conn2 = {"db_name": RepSetColl(), "test": {"coll_name": True}}
@@ -172,8 +167,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri,
-            auth_mech=self.auth_mech2)
+            db=self.dbs, auth=True, auth_mech=self.auth_mech2)
         mongo.connect()
 
         self.assertEqual(mongo.auth_mech, self.auth_mech2)
@@ -197,8 +191,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri,
-            auth_mech=self.auth_mech2)
+            db=self.dbs, auth=True, auth_mech=self.auth_mech2)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -221,8 +214,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri,
-            auth_mech=self.auth_mech)
+            db=self.dbs, auth=True, auth_mech=self.auth_mech)
         mongo.connect()
 
         self.assertEqual(mongo.auth_mech, self.auth_mech)
@@ -246,8 +238,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri,
-            auth_mech=self.auth_mech)
+            db=self.dbs, auth=True, auth_mech=self.auth_mech)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -270,7 +261,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri)
+            db=self.dbs, auth=True)
         mongo.connect()
 
         self.assertEqual(mongo.auth_mech, self.auth_mech)
@@ -294,7 +285,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri)
+            db=self.dbs, auth=True)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -317,7 +308,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri)
+            db=self.dbs, auth=True)
         mongo.connect()
 
         self.assertEqual(mongo.db_auth, self.db_auth)
@@ -341,7 +332,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri)
+            db=self.dbs, auth=True)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -364,7 +355,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri)
+            db=self.dbs, auth=True)
         mongo.connect()
 
         self.assertEqual(mongo.coll, self.coll)
@@ -388,7 +379,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri)
+            db=self.dbs, auth=True)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -411,7 +402,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            auth=True, use_uri=self.use_uri)
+            auth=True)
         mongo.connect()
 
         self.assertEqual(mongo.db, "test")
@@ -435,7 +426,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            auth=True, use_uri=self.use_uri)
+            auth=True)
 
         self.assertEqual(mongo.connect(), (True, None))
 
@@ -458,7 +449,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            auth=True, use_uri=self.use_uri, db=self.dbn)
+            auth=True, db=self.dbn)
         mongo.connect()
 
         self.assertEqual(mongo.db, self.dbn)
@@ -482,41 +473,18 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            auth=True, use_uri=self.use_uri, db=self.dbn)
+            auth=True, db=self.dbn)
 
         self.assertEqual(mongo.connect(), (True, None))
 
     @mock.patch("mongo_class.Server.get_srv_attr",
                 mock.Mock(return_value=(True, None)))
     @mock.patch("mongo_class.pymongo.MongoClient")
-    def test_auth_uri2(self, mock_mongo):
+    def test_auth(self, mock_mongo):
 
-        """Function:  test_auth_uri2
+        """Function:  test_auth
 
-        Description:  Test with auth and uri present.
-
-        Arguments:
-
-        """
-
-        mock_mongo.return_value = {"db_name": RepSetColl(),
-                                   "test": {"coll_name": True}}
-        mongo = mongo_class.RepSetColl(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri)
-        mongo.connect()
-
-        self.assertEqual((mongo.use_uri), (True))
-
-    @mock.patch("mongo_class.Server.get_srv_attr",
-                mock.Mock(return_value=(True, None)))
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    def test_auth_uri(self, mock_mongo):
-
-        """Function:  test_auth_uri
-
-        Description:  Test with auth and uri present.
+        Description:  Test with auth present.
 
         Arguments:
 
@@ -527,57 +495,10 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.RepSetColl(
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_uri=self.use_uri)
+            db=self.dbs, auth=True)
 
         self.assertEqual(mongo.connect(), (True, None))
 
-    @mock.patch("mongo_class.Server.get_srv_attr",
-                mock.Mock(return_value=(True, None)))
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    def test_auth_arg2(self, mock_mongo):
-
-        """Function:  test_auth_arg2
-
-        Description:  Test with auth and arg present.
-
-        Arguments:
-
-        """
-
-        mock_mongo.return_value = {"db_name": RepSetColl(),
-                                   "test": {"coll_name": True}}
-        mongo = mongo_class.RepSetColl(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_arg=self.use_arg)
-        mongo.connect()
-
-        self.assertEqual((mongo.use_arg), (True))
-
-    @mock.patch("mongo_class.Server.get_srv_attr",
-                mock.Mock(return_value=(True, None)))
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    def test_auth_arg(self, mock_mongo):
-
-        """Function:  test_auth_arg
-
-        Description:  Test with auth and arg present.
-
-        Arguments:
-
-        """
-
-        mock_mongo.return_value = {"db_name": RepSetColl(),
-                                   "test": {"coll_name": True}}
-        mongo = mongo_class.RepSetColl(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, use_arg=self.use_arg)
-
-        self.assertEqual(mongo.connect(), (True, None))
-
-    @mock.patch("mongo_class.RepSetColl._db_auth",
-                mock.Mock(return_value=(True, None)))
     @mock.patch("mongo_class.Server.get_srv_attr",
                 mock.Mock(return_value=(True, None)))
     @mock.patch("mongo_class.pymongo.MongoClient")
