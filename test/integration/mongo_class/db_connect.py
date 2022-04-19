@@ -166,7 +166,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_auth
 
-        Description:  Test with uri present.
+        Description:  Test with auth present.
 
         Arguments:
 
@@ -174,7 +174,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=self.cfg.auth, auth_db=True,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,

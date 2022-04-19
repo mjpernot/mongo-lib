@@ -51,9 +51,6 @@ class UnitTest(unittest.TestCase):
         test_db_not_passed
         test_db_passed2
         test_db_passed
-        test_auth_uri2
-        test_auth_uri
-        test_auth_arg2
         test_auth
         test_auth_false
         test_fail_get_srv_attr2
