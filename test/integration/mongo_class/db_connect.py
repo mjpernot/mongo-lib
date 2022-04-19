@@ -42,6 +42,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_db_attr2
+        test_db_attr
         test_fail_get_srv_attr2
         test_fail_get_srv_attr
         test_auth
@@ -180,7 +182,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertEqual(mongo.connect(), (False, self.errmsg2))
+        self.assertEqual(mongo.connect(), (True, None))
 
     def test_no_auth2(self):
 
