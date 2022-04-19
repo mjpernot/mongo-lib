@@ -98,10 +98,6 @@ class UnitTest(unittest.TestCase):
         test_config_attr
         test_default_auth_db
         test_using_auth_db
-        test_default_arg
-        test_using_arg
-        test_default_uri
-        test_using_uri
         test_default
 
     """
