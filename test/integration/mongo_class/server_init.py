@@ -93,10 +93,6 @@ class UnitTest(unittest.TestCase):
         test_config_attr
         test_using_no_auth_db
         test_using_auth_db
-        test_no_using_arg
-        test_using_arg
-        test_no_auth_uri
-        test_using_uri
         test_auth_false
         test_auth_true
         test_default
@@ -926,70 +922,6 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, auth_db=self.cfg.auth_db)
 
         self.assertEqual(mongo.auth_db, self.cfg.auth_db)
-
-    def test_no_using_arg(self):
-
-        """Function:  test_no_using_arg
-
-        Description:  Test with auth and no arg present.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.Server(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port)
-
-        self.assertFalse(mongo.use_arg)
-
-    def test_using_arg(self):
-
-        """Function:  test_using_arg
-
-        Description:  Test using the arg connection.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.Server(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_arg=self.cfg.use_arg)
-
-        self.assertTrue(mongo.use_arg)
-
-    def test_no_auth_uri(self):
-
-        """Function:  test_no_auth_uri
-
-        Description:  Test with auth and no uri present.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.Server(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port)
-
-        self.assertFalse(mongo.use_uri)
-
-    def test_using_uri(self):
-
-        """Function:  test_using_uri
-
-        Description:  Test using the uri connection.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.Server(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, use_uri=True)
-
-        self.assertTrue(mongo.use_uri)
 
     def test_auth_false(self):
 

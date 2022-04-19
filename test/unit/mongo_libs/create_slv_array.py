@@ -74,15 +74,13 @@ class UnitTest(unittest.TestCase):
                       "conf_file": "conf_file"},
                      {"name": "name", "user": "user", "japd": "userpd",
                       "host": "host", "port": 27017, "auth": True,
-                      "conf_file": "conf_file", "auth_db": "admin",
-                      "use_uri": False, "use_arg": True}]
+                      "conf_file": "conf_file", "auth_db": "admin"}]
         self.cfg3 = [{"name": "name", "user": "user", "japd": "userpd",
                       "host": "host", "port": 27017, "auth": True,
                       "conf_file": "conf_file", "mech_auth": "SCRAM-SHA-1"},
                      {"name": "name", "user": "user", "japd": "userpd",
                       "host": "host", "port": 27017, "auth": True,
                       "conf_file": "conf_file", "auth_db": "admin",
-                      "use_uri": False, "use_arg": True,
                       "mech_auth": "SCRAM-SHA-1"}]
 
     @mock.patch("mongo_libs.mongo_class.SlaveRep")
@@ -120,7 +118,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_new_attributes
 
-        Description:  Test with new use_uri, use_arg, and auth_db attributes.
+        Description:  Test with auth_db attributes.
 
         Arguments:
 

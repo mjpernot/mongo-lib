@@ -9,7 +9,7 @@ pipeline {
         stage('Test') {
             steps {
                 dir ('lib') {
-                    git branch: "master", credentialsId: "2cfb403c-be21-4fac-94d7-c8cd5c531feb", url: "https://gitlab.code.dicelab.net/JAC-IDM/python-lib.git"
+                    git branch: "mod/286", credentialsId: "2cfb403c-be21-4fac-94d7-c8cd5c531feb", url: "https://gitlab.code.dicelab.net/JAC-IDM/python-lib.git"
                 }
                 sh """
                 virtualenv test_env
@@ -44,7 +44,6 @@ pipeline {
                 ./test/unit/mongo_class/repsetcoll_coll_find1.py
                 ./test/unit/mongo_class/repsetcoll_coll_options.py
                 ./test/unit/mongo_class/repsetcoll_connect.py
-                ./test/unit/mongo_class/repsetcoll_db_auth.py
                 ./test/unit/mongo_class/repsetcoll_init.py
                 ./test/unit/mongo_class/repsetcoll_ins_doc.py
                 ./test/unit/mongo_class/repset_connect.py
@@ -113,6 +112,11 @@ pipeline {
                     server.upload(uploadSpec)
                 }
             }
+        }
+    }
+    post {
+        always {
+            cleanWs disableDeferredWipeout: true
         }
     }
 }

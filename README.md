@@ -8,7 +8,6 @@
 ###  This README file is broken down into the following sections:
  * Prerequisites
    - FIPS Environment
-   - SSL Usage
  * Installation
    - Pip Installation
  * Testing
@@ -24,35 +23,28 @@
     - python-devel
 
   * List of local packages that need to be installed within the program structure.
-    - lib/arg_parser
-    - lib/gen_libs
-    - lib/cmds_gen
+    - python-lib
 
-  * FIPS Environment
-    If operating in a FIPS 104-2 environment, this package will require at least a minimum of pymongo==3.8.0 or better.  It will also require a manual change to the auth.py module in the pymongo package.  See below for changes to auth.py.
+  * FIPS Environment:  If operating in a FIPS 104-2 environment, this package will require at least a minimum of pymongo==3.8.0 or better.  It will also require a manual change to the auth.py module in the pymongo package.  See below for changes to auth.py.
     - Locate the auth.py file python installed packages on the system in the pymongo package directory.
     - Edit the file and locate the \_password_digest function.
     - In the \_password_digest function there is an line that should match: "md5hash = hashlib.md5()".  Change it to "md5hash = hashlib.md5(usedforsecurity=False)".
     - Lastly, it will require the configuration file entry auth_mech to be set to: SCRAM-SHA-1 or SCRAM-SHA-256.
 
-  * SSL Usage
-    -  The use of SSL arguments will only be applicable when using the "use_arg" option.  URI connections are not able to use the SSL arguments in the connection.
-
 
 # Installation:
 
 ### Pip Installation:
-  * Replace **{Python_Project}** with the baseline path of the python program.
-  * Replace **{Other_Python_Project}** with the baseline path of another python program.
+  * From here on out, any reference to **{Python_Project}** or **PYTHON_PROJECT** replace with the baseline path of the python program and any reference to **{Other_Python_Project}** with the baseline path of another python program.
 
 ##### Create requirements file in another program's project to install mongo-lib as a library module.
 
-Create requirements-mongo-lib.txt and requirements-python-lib.txt files:
+Create requirements-mongo-lib.txt and requirements-mongo-python-lib.txt files:
 
 ```
 cd {Python_Project}
-cp requirements-mongo-lib.txt > {Other_Python_Project}/requirements-mongo-lib.txt
-cp requirements-python-lib.txt > {Other_Python_Project}/requirements-python-lib.txt
+cp requirements-mongo-lib.txt {Other_Python_Project}/requirements-mongo-lib.txt
+cp requirements-python-lib.txt {Other_Python_Project}/requirements-mongo-python-lib.txt
 ```
 
 ##### Modify the other program's README.md file to add the pip commands under the "Install supporting classes and libraries" section.
@@ -60,8 +52,8 @@ cp requirements-python-lib.txt > {Other_Python_Project}/requirements-python-lib.
 Modify the {Other_Python_Project}/README.md file:
 
 ```
-   pip install -r requirements-mongo-lib.txt --target mongo_lib --trusted-host pypi.appdev.proj.coe.ic.gov
-   pip install -r requirements-python-lib.txt --target mongo_lib/lib --trusted-host pypi.appdev.proj.coe.ic.gov
+pip install -r requirements-mongo-lib.txt --target mongo_lib --trusted-host pypi.appdev.proj.coe.ic.gov
+pip install -r requirements-mongo-python-lib.txt --target mongo_lib/lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 ##### Add the general Mongo-Lib requirements to the other program's requirements.txt file.  Remove any duplicates.
@@ -82,7 +74,6 @@ simplejson==2.0.9
 ### Installation:
 
 Install general Mongo libraries and classes using git.
-  * Replace **{Python_Project}** with the baseline path of the python program.
 
 ```
 cd {Python_Project}
@@ -106,7 +97,6 @@ pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appd
 ```
 
 ### Testing:
-  * Replace **{Python_Project}** with the baseline path of the python program.
 
 ```
 cd {Python_Project}/mongo-lib
@@ -123,29 +113,11 @@ test/unit/mongodb_lib/code_coverage.sh
 
 # Integration Testing:
 
-NOTE:  Part of the Integration testing will require access to a Mongo database server which is part of a replica set.  If this is not the case, then do not run this part of the testing.
+NOTE:  Part of the Integration testing will require access to a Mongo database server which is part of a replica set.  If this is not the case, then do not run the Mongo Replica part of the testing.
 
 ### Installation:
 
-Install the project using git.
-  * Replace **{Python_Project}** with the baseline path of the python program.
-  * Replace **{Branch_Name}** with the name of the Git branch being tested.  See Git Merge Request.
-
-```
-umask 022
-cd {Python_Project}
-git clone --branch {Branch_Name} git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/mongo-lib.git
-```
-
-Install/upgrade system modules.
-
-```
-cd mongo-lib
-sudo bash
-umask 022
-pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
-exit
-```
+Install the project using the procedures in the Installation section under Unit Testing.
 
 ### Configuration:
 

@@ -28,7 +28,6 @@ import json
 # Local
 import lib.arg_parser as arg_parser
 import lib.gen_libs as gen_libs
-import lib.cmds_gen as cmds_gen
 import mongo_class
 import version
 
@@ -74,8 +73,8 @@ def add_ssl_cmd(mongo, cmd_list):
 
             if mongo.config.get(KEY3 + KEY1 + KEY4):
                 cmd_list.append(
-                    "--sslPEMKeyPass" + KEY2 + "="
-                    + mongo.config.get(KEY3 + KEY1 + KEY4))
+                    "--sslPEMKeyPass" + KEY2 + "=" +
+                    mongo.config.get(KEY3 + KEY1 + KEY4))
 
     return cmd_list
 
@@ -103,15 +102,16 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
     """
 
     args_array = dict(args_array)
-    cmd = crt_base_cmd(mongo, arg_parser.arg_set_path(args_array, path_opt)
-                       + prog_name, **kwargs)
+    cmd = crt_base_cmd(
+        mongo, arg_parser.arg_set_path(args_array, path_opt) + prog_name,
+        **kwargs)
 
     # Process required arguments.
     for arg in list(kwargs.get("req_arg", [])):
-        cmd = cmds_gen.add_cmd(cmd, arg=arg)
+        cmd = gen_libs.add_cmd(cmd, arg=arg)
 
     # Process optional arguments.
-    return cmds_gen.is_add_cmd(args_array, cmd,
+    return gen_libs.is_add_cmd(args_array, cmd,
                                dict(kwargs.get("opt_arg", {})))
 
 
@@ -141,46 +141,24 @@ def create_instance(cfg_file, dir_path, class_name):
 
     """
 
-    auth_db = "admin"
-    use_arg = False
-    use_uri = False
-    auth_mech = "SCRAM-SHA-1"
-    ssl_client_ca = None
-    ssl_client_cert = None
-    ssl_client_key = None
-    ssl_client_phrase = None
     cfg = gen_libs.load_module(cfg_file, dir_path)
-
-    if hasattr(cfg, "auth_db"):
-        auth_db = cfg.auth_db
-
-    if hasattr(cfg, "auth_mech"):
-        auth_mech = cfg.auth_mech
-
-    if hasattr(cfg, "use_arg"):
-        use_arg = cfg.use_arg
-
-    if hasattr(cfg, "use_uri"):
-        use_uri = cfg.use_uri
-
-    if hasattr(cfg, "ssl_client_ca"):
-        ssl_client_ca = cfg.ssl_client_ca
-
-    if hasattr(cfg, "ssl_client_cert"):
-        ssl_client_cert = cfg.ssl_client_cert
-
-    if hasattr(cfg, "ssl_client_key"):
-        ssl_client_key = cfg.ssl_client_key
-
-    if hasattr(cfg, "ssl_client_phrase"):
-        ssl_client_phrase = cfg.ssl_client_phrase
+    auth_db = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
+    auth_mech = cfg.auth_mech if hasattr(cfg, "auth_mech") else "SCRAM-SHA-1"
+    ssl_client_ca = cfg.ssl_client_ca if hasattr(
+        cfg, "ssl_client_ca") else None
+    ssl_client_cert = cfg.ssl_client_cert if hasattr(
+        cfg, "ssl_client_cert") else None
+    ssl_client_key = cfg.ssl_client_key if hasattr(
+        cfg, "ssl_client_key") else None
+    ssl_client_phrase = cfg.ssl_client_phrase if hasattr(
+        cfg, "ssl_client_phrase") else None
 
     return class_name(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         auth=cfg.auth, conf_file=cfg.conf_file, auth_db=auth_db,
-        use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech,
-        ssl_client_ca=ssl_client_ca, ssl_client_cert=ssl_client_cert,
-        ssl_client_key=ssl_client_key, ssl_client_phrase=ssl_client_phrase)
+        auth_mech=auth_mech, ssl_client_ca=ssl_client_ca,
+        ssl_client_cert=ssl_client_cert, ssl_client_key=ssl_client_key,
+        ssl_client_phrase=ssl_client_phrase)
 
 
 def create_slv_array(cfg_array):
@@ -201,15 +179,12 @@ def create_slv_array(cfg_array):
 
     for slv in cfg_array:
         auth_db = slv.get("auth_db", "admin")
-        use_uri = slv.get("use_uri", False)
-        use_arg = slv.get("use_arg", False)
         auth_mech = slv.get("auth_mech", "SCRAM-SHA-1")
 
         slave_inst = mongo_class.SlaveRep(
             slv["name"], slv["user"], slv["japd"], host=slv["host"],
             port=int(slv["port"]), auth=slv["auth"],
-            conf_file=slv["conf_file"], auth_db=auth_db, use_arg=use_arg,
-            use_uri=use_uri, auth_mech=auth_mech)
+            conf_file=slv["conf_file"], auth_db=auth_db, auth_mech=auth_mech)
 
         slaves.append(slave_inst)
 
@@ -251,8 +226,8 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     # Use repset name for connection
     elif kwargs.get("use_repset", False) and mongo.repset:
-        host_port = HOST + mongo.repset + "/" + mongo.host + ":" \
-                    + str(mongo.port)
+        host_port = HOST + mongo.repset + "/" + mongo.host + ":" + str(
+            mongo.port)
 
     # Assume just host and port
     else:
@@ -290,38 +265,16 @@ def crt_coll_inst(cfg, dbs, tbl):
 
     """
 
-    auth_db = "admin"
-    use_arg = False
-    use_uri = False
-    auth_mech = "SCRAM-SHA-1"
-    ssl_client_ca = None
-    ssl_client_cert = None
-    ssl_client_key = None
-    ssl_client_phrase = None
-
-    if hasattr(cfg, "auth_db"):
-        auth_db = cfg.auth_db
-
-    if hasattr(cfg, "use_arg"):
-        use_arg = cfg.use_arg
-
-    if hasattr(cfg, "use_uri"):
-        use_uri = cfg.use_uri
-
-    if hasattr(cfg, "auth_mech"):
-        auth_mech = cfg.auth_mech
-
-    if hasattr(cfg, "ssl_client_ca"):
-        ssl_client_ca = cfg.ssl_client_ca
-
-    if hasattr(cfg, "ssl_client_cert"):
-        ssl_client_cert = cfg.ssl_client_cert
-
-    if hasattr(cfg, "ssl_client_key"):
-        ssl_client_key = cfg.ssl_client_key
-
-    if hasattr(cfg, "ssl_client_phrase"):
-        ssl_client_phrase = cfg.ssl_client_phrase
+    auth_db = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
+    auth_mech = cfg.auth_mech if hasattr(cfg, "auth_mech") else "SCRAM-SHA-1"
+    ssl_client_ca = cfg.ssl_client_ca if hasattr(
+        cfg, "ssl_client_ca") else None
+    ssl_client_cert = cfg.ssl_client_cert if hasattr(
+        cfg, "ssl_client_cert") else None
+    ssl_client_key = cfg.ssl_client_key if hasattr(
+        cfg, "ssl_client_key") else None
+    ssl_client_phrase = cfg.ssl_client_phrase if hasattr(
+        cfg, "ssl_client_phrase") else None
 
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
 
@@ -329,16 +282,16 @@ def crt_coll_inst(cfg, dbs, tbl):
             cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
             auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,
             db=dbs, coll=tbl, db_auth=cfg.db_auth, auth_db=auth_db,
-            use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech,
-            ssl_client_ca=ssl_client_ca, ssl_client_cert=ssl_client_cert,
-            ssl_client_key=ssl_client_key, ssl_client_phrase=ssl_client_phrase)
+            auth_mech=auth_mech, ssl_client_ca=ssl_client_ca,
+            ssl_client_cert=ssl_client_cert, ssl_client_key=ssl_client_key,
+            ssl_client_phrase=ssl_client_phrase)
 
     return mongo_class.Coll(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file,
-        auth_db=auth_db, use_arg=use_arg, use_uri=use_uri, auth_mech=auth_mech,
-        ssl_client_ca=ssl_client_ca, ssl_client_cert=ssl_client_cert,
-        ssl_client_key=ssl_client_key, ssl_client_phrase=ssl_client_phrase)
+        auth_db=auth_db, auth_mech=auth_mech, ssl_client_ca=ssl_client_ca,
+        ssl_client_cert=ssl_client_cert, ssl_client_key=ssl_client_key,
+        ssl_client_phrase=ssl_client_phrase)
 
 
 def disconnect(*args):
