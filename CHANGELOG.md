@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.2.2] - 2022-10-07
+
+
 ## [4.2.1] - 2022-03-08
 - Upgraded python-lib to v2.8.6
 
