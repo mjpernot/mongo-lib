@@ -20,7 +20,7 @@
   * List of Linux packages that need to be installed on the server.
     - git
     - python-pip
-    - python-devel
+    - python-devel (python3-devel if installing for Python 3)
 
   * List of local packages that need to be installed within the program structure.
     - python-lib

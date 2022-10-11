@@ -8,7 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Updated to work in Python 3 too.
 
 ### Changed
-- mongo_class.Server.upd_srv_stat: Converted divisor to a float to force float division.
+- mongo_class.Server.upd_srv_stat: Converted divisor to a float to force float division and closed socket connection.
 
 
 ## [4.2.1] - 2022-03-08

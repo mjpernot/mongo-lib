@@ -216,6 +216,7 @@ class Server(object):
         # Connecting to an UDP address doesn't send packets.
         sock.connect((udp_addr, 0))
         local_ip = sock.getsockname()[0]
+        sock.close()
 
         # Only get System Memory if on local machine.
         if self.host == local_ip or self.host == loopback:
