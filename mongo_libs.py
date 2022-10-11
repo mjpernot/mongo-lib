@@ -17,19 +17,26 @@
 """
 
 # Libraries and Global Variables
+from __future__ import print_function
+from __future__ import absolute_import
 
 # Standard
-# For Python 2.6/2.7: Redirection of stdout in a print command.
-from __future__ import print_function
 
 # Third party
 import json
 
 # Local
-import lib.arg_parser as arg_parser
-import lib.gen_libs as gen_libs
-import mongo_class
-import version
+try:
+    from .lib import gen_libs
+    from .lib import arg_parser
+    from . import mongo_class
+    from . import version
+
+except (ValueError, ImportError) as err:
+    import lib.gen_libs as gen_libs
+    import lib.arg_parser as arg_parser
+    import mongo_class
+    import version
 
 __version__ = version.__version__
 

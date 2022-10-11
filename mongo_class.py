@@ -22,17 +22,23 @@
 """
 
 # Libraries and Global Variables
+from __future__ import print_function
+from __future__ import absolute_import
 
 # Standard
 import time
 import socket
+import psutil
 
 # Third-party
-import psutil
 import pymongo
 
 # Local
-import version
+try:
+    from . import version
+
+except (ValueError, ImportError) as err:
+    import version
 
 __version__ = version.__version__
 
@@ -224,7 +230,7 @@ class Server(object):
             self.max_mem = "Unknown - Remote"
 
         # Days up since last recycle.
-        self.days_up = int(float(self.uptime) / 3600 / 24)
+        self.days_up = int(self.uptime / 3600.0 / 24)
 
         # Total connections and percentage of connections used.
         self.max_conn = self.cur_conn + self.avl_conn
