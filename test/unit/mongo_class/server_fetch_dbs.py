@@ -40,6 +40,7 @@ class FetchAdr(object):
 
     Methods:
         database_names
+        list_database_names
 
     """
 
@@ -48,6 +49,18 @@ class FetchAdr(object):
         """Function:  database_names
 
         Description:  Stub holder for Server.conn.database_names method.
+
+        Arguments:
+
+        """
+
+        return True
+
+    def list_database_names(self):
+
+        """Function:  list_database_names
+
+        Description:  Stub holder for Server.conn.list_database_names method.
 
         Arguments:
 
