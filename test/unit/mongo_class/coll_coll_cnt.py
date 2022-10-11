@@ -41,6 +41,7 @@ class CollCnt(object):
     Methods:
         __init__
         count
+        count_documents
 
     """
 
@@ -60,7 +61,22 @@ class CollCnt(object):
 
         """Function:  count
 
-        Description:  Stub for Coll.coll_cnt method.
+        Description:  Stub for Coll.coll.cnt method.
+
+        Arguments:
+            (input) qry
+
+        """
+
+        self.qry = qry
+
+        return True
+
+    def count_documents(self, qry):
+
+        """Function:  count_documents
+
+        Description:  Stub for Coll.coll.count_documents method.
 
         Arguments:
             (input) qry

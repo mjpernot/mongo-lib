@@ -41,6 +41,7 @@ class DBValidate(object):
     Methods:
         __init__
         collection_names
+        list_collection_names
 
     """
 
@@ -61,6 +62,22 @@ class DBValidate(object):
         """Function:  collection_names
 
         Description:  Stub for DB.db.collection_names method.
+
+        Arguments:
+            (input) include_system_collections -> True|False - Include system
+                tables
+
+        """
+
+        self.include_system_collections = include_system_collections
+
+        return True
+
+    def list_collection_names(self, include_system_collections):
+
+        """Function:  list_collection_names
+
+        Description:  Stub for DB.db.list_collection_names method.
 
         Arguments:
             (input) include_system_collections -> True|False - Include system
