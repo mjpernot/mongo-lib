@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  db_get_tbl_list.py
@@ -42,7 +41,6 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_pass_false2
         test_pass_false
         test_pass_true2
         test_pass_true
@@ -76,20 +74,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
         self.mongo.connect()
         self.mongo.chg_db(self.database)
-
-    def test_pass_false2(self):
-
-        """Function:  test_pass_false2
-
-        Description:  Test pass False to include system tables.
-
-        Arguments:
-
-        """
-
-        db_list = self.mongo.get_tbl_list(False)
-
-        self.assertTrue(self.tbl_name not in db_list)
 
     def test_pass_false(self):
 
