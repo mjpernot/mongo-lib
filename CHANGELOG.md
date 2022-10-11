@@ -8,6 +8,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Updated to work in Python 3 too.
 
 ### Changed
+- mongo_class.Coll.coll_cnt, mongo_class.RepSetColl.coll_cnt:  Replaced deprecated count() with count_documents().
+- mongo_class.DB.get_tbl_list:  Replaced deprecated collection_names() with list_collection_names().
+- mongo_class.Server.fetch_dbs:  Replaced deprecated database_names() with list_database_names().
 - mongo_class.Server.upd_srv_stat: Converted divisor to a float to force float division and closed socket connection.
 
 ### Removed

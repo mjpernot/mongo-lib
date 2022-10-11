@@ -352,7 +352,7 @@ class Server(object):
 
         """
 
-        return self.conn.database_names()
+        return self.conn.list_database_names()
 
     def is_primary(self):
 
@@ -621,7 +621,8 @@ class DB(Server):
 
         """
 
-        return self.db.collection_names(include_system_collections=inc_sys)
+        return self.db.list_collection_names(
+            include_system_collections=inc_sys)
 
     def validate_tbl(self, tbl_name, scan=False):
 
@@ -772,7 +773,7 @@ class Coll(DB):
         if qry is None:
             qry = {}
 
-        return self.coll.count(qry)
+        return self.coll.count_documents(qry)
 
     def coll_find(self, qry=None):
 
@@ -1328,7 +1329,7 @@ class RepSetColl(RepSet):
         if qry is None:
             qry = {}
 
-        return self.db_coll.count(qry)
+        return self.db_coll.count_documents(qry)
 
     def coll_del_many(self, qry=None, override=False):
 

@@ -201,7 +201,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertEqual(mongo.connect(), (False, self.errmsg))
+        self.assertFalse(mongo.connect()[0])
 
 
 if __name__ == "__main__":
