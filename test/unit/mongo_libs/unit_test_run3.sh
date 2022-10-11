@@ -8,7 +8,6 @@ echo "Unit test: mongo_class"
 /usr/bin/python3 ./test/unit/mongo_libs/add_ssl_cmd.py
 /usr/bin/python3 ./test/unit/mongo_libs/create_cmd.py
 /usr/bin/python3 ./test/unit/mongo_libs/create_instance.py
-/usr/bin/python3 ./test/unit/mongo_libs/create_slv_array.py
 /usr/bin/python3 ./test/unit/mongo_libs/crt_base_cmd.py
 /usr/bin/python3 ./test/unit/mongo_libs/crt_coll_inst.py
 /usr/bin/python3 ./test/unit/mongo_libs/disconnect.py

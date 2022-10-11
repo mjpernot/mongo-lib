@@ -8,7 +8,6 @@
         add_ssl_cmd
         create_cmd
         create_instance
-        create_slv_array
         crt_base_cmd
         crt_coll_inst
         disconnect
@@ -166,36 +165,6 @@ def create_instance(cfg_file, dir_path, class_name):
         auth_mech=auth_mech, ssl_client_ca=ssl_client_ca,
         ssl_client_cert=ssl_client_cert, ssl_client_key=ssl_client_key,
         ssl_client_phrase=ssl_client_phrase)
-
-
-def create_slv_array(cfg_array):
-
-    """Function:  create_slv_array
-
-    Description:  Create an array of slave instances from a configuration
-        array.
-
-    Arguments:
-        (input) cfg_array -> List of configurations.
-        (output) slaves -> List of slave instances.
-
-    """
-
-    cfg_array = list(cfg_array)
-    slaves = []
-
-    for slv in cfg_array:
-        auth_db = slv.get("auth_db", "admin")
-        auth_mech = slv.get("auth_mech", "SCRAM-SHA-1")
-
-        slave_inst = mongo_class.SlaveRep(
-            slv["name"], slv["user"], slv["japd"], host=slv["host"],
-            port=int(slv["port"]), auth=slv["auth"],
-            conf_file=slv["conf_file"], auth_db=auth_db, auth_mech=auth_mech)
-
-        slaves.append(slave_inst)
-
-    return slaves
 
 
 def crt_base_cmd(mongo, prog_name, **kwargs):

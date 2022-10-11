@@ -10,6 +10,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Changed
 - mongo_class.Server.upd_srv_stat: Converted divisor to a float to force float division and closed socket connection.
 
+### Removed
+- mongo_libs.create_slv_array
+
 
 ## [4.2.1] - 2022-03-08
 - Upgraded python-lib to v2.8.6
