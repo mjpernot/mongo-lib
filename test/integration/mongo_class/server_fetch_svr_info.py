@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  server_fetch_svr_info.py
@@ -23,8 +22,6 @@ if sys.version_info < (2, 7):
     import unittest2 as unittest
 else:
     import unittest
-
-# Third-party
 
 # Local
 sys.path.append(os.getcwd())

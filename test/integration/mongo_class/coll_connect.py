@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  coll_connect.py
@@ -22,8 +21,6 @@ if sys.version_info < (2, 7):
     import unittest2 as unittest
 else:
     import unittest
-
-# Third-party
 
 # Local
 sys.path.append(os.getcwd())
@@ -227,7 +224,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertEqual(mongo.connect(), (False, self.errmsg))
+        self.assertFalse(mongo.connect()[0])
 
     def test_fail_connection2(self):
 

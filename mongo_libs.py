@@ -8,7 +8,6 @@
         add_ssl_cmd
         create_cmd
         create_instance
-        create_slv_array
         crt_base_cmd
         crt_coll_inst
         disconnect
@@ -17,19 +16,24 @@
 """
 
 # Libraries and Global Variables
+from __future__ import print_function
+from __future__ import absolute_import
 
 # Standard
-# For Python 2.6/2.7: Redirection of stdout in a print command.
-from __future__ import print_function
-
-# Third party
 import json
 
 # Local
-import lib.arg_parser as arg_parser
-import lib.gen_libs as gen_libs
-import mongo_class
-import version
+try:
+    from .lib import gen_libs
+    from .lib import arg_parser
+    from . import mongo_class
+    from . import version
+
+except (ValueError, ImportError) as err:
+    import lib.gen_libs as gen_libs
+    import lib.arg_parser as arg_parser
+    import mongo_class
+    import version
 
 __version__ = version.__version__
 
@@ -159,36 +163,6 @@ def create_instance(cfg_file, dir_path, class_name):
         auth_mech=auth_mech, ssl_client_ca=ssl_client_ca,
         ssl_client_cert=ssl_client_cert, ssl_client_key=ssl_client_key,
         ssl_client_phrase=ssl_client_phrase)
-
-
-def create_slv_array(cfg_array):
-
-    """Function:  create_slv_array
-
-    Description:  Create an array of slave instances from a configuration
-        array.
-
-    Arguments:
-        (input) cfg_array -> List of configurations.
-        (output) slaves -> List of slave instances.
-
-    """
-
-    cfg_array = list(cfg_array)
-    slaves = []
-
-    for slv in cfg_array:
-        auth_db = slv.get("auth_db", "admin")
-        auth_mech = slv.get("auth_mech", "SCRAM-SHA-1")
-
-        slave_inst = mongo_class.SlaveRep(
-            slv["name"], slv["user"], slv["japd"], host=slv["host"],
-            port=int(slv["port"]), auth=slv["auth"],
-            conf_file=slv["conf_file"], auth_db=auth_db, auth_mech=auth_mech)
-
-        slaves.append(slave_inst)
-
-    return slaves
 
 
 def crt_base_cmd(mongo, prog_name, **kwargs):

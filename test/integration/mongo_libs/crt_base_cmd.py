@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  crt_base_cmd.py
@@ -22,8 +21,6 @@ if sys.version_info < (2, 7):
     import unittest2 as unittest
 else:
     import unittest
-
-# Third-party
 
 # Local
 sys.path.append(os.getcwd())
@@ -79,7 +76,6 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd,
             host=self.cfg.host, port=self.cfg.port, auth=self.cfg.auth,
             conf_file=self.cfg.conf_file, auth_db=self.cfg.auth_db,
-            use_arg=self.cfg.use_arg, use_uri=self.cfg.use_uri,
             ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
@@ -88,7 +84,6 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd,
             host=self.cfg.host, port=self.cfg.port, auth=self.cfg.auth,
             conf_file=self.cfg.conf_file, auth_db=self.cfg.auth_db,
-            use_arg=self.cfg.use_arg, use_uri=self.cfg.use_uri,
             repset=self.cfg.repset, ssl_client_ca=self.cfg.ssl_client_ca,
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
