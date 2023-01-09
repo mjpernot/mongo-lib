@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  repsetcoll_coll_cnt.py
@@ -23,8 +22,6 @@ if sys.version_info < (2, 7):
 else:
     import unittest
 
-# Third-party
-
 # Local
 sys.path.append(os.getcwd())
 import mongo_class
@@ -42,6 +39,7 @@ class CollCnt(object):
     Methods:
         __init__
         count
+        count_documents
 
     """
 
@@ -62,6 +60,21 @@ class CollCnt(object):
         """Function:  count
 
         Description:  Stub holder for RepSetColl.db_coll.count method.
+
+        Arguments:
+            (input) qry
+
+        """
+
+        self.qry = qry
+
+        return 10
+
+    def count_documents(self, qry):
+
+        """Function:  count_documents
+
+        Description:  Stub holder for RepSetColl.db_coll.count_documents method
 
         Arguments:
             (input) qry

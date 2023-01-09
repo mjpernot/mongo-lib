@@ -5,10 +5,10 @@
 #   is located at.
 
 echo "Integration test: mongo_libs"
-test/integration/mongo_libs/add_ssl_cmd.py
-test/integration/mongo_libs/create_cmd.py
-test/integration/mongo_libs/create_instance.py
-test/integration/mongo_libs/crt_base_cmd.py
-test/integration/mongo_libs/crt_coll_inst.py
-test/integration/mongo_libs/disconnect.py
+/usr/bin/python ./test/integration/mongo_libs/add_ssl_cmd.py
+/usr/bin/python ./test/integration/mongo_libs/create_cmd.py
+/usr/bin/python ./test/integration/mongo_libs/create_instance.py
+/usr/bin/python ./test/integration/mongo_libs/crt_base_cmd.py
+/usr/bin/python ./test/integration/mongo_libs/crt_coll_inst.py
+/usr/bin/python ./test/integration/mongo_libs/disconnect.py
 

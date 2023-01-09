@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  server_fetch_dbs.py
@@ -23,8 +22,6 @@ if sys.version_info < (2, 7):
 else:
     import unittest
 
-# Third-party
-
 # Local
 sys.path.append(os.getcwd())
 import mongo_class
@@ -41,6 +38,7 @@ class FetchAdr(object):
 
     Methods:
         database_names
+        list_database_names
 
     """
 
@@ -49,6 +47,18 @@ class FetchAdr(object):
         """Function:  database_names
 
         Description:  Stub holder for Server.conn.database_names method.
+
+        Arguments:
+
+        """
+
+        return True
+
+    def list_database_names(self):
+
+        """Function:  list_database_names
+
+        Description:  Stub holder for Server.conn.list_database_names method.
 
         Arguments:
 
