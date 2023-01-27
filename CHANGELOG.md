@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.2.3] - 2023-01-26
+### Fixed
+- mongo_class.Server.upd_srv_stat: Added check for hostname in the system memory check.
 
 
 ## [4.2.2] - 2022-10-07
