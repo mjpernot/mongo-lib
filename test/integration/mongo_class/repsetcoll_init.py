@@ -982,7 +982,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port)
 
-        self.assertEqual(mongo.db, "test")
+        self.assertEqual(mongo.db_name, "test")
 
     def test_db_attr(self):
 
@@ -998,7 +998,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, db=self.dbn)
 
-        self.assertEqual(mongo.db, self.dbn)
+        self.assertEqual(mongo.db_name, self.dbn)
 
     def test_default_conf_file(self):
 

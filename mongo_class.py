@@ -1251,7 +1251,7 @@ class RepSetColl(RepSet):
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
             ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
 
-        self.db = kwargs.get("db", "test")
+        self.db_name = kwargs.get("db", "test")
         self.coll = kwargs.get("coll", None)
         self.db_auth = kwargs.get("db_auth", None)
         self.db_conn = None
@@ -1290,7 +1290,7 @@ class RepSetColl(RepSet):
                     **self.config)
 
                 if self.conn:
-                    self.db_coll = self.conn[self.db][self.coll]
+                    self.db_coll = self.conn[self.db_name][self.coll]
 
             else:
                 self.conn = pymongo.MongoClient(connections,

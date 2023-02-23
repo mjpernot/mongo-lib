@@ -175,7 +175,7 @@ class UnitTest(unittest.TestCase):
             coll=self.coll, db_auth=self.cfg.auth_db)
         mongo.connect()
 
-        self.assertTrue(mongo.db, "test")
+        self.assertTrue(mongo.db_name, "test")
 
     def test_db_not_passed(self):
 
@@ -212,7 +212,7 @@ class UnitTest(unittest.TestCase):
             coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
         mongo.connect()
 
-        self.assertTrue(mongo.db, self.dbs)
+        self.assertTrue(mongo.db_name, self.dbs)
 
     def test_db_passed(self):
 

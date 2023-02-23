@@ -1117,7 +1117,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset, db=self.mydb)
 
-        self.assertEqual(mongo.db, self.mydb)
+        self.assertEqual(mongo.db_name, self.mydb)
 
     def test_no_db_attr(self):
 
@@ -1133,7 +1133,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, self.host, self.port,
             repset=self.repset)
 
-        self.assertEqual(mongo.db, "test")
+        self.assertEqual(mongo.db_name, "test")
 
     def test_conn_list_attr(self):
 
@@ -1215,7 +1215,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
-             mongo.db, mongo.coll, mongo.repset),
+             mongo.db_name, mongo.coll, mongo.repset),
             (self.name, self.user, self.japd, self.host, self.port, self.dbs,
              self.coll, self.repset))
 
