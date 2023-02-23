@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ### Changed
 - mongo_class.RepSetColl:  Changed attribute db to db_name.
+- mongo_class.DB: Changed attribute db to db_inst.
 
 
 ## [4.2.2] - 2022-10-07

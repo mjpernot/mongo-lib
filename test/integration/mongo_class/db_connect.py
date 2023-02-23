@@ -109,7 +109,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
 
-        self.assertTrue(mongo.db)
+        self.assertTrue(mongo.db_inst)
 
     def test_fail_get_srv_attr2(self):
 
@@ -131,7 +131,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
 
-        self.assertFalse(mongo.db)
+        self.assertFalse(mongo.db_inst)
 
     def test_fail_get_srv_attr(self):
 
@@ -242,7 +242,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.connect()
 
-        self.assertFalse(mongo.db)
+        self.assertFalse(mongo.db_inst)
 
     def test_fail_connection(self):
 

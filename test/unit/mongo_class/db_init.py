@@ -813,7 +813,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
 
-        self.assertFalse(mongo.db)
+        self.assertFalse(mongo.db_inst)
 
     def test_no_db_name_attr(self):
 

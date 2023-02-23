@@ -126,7 +126,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
-        mongo.db = DBValidate()
+        mongo.db_inst = DBValidate()
 
         self.assertTrue(mongo.get_tbl_list(True))
 

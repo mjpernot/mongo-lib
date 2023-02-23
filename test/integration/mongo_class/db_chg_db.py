@@ -75,7 +75,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
         mongo.chg_db(self.database)
 
-        self.assertTrue(mongo.db)
+        self.assertTrue(mongo.db_inst)
 
     def test_database_passed(self):
 
@@ -117,7 +117,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
         mongo.chg_db()
 
-        self.assertTrue(mongo.db)
+        self.assertTrue(mongo.db_inst)
 
     def test_no_database(self):
 
