@@ -16,12 +16,7 @@
 # Standard
 import sys
 import os
-
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
-
+import unittest
 import mock
 
 # Local
@@ -65,9 +60,9 @@ class UnitTest(unittest.TestCase):
         self.dbs = "test"
         self.coll = None
         self.db_auth = None
-        self.data = {"uptime": 10, "connections": {"current": 1,
-                                                   "available": 9},
-                     "mem": {"resident": 1000000}}
+        self.data = {
+            "uptime": 10, "connections": {"current": 1, "available": 9},
+            "mem": {"resident": 1000000}}
 
     @mock.patch("mongo_class.Server.adm_cmd")
     def test_remote_host(self, mock_cmd):

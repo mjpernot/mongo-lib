@@ -16,12 +16,7 @@
 # Standard
 import sys
 import os
-
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
-
+import unittest
 import pymongo
 
 # Local
@@ -162,7 +157,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
-        mongo.db = DBValidate2()
+        mongo.db_inst = DBValidate2()
         status, _ = mongo.validate_tbl("tbl", True)
 
         self.assertEqual((status), (False))
@@ -182,7 +177,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
-        mongo.db = DBValidate2()
+        mongo.db_inst = DBValidate2()
         status, msg = mongo.validate_tbl("tbl", True)
 
         self.assertEqual((status, msg._message), (False, "ErrorMsg"))
@@ -199,7 +194,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
-        mongo.db = DBValidate()
+        mongo.db_inst = DBValidate()
 
         self.assertEqual(mongo.validate_tbl("tbl", True),
                          (True, "MessageHere"))
