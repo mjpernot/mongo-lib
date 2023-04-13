@@ -16,12 +16,7 @@
 # Standard
 import sys
 import os
-
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
-
+import unittest
 import mock
 
 # Local
@@ -403,7 +398,7 @@ class UnitTest(unittest.TestCase):
             auth=True)
         mongo.connect()
 
-        self.assertEqual(mongo.db, "test")
+        self.assertEqual(mongo.db_name, "test")
 
     @mock.patch("mongo_class.Server.get_srv_attr",
                 mock.Mock(return_value=(True, None)))
@@ -450,7 +445,7 @@ class UnitTest(unittest.TestCase):
             auth=True, db=self.dbn)
         mongo.connect()
 
-        self.assertEqual(mongo.db, self.dbn)
+        self.assertEqual(mongo.db_name, self.dbn)
 
     @mock.patch("mongo_class.Server.get_srv_attr",
                 mock.Mock(return_value=(True, None)))

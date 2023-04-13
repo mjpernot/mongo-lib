@@ -16,12 +16,7 @@
 # Standard
 import sys
 import os
-
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
-
+import unittest
 import mock
 
 # Local
@@ -108,7 +103,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
 
-        self.assertEqual((mongo.db), (None))
+        self.assertEqual((mongo.db_inst), (None))
 
     @mock.patch("mongo_class.Server.connect",
                 mock.Mock(return_value=(False, "Error Message")))
@@ -142,7 +137,7 @@ class UnitTest(unittest.TestCase):
         mongo.conn = DBConn()
         mongo.db_connect(dbs=None)
 
-        self.assertEqual((mongo.db), ("testdb"))
+        self.assertEqual((mongo.db_inst), ("testdb"))
 
     def test_none_database_passed(self):
 
@@ -175,7 +170,7 @@ class UnitTest(unittest.TestCase):
         mongo.conn = {"testdb": "testdb"}
         mongo.db_connect("testdb")
 
-        self.assertEqual((mongo.db), ("testdb"))
+        self.assertEqual((mongo.db_inst), ("testdb"))
 
     def test_database_passed(self):
 
@@ -208,7 +203,7 @@ class UnitTest(unittest.TestCase):
         mongo.conn = {"test": "testdb"}
         mongo.db_connect()
 
-        self.assertEqual((mongo.db), ("testdb"))
+        self.assertEqual((mongo.db_inst), ("testdb"))
 
     def test_no_database(self):
 
