@@ -16,11 +16,7 @@
 # Standard
 import sys
 import os
-
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
+import unittest
 
 # Local
 sys.path.append(os.getcwd())
@@ -86,7 +82,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.db_connect("testdb")
 
-        self.assertFalse(mongo.db)
+        self.assertFalse(mongo.db_inst)
 
     def test_fail_connection(self):
 
@@ -131,7 +127,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.db_connect(dbs=None)
 
-        self.assertTrue(mongo.db)
+        self.assertTrue(mongo.db_inst)
 
     def test_none_database_passed(self):
 

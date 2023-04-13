@@ -4,8 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.2.3] - 2023-01-26
+### Fixed
+- mongo_class.Server.upd_srv_stat: Added check for hostname in the system memory check.
+
+### Changed
+- mongo_class.RepSetColl:  Changed attribute db to db_name.
+- mongo_class.DB: Changed attribute db to db_inst.
+
+
 ## [4.2.2] - 2022-10-07
-- Updated to work in Python 3 too.
+- Updated to work in Python 3 too
+- Upgraded python-lib to v2.9.4
 
 ### Changed
 - mongo_class.Coll.coll_cnt, mongo_class.RepSetColl.coll_cnt:  Replaced deprecated count() with count_documents().

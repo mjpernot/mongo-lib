@@ -217,7 +217,8 @@ class Server(object):
         sock.close()
 
         # Only get System Memory if on local machine.
-        if self.host == local_ip or self.host == loopback:
+        if self.host in [local_ip, loopback] or \
+           self.name in socket.gethostname():
 
             # Total Memory and percentage of memory used.
             self.avl_sys_mem = psutil.virtual_memory().available
@@ -537,7 +538,7 @@ class DB(Server):
             ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
 
         self.db_name = kwargs.get("db", "test")
-        self.db = None
+        self.db_inst = None
 
     def connect(self):
 
@@ -554,7 +555,7 @@ class DB(Server):
         status, errmsg = super(DB, self).connect()
 
         if status:
-            self.db = self.conn[self.db_name]
+            self.db_inst = self.conn[self.db_name]
 
         return status, errmsg
 
@@ -579,10 +580,10 @@ class DB(Server):
 
         if status:
             if dbs:
-                self.db = self.conn[dbs]
+                self.db_inst = self.conn[dbs]
 
             else:
-                self.db = self.conn.test
+                self.db_inst = self.conn.test
 
         return status, errmsg
 
@@ -599,11 +600,11 @@ class DB(Server):
         """
 
         if dbs:
-            self.db = self.conn[dbs]
+            self.db_inst = self.conn[dbs]
             self.db_name = dbs
 
         else:
-            self.db = self.conn["test"]
+            self.db_inst = self.conn["test"]
             self.db_name = "test"
 
     def get_tbl_list(self, inc_sys=True):
@@ -619,7 +620,7 @@ class DB(Server):
 
         """
 
-        return self.db.list_collection_names(
+        return self.db_inst.list_collection_names(
             include_system_collections=inc_sys)
 
     def validate_tbl(self, tbl_name, scan=False):
@@ -639,7 +640,7 @@ class DB(Server):
         status = True
 
         try:
-            data = self.db.validate_collection(tbl_name, full=scan)
+            data = self.db_inst.validate_collection(tbl_name, full=scan)
 
         except pymongo.errors.OperationFailure as msg:
             status = False
@@ -665,9 +666,9 @@ class DB(Server):
         """
 
         if "obj" in kwargs:
-            return self.db.command(cmd, kwargs["obj"])
+            return self.db_inst.command(cmd, kwargs["obj"])
 
-        return self.db.command(cmd)
+        return self.db_inst.command(cmd)
 
 
 class Coll(DB):
@@ -1250,7 +1251,7 @@ class RepSetColl(RepSet):
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
             ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
 
-        self.db = kwargs.get("db", "test")
+        self.db_name = kwargs.get("db", "test")
         self.coll = kwargs.get("coll", None)
         self.db_auth = kwargs.get("db_auth", None)
         self.db_conn = None
@@ -1289,7 +1290,7 @@ class RepSetColl(RepSet):
                     **self.config)
 
                 if self.conn:
-                    self.db_coll = self.conn[self.db][self.coll]
+                    self.db_coll = self.conn[self.db_name][self.coll]
 
             else:
                 self.conn = pymongo.MongoClient(connections,

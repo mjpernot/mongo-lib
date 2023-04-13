@@ -16,11 +16,7 @@
 # Standard
 import sys
 import os
-
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
+import unittest
 
 # Local
 sys.path.append(os.getcwd())
@@ -79,7 +75,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
         mongo.chg_db(self.database)
 
-        self.assertTrue(mongo.db)
+        self.assertTrue(mongo.db_inst)
 
     def test_database_passed(self):
 
@@ -121,7 +117,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
         mongo.chg_db()
 
-        self.assertTrue(mongo.db)
+        self.assertTrue(mongo.db_inst)
 
     def test_no_database(self):
 

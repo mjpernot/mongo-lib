@@ -16,11 +16,7 @@
 # Standard
 import sys
 import os
-
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
+import unittest
 
 # Local
 sys.path.append(os.getcwd())
@@ -130,7 +126,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
-        mongo.db = DBValidate()
+        mongo.db_inst = DBValidate()
 
         self.assertTrue(mongo.get_tbl_list(True))
 

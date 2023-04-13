@@ -16,11 +16,7 @@
 # Standard
 import sys
 import os
-
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
+import unittest
 
 # Local
 sys.path.append(os.getcwd())
@@ -76,7 +72,7 @@ class UnitTest(unittest.TestCase):
         mongo.conn = {"testdb": "testdb"}
         mongo.chg_db("testdb")
 
-        self.assertEqual((mongo.db, mongo.db_name), ("testdb", "testdb"))
+        self.assertEqual((mongo.db_inst, mongo.db_name), ("testdb", "testdb"))
 
     def test_no_database(self):
 
@@ -93,7 +89,7 @@ class UnitTest(unittest.TestCase):
         mongo.conn = {"test": "testdb"}
         mongo.chg_db()
 
-        self.assertEqual((mongo.db, mongo.db_name), ("testdb", "test"))
+        self.assertEqual((mongo.db_inst, mongo.db_name), ("testdb", "test"))
 
 
 if __name__ == "__main__":
