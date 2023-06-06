@@ -55,8 +55,8 @@ def fetch_cmd_line(mongo):
         command.
 
     Arguments:
-        (input) mongo -> Database instance.
-        (output) -> Returns a document from the getCmdLineOpts command.
+        (input) mongo -> Database instance
+        (output) -> Returns a document from the getCmdLineOpts command
 
     """
 
@@ -70,8 +70,8 @@ def fetch_db_info(mongo):
     Description:  Calls adminstration command to run the listDatabases command.
 
     Arguments:
-        (input) mongo -> Database instance.
-        (output) -> Returns a document from the listDatabases command.
+        (input) mongo -> Database instance
+        (output) -> Returns a document from the listDatabases command
 
     """
 
@@ -85,8 +85,8 @@ def fetch_ismaster(mongo):
     Description:  Calls the adminstration command to run the isMaster command.
 
     Arguments:
-        (input) mongo -> Database instance.
-        (output) -> Returns a document from the isMaster command.
+        (input) mongo -> Database instance
+        (output) -> Returns a document from the isMaster command
 
     """
 
@@ -131,20 +131,20 @@ class Server(object):
         Description:  Initialization of an instance of the Server class.
 
         Arguments:
-            (input) name -> Name of server.
-            (input) user -> User's name.
-            (input) japd -> User's pswd.
-            (input) host -> 'localhost' or host name or IP.
-            (input) port -> '27017' or port for Mongo.
+            (input) name -> Name of server
+            (input) user -> User's name
+            (input) japd -> User's pswd
+            (input) host -> 'localhost' or host name or IP
+            (input) port -> '27017' or port for Mongo
             (input) kwargs:
-                auth -> True|False - Authentication on.
-                conf_file -> Location of mongo.conf file.
-                auth_db -> Authentication database name.
-                auth_mech -> Authentication mechanism for connecting.
-                ssl_client_ca -> SSL certificate authority file.
-                ssl_client_key -> SSL key pem file.
-                ssl_client_cert -> SSL certificate pem file.
-                ssl_client_phrase -> SSL client pass phrase to key file.
+                auth -> True|False - Authentication on
+                conf_file -> Location of mongo.conf file
+                auth_db -> Authentication database name
+                auth_mech -> Authentication mechanism for connecting
+                ssl_client_ca -> SSL certificate authority file
+                ssl_client_key -> SSL key pem file
+                ssl_client_cert -> SSL certificate pem file
+                ssl_client_phrase -> SSL client pass phrase to key file
 
         """
 
@@ -211,12 +211,12 @@ class Server(object):
         # Get local IP address.
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-        # Connecting to an UDP address doesn't send packets.
+        # Connecting to an UDP address doesn't send packets
         sock.connect((udp_addr, 0))
         local_ip = sock.getsockname()[0]
         sock.close()
 
-        # Only get System Memory if on local machine.
+        # Only get System Memory if on local machine
         if self.host in [local_ip, loopback] or \
            self.name in socket.gethostname():
 
@@ -229,10 +229,10 @@ class Server(object):
         else:
             self.max_mem = "Unknown - Remote"
 
-        # Days up since last recycle.
+        # Days up since last recycle
         self.days_up = int(self.uptime / 3600.0 / 24)
 
-        # Total connections and percentage of connections used.
+        # Total connections and percentage of connections used
         self.max_conn = self.cur_conn + self.avl_conn
         self.prct_conn = int(float(self.cur_conn) / self.max_conn * 100)
 
@@ -260,8 +260,8 @@ class Server(object):
         Description:  Exception handling for the upd_server_attr method.
 
         Arguments:
-            (output) status -> True|False - Connection successful.
-            (output) msg -> Error message if connection failed.
+            (output) status -> True|False - Connection successful
+            (output) msg -> Error message if connection failed
 
         """
 
@@ -291,8 +291,8 @@ class Server(object):
             basic server attributes.
 
         Arguments:
-            (output) status -> True|False - Connection successful.
-            (output) msg -> Error message if connection failed.
+            (output) status -> True|False - Connection successful
+            (output) msg -> Error message if connection failed
 
         """
 
@@ -331,10 +331,10 @@ class Server(object):
             Will setup a connection to the database if not already connected.
 
         Arguments:
-            (input) cmd -> Adminstration command.
+            (input) cmd -> Adminstration command
             (input) **kwargs:
-                arg1 -> Name of argument for command to work with.
-            (output) Returns the output of the admin command.
+                arg1 -> Name of argument for command to work with
+            (output) Returns the output of the admin command
 
         """
 
@@ -347,7 +347,7 @@ class Server(object):
         Description:  Get a list of databases in the database server.
 
         Arguments:
-            (output) Returns a list of database names.
+            (output) Returns a list of database names
 
         """
 
@@ -361,7 +361,7 @@ class Server(object):
             primary database in a replica set, otherwise False.
 
         Arguments:
-            (output) Returns True|False.
+            (output) Returns True|False
 
         """
 
@@ -374,7 +374,7 @@ class Server(object):
         Description:  Gets hostname & port from the current database server.
 
         Arguments:
-            (output) Returns a tuple of host and port.
+            (output) Returns a tuple of host and port
 
         """
 
@@ -387,7 +387,7 @@ class Server(object):
         Description:  Returns information about a Mongo database server.
 
         Arguments:
-            (output) Returns a dictionary with the server information.
+            (output) Returns a dictionary with the server information
 
         """
 
@@ -400,7 +400,7 @@ class Server(object):
         Description:  Unlocks a Mongo database server.
 
         Arguments:
-            (output) Returns any output from the unlock command.
+            (output) Returns any output from the unlock command
 
         """
 
@@ -414,8 +414,8 @@ class Server(object):
 
         Arguments:
             (input) **kwargs:
-                lock -> True|False - To lock the database.
-            (output) Returns any output from the lock command.
+                lock -> True|False - To lock the database
+            (output) Returns any output from the lock command
 
         """
 
@@ -429,7 +429,7 @@ class Server(object):
         Description:  Checks to see if the Mongo database is locked.
 
         Arguments:
-            (output) Returns True|False based on the database status.
+            (output) Returns True|False based on the database status
 
         """
 
@@ -508,21 +508,21 @@ class DB(Server):
         Description:  Initialization of an instance of the DB class.
 
         Arguments:
-            (input) name -> Name of server.
-            (input) user -> User's name.
-            (input) japd -> User's pswd.
-            (input) host -> 'localhost' or host name or IP.
-            (input) port -> '27017' or port for Mongo.
+            (input) name -> Name of server
+            (input) user -> User's name
+            (input) japd -> User's pswd
+            (input) host -> 'localhost' or host name or IP
+            (input) port -> '27017' or port for Mongo
             (input) kwargs:
-                db -> Name of database.
-                auth -> True|False - Authenication on.
-                conf_file -> Location of mongo.conf file.
-                auth_db -> Authentication database name.
-                auth_mech -> Authentication mechanism for connecting.
-                ssl_client_ca -> SSL certificate authority file.
-                ssl_client_key -> SSL key pem file.
-                ssl_client_cert -> SSL certificate pem file.
-                ssl_client_phrase -> SSL client pass phrase to key file.
+                db -> Name of database
+                auth -> True|False - Authenication on
+                conf_file -> Location of mongo.conf file
+                auth_db -> Authentication database name
+                auth_mech -> Authentication mechanism for connecting
+                ssl_client_ca -> SSL certificate authority file
+                ssl_client_key -> SSL key pem file
+                ssl_client_cert -> SSL certificate pem file
+                ssl_client_phrase -> SSL client pass phrase to key file
 
         """
 
@@ -547,8 +547,8 @@ class DB(Server):
         Description:  Connect to a Mongo database.
 
         Arguments:
-            (output) status -> True|False - Connection successful.
-            (output) errmsg -> Error message if connection failed.
+            (output) status -> True|False - Connection successful
+            (output) errmsg -> Error message if connection failed
 
         """
 
@@ -566,9 +566,9 @@ class DB(Server):
         Description:  Sets up an instance to a Mongo database.
 
         Arguments:
-            (input) dbs -> Name of database.
-            (output) status -> True|False - Connection successful.
-            (output) errmsg -> Error message if connection failed.
+            (input) dbs -> Name of database
+            (output) status -> True|False - Connection successful
+            (output) errmsg -> Error message if connection failed
 
         """
 
@@ -595,7 +595,7 @@ class DB(Server):
             database passed then will default to test database.
 
         Arguments:
-            (input) dbs -> Name of database.
+            (input) dbs -> Name of database
 
         """
 
@@ -615,8 +615,8 @@ class DB(Server):
             assigned to the database instance.
 
         Arguments:
-            (input) inc_sys = True|False - Include system collections.
-            (output) -> Returns a list of table names.
+            (input) inc_sys = True|False - Include system collections
+            (output) -> Returns a list of table names
 
         """
 
@@ -630,10 +630,10 @@ class DB(Server):
         Description:  Validates a table.
 
         Arguments:
-            (input) tbl_name -> Table name.
-            (input) scan -> True|False - Do full scan of table.
-            (output) status -> True|False - Operation successful.
-            (output) data -> Returns the results of the validate command.
+            (input) tbl_name -> Table name
+            (input) scan -> True|False - Do full scan of table
+            (output) status -> True|False - Operation successful
+            (output) data -> Returns the results of the validate command
 
         """
 
@@ -657,11 +657,11 @@ class DB(Server):
             the command.
 
         Arguments:
-            (input) cmd -> Database command.
+            (input) cmd -> Database command
             (input) **kwargs:
-                obj -> Name of object command will work against.
-                    NOTE:  obj can be a database or collection.
-            (output) Returns the output of the database command.
+                obj -> Name of object command will work against
+                    NOTE:  obj can be a database or collection
+            (output) Returns the output of the database command
 
         """
 
@@ -699,22 +699,22 @@ class Coll(DB):
         Description:  Initialization of an instance of the DB class.
 
         Arguments:
-            (input) name -> Name of server.
-            (input) user -> User's name.
-            (input) japd -> User's pswd.
-            (input) host -> 'localhost' or host name or IP.
-            (input) port -> '27017' or port for Mongo.
+            (input) name -> Name of server
+            (input) user -> User's name
+            (input) japd -> User's pswd
+            (input) host -> 'localhost' or host name or IP
+            (input) port -> '27017' or port for Mongo
             (input) kwargs:
-                db -> Name of database.
-                coll -> Name of collection.
-                auth -> True|False - Authenication on.
-                conf_file -> Location of mongo.conf file.
-                auth_db -> Authentication database name.
-                auth_mech -> Authentication mechanism for connecting.
-                ssl_client_ca -> SSL certificate authority file.
-                ssl_client_key -> SSL key pem file.
-                ssl_client_cert -> SSL certificate pem file.
-                ssl_client_phrase -> SSL client pass phrase to key file.
+                db -> Name of database
+                coll -> Name of collection
+                auth -> True|False - Authenication on
+                conf_file -> Location of mongo.conf file
+                auth_db -> Authentication database name
+                auth_mech -> Authentication mechanism for connecting
+                ssl_client_ca -> SSL certificate authority file
+                ssl_client_key -> SSL key pem file
+                ssl_client_cert -> SSL certificate pem file
+                ssl_client_phrase -> SSL client pass phrase to key file
 
         """
 
@@ -740,8 +740,8 @@ class Coll(DB):
         Description:  Connect to a Mongo database.
 
         Arguments:
-            (output) status -> True|False - Connection successful.
-            (output) errmsg -> Error message if connection failed.
+            (output) status -> True|False - Connection successful
+            (output) errmsg -> Error message if connection failed
 
         """
 
@@ -764,8 +764,8 @@ class Coll(DB):
         Description:  Total count in a collection.
 
         Arguments:
-            (input) qry -> Query criteria for count command.
-            (output) -> Total number of documents in a collection.
+            (input) qry -> Query criteria for count command
+            (output) -> Total number of documents in a collection
 
         """
 
@@ -781,8 +781,8 @@ class Coll(DB):
         Description:  Query of document using find command.
 
         Arguments:
-            (input) qry -> Query criteria for find command.
-            (output) -> Return of documents from collection as cursor.
+            (input) qry -> Query criteria for find command
+            (output) -> Return of documents from collection as cursor
 
         """
 
@@ -798,8 +798,8 @@ class Coll(DB):
         Description:  Query of document using distinct command.
 
         Arguments:
-            (input) col -> Column distinct will be ran against.
-            (output) -> Return of distinct values for col.
+            (input) col -> Column distinct will be ran against
+            (output) -> Return of distinct values for col
 
         """
 
@@ -812,8 +812,8 @@ class Coll(DB):
         Description:  Query of document using findOne command.
 
         Arguments:
-            (input) qry -> Query criteria for findOne command.
-            (output) -> Return of document from collection as cursor.
+            (input) qry -> Query criteria for findOne command
+            (output) -> Return of document from collection as cursor
 
         """
 
@@ -829,7 +829,7 @@ class Coll(DB):
         Description:  Insert document into a collection.
 
         Arguments:
-            (input) doc -> Document to be inserted into collection.
+            (input) doc -> Document to be inserted into collection
 
         """
 
@@ -842,7 +842,7 @@ class Coll(DB):
         Description:  Return the collections option settings.
 
         Arguments:
-            (output) -> Return options settings on the collection.
+            (output) -> Return options settings on the collection
 
         """
 
@@ -872,20 +872,20 @@ class Rep(Server):
         Description:  Initialization of an instance of the Rep class.
 
         Arguments:
-            (input) name -> Name of server.
-            (input) user -> User's name.
-            (input) japd -> User's pswd.
-            (input) host -> 'localhost' or host name or IP.
-            (input) port -> '27017' or port for Mongo.
+            (input) name -> Name of server
+            (input) user -> User's name
+            (input) japd -> User's pswd
+            (input) host -> 'localhost' or host name or IP
+            (input) port -> '27017' or port for Mongo
             (input) kwargs:
-                auth -> True|False - Authenication on.
-                conf_file -> Location of mongo.conf file.
-                auth_db -> Authentication database name.
-                auth_mech -> Authentication mechanism for connecting.
-                ssl_client_ca -> SSL certificate authority file.
-                ssl_client_key -> SSL key pem file.
-                ssl_client_cert -> SSL certificate pem file.
-                ssl_client_phrase -> SSL client pass phrase to key file.
+                auth -> True|False - Authenication on
+                conf_file -> Location of mongo.conf file
+                auth_db -> Authentication database name
+                auth_mech -> Authentication mechanism for connecting
+                ssl_client_ca -> SSL certificate authority file
+                ssl_client_key -> SSL key pem file
+                ssl_client_cert -> SSL certificate pem file
+                ssl_client_phrase -> SSL client pass phrase to key file
 
         """
 
@@ -912,7 +912,7 @@ class Rep(Server):
             NOTE:  Require time delay to allow for all nodes to be discover.
 
         Arguments:
-            (output) -> List of all nodes in the replica set.
+            (output) -> List of all nodes in the replica set
 
         """
 
@@ -943,20 +943,20 @@ class MasterRep(Rep):
         Description:  Initialization of an instance of the MasterRep class.
 
         Arguments:
-            (input) name -> Name of server.
-            (input) user -> User's name.
-            (input) japd -> User's pswd.
-            (input) host -> 'localhost' or host name or IP.
-            (input) port -> '27017' or port for Mongo.
+            (input) name -> Name of server
+            (input) user -> User's name
+            (input) japd -> User's pswd
+            (input) host -> 'localhost' or host name or IP
+            (input) port -> '27017' or port for Mongo
             (input) kwargs:
-                auth -> True|False - Authenication on.
-                conf_file -> Location of mongo.conf file.
-                auth_db -> Authentication database name.
-                auth_mech -> Authentication mechanism for connecting.
-                ssl_client_ca -> SSL certificate authority file.
-                ssl_client_key -> SSL key pem file.
-                ssl_client_cert -> SSL certificate pem file.
-                ssl_client_phrase -> SSL client pass phrase to key file.
+                auth -> True|False - Authenication on
+                conf_file -> Location of mongo.conf file
+                auth_db -> Authentication database name
+                auth_mech -> Authentication mechanism for connecting
+                ssl_client_ca -> SSL certificate authority file
+                ssl_client_key -> SSL key pem file
+                ssl_client_cert -> SSL certificate pem file
+                ssl_client_phrase -> SSL client pass phrase to key file
 
         """
 
@@ -983,8 +983,8 @@ class MasterRep(Rep):
         Description:  Connect to a Mongo database.
 
         Arguments:
-            (output) status -> True|False - Connection success or not master.
-            (output) errmsg -> Message status.
+            (output) status -> True|False - Connection success or not master
+            (output) errmsg -> Message status
 
         """
 
@@ -1029,20 +1029,20 @@ class SlaveRep(Rep):
         Description:  Initialization of an instance of the SlaveRep class.
 
         Arguments:
-            (input) name -> Name of server.
-            (input) user -> User's name.
-            (input) japd -> User's pswd.
-            (input) host -> 'localhost' or host name or IP.
-            (input) port -> '27017' or port for Mongo.
+            (input) name -> Name of server
+            (input) user -> User's name
+            (input) japd -> User's pswd
+            (input) host -> 'localhost' or host name or IP
+            (input) port -> '27017' or port for Mongo
             (input) kwargs:
-                auth -> True|False - Authenication on.
-                conf_file -> Location of mongo.conf file.
-                auth_db -> Authentication database name.
-                auth_mech -> Authentication mechanism for connecting.
-                ssl_client_ca -> SSL certificate authority file.
-                ssl_client_key -> SSL key pem file.
-                ssl_client_cert -> SSL certificate pem file.
-                ssl_client_phrase -> SSL client pass phrase to key file.
+                auth -> True|False - Authenication on
+                conf_file -> Location of mongo.conf file
+                auth_db -> Authentication database name
+                auth_mech -> Authentication mechanism for connecting
+                ssl_client_ca -> SSL certificate authority file
+                ssl_client_key -> SSL key pem file
+                ssl_client_cert -> SSL certificate pem file
+                ssl_client_phrase -> SSL client pass phrase to key file
 
         """
 
@@ -1069,8 +1069,8 @@ class SlaveRep(Rep):
         Description:  Connect to a Mongo database.
 
         Arguments:
-            (output) status -> True|False - Connection successful.
-            (output) errmsg -> Error message if connection failed.
+            (output) status -> True|False - Connection successful
+            (output) errmsg -> Error message if connection failed
 
         """
 
@@ -1116,22 +1116,22 @@ class RepSet(Rep):
         Description:  Initialization of an instance of the RepSet class.
 
         Arguments:
-            (input) name -> Name of server.
-            (input) user -> User's name.
-            (input) japd -> User's pswd.
-            (input) host -> 'localhost' or host name or IP.
-            (input) port -> '27017' or port for Mongo.
+            (input) name -> Name of server
+            (input) user -> User's name
+            (input) japd -> User's pswd
+            (input) host -> 'localhost' or host name or IP
+            (input) port -> '27017' or port for Mongo
             (input) kwargs:
-                auth -> True|False - Authenication on.
-                repset -> Replication Set name.
-                conf_file -> Location of mongo.conf file.
-                repset_hosts -> Repset hosts:ports.
-                auth_db -> Authentication database name.
-                auth_mech -> Authentication mechanism for connecting.
-                ssl_client_ca -> SSL certificate authority file.
-                ssl_client_key -> SSL key pem file.
-                ssl_client_cert -> SSL certificate pem file.
-                ssl_client_phrase -> SSL client pass phrase to key file.
+                auth -> True|False - Authenication on
+                repset -> Replication Set name
+                conf_file -> Location of mongo.conf file
+                repset_hosts -> Repset hosts:ports
+                auth_db -> Authentication database name
+                auth_mech -> Authentication mechanism for connecting
+                ssl_client_ca -> SSL certificate authority file
+                ssl_client_key -> SSL key pem file
+                ssl_client_cert -> SSL certificate pem file
+                ssl_client_phrase -> SSL client pass phrase to key file
 
         """
 
@@ -1157,9 +1157,9 @@ class RepSet(Rep):
             basic server attributes.
 
         Arguments:
-            (input) connections ->  String of server connections.
-            (output) status -> True|False - Connection successful.
-            (output) errmsg -> Error message if connection failed.
+            (input) connections ->  String of server connections
+            (output) status -> True|False - Connection successful
+            (output) errmsg -> Error message if connection failed
 
         """
 
@@ -1216,25 +1216,25 @@ class RepSetColl(RepSet):
         Description:  Initialization of an instance of the DB class.
 
         Arguments:
-            (input) name -> Name of server.
-            (input) user -> User's name.
-            (input) japd -> User's pswd.
-            (input) host -> 'localhost' or host name or IP.
-            (input) port -> '27017' or port for Mongo.
+            (input) name -> Name of server
+            (input) user -> User's name
+            (input) japd -> User's pswd
+            (input) host -> 'localhost' or host name or IP
+            (input) port -> '27017' or port for Mongo
             (input) kwargs:
-                auth -> True|False - Authenication on.
-                repset -> Replication Set name.
-                conf_file -> Location of mongo.conf file.
-                repset_hosts -> Repset hosts and ports.
-                db -> Name of database.
-                coll -> Name of collection.
-                db_auth -> None or name of authentication database.
-                auth_db -> Authentication database name.
-                auth_mech -> Authentication mechanism for connecting.
-                ssl_client_ca -> SSL certificate authority file.
-                ssl_client_key -> SSL key pem file.
-                ssl_client_cert -> SSL certificate pem file.
-                ssl_client_phrase -> SSL client pass phrase to key file.
+                auth -> True|False - Authenication on
+                repset -> Replication Set name
+                conf_file -> Location of mongo.conf file
+                repset_hosts -> Repset hosts and ports
+                db -> Name of database
+                coll -> Name of collection
+                db_auth -> None or name of authentication database
+                auth_db -> Authentication database name
+                auth_mech -> Authentication mechanism for connecting
+                ssl_client_ca -> SSL certificate authority file
+                ssl_client_key -> SSL key pem file
+                ssl_client_cert -> SSL certificate pem file
+                ssl_client_phrase -> SSL client pass phrase to key file
 
         """
 
@@ -1266,9 +1266,9 @@ class RepSetColl(RepSet):
             connects to a database and collection.
 
         Arguments:
-            (input) connections ->  String of server connections.
-            (output) status -> True|False - Connection successful.
-            (output) errmsg -> Error message if connection failed.
+            (input) connections ->  String of server connections
+            (output) status -> True|False - Connection successful
+            (output) errmsg -> Error message if connection failed
 
         """
 
@@ -1307,7 +1307,7 @@ class RepSetColl(RepSet):
         Description:  Insert document into a collection.
 
         Arguments:
-            (input) doc -> Document to be inserted into collection.
+            (input) doc -> Document to be inserted into collection
 
         """
 
@@ -1320,8 +1320,8 @@ class RepSetColl(RepSet):
         Description:  Total count in a collection.
 
         Arguments:
-            (input) qry -> Query criteria for command.
-            (output) -> Total number of documents in a collection.
+            (input) qry -> Query criteria for command
+            (output) -> Total number of documents in a collection
 
         """
 
@@ -1339,8 +1339,8 @@ class RepSetColl(RepSet):
             truncate the collection.
 
         Arguments:
-            (input) qry -> Query criteria for command.
-            (input) override -> True|False - Allow for empty queries.
+            (input) qry -> Query criteria for command
+            (input) override -> True|False - Allow for empty queries
 
         """
 
@@ -1362,8 +1362,8 @@ class RepSetColl(RepSet):
         Description:  Query of document using find command.
 
         Arguments:
-            (input) query -> Query criteria for find command.
-            (output) -> Return of documents from collection as cursor.
+            (input) query -> Query criteria for find command
+            (output) -> Return of documents from collection as cursor
 
         """
 
@@ -1379,8 +1379,8 @@ class RepSetColl(RepSet):
         Description:  Query of document using distinct command.
 
         Arguments:
-            (input) column -> Column distinct will be ran against.
-            (output) -> Return of distinct values for col.
+            (input) column -> Column distinct will be ran against
+            (output) -> Return of distinct values for col
 
         """
 
@@ -1393,8 +1393,8 @@ class RepSetColl(RepSet):
         Description:  Query of document using findOne command.
 
         Arguments:
-            (input) query -> Query criteria for findOne command.
-            (output) -> Return of document from collection as cursor.
+            (input) query -> Query criteria for findOne command
+            (output) -> Return of document from collection as cursor
 
         """
 
@@ -1410,7 +1410,7 @@ class RepSetColl(RepSet):
         Description:  Return the collections option settings.
 
         Arguments:
-            (output) -> Return options settings on the collection.
+            (output) -> Return options settings on the collection
 
         """
 
