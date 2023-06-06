@@ -217,8 +217,7 @@ class Server(object):
         sock.close()
 
         # Only get System Memory if on local machine
-        if self.host in [local_ip, loopback] or \
-           self.name in socket.gethostname():
+        if socket.gethostbyname(self.host) in [local_ip, loopback]:
 
             # Total Memory and percentage of memory used.
             self.avl_sys_mem = psutil.virtual_memory().available

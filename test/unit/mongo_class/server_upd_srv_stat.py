@@ -53,7 +53,7 @@ class UnitTest(unittest.TestCase):
         self.name = "Mongo_Server"
         self.user = "mongo_user"
         self.japd = "mongo_pd"
-        self.host = "host_server"
+        self.host = "localhost"
         # Require a string concatenation to pass quality check
         self.host2 = "127.0" + ".0.1"
         self.port = 27017
@@ -76,8 +76,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_cmd.return_value = self.data
-        mongo = mongo_class.Server(self.name, self.user, self.japd,
-                                   self.host, self.port)
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, self.host, self.port)
 
         mongo.upd_srv_stat()
         self.assertEqual(
@@ -96,8 +96,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_cmd.return_value = self.data
-        mongo = mongo_class.Server(self.name, self.user, self.japd,
-                                   self.host2, self.port)
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, self.host2, self.port)
 
         mongo.upd_srv_stat()
         self.assertEqual(
