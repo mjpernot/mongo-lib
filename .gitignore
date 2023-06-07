@@ -5,3 +5,4 @@ test/integration/config/*.py
 .coverage
 coverage.xml
 lib
+.scannerwork
