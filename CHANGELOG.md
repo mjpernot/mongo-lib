@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.2.4] - 2023-06-06
+### Fixed
+- mongo_class.Server.upd_srv_stat: Using only self.host ip to determine if on a remote host.
+
+### Changed
+- Update documentation.
+
+
 ## [4.2.3] - 2023-01-26
 ### Fixed
 - mongo_class.Server.upd_srv_stat: Added check for hostname in the system memory check.
