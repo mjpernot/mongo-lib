@@ -20,18 +20,17 @@ from __future__ import print_function
 from __future__ import absolute_import
 
 # Standard
+import os
 import json
 
 # Local
 try:
     from .lib import gen_libs
-    from .lib import arg_parser
     from . import mongo_class
     from . import version
 
 except (ValueError, ImportError) as err:
     import lib.gen_libs as gen_libs
-    import lib.arg_parser as arg_parser
     import mongo_class
     import version
 
@@ -54,8 +53,8 @@ def add_ssl_cmd(mongo, cmd_list):
 
     Arguments:
         (input) mongo -> Database instance
-        (input) cmd_line -> Basic Mongo utility command line in list format.
-        (output) cmd_line -> Basic Mongo utility command line in list format.
+        (input) cmd_line -> Basic Mongo utility command line in list format
+        (output) cmd_line -> Basic Mongo utility command line in list format
     """
 
     global KEY1
@@ -91,32 +90,32 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
         then add required arguments and additional options if they are present.
 
     Arguments:
-        (input) mongo -> Database instance.
-        (input) args_array -> Array of command line options and values.
-        (input) prog_name -> Name of utility program.
-        (input) path_opt -> Option containing the path dir to program.
+        (input) mongo -> Database instance
+        (input) args_array -> Array of command line options and values or an
+            gen_class.ArgParser class instance
+        (input) prog_name -> Name of utility program
+        (input) path_opt -> Option containing the path dir to program
         (input) **kwargs:
-            req_arg -> List of options to add to cmd line.
-            opt_arg -> Dictionary of additional options to add.
-            use_repset -> True|False - Use repset name connection.
+            req_arg -> List of options to add to cmd line
+            opt_arg -> Dictionary of additional options to add
+            use_repset -> True|False - Use repset name connection
                 (i.e. repset_name/host1,host2,...)
-            no_pass -> True|False - Turn off --password= option.
-        (output) -> Mongo utility command line.
+            no_pass -> True|False - Turn off --password= option
+        (output) -> Mongo utility command line
 
     """
 
-    args_array = dict(args_array)
+    args = dict(args_array) if isinstance(args_array, dict) \
+        else dict(args_array.args_array)
     cmd = crt_base_cmd(
-        mongo, arg_parser.arg_set_path(args_array, path_opt) + prog_name,
-        **kwargs)
+        mongo, os.path.join(args[path_opt], prog_name), **kwargs)
 
     # Process required arguments.
     for arg in list(kwargs.get("req_arg", [])):
         cmd = gen_libs.add_cmd(cmd, arg=arg)
 
     # Process optional arguments.
-    return gen_libs.is_add_cmd(args_array, cmd,
-                               dict(kwargs.get("opt_arg", {})))
+    return gen_libs.is_add_cmd(args, cmd, dict(kwargs.get("opt_arg", {})))
 
 
 def create_instance(cfg_file, dir_path, class_name):
@@ -138,10 +137,10 @@ def create_instance(cfg_file, dir_path, class_name):
         connect method.
 
     Arguments:
-        (input) cfg_file -> Configuration file name.
-        (input) dir_path -> Directory path.
-        (input) class_name -> Reference to a Class type.
-        (output) -> Mongo class instance.
+        (input) cfg_file -> Configuration file name
+        (input) dir_path -> Directory path
+        (input) class_name -> Reference to a Class type
+        (output) -> Mongo class instance
 
     """
 
@@ -174,13 +173,13 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
         basic setup will include program name, host, and port.
 
     Arguments:
-        (input) mongo -> Database instance.
-        (input) prog_name -> Name of binary program.
+        (input) mongo -> Database instance
+        (input) prog_name -> Name of binary program
         (input) **kwargs:
-            use_repset -> True|False - Use repset name connection.
+            use_repset -> True|False - Use repset name connection
                 (i.e. repset_name/host1,host2,...)
-            no_pass -> True|False - Turn off --password= option.
-        (output) cmd_line -> Basic Mongo utility command line in list format.
+            no_pass -> True|False - Turn off --password= option
+        (output) cmd_line -> Basic Mongo utility command line in list format
 
     """
 
@@ -233,9 +232,9 @@ def crt_coll_inst(cfg, dbs, tbl):
         This will be based on the type of configuration passed.
 
     Arguments:
-        (input) cfg -> Mongo instance or mongo config module.
-        (input) dbs -> Database name.
-        (input) tbl ->  Collection name.
+        (input) cfg -> Mongo instance or mongo config module
+        (input) dbs -> Database name
+        (input) tbl ->  Collection name
 
     """
 
@@ -278,7 +277,7 @@ def disconnect(*args):
         The disconnect method will be particular to that class.
 
     Arguments:
-        (input) *arg -> One or more connection instances.
+        (input) *arg -> One or more connection instances
 
     """
 
@@ -300,12 +299,12 @@ def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
         document to JSON, and insert document into the database.
 
     Arguments:
-        (input) mongo_cfg -> Mongo instance or mongo config module.
-        (input) dbs -> Database name.
-        (input) tbl ->  Collection name.
-        (input) data -> Document to be inserted.
-        (output) status -> True|False - Connection successful.
-        (output) errmsg -> Error message if connection failed.
+        (input) mongo_cfg -> Mongo instance or mongo config module
+        (input) dbs -> Database name
+        (input) tbl ->  Collection name
+        (input) data -> Document to be inserted
+        (output) status -> True|False - Connection successful
+        (output) errmsg -> Error message if connection failed
 
     """
 

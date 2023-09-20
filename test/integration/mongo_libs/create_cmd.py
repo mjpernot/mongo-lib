@@ -28,6 +28,30 @@ import version
 __version__ = version.__version__
 
 
+class ArgParser(object):
+
+    """Class:  ArgParser
+
+    Description:  Class stub holder for gen_class.ArgParser class.
+
+    Methods:
+        __init__
+
+    """
+
+    def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Class initialization.
+
+        Arguments:
+
+        """
+
+        self.args_array = dict()
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -36,6 +60,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_args
+        test_args_array
         test_full_test
         test_crt_base_cmd2
         test_crt_base_cmd
@@ -77,6 +103,12 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
         self.mongo.connect()
+        self.args = ArgParser()
+        self.args2 = ArgParser()
+        self.args3 = ArgParser()
+        self.args.args_array = {"-p": os.getcwd()}
+        self.args2.args_array = {"-p": os.getcwd(), "-m": True}
+        self.args3.args_array = {"-p": os.getcwd(), "-m": True, "-n": True}
         self.args_array = {"-p": os.getcwd()}
         self.args_array2 = {"-p": os.getcwd(), "-m": True}
         self.args_array3 = {"-p": os.getcwd(), "-m": True, "-n": True}
@@ -87,48 +119,74 @@ class UnitTest(unittest.TestCase):
         self.req_arg2 = ["--keeparg", "--keeparg2"]
         self.opt_arg = {"-m": "-m=1"}
         self.opt_arg2 = {"-m": "-m=1", "-n": "-n=0"}
-        self.cmd_result = [os.path.join(self.args_array["-p"], self.prog_name),
-                           username + self.cfg.user, host + self.hosts,
-                           japd2 + self.cfg.japd]
-        self.cmd_result2 = [os.path.join(self.args_array["-p"],
-                                         self.prog_name),
-                            username + self.cfg.user, host + self.hosts,
-                            japd2 + self.cfg.japd, self.req_arg[0]]
-        self.cmd_result3 = [os.path.join(self.args_array["-p"],
-                                         self.prog_name),
-                            username + self.cfg.user, host + self.hosts,
-                            japd2 + self.cfg.japd, self.opt_arg["-m"]]
-        self.cmd_result4 = [os.path.join(self.args_array["-p"],
-                                         self.prog_name),
-                            username + self.cfg.user, host + self.hosts,
-                            japd2 + self.cfg.japd, self.req_arg[0],
-                            self.opt_arg["-m"]]
-        self.cmd_result5 = [os.path.join(self.args_array["-p"],
-                                         self.prog_name),
-                            username + self.cfg.user, host + self.hosts,
-                            japd2 + self.cfg.japd, self.req_arg2[0],
-                            self.req_arg2[1]]
-        self.cmd_result6 = [os.path.join(self.args_array["-p"],
-                                         self.prog_name),
-                            username + self.cfg.user, host + self.hosts,
-                            japd2 + self.cfg.japd, self.opt_arg2["-m"],
-                            self.opt_arg2["-n"]]
-        self.cmd_result7 = [os.path.join(self.args_array["-p"],
-                                         self.prog_name),
-                            username + self.cfg.user, host + self.hosts,
-                            japd2 + self.cfg.japd, self.req_arg2[0],
-                            self.req_arg2[1], self.opt_arg["-m"]]
-        self.cmd_result8 = [os.path.join(self.args_array["-p"],
-                                         self.prog_name),
-                            username + self.cfg.user, host + self.hosts,
-                            japd2 + self.cfg.japd, self.req_arg[0],
-                            self.opt_arg2["-m"], self.opt_arg2["-n"]]
-        self.cmd_result9 = [os.path.join(self.args_array["-p"],
-                                         self.prog_name),
-                            username + self.cfg.user, host + self.hosts,
-                            japd2 + self.cfg.japd, self.req_arg2[0],
-                            self.req_arg2[1], self.opt_arg2["-m"],
-                            self.opt_arg2["-n"]]
+        self.cmd_result = [
+            os.path.join(self.args_array["-p"], self.prog_name),
+            username + self.cfg.user, host + self.hosts, japd2 + self.cfg.japd]
+        self.cmd_result2 = [
+            os.path.join(self.args_array["-p"], self.prog_name),
+            username + self.cfg.user, host + self.hosts, japd2 + self.cfg.japd,
+            self.req_arg[0]]
+        self.cmd_result3 = [
+            os.path.join(self.args_array["-p"], self.prog_name),
+            username + self.cfg.user, host + self.hosts, japd2 + self.cfg.japd,
+            self.opt_arg["-m"]]
+        self.cmd_result4 = [
+            os.path.join(self.args_array["-p"], self.prog_name),
+            username + self.cfg.user, host + self.hosts, japd2 + self.cfg.japd,
+            self.req_arg[0], self.opt_arg["-m"]]
+        self.cmd_result5 = [
+            os.path.join(self.args_array["-p"], self.prog_name),
+            username + self.cfg.user, host + self.hosts, japd2 + self.cfg.japd,
+            self.req_arg2[0], self.req_arg2[1]]
+        self.cmd_result6 = [
+            os.path.join(self.args_array["-p"], self.prog_name),
+            username + self.cfg.user, host + self.hosts, japd2 + self.cfg.japd,
+            self.opt_arg2["-m"], self.opt_arg2["-n"]]
+        self.cmd_result7 = [
+            os.path.join(self.args_array["-p"], self.prog_name),
+            username + self.cfg.user, host + self.hosts, japd2 + self.cfg.japd,
+            self.req_arg2[0], self.req_arg2[1], self.opt_arg["-m"]]
+        self.cmd_result8 = [
+            os.path.join(self.args_array["-p"], self.prog_name),
+            username + self.cfg.user, host + self.hosts, japd2 + self.cfg.japd,
+            self.req_arg[0], self.opt_arg2["-m"], self.opt_arg2["-n"]]
+        self.cmd_result9 = [
+            os.path.join(self.args_array["-p"], self.prog_name),
+            username + self.cfg.user, host + self.hosts, japd2 + self.cfg.japd,
+            self.req_arg2[0], self.req_arg2[1], self.opt_arg2["-m"],
+            self.opt_arg2["-n"]]
+
+    def test_args(self):
+
+        """Function:  test_args
+
+        Description:  Test with the gen_class.ArgParser class.
+
+        Arguments:
+
+        """
+
+        self.mongo.config["ssl"] = False
+        cmd_line = mongo_libs.create_cmd(
+            self.mongo, self.args, self.prog_name, self.path_opt)
+
+        self.assertEqual(cmd_line, self.cmd_result)
+
+    def test_args_array(self):
+
+        """Function:  test_args_array
+
+        Description:  Test with args_array (old method).
+
+        Arguments:
+
+        """
+
+        self.mongo.config["ssl"] = False
+        cmd_line = mongo_libs.create_cmd(
+            self.mongo, self.args_array, self.prog_name, self.path_opt)
+
+        self.assertEqual(cmd_line, self.cmd_result)
 
     def test_full_test(self):
 
@@ -142,7 +200,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
-            self.mongo, self.args_array3, self.prog_name, self.path_opt,
+            self.mongo, self.args3, self.prog_name, self.path_opt,
             req_arg=self.req_arg2, opt_arg=self.opt_arg2)
 
         self.assertEqual(cmd_line, self.cmd_result9)
@@ -159,7 +217,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
-            self.mongo, self.args_array3, self.prog_name, self.path_opt,
+            self.mongo, self.args3, self.prog_name, self.path_opt,
             req_arg=self.req_arg, opt_arg=self.opt_arg2)
 
         self.assertEqual(cmd_line, self.cmd_result8)
@@ -176,7 +234,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
-            self.mongo, self.args_array3, self.prog_name, self.path_opt,
+            self.mongo, self.args3, self.prog_name, self.path_opt,
             opt_arg=self.opt_arg2)
 
         self.assertEqual(cmd_line, self.cmd_result6)
@@ -193,7 +251,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
-            self.mongo, self.args_array, self.prog_name, self.path_opt,
+            self.mongo, self.args, self.prog_name, self.path_opt,
             req_arg=self.req_arg2)
 
         self.assertEqual(cmd_line, self.cmd_result5)
@@ -210,7 +268,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
-            self.mongo, self.args_array, self.prog_name, self.path_opt,
+            self.mongo, self.args, self.prog_name, self.path_opt,
             opt_arg={})
 
         self.assertEqual(cmd_line, self.cmd_result)
@@ -227,7 +285,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
-            self.mongo, self.args_array, self.prog_name, self.path_opt,
+            self.mongo, self.args, self.prog_name, self.path_opt,
             req_arg=[])
 
         self.assertEqual(cmd_line, self.cmd_result)
@@ -244,7 +302,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
-            self.mongo, self.args_array2, self.prog_name, self.path_opt,
+            self.mongo, self.args2, self.prog_name, self.path_opt,
             opt_arg=self.opt_arg, req_arg=self.req_arg)
 
         self.assertEqual(cmd_line, self.cmd_result4)
@@ -261,7 +319,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
-            self.mongo, self.args_array2, self.prog_name, self.path_opt,
+            self.mongo, self.args2, self.prog_name, self.path_opt,
             opt_arg=self.opt_arg)
 
         self.assertEqual(cmd_line, self.cmd_result3)
@@ -278,7 +336,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
-            self.mongo, self.args_array, self.prog_name, self.path_opt,
+            self.mongo, self.args, self.prog_name, self.path_opt,
             req_arg=self.req_arg)
 
         self.assertEqual(cmd_line, self.cmd_result2)
@@ -295,7 +353,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
-            self.mongo, self.args_array, self.prog_name, self.path_opt)
+            self.mongo, self.args, self.prog_name, self.path_opt)
 
         self.assertEqual(cmd_line, self.cmd_result)
 

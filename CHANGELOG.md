@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.2.5] - 2023-09-19
+### Changed
+- mongo_lib.create_cmd: Added ability to pass an args_array or an gen_class.ArgParser instance.
 
 
 ## [4.2.4] - 2023-06-06
