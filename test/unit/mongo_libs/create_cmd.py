@@ -118,7 +118,7 @@ class UnitTest(unittest.TestCase):
         self.args = ArgParser()
         self.args_array = {"-m": True, "-p": "/dir/path"}
         self.prog_name = "mongostats"
-        self.path = "/dir/path"
+        self.path = "/base/path"
         self.path_opt = "-p"
         self.req_arg = ["--required"]
         self.opt_arg = {"-m": "-m=1"}
