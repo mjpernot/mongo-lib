@@ -27,6 +27,30 @@ import version
 __version__ = version.__version__
 
 
+class ArgParser(object):
+
+    """Class:  ArgParser
+
+    Description:  Class stub holder for gen_class.ArgParser class.
+
+    Methods:
+        __init__
+
+    """
+
+    def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Class initialization.
+
+        Arguments:
+
+        """
+
+        self.args_array = {"-m": True, "-p": "/dir/path"}
+
+
 class Mongo(object):
 
     """Class:  Mongo
@@ -66,6 +90,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_args
+        test_args_array
         test_full_test
         test_crt_base_cmd
         test_add_cmd_list
@@ -89,17 +115,60 @@ class UnitTest(unittest.TestCase):
         data2 = "word="
         pwd = data + data2
         self.mongo = Mongo()
+        self.args = ArgParser()
         self.args_array = {"-m": True, "-p": "/dir/path"}
         self.prog_name = "mongostats"
-        self.path = "/dir/path"
+        self.path = "/base/path"
         self.path_opt = "-p"
         self.req_arg = ["--required"]
         self.opt_arg = {"-m": "-m=1"}
         self.result = [self.path + "/" + self.prog_name, "-m=1"]
         self.result2 = [self.path + "/" + self.prog_name, "--required", "-m=1"]
-        self.result3 = [self.path + "/" + self.prog_name,
-                        "--username=username", "--host=IP:27017",
-                        pwd + "userpd", "--required", "-m=1"]
+        self.result3 = [
+            self.path + "/" + self.prog_name, "--username=username",
+            "--host=IP:27017", pwd + "userpd", "--required", "-m=1"]
+
+    @mock.patch("mongo_libs.gen_libs.is_add_cmd")
+    @mock.patch("mongo_libs.gen_libs.add_cmd")
+    @mock.patch("mongo_libs.crt_base_cmd")
+    def test_args(self, mock_cmd, mock_add, mock_is_add):
+
+        """Function:  test_args
+
+        Description:  Test with the the gen_class.ArgsParser class.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = "Base_Crt_Program"
+        mock_add.return_value = "Base_Crt_Program_Arg"
+        mock_is_add.return_value = ["Base_Crt_Program_Arg_Plus"]
+        self.assertEqual(
+            mongo_libs.create_cmd(
+                self.mongo, self.args, self.prog_name, self.path_opt,
+                req_arg=self.req_arg), ["Base_Crt_Program_Arg_Plus"])
+
+    @mock.patch("mongo_libs.gen_libs.is_add_cmd")
+    @mock.patch("mongo_libs.gen_libs.add_cmd")
+    @mock.patch("mongo_libs.crt_base_cmd")
+    def test_args_array(self, mock_cmd, mock_add, mock_is_add):
+
+        """Function:  test_args_array
+
+        Description:  Test with the args_array dictionary (old method).
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = "Base_Crt_Program"
+        mock_add.return_value = "Base_Crt_Program_Arg"
+        mock_is_add.return_value = ["Base_Crt_Program_Arg_Plus"]
+        self.assertEqual(
+            mongo_libs.create_cmd(
+                self.mongo, self.args_array, self.prog_name, self.path_opt,
+                req_arg=self.req_arg), ["Base_Crt_Program_Arg_Plus"])
 
     def test_full_test(self):
 
@@ -111,14 +180,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
-                                               self.prog_name, self.path_opt,
-                                               opt_arg=self.opt_arg,
-                                               req_arg=self.req_arg),
-                         self.result3)
+        self.assertEqual(
+            mongo_libs.create_cmd(
+                self.mongo, self.args, self.prog_name, self.path_opt,
+                opt_arg=self.opt_arg, req_arg=self.req_arg), self.result3)
 
-    @mock.patch("mongo_libs.arg_parser.arg_set_path")
-    def test_crt_base_cmd(self, mock_arg):
+    def test_crt_base_cmd(self):
 
         """Function:  test_crt_base_cmd
 
@@ -128,16 +195,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_arg.return_value = self.path + "/"
-        self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
-                                               self.prog_name, self.path_opt,
-                                               opt_arg=self.opt_arg,
-                                               req_arg=self.req_arg),
-                         self.result3)
+        self.assertEqual(
+            mongo_libs.create_cmd(
+                self.mongo, self.args, self.prog_name, self.path_opt,
+                opt_arg=self.opt_arg, req_arg=self.req_arg), self.result3)
 
     @mock.patch("mongo_libs.crt_base_cmd")
-    @mock.patch("mongo_libs.arg_parser.arg_set_path")
-    def test_add_cmd_list(self, mock_arg, mock_cmd):
+    def test_add_cmd_list(self, mock_cmd):
 
         """Function:  test_add_cmd_list
 
@@ -147,17 +211,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_arg.return_value = self.path + "/"
         mock_cmd.return_value = [self.path + "/" + self.prog_name]
-        self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
-                                               self.prog_name, self.path_opt,
-                                               opt_arg=self.opt_arg,
-                                               req_arg=self.req_arg),
-                         self.result2)
+        self.assertEqual(
+            mongo_libs.create_cmd(
+                self.mongo, self.args, self.prog_name, self.path_opt,
+                opt_arg=self.opt_arg, req_arg=self.req_arg), self.result2)
 
     @mock.patch("mongo_libs.crt_base_cmd")
-    @mock.patch("mongo_libs.arg_parser.arg_set_path")
-    def test_add_cmd_empty(self, mock_arg, mock_cmd):
+    def test_add_cmd_empty(self, mock_cmd):
 
         """Function:  test_add_cmd_empty
 
@@ -167,16 +228,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_arg.return_value = self.path + "/"
         mock_cmd.return_value = [self.path + "/" + self.prog_name]
-        self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
-                                               self.prog_name, self.path_opt,
-                                               opt_arg=self.opt_arg),
-                         self.result)
+        self.assertEqual(
+            mongo_libs.create_cmd(
+                self.mongo, self.args, self.prog_name, self.path_opt,
+                opt_arg=self.opt_arg), self.result)
 
     @mock.patch("mongo_libs.crt_base_cmd")
-    @mock.patch("mongo_libs.arg_parser.arg_set_path")
-    def test_is_add_cmd(self, mock_arg, mock_cmd):
+    def test_is_add_cmd(self, mock_cmd):
 
         """Function:  test_is_add_cmd
 
@@ -186,18 +245,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_arg.return_value = self.path + "/"
         mock_cmd.return_value = [self.path + "/" + self.prog_name]
-        self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
-                                               self.prog_name, self.path_opt,
-                                               opt_arg=self.opt_arg),
-                         self.result)
+        self.assertEqual(
+            mongo_libs.create_cmd(
+                self.mongo, self.args, self.prog_name, self.path_opt,
+                opt_arg=self.opt_arg), self.result)
 
     @mock.patch("mongo_libs.gen_libs.is_add_cmd")
     @mock.patch("mongo_libs.gen_libs.add_cmd")
     @mock.patch("mongo_libs.crt_base_cmd")
-    @mock.patch("mongo_libs.arg_parser.arg_set_path")
-    def test_default(self, mock_arg, mock_cmd, mock_add, mock_is_add):
+    def test_default(self, mock_cmd, mock_add, mock_is_add):
 
         """Function:  test_default
 
@@ -207,14 +264,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_arg.return_value = "Base_Program"
         mock_cmd.return_value = "Base_Crt_Program"
         mock_add.return_value = "Base_Crt_Program_Arg"
         mock_is_add.return_value = ["Base_Crt_Program_Arg_Plus"]
-        self.assertEqual(mongo_libs.create_cmd(self.mongo, self.args_array,
-                                               self.prog_name, self.path_opt,
-                                               req_arg=self.req_arg),
-                         ["Base_Crt_Program_Arg_Plus"])
+        self.assertEqual(
+            mongo_libs.create_cmd(
+                self.mongo, self.args, self.prog_name, self.path_opt,
+                req_arg=self.req_arg), ["Base_Crt_Program_Arg_Plus"])
 
 
 if __name__ == "__main__":
