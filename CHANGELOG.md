@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.2.6] - 2023-10-04
+- Fixed errors in unit testing.
+
+
 ## [4.2.5] - 2023-09-19
 ### Changed
 - mongo_lib.create_cmd: Added ability to pass an args_array or an gen_class.ArgParser instance.
