@@ -114,11 +114,11 @@ class UnitTest(unittest.TestCase):
         data = "--pass"
         data2 = "word="
         pwd = data + data2
+        self.path = "/base/path"
         self.mongo = Mongo()
         self.args = ArgParser()
-        self.args_array = {"-m": True, "-p": "/dir/path"}
+        self.args.args_array = {"-m": True, "-p": self.path}
         self.prog_name = "mongostats"
-        self.path = "/base/path"
         self.path_opt = "-p"
         self.req_arg = ["--required"]
         self.opt_arg = {"-m": "-m=1"}
@@ -167,7 +167,7 @@ class UnitTest(unittest.TestCase):
         mock_is_add.return_value = ["Base_Crt_Program_Arg_Plus"]
         self.assertEqual(
             mongo_libs.create_cmd(
-                self.mongo, self.args_array, self.prog_name, self.path_opt,
+                self.mongo, self.args, self.prog_name, self.path_opt,
                 req_arg=self.req_arg), ["Base_Crt_Program_Arg_Plus"])
 
     def test_full_test(self):
