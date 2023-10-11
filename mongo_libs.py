@@ -82,7 +82,7 @@ def add_ssl_cmd(mongo, cmd_list):
     return cmd_list
 
 
-def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
+def create_cmd(mongo, args, prog_name, path_opt, **kwargs):
 
     """Function:  create_cmd
 
@@ -91,8 +91,7 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
 
     Arguments:
         (input) mongo -> Database instance
-        (input) args_array -> Array of command line options and values or an
-            gen_class.ArgParser class instance
+        (input) args -> ArgParser class instance
         (input) prog_name -> Name of utility program
         (input) path_opt -> Option containing the path dir to program
         (input) **kwargs:
@@ -105,10 +104,8 @@ def create_cmd(mongo, args_array, prog_name, path_opt, **kwargs):
 
     """
 
-    args = dict(args_array) if isinstance(args_array, dict) \
-        else dict(args_array.args_array)
     cmd = crt_base_cmd(
-        mongo, os.path.join(args[path_opt], prog_name), **kwargs)
+        mongo, os.path.join(args.arg_set_path(path_opt), prog_name), **kwargs)
 
     # Process required arguments.
     for arg in list(kwargs.get("req_arg", [])):
