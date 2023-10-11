@@ -48,7 +48,7 @@ class ArgParser(object):
 
         """
 
-        self.args_array = {"-m": True, "-p": "/dir/path"}
+        self.args_array = dict()
 
 
 class Mongo(object):
@@ -90,6 +90,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_missing_arg
         test_args
         test_args_array
         test_full_test
@@ -117,6 +118,7 @@ class UnitTest(unittest.TestCase):
         self.path = "/base/path"
         self.mongo = Mongo()
         self.args = ArgParser()
+        self.args2 = ArgParser()
         self.args.args_array = {"-m": True, "-p": self.path}
         self.prog_name = "mongostats"
         self.path_opt = "-p"
@@ -131,11 +133,32 @@ class UnitTest(unittest.TestCase):
     @mock.patch("mongo_libs.gen_libs.is_add_cmd")
     @mock.patch("mongo_libs.gen_libs.add_cmd")
     @mock.patch("mongo_libs.crt_base_cmd")
+    def test_missing_arg(self, mock_cmd, mock_add, mock_is_add):
+
+        """Function:  test_missing_arg
+
+        Description:  Test with the missing option in args_array.
+
+        Arguments:
+
+        """
+
+        mock_cmd.return_value = "Base_Crt_Program"
+        mock_add.return_value = "Base_Crt_Program_Arg"
+        mock_is_add.return_value = ["Base_Crt_Program_Arg_Plus"]
+        self.assertEqual(
+            mongo_libs.create_cmd(
+                self.mongo, self.args2, self.prog_name, self.path_opt,
+                req_arg=self.req_arg), ["Base_Crt_Program_Arg_Plus"])
+
+    @mock.patch("mongo_libs.gen_libs.is_add_cmd")
+    @mock.patch("mongo_libs.gen_libs.add_cmd")
+    @mock.patch("mongo_libs.crt_base_cmd")
     def test_args(self, mock_cmd, mock_add, mock_is_add):
 
         """Function:  test_args
 
-        Description:  Test with the the gen_class.ArgsParser class.
+        Description:  Test with the gen_class.ArgsParser class.
 
         Arguments:
 
