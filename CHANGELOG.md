@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.2.7] - 2023-10-11
+
+
 ## [4.2.6] - 2023-10-04
 - Fixed errors in unit testing.
 
