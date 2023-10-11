@@ -7,6 +7,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [4.2.7] - 2023-10-11
 - Upgraded python-lib to v2.10.1
 
+### Fixed
+- mongo_libs.create_cmd: Added args.arg_set_path to the join command to produce the correct path.
+
 
 ## [4.2.6] - 2023-10-04
 - Fixed errors in unit testing.
