@@ -35,6 +35,7 @@ class ArgParser(object):
 
     Methods:
         __init__
+        arg_set_path
 
     """
 
@@ -49,6 +50,22 @@ class ArgParser(object):
         """
 
         self.args_array = dict()
+
+    def arg_set_path(self, arg_opt):
+
+        """Method:  arg_set_path
+
+        Description:  Return dir path from argument list or return empty
+            string.
+
+        Arguments:
+
+        """
+
+        path = os.path.join(
+            self.args_array[arg_opt] if arg_opt in self.args_array else "")
+
+        return path
 
 
 class Mongo(object):
@@ -92,7 +109,6 @@ class UnitTest(unittest.TestCase):
         setUp
         test_missing_arg
         test_args
-        test_args_array
         test_full_test
         test_crt_base_cmd
         test_add_cmd_list
@@ -159,27 +175,6 @@ class UnitTest(unittest.TestCase):
         """Function:  test_args
 
         Description:  Test with the gen_class.ArgsParser class.
-
-        Arguments:
-
-        """
-
-        mock_cmd.return_value = "Base_Crt_Program"
-        mock_add.return_value = "Base_Crt_Program_Arg"
-        mock_is_add.return_value = ["Base_Crt_Program_Arg_Plus"]
-        self.assertEqual(
-            mongo_libs.create_cmd(
-                self.mongo, self.args, self.prog_name, self.path_opt,
-                req_arg=self.req_arg), ["Base_Crt_Program_Arg_Plus"])
-
-    @mock.patch("mongo_libs.gen_libs.is_add_cmd")
-    @mock.patch("mongo_libs.gen_libs.add_cmd")
-    @mock.patch("mongo_libs.crt_base_cmd")
-    def test_args_array(self, mock_cmd, mock_add, mock_is_add):
-
-        """Function:  test_args_array
-
-        Description:  Test with the args_array dictionary (old method).
 
         Arguments:
 
