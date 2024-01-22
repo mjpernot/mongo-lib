@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.2.8] - 2024-01-19
+- Upgraded python-lib to v3.0.1
+- Updated to work in RedHat 8 environment.
+
+
 ## [4.2.7] - 2023-10-11
 - Upgraded python-lib to v2.10.1
 
