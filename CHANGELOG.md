@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.2.8] - 2024-01-19
+- Upgraded python-lib to v3.0.1
+- Updated to work in RedHat 8 environment.
 
 
 ## [4.2.7] - 2023-10-11

@@ -40,9 +40,8 @@
 Create requirements-mongo-lib.txt and requirements-mongo-python-lib.txt files:
 
 ```
-cd {Python_Project}
-cp requirements-mongo-lib.txt {Other_Python_Project}/requirements-mongo-lib.txt
-cp requirements-python-lib.txt {Other_Python_Project}/requirements-mongo-python-lib.txt
+cp {Python_Project}/requirements-mongo-lib.txt {Other_Python_Project}/requirements-mongo-lib.txt
+cp {Python_Project}/requirements-python-lib.txt {Other_Python_Project}/requirements-mongo-python-lib.txt
 ```
 
 ##### Modify the other program's README.md file to add the pip commands under the "Install supporting classes and libraries" section.
@@ -63,9 +62,23 @@ python -m pip install -r requirements-mongo-python-lib.txt --target mongo_lib/li
 
 ##### Add the general Mongo-Lib requirements to the other program's requirements.txt file.  Remove any duplicates.
 
+Centos 7 (Running Python 2.7):
 Add/modify the following lines to the {Other_Python_Project}/requirements.txt file:
 
 ```
+chardet==4.0.0
+distro==1.6.0
+email==4.0.3
+psutil==5.4.3
+pymongo==3.8.0
+simplejson==2.0.9
+```
+
+Redhat 8 (Running Python 3.6):
+Add/modify the following lines to the {Other_Python_Project}/requirements3.txt file:
+
+```
+chardet==4.0.0
 psutil==5.4.3
 pymongo==3.8.0
 simplejson==2.0.9
