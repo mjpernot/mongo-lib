@@ -79,26 +79,22 @@ Add/modify the following lines to the {Other_Python_Project}/requirements3.txt f
 
 ```
 chardet==4.0.0
+distro==1.6.0
 psutil==5.4.3
 pymongo==3.8.0
-simplejson==2.0.9
+simplejson==3.12.0
 ```
 
 
-# Testing
+### Git Installation:
 
-# Unit Testing:
-
-### Installation:
-
-Install general Mongo libraries and classes using git.
+Install the project using git.
 
 ```
 git clone git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/mongo-lib.git
 ```
 
 Install/upgrade system modules.
-
 Centos 7 (Running Python 2.7):
 
 ```
@@ -113,7 +109,6 @@ python -m pip install --user -r requirements.txt --upgrade --trusted-host pypi.a
 ```
 
 Install supporting classes and libraries
-
 Centos 7 (Running Python 2.7):
 
 ```
@@ -127,6 +122,14 @@ python -m pip install -r requirements-python-lib.txt --target lib --trusted-host
 ```
 
 
+# Testing
+
+# Unit Testing:
+
+### Installation:
+
+Install the project using the procedures in the Git Installation section.
+
 ### Testing:
 
 ```
@@ -137,7 +140,6 @@ test/unit/mongodb_lib/unit_test_run.sh
 
 ### Code coverage:
 ```
-cd {Python_Project}/mongo-lib
 test/unit/mongodb_class/code_coverage.sh
 test/unit/mongodb_lib/code_coverage.sh
 ```
@@ -148,7 +150,7 @@ NOTE:  Part of the Integration testing will require access to a Mongo database s
 
 ### Installation:
 
-Install the project using the procedures in the Installation section under Unit Testing.
+Install the project using the procedures in the Git Installation section.
 
 ### Configuration:
 
@@ -204,7 +206,6 @@ test/integration/mongo_class/code_coverage.sh
 ### Testing mongo_lib.py:
 
 ```
-cd {Python_Project}/mongo-lib
 test/integration/mongo_libs/integration_test_run.sh
 test/integration/mongo_libs/code_coverage.sh
 ```
@@ -212,7 +213,6 @@ test/integration/mongo_libs/code_coverage.sh
 ### Testing mongo_class.py - Mongo Replica Set
 
 ```
-cd {Python_Project}/mongo-lib
 test/integration/mongo_class/replica_integration_test_run.sh
 test/integration/mongo_class/replica_code_coverage.sh
 ```
