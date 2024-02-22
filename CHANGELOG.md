@@ -6,11 +6,12 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [4.2.9] - 2024-02-21
 - Updated python-lib to v3.0.3
-- Updated requirements for Python 3.
+- Updated module requirements for Python.
 
 ### Changed
 - Set simplejson to 3.12.0 for Python 3.
 - Set distro to 1.6.0 for Python 3.
+- Set chardet to 3.0.4 for Python 2 and Python 3.
 - Documentation changes.
 
 
