@@ -66,7 +66,7 @@ Centos 7 (Running Python 2.7):
 Add/modify the following lines to the {Other_Python_Project}/requirements.txt file:
 
 ```
-chardet==4.0.0
+chardet==3.0.4
 distro==1.6.0
 email==4.0.3
 psutil==5.4.3
@@ -78,7 +78,7 @@ Redhat 8 (Running Python 3.6):
 Add/modify the following lines to the {Other_Python_Project}/requirements3.txt file:
 
 ```
-chardet==4.0.0
+chardet==3.0.4
 distro==1.6.0
 psutil==5.4.3
 pymongo==3.8.0
