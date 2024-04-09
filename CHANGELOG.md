@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.3.0] - 2024-04-09
+- Added TLS connection capability to the Mongo classes.
+- Set pymongo to 3.12.3 for Python 2 and Python 3.
+
+
 ## [4.2.9] - 2024-02-21
 - Updated python-lib to v3.0.3
 - Updated module requirements for Python.
