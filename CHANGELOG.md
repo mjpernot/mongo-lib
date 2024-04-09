@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ### Changed
 - mongo_class: \_\_init\_\_, set_pass_config, set_ssl_config: Removed global variables and replaced them with hardcoded values.
+- mongo_lib: add_ssl_cmd, crt_base_cmd: Removed global variables and replaced them with hardcoded values.
 - Documentation changes.
 
 ### Added

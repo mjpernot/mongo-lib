@@ -37,10 +37,6 @@ except (ValueError, ImportError) as err:
 __version__ = version.__version__
 
 # Global
-KEY1 = "pass"
-KEY2 = "word"
-KEY3 = "ssl_pem_"
-KEY4 = "phrase"
 HOST = "--host="
 
 
@@ -57,11 +53,6 @@ def add_ssl_cmd(mongo, cmd_list):
         (output) cmd_line -> Basic Mongo utility command line in list format
     """
 
-    global KEY1
-    global KEY2
-    global KEY3
-    global KEY4
-
     cmd_list = list(cmd_list)
 
     if mongo.config.get("ssl", False):
@@ -74,10 +65,10 @@ def add_ssl_cmd(mongo, cmd_list):
             cmd_list.append(
                 "--sslPEMKeyFile=" + mongo.config.get("ssl_keyfile"))
 
-            if mongo.config.get(KEY3 + KEY1 + KEY4):
+            if mongo.config.get("ssl_pem_passphrase"):
                 cmd_list.append(
-                    "--sslPEMKeyPass" + KEY2 + "=" +
-                    mongo.config.get(KEY3 + KEY1 + KEY4))
+                    "--sslPEMKeyPassword=" +
+                    mongo.config.get("ssl_pem_passphrase"))
 
     return cmd_list
 
@@ -180,10 +171,6 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     """
 
-    global KEY1
-    global KEY2
-    global KEY3
-    global KEY4
     global HOST
 
     cmd_list = []
@@ -209,7 +196,7 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     elif mongo.auth:
         cmd_list = [prog_name, "--username=" + mongo.user, host_port,
-                    "--" + KEY1 + KEY2 + "=" + mongo.japd]
+                    "--password=" + mongo.japd]
 
     else:
         cmd_list = [prog_name, host_port]
