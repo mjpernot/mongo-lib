@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Set pymongo to 3.12.3 for Python 2 and Python 3.
 
 ### Changed
+- mongo_class: \_\_init\_\_, set_pass_config, set_ssl_config: Removed global variables and replaced them with hardcoded values.
 - Documentation changes.
 
 ### Added

@@ -41,10 +41,6 @@ except (ValueError, ImportError) as err:
 __version__ = version.__version__
 
 # Global
-KEY1 = "pass"
-KEY2 = "word"
-KEY3 = "ssl_pem_"
-KEY4 = "phrase"
 
 
 def fetch_cmd_line(mongo):
@@ -147,9 +143,6 @@ class Server(object):
                 ssl_client_phrase -> SSL client pass phrase to key file
 
         """
-
-        global KEY1
-        global KEY2
 
         self.name = name
         self.user = user
@@ -444,10 +437,7 @@ class Server(object):
 
         """
 
-        global KEY1
-        global KEY2
-
-        self.config[KEY1 + KEY2] = self.japd
+        self.config["password"] = self.japd
 
     def set_ssl_config(self):
 
@@ -458,10 +448,6 @@ class Server(object):
         Arguments:
 
         """
-
-        global KEY1
-        global KEY3
-        global KEY4
 
         if self.ssl_client_ca or self.ssl_client_cert:
             self.config["ssl"] = True
@@ -476,7 +462,7 @@ class Server(object):
                 self.config["ssl_keyfile"] = self.ssl_client_key
 
             if self.ssl_client_phrase and self.ssl_client_cert:
-                self.config[KEY3 + KEY1 + KEY4] = self.ssl_client_phrase
+                self.config["ssl_pem_passphrase"] = self.ssl_client_phrase
 
 
 class DB(Server):
