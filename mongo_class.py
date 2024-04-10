@@ -116,6 +116,7 @@ class Server(object):
         is_locked
         set_pass_config
         set_ssl_config
+        set_tls_config
 
     """
 
@@ -134,13 +135,14 @@ class Server(object):
             (input) port -> '27017' or port for Mongo
             (input) kwargs:
                 auth -> True|False - Authentication on
-                conf_file -> Location of mongo.conf file
+                conf_file -> Location of mongod.conf file
                 auth_db -> Authentication database name
                 auth_mech -> Authentication mechanism for connecting
                 ssl_client_ca -> SSL certificate authority file
                 ssl_client_key -> SSL key pem file
                 ssl_client_cert -> SSL certificate pem file
                 ssl_client_phrase -> SSL client pass phrase to key file
+                auth_type -> SSL | TLS | None - Type of connection to use.
 
         """
 
@@ -176,12 +178,29 @@ class Server(object):
         if self.auth_mech != "MONGODB-CR":
             self.config["authMechanism"] = self.auth_mech
 
+        # TLS|SSL setting
+        self.auth_type = kwargs.get("auth_type", None)
+
         # SSL configuration settings
         self.ssl_client_ca = kwargs.get("ssl_client_ca", None)
         self.ssl_client_key = kwargs.get("ssl_client_key", None)
         self.ssl_client_cert = kwargs.get("ssl_client_cert", None)
         self.ssl_client_phrase = kwargs.get("ssl_client_phrase", None)
-        self.set_ssl_config()
+
+        # TLS configuration settings
+        self.tls_certkey = kwargs.get("tls_certkey", None)
+        self.tls_ca_certs = kwargs.get("tls_ca_certs", None)
+        self.tls_certkey_phrase = kwargs.get("tls_certkey_phrase", None)
+
+        # Double check for SSL for backward comptability
+        if self.auth_type = "SSL" or (self.ssl_client_ca or
+                                      self.ssl_client_cert):
+            self.auth_type = "SSL"
+            self.set_ssl_config()
+
+        elif self.auth_type = "TLS":
+            self.set_tls_config()
+
 
     def upd_srv_stat(self):
 
@@ -463,6 +482,29 @@ class Server(object):
 
             if self.ssl_client_phrase and self.ssl_client_cert:
                 self.config["ssl_pem_passphrase"] = self.ssl_client_phrase
+
+    def set_tls_config(self):
+
+        """Method:  set_tls_config
+
+        Description:  Append TLS attributes to config.
+
+        Arguments:
+
+        """
+
+        if self.ssl_client_ca or self.ssl_client_cert:
+            self.config["tls"] = True
+
+            if self.tls_ca_certs:
+                self.config["tlsCAFile"] = self.tls_ca_certs
+
+            if self.tls_certkey:
+                self.config["tlsCertificateKeyFile"] = self.tls_certkey
+
+            if self.tls_certkey_phrase and self.tls_certkey:
+                self.config[
+                    "tlsCertificateKeyFilePassword"] = self.tls_certkey_phrase
 
 
 class DB(Server):
