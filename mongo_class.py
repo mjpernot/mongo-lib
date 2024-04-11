@@ -192,14 +192,14 @@ class Server(object):
         self.tls_ca_certs = kwargs.get("tls_ca_certs", None)
         self.tls_certkey_phrase = kwargs.get("tls_certkey_phrase", None)
 
+        if self.auth_type == "TLS":
+            self.set_tls_config()
+
         # Double check for SSL for backward comptability
-        if self.auth_type = "SSL" or (self.ssl_client_ca or
-                                      self.ssl_client_cert):
+        elif self.auth_type == "SSL" or (self.ssl_client_ca or
+                                         self.ssl_client_cert):
             self.auth_type = "SSL"
             self.set_ssl_config()
-
-        elif self.auth_type = "TLS":
-            self.set_tls_config()
 
 
     def upd_srv_stat(self):
@@ -493,7 +493,7 @@ class Server(object):
 
         """
 
-        if self.ssl_client_ca or self.ssl_client_cert:
+        if self.tls_ca_certs or self.tls_certkey:
             self.config["tls"] = True
 
             if self.tls_ca_certs:
