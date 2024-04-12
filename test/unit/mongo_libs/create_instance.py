@@ -92,6 +92,10 @@ class Cfg2(object):
         self.ssl_client_cert = None
         self.ssl_client_key = None
         self.ssl_client_phrase = None
+        self.auth_type = None
+        self.tls_ca_certs = None
+        self.tls_certkey = None
+        self.tls_certkey_phrase = None
 
 
 class Cfg3(object):
@@ -131,6 +135,53 @@ class Cfg3(object):
         self.ssl_client_cert = "CertFile"
         self.ssl_client_key = "KeyFile"
         self.ssl_client_phrase = "MyPhrase"
+        self.auth_type = "SSL"
+        self.tls_ca_certs = None
+        self.tls_certkey = None
+        self.tls_certkey_phrase = None
+
+
+class Cfg4(object):
+
+    """Class:  Cfg4
+
+    Description:  Class stub holder for Cfg class with new attributes.
+
+    Methods:
+        __init__
+
+    """
+
+    def __init__(self, repset_hosts=None):
+
+        """Function:  __init__
+
+        Description:  Class initialization.
+
+        Arguments:
+
+        """
+
+        self.name = "name"
+        self.user = "user"
+        self.japd = "userpd"
+        self.host = "host"
+        self.port = 27017
+        self.auth = True
+        self.repset = "repset_name"
+        self.conf_file = "conf_file"
+        self.repset_hosts = repset_hosts
+        self.db_auth = "db_name"
+        self.auth_db = "mydatabase"
+        self.auth_mech = "SCRAM-SHA-1"
+        self.ssl_client_ca = None
+        self.ssl_client_cert = None
+        self.ssl_client_key = None
+        self.ssl_client_phrase = None
+        self.auth_type = "TLS"
+        self.tls_ca_certs = "CAFile"
+        self.tls_certkey = "CertKeyFile"
+        self.tls_certkey_phrase = "MyPhrase"
 
 
 class UnitTest(unittest.TestCase):

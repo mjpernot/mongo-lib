@@ -188,8 +188,8 @@ class Server(object):
         self.ssl_client_phrase = kwargs.get("ssl_client_phrase", None)
 
         # TLS configuration settings
-        self.tls_certkey = kwargs.get("tls_certkey", None)
         self.tls_ca_certs = kwargs.get("tls_ca_certs", None)
+        self.tls_certkey = kwargs.get("tls_certkey", None)
         self.tls_certkey_phrase = kwargs.get("tls_certkey_phrase", None)
 
         if self.auth_type == "TLS":
