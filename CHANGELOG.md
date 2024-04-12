@@ -16,7 +16,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Documentation changes.
 
 ### Added
-- Added mongo.py - template Mongo configuration file.
+- mongo_libs.add_tls_cmd: Add TLS options to the command line.
+- mongo_class.Server.set_tls_config: Append TLS attributes to config.
+- Added mongo.py - Remplate Mongo configuration file.
 
 
 ## [4.2.9] - 2024-02-21

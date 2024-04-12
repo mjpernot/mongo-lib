@@ -5,6 +5,7 @@
     Description:  Library of function calls for a Mongo database system.
 
     Functions:
+        add_tls_cmd
         add_ssl_cmd
         create_cmd
         create_instance
@@ -38,6 +39,40 @@ __version__ = version.__version__
 
 # Global
 HOST = "--host="
+
+
+def add_tls_cmd(mongo, cmd_list):
+
+    """Function:  add_tls_cmd
+
+    Description:  Determine if TLS options are present and add to the command
+        line.
+
+    Arguments:
+        (input) mongo -> Database instance
+        (input) cmd_line -> Basic Mongo utility command line in list format
+        (output) cmd_line -> Basic Mongo utility command line in list format
+    """
+
+    cmd_list = list(cmd_list)
+
+    if mongo.config.get("tls", False):
+        cmd_list.append("--tls")
+
+        if mongo.config.get("tlsCAFile"):
+            cmd_list.append("--tlsCAFile=" + mongo.config.get("tlsCAFile"))
+
+        if mongo.config.get("tlsCertificateKeyFile"):
+            cmd_list.append(
+                "--tlsCertificateKeyFile=" + mongo.config.get(
+                    "tlsCertificateKeyFile"))
+
+            if mongo.config.get("tlsCertificateKeyFilePassword"):
+                cmd_list.append(
+                    "--tlsCertificateKeyFilePassword=" +
+                    mongo.config.get("tlsCertificateKeyFilePassword"))
+
+    return cmd_list
 
 
 def add_ssl_cmd(mongo, cmd_list):

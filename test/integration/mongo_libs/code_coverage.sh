@@ -9,6 +9,7 @@ coverage erase
 echo ""
 echo "Running unit test modules in conjunction with coverage"
 coverage run -a --source=mongo_libs test/integration/mongo_libs/add_ssl_cmd.py
+coverage run -a --source=mongo_libs test/integration/mongo_libs/add_tls_cmd.py
 coverage run -a --source=mongo_libs test/integration/mongo_libs/create_cmd.py
 coverage run -a --source=mongo_libs test/integration/mongo_libs/create_instance.py
 coverage run -a --source=mongo_libs test/integration/mongo_libs/crt_base_cmd.py
