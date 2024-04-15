@@ -16,7 +16,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class.SlaveRep.\_\_init\_\_: Added TLS attributes and type of connection attribute.
 - mongo_class.RepSet.\_\_init\_\_: Added TLS attributes and type of connection attribute.
 - mongo_class.RepSetColl.\_\_init\_\_: Added TLS attributes and type of connection attribute.
-- mongo_libs.create_instance: Added TLS configuration entries and also passed in TLS and SSL via a pointer instead of individual parameters.
+- mongo_libs: create_instance, crt_coll_inst: Added TLS configuration entries and also passed in TLS and SSL via a pointer instead of individual parameters.
 - mongo_class.Server.\_\_init\_\_: Added TLS attributes and type of connection attribute.
 - mongo_class.Server.set_tls_config: Set the TLS attributes to the config setup.
 - mongo_class.Server: \_\_init\_\_, set_pass_config, set_ssl_config: Removed global variables and replaced them with hardcoded values.

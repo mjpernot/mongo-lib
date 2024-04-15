@@ -97,6 +97,10 @@ class Cfg2(object):
         self.ssl_client_cert = None
         self.ssl_client_key = None
         self.ssl_client_phrase = None
+        self.auth_type = None
+        self.tls_ca_certs = None
+        self.tls_certkey = None
+        self.tls_certkey_phrase = None
 
 
 class Cfg3(object):
@@ -136,6 +140,94 @@ class Cfg3(object):
         self.ssl_client_cert = "CertFile"
         self.ssl_client_key = "KeyFile"
         self.ssl_client_phrase = "MyPhrase"
+        self.auth_type = None
+        self.tls_ca_certs = None
+        self.tls_certkey = None
+        self.tls_certkey_phrase = None
+
+class Cfg4(object):
+
+    """Class:  Cfg4
+
+    Description:  Class stub holder for Cfg class with new attributes.
+
+    Methods:
+        __init__
+
+    """
+
+    def __init__(self, repset_hosts=None):
+
+        """Function:  __init__
+
+        Description:  Class initialization.
+
+        Arguments:
+
+        """
+
+        self.name = "name"
+        self.user = "user"
+        self.japd = "userpd"
+        self.host = "host"
+        self.port = 27017
+        self.auth = True
+        self.repset = "repset_name"
+        self.conf_file = "conf_file"
+        self.repset_hosts = repset_hosts
+        self.db_auth = "db_name"
+        self.auth_db = "mydatabase"
+        self.auth_mech = "SCRAM-SHA-1"
+        self.ssl_client_ca = "CAFile"
+        self.ssl_client_cert = "CertFile"
+        self.ssl_client_key = "KeyFile"
+        self.ssl_client_phrase = "MyPhrase"
+        self.auth_type = "SSL"
+        self.tls_ca_certs = None
+        self.tls_certkey = None
+        self.tls_certkey_phrase = None
+
+class Cfg5(object):
+
+    """Class:  Cfg5
+
+    Description:  Class stub holder for Cfg class with new attributes.
+
+    Methods:
+        __init__
+
+    """
+
+    def __init__(self, repset_hosts=None):
+
+        """Function:  __init__
+
+        Description:  Class initialization.
+
+        Arguments:
+
+        """
+
+        self.name = "name"
+        self.user = "user"
+        self.japd = "userpd"
+        self.host = "host"
+        self.port = 27017
+        self.auth = True
+        self.repset = "repset_name"
+        self.conf_file = "conf_file"
+        self.repset_hosts = repset_hosts
+        self.db_auth = "db_name"
+        self.auth_db = "mydatabase"
+        self.auth_mech = "SCRAM-SHA-1"
+        self.ssl_client_ca = None
+        self.ssl_client_cert = None
+        self.ssl_client_key = None
+        self.ssl_client_phrase = None
+        self.auth_type = "TLS"
+        self.tls_ca_certs = "tlsCAFile"
+        self.tls_certkey = "tlsCertKeyFile"
+        self.tls_certkey_phrase = "tlsCertKeyPhrase"
 
 
 class UnitTest(unittest.TestCase):
@@ -146,6 +238,11 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_set_tls_ca_certs2
+        test_set_tls_ca_certs
+        test_auth_type_tls
+        test_auth_type_ssl
+        test_auth_type_none
         test_coll_set_ssl
         test_rep_set_ssl
         test_coll_none_ssl
@@ -176,6 +273,83 @@ class UnitTest(unittest.TestCase):
         """
 
         self.repset_hosts = "host:port"
+        self.tls_ca_certs = "tlsCAFile"
+        self.auth_type = "TLS"
+
+    def test_set_tls_ca_certs2(self):
+
+        """Function:  test_set_tls_ca_certs2
+
+        Description:  Test with tls_ca_certs set.
+
+        Arguments:
+
+        """
+
+        cfg = Cfg5(self.repset_hosts)
+        mongo = mongo_libs.crt_coll_inst(cfg, "db", "tbl")
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    def test_set_tls_ca_certs(self):
+
+        """Function:  test_set_tls_ca_certs
+
+        Description:  Test with tls_ca_certs set.
+
+        Arguments:
+
+        """
+
+        cfg = Cfg5()
+        mongo = mongo_libs.crt_coll_inst(cfg, "db", "tbl")
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    def test_auth_type_tls(self):
+
+        """Function:  test_auth_type_tls
+
+        Description:  Test with auth_type set to TLS.
+
+        Arguments:
+
+        """
+
+        cfg = Cfg5()
+        mongo = mongo_libs.crt_coll_inst(cfg, "db", "tbl")
+
+        self.assertEqual(mongo.auth_type, self.auth_type)
+
+    def test_auth_type_ssl(self):
+
+        """Function:  test_auth_type_ssl
+
+        Description:  Test with auth_type set to SSL.
+
+        Arguments:
+
+        """
+
+        cfg = Cfg4()
+        mongo = mongo_libs.crt_coll_inst(cfg, "db", "tbl")
+
+        self.assertEqual(mongo.auth_type, "SSL")
+
+    def test_auth_type_none(self):
+
+        """Function:  test_auth_type_none
+
+        Description:  Test with auth_type set to None.
+
+        Arguments:
+
+        """
+
+        cfg = Cfg3()
+        mongo = mongo_libs.crt_coll_inst(cfg, "db", "tbl")
+
+        self.assertEqual(mongo.auth_type, "SSL")
 
     def test_coll_set_ssl(self):
 
