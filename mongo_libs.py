@@ -243,7 +243,10 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
     else:
         cmd_list = [prog_name, host_port]
 
-    if mongo.config.get("ssl", False):
+    if mongo.config.get("tls", False):
+        cmd_list = add_tls_cmd(mongo, cmd_list)
+
+    elif mongo.config.get("ssl", False):
         cmd_list = add_ssl_cmd(mongo, cmd_list)
 
     return cmd_list

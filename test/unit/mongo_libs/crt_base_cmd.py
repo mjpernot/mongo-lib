@@ -66,6 +66,9 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_tls_true
+        test_tls_false2
+        test_tls_false
         test_ssl_true
         test_ssl_false2
         test_ssl_false
@@ -107,6 +110,57 @@ class UnitTest(unittest.TestCase):
             host + self.repset + "/" + self.host + ":" + str(self.port)
         self.host_port3 = host + self.host + ":" + str(self.port)
         self.ssl = "--ssl"
+        self.tls = "--tls"
+
+    def test_tls_true(self):
+
+        """Function:  test_tls_true
+
+        Description:  Test with TLS option set to True.
+
+        Arguments:
+
+        """
+
+        mongo = Mongo()
+        mongo.config["tls"] = True
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name),
+            [self.prog_name, self.uname + self.user, self.host_port3,
+             self.japd2 + self.japd, self.tls])
+
+    def test_tls_false2(self):
+
+        """Function:  test_tls_false2
+
+        Description:  Test with TLS option set to False.
+
+        Arguments:
+
+        """
+
+        mongo = Mongo()
+        mongo.config["tls"] = False
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name),
+            [self.prog_name, self.uname + self.user, self.host_port3,
+             self.japd2 + self.japd])
+
+    def test_tls_false(self):
+
+        """Function:  test_tls_false
+
+        Description:  Test with no TLS option present.
+
+        Arguments:
+
+        """
+
+        mongo = Mongo()
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(mongo, self.prog_name),
+            [self.prog_name, self.uname + self.user, self.host_port3,
+             self.japd2 + self.japd])
 
     def test_ssl_true(self):
 

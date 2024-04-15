@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Set pymongo to 3.12.3 for Python 2 and Python 3.
 
 ### Changed
+- mongo_libs.crt_base_cmd: Added check for TLS settings.
 - mongo_class.DB.\_\_init\_\_: Added TLS attributes and type of connection attribute.
 - mongo_class.Coll.\_\_init\_\_: Added TLS attributes and type of connection attribute.
 - mongo_class.Rep.\_\_init\_\_: Added TLS attributes and type of connection attribute.
@@ -18,8 +19,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_libs.create_instance: Added TLS configuration entries and also passed in TLS and SSL via a pointer instead of individual parameters.
 - mongo_class.Server.\_\_init\_\_: Added TLS attributes and type of connection attribute.
 - mongo_class.Server.set_tls_config: Set the TLS attributes to the config setup.
-- mongo_classi.Server: \_\_init\_\_, set_pass_config, set_ssl_config: Removed global variables and replaced them with hardcoded values.
-- mongo_lib: add_ssl_cmd, crt_base_cmd: Removed global variables and replaced them with hardcoded values.
+- mongo_class.Server: \_\_init\_\_, set_pass_config, set_ssl_config: Removed global variables and replaced them with hardcoded values.
+- mongo_libs: add_ssl_cmd, crt_base_cmd: Removed global variables and replaced them with hardcoded values.
 - Documentation changes.
 
 ### Added
