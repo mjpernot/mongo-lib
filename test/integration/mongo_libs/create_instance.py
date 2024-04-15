@@ -35,8 +35,19 @@ class UnitTest(unittest.TestCase):
 
     Description:  Class which is a representation of a unit testing.
 
+    Note:  Some of the tests will fail depending whether SSL or TLS is being
+        used.
+
     Methods:
         setUp
+        test_set_tls8
+        test_set_tls7
+        test_set_tls6
+        test_set_tls5
+        test_set_tls4
+        test_set_tls3
+        test_set_tls2
+        test_set_tls
         test_set_ssl8
         test_set_ssl7
         test_set_ssl6
@@ -112,11 +123,148 @@ class UnitTest(unittest.TestCase):
         self.auth_mech = "SCRAM-SHA-1"
         self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
         self.ssl_client_ca = self.cfg.ssl_client_ca
+        self.tls_ca_certs = self.cfg.tls_ca_certs
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls8(self, mock_load):
+
+        """Function:  test_set_tls8
+
+        Description:  Test Server class with TLS attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(
+            self.config_name, self.config_dir, mongo_class.RepSetColl)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls7(self, mock_load):
+
+        """Function:  test_set_tls7
+
+        Description:  Test Server class with TLS attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(
+            self.config_name, self.config_dir, mongo_class.RepSet)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls6(self, mock_load):
+
+        """Function:  test_set_tls6
+
+        Description:  Test Server class with TLS attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(
+            self.config_name, self.config_dir, mongo_class.SlaveRep)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls5(self, mock_load):
+
+        """Function:  test_set_tls5
+
+        Description:  Test Server class with TLS attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(
+            self.config_name, self.config_dir, mongo_class.MasterRep)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls4(self, mock_load):
+
+        """Function:  test_set_tls4
+
+        Description:  Test Server class with TLS attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(
+            self.config_name, self.config_dir, mongo_class.Rep)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls3(self, mock_load):
+
+        """Function:  test_set_tls3
+
+        Description:  Test Server class with TLS attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(
+            self.config_name, self.config_dir, mongo_class.Coll)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls2(self, mock_load):
+
+        """Function:  test_set_tls2
+
+        Description:  Test Server class with TLS attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(
+            self.config_name, self.config_dir, mongo_class.DB)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls(self, mock_load):
+
+        """Function:  test_set_tls
+
+        Description:  Test Server class with TLS attribute set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg
+        mongo = mongo_libs.create_instance(
+            self.config_name, self.config_dir, mongo_class.Server)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl8(self, mock_load):
 
-        """Function:  test_none_ssl8
+        """Function:  test_set_ssl8
 
         Description:  Test Server class with SSL attribute set.
 
@@ -133,7 +281,7 @@ class UnitTest(unittest.TestCase):
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl7(self, mock_load):
 
-        """Function:  test_none_ssl7
+        """Function:  test_set_ssl7
 
         Description:  Test Server class with SSL attribute set.
 
@@ -150,7 +298,7 @@ class UnitTest(unittest.TestCase):
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl6(self, mock_load):
 
-        """Function:  test_none_ssl6
+        """Function:  test_set_ssl6
 
         Description:  Test Server class with SSL attribute set.
 
@@ -167,7 +315,7 @@ class UnitTest(unittest.TestCase):
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl5(self, mock_load):
 
-        """Function:  test_none_ssl5
+        """Function:  test_set_ssl5
 
         Description:  Test Server class with SSL attribute set.
 
@@ -184,7 +332,7 @@ class UnitTest(unittest.TestCase):
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl4(self, mock_load):
 
-        """Function:  test_none_ssl4
+        """Function:  test_set_ssl4
 
         Description:  Test Server class with SSL attribute set.
 
@@ -201,7 +349,7 @@ class UnitTest(unittest.TestCase):
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl3(self, mock_load):
 
-        """Function:  test_none_ssl3
+        """Function:  test_set_ssl3
 
         Description:  Test Server class with SSL attribute set.
 
@@ -218,7 +366,7 @@ class UnitTest(unittest.TestCase):
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl2(self, mock_load):
 
-        """Function:  test_none_ssl2
+        """Function:  test_set_ssl2
 
         Description:  Test Server class with SSL attribute set.
 
@@ -235,9 +383,9 @@ class UnitTest(unittest.TestCase):
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl(self, mock_load):
 
-        """Function:  test_none_ssl
+        """Function:  test_set_ssl
 
-        Description:  Test Server class with SSL attribute set to none.
+        Description:  Test Server class with SSL attribute set.
 
         Arguments:
 

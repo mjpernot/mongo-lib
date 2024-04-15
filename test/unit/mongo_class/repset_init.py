@@ -40,6 +40,21 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_auth_type_none
+        test_auth_type_ssl
+        test_auth_type_tls
+        test_tls_all2
+        test_tls_all
+        test_tls_cert_key_config2
+        test_tls_cert_key_config
+        test_tls_ca_certs_config2
+        test_tls_ca_certs_config
+        test_tls_certkey_phrase2
+        test_tls_certkey_phrase
+        test_tls_cert_key2
+        test_tls_clientkey
+        test_tls_client_ca2
+        test_tls_ca_certs
         test_ssl_all_phrase2
         test_ssl_all_phrase
         test_ssl_all2
@@ -177,6 +192,303 @@ class UnitTest(unittest.TestCase):
         self.config7["ssl_keyfile"] = self.ssl_client_key
         self.config7["ssl_certfile"] = self.ssl_client_cert
         self.config7[KEY3 + KEY1 + KEY4] = self.ssl_client_phrase
+
+
+        self.tls_ca_certs = "tlsCAFile"
+        self.tls_certkey = "tlsCertificationKeyFile"
+        self.tls_certkey_phrase = "tlsCertificationKeyFilePassword"
+
+        config = dict()
+        config["password"] = self.japd
+        config["authMechanism"] = self.auth_mech2
+        config["tls"] = True
+
+        self.config3a = dict(config)
+        self.config4a = dict(config)
+        self.config5a = dict(config)
+        self.config6a = dict(config)
+        self.config7a = dict(config)
+
+        self.config3a["tlsCAFile"] = self.tls_ca_certs
+
+        self.config4a["tlsCertificateKeyFile"] = self.tls_certkey
+
+        self.config5a["tlsCertificateKeyFile"] = self.tls_certkey
+        self.config5a[
+            "tlsCertificateKeyFilePassword"] = self.tls_certkey_phrase
+
+        self.config6a["tlsCAFile"] = self.tls_ca_certs
+        self.config6a["tlsCertificateKeyFile"] = self.tls_certkey
+
+        self.config7a["tlsCAFile"] = self.tls_ca_certs
+        self.config7a["tlsCertificateKeyFile"] = self.tls_certkey
+        self.config7a[
+            "tlsCertificateKeyFilePassword"] = self.tls_certkey_phrase
+
+    def test_auth_type_none(self):
+
+        """Function:  test_auth_type_tls
+
+        Description:  Test with all ssl arguments present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
+            tls_certkey=self.tls_certkey,
+            tls_certkey_phrase=self.tls_certkey_phrase,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_ca=self.ssl_client_ca,
+            ssl_client_phrase=self.ssl_client_phrase)
+
+        self.assertEqual(mongo.config, self.config7)
+
+    def test_auth_type_ssl(self):
+
+        """Function:  test_auth_type_tls
+
+        Description:  Test with all ssl arguments present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
+            tls_certkey=self.tls_certkey,
+            tls_certkey_phrase=self.tls_certkey_phrase,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_ca=self.ssl_client_ca,
+            ssl_client_phrase=self.ssl_client_phrase, auth_type="SSL")
+
+        self.assertEqual(mongo.config, self.config7)
+
+    def test_auth_type_tls(self):
+
+        """Function:  test_auth_type_tls
+
+        Description:  Test with all ssl arguments present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
+            tls_certkey=self.tls_certkey,
+            tls_certkey_phrase=self.tls_certkey_phrase,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_ca=self.ssl_client_ca,
+            ssl_client_phrase=self.ssl_client_phrase, auth_type="TLS")
+
+        self.assertEqual(mongo.config, self.config7a)
+
+    def test_tls_all2(self):
+
+        """Function:  test_tls_all2
+
+        Description:  Test with all ssl arguments present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
+            tls_certkey=self.tls_certkey,
+            tls_certkey_phrase=self.tls_certkey_phrase, auth_type="TLS")
+
+        self.assertEqual(mongo.config, self.config7a)
+
+    def test_tls_all(self):
+
+        """Function:  test_tls_all
+
+        Description:  Test with all tls arguments present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
+            tls_certkey=self.tls_certkey, auth_type="TLS")
+
+        self.assertEqual(mongo.config, self.config6a)
+
+    def test_tls_cert_key_config2(self):
+
+        """Function:  test_tls_cert_key_config2
+
+        Description:  Test with tls_cert_key_config with config attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file, tls_certkey=self.tls_certkey,
+            tls_certkey_phrase=self.tls_certkey_phrase, auth_type="TLS")
+
+        self.assertEqual(mongo.config, self.config5a)
+
+    def test_tls_cert_key_config(self):
+
+        """Function:  test_tls_cert_key_config
+
+        Description:  Test with tls_cert_key_config with config attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file, tls_certkey=self.tls_certkey,
+            auth_type="TLS")
+
+        self.assertEqual(mongo.config, self.config4a)
+
+    def test_tls_ca_certs_config2(self):
+
+        """Function:  test_tls_ca_certs_config2
+
+        Description:  Test with ssl_client_ca only present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
+            tls_certkey_phrase=self.tls_certkey_phrase, auth_type="TLS")
+
+        self.assertEqual(mongo.config, self.config3a)
+
+    def test_tls_ca_certs_config(self):
+
+        """Function:  test_tls_ca_certs_config
+
+        Description:  Test with tls_ca_certs with config attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, self.host, self.port,
+            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
+            auth_type="TLS")
+
+        self.assertEqual(mongo.config, self.config3a)
+
+    def test_tls_certkey_phrase2(self):
+
+        """Function:  test_tls_certkey_phrase2
+
+        Description:  Test with tls_certkey_phrase attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            tls_certkey_phrase=self.tls_certkey_phrase, auth_type="TLS")
+
+        self.assertEqual(mongo.tls_certkey_phrase, self.tls_certkey_phrase)
+
+    def test_tls_certkey_phrase(self):
+
+        """Function:  test_tls_certkey_phrase
+
+        Description:  Test with tls_certkey_phrase attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            auth_type="TLS")
+
+        self.assertEqual(mongo.ssl_client_phrase, None)
+
+    def test_tls_cert_key2(self):
+
+        """Function:  test_tls_cert_key2
+
+        Description:  Test with tls_cert_key attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            tls_certkey=self.tls_certkey, auth_type="TLS")
+
+        self.assertEqual(mongo.tls_certkey, self.tls_certkey)
+
+    def test_tls_cert_key(self):
+
+        """Function:  test_tls_cert_key
+
+        Description:  Test with no tls_cert_key attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            auth_type="TLS")
+
+        self.assertEqual(mongo.tls_certkey, None)
+
+    def test_tls_client_ca2(self):
+
+        """Function:  test_tls_client_ca2
+
+        Description:  Test with tls_ca_certs attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            tls_ca_certs=self.tls_ca_certs, auth_type="TLS")
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    def test_tls_ca_certs(self):
+
+        """Function:  test_tls_ca_certs
+
+        Description:  Test with no tls_ca_certs attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.RepSet(
+            self.name, self.user, self.japd, host=self.host, port=self.port,
+            auth_type="TLS")
+
+        self.assertEqual(mongo.tls_ca_certs, None)
 
     def test_ssl_all_phrase2(self):
 

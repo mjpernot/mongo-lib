@@ -135,7 +135,7 @@ class Cfg3(object):
         self.ssl_client_cert = "CertFile"
         self.ssl_client_key = "KeyFile"
         self.ssl_client_phrase = "MyPhrase"
-        self.auth_type = "SSL"
+        self.auth_type = None
         self.tls_ca_certs = None
         self.tls_certkey = None
         self.tls_certkey_phrase = None
@@ -174,14 +174,57 @@ class Cfg4(object):
         self.db_auth = "db_name"
         self.auth_db = "mydatabase"
         self.auth_mech = "SCRAM-SHA-1"
+        self.ssl_client_ca = "CAFile"
+        self.ssl_client_cert = "CertFile"
+        self.ssl_client_key = "KeyFile"
+        self.ssl_client_phrase = "MyPhrase"
+        self.auth_type = "SSL"
+        self.tls_ca_certs = None
+        self.tls_certkey = None
+        self.tls_certkey_phrase = None
+
+
+class Cfg5(object):
+
+    """Class:  Cfg5
+
+    Description:  Class stub holder for Cfg class with new attributes.
+
+    Methods:
+        __init__
+
+    """
+
+    def __init__(self, repset_hosts=None):
+
+        """Function:  __init__
+
+        Description:  Class initialization.
+
+        Arguments:
+
+        """
+
+        self.name = "name"
+        self.user = "user"
+        self.japd = "userpd"
+        self.host = "host"
+        self.port = 27017
+        self.auth = True
+        self.repset = "repset_name"
+        self.conf_file = "conf_file"
+        self.repset_hosts = repset_hosts
+        self.db_auth = "db_name"
+        self.auth_db = "mydatabase"
+        self.auth_mech = "SCRAM-SHA-1"
         self.ssl_client_ca = None
         self.ssl_client_cert = None
         self.ssl_client_key = None
         self.ssl_client_phrase = None
         self.auth_type = "TLS"
-        self.tls_ca_certs = "CAFile"
-        self.tls_certkey = "CertKeyFile"
-        self.tls_certkey_phrase = "MyPhrase"
+        self.tls_ca_certs = "tlsCAFile"
+        self.tls_certkey = "tlsCertKeyFile"
+        self.tls_certkey_phrase = "tlsCertKeyPhrase"
 
 
 class UnitTest(unittest.TestCase):
@@ -192,6 +235,33 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_set_tls_certkey_phrase8
+        test_set_tls_certkey_phrase7
+        test_set_tls_certkey_phrase6
+        test_set_tls_certkey_phrase5
+        test_set_tls_certkey_phrase4
+        test_set_tls_certkey_phrase3
+        test_set_tls_certkey_phrase2
+        test_set_tls_certkey_phrase
+        test_set_tls_certkey8
+        test_set_tls_certkey7
+        test_set_tls_certkey6
+        test_set_tls_certkey5
+        test_set_tls_certkey4
+        test_set_tls_certkey3
+        test_set_tls_certkey2
+        test_set_tls_certkey
+        test_set_tls_ca_certs8
+        test_set_tls_ca_certs7
+        test_set_tls_ca_certs6
+        test_set_tls_ca_certs5
+        test_set_tls_ca_certs4
+        test_set_tls_ca_certs3
+        test_set_tls_ca_certs2
+        test_set_tls_ca_certs
+        test_auth_type_tls
+        test_auth_type_ssl
+        test_auth_type_none
         test_set_ssl2
         test_set_ssl
         test_none_ssl2
@@ -238,9 +308,474 @@ class UnitTest(unittest.TestCase):
         self.cfg = Cfg()
         self.cfg2 = Cfg2()
         self.cfg3 = Cfg3()
+        self.cfg4 = Cfg4()
+        self.cfg5 = Cfg5()
         self.auth_db2 = "mydatabase"
         self.auth_meth = "SCRAM-SHA-1"
         self.ssl_client_ca = "CAFile"
+        self.auth_type = "TLS"
+        self.tls_ca_certs = "tlsCAFile"
+        self.tls_certkey = "tlsCertKeyFile"
+        self.tls_certkey_phrase = "tlsCertKeyPhrase"
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey_phrase8(self, mock_load):
+
+        """Function:  test_set_tls_certkey_phrase8
+
+        Description:  Test with tls_certkey_phrase set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.RepSetColl)
+
+        self.assertEqual(mongo.tls_certkey_phrase, self.tls_certkey_phrase)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey_phrase7(self, mock_load):
+
+        """Function:  test_set_tls_certkey_phrase7
+
+        Description:  Test with tls_certkey_phrase set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.RepSet)
+
+        self.assertEqual(mongo.tls_certkey_phrase, self.tls_certkey_phrase)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey_phrase6(self, mock_load):
+
+        """Function:  test_set_tls_certkey_phrase6
+
+        Description:  Test with tls_certkey_phrase set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.SlaveRep)
+
+        self.assertEqual(mongo.tls_certkey_phrase, self.tls_certkey_phrase)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey_phrase5(self, mock_load):
+
+        """Function:  test_set_tls_certkey_phrase5
+
+        Description:  Test with tls_certkey_phrase set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Rep)
+
+        self.assertEqual(mongo.tls_certkey_phrase, self.tls_certkey_phrase)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey_phrase4(self, mock_load):
+
+        """Function:  test_set_tls_certkey_phrase4
+
+        Description:  Test with tls_certkey_phrase set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Coll)
+
+        self.assertEqual(mongo.tls_certkey_phrase, self.tls_certkey_phrase)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey_phrase3(self, mock_load):
+
+        """Function:  test_set_tls_certkey_phrase3
+
+        Description:  Test with tls_certkey_phrase set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.DB)
+
+        self.assertEqual(mongo.tls_certkey_phrase, self.tls_certkey_phrase)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey_phrase2(self, mock_load):
+
+        """Function:  test_set_tls_certkey_phrase2
+
+        Description:  Test with tls_certkey_phrase set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.MasterRep)
+
+        self.assertEqual(mongo.tls_certkey_phrase, self.tls_certkey_phrase)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey_phrase(self, mock_load):
+
+        """Function:  test_set_tls_certkey_phrase
+
+        Description:  Test with tls_certkey_phrase set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
+
+        self.assertEqual(mongo.tls_certkey_phrase, self.tls_certkey_phrase)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey8(self, mock_load):
+
+        """Function:  test_set_tls_certkey8
+
+        Description:  Test with tls_certkey set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.RepSetColl)
+
+        self.assertEqual(mongo.tls_certkey, self.tls_certkey)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey7(self, mock_load):
+
+        """Function:  test_set_tls_certkey7
+
+        Description:  Test with tls_certkey set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.RepSet)
+
+        self.assertEqual(mongo.tls_certkey, self.tls_certkey)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey6(self, mock_load):
+
+        """Function:  test_set_tls_certkey6
+
+        Description:  Test with tls_certkey set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.SlaveRep)
+
+        self.assertEqual(mongo.tls_certkey, self.tls_certkey)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey5(self, mock_load):
+
+        """Function:  test_set_tls_certkey5
+
+        Description:  Test with tls_certkey set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Rep)
+
+        self.assertEqual(mongo.tls_certkey, self.tls_certkey)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey4(self, mock_load):
+
+        """Function:  test_set_tls_certkey4
+
+        Description:  Test with tls_certkey set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Coll)
+
+        self.assertEqual(mongo.tls_certkey, self.tls_certkey)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey3(self, mock_load):
+
+        """Function:  test_set_tls_certkey3
+
+        Description:  Test with tls_certkey set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.DB)
+
+        self.assertEqual(mongo.tls_certkey, self.tls_certkey)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey2(self, mock_load):
+
+        """Function:  test_set_tls_certkey2
+
+        Description:  Test with tls_certkey set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.MasterRep)
+
+        self.assertEqual(mongo.tls_certkey, self.tls_certkey)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_certkey(self, mock_load):
+
+        """Function:  test_set_tls_certkey
+
+        Description:  Test with tls_certkey set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
+
+        self.assertEqual(mongo.tls_certkey, self.tls_certkey)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_ca_certs8(self, mock_load):
+
+        """Function:  test_set_tls_ca_certs8
+
+        Description:  Test with tls_ca_certs set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.RepSetColl)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_ca_certs7(self, mock_load):
+
+        """Function:  test_set_tls_ca_certs7
+
+        Description:  Test with tls_ca_certs set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.RepSet)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_ca_certs6(self, mock_load):
+
+        """Function:  test_set_tls_ca_certs6
+
+        Description:  Test with tls_ca_certs set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.SlaveRep)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_ca_certs5(self, mock_load):
+
+        """Function:  test_set_tls_ca_certs5
+
+        Description:  Test with tls_ca_certs set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Rep)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_ca_certs4(self, mock_load):
+
+        """Function:  test_set_tls_ca_certs4
+
+        Description:  Test with tls_ca_certs set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Coll)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_ca_certs3(self, mock_load):
+
+        """Function:  test_set_tls_ca_certs3
+
+        Description:  Test with tls_ca_certs set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.DB)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_ca_certs2(self, mock_load):
+
+        """Function:  test_set_tls_ca_certs2
+
+        Description:  Test with tls_ca_certs set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.MasterRep)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_tls_ca_certs(self, mock_load):
+
+        """Function:  test_set_tls_ca_certs
+
+        Description:  Test with tls_ca_certs set.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
+
+        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_auth_type_tls(self, mock_load):
+
+        """Function:  test_auth_type_tls
+
+        Description:  Test with auth_type set to TLS.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg5
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
+
+        self.assertEqual(mongo.auth_type, self.auth_type)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_auth_type_ssl(self, mock_load):
+
+        """Function:  test_auth_type_ssl
+
+        Description:  Test with auth_type set to SSL.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg4
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
+
+        self.assertEqual(mongo.auth_type, "SSL")
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_auth_type_none(self, mock_load):
+
+        """Function:  test_auth_type_none
+
+        Description:  Test with auth_type set to None.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg3
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
+
+        self.assertEqual(mongo.auth_type, "SSL")
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_ssl2(self, mock_load):

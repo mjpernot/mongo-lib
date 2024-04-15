@@ -562,7 +562,11 @@ class DB(Server):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.db_name = kwargs.get("db", "test")
         self.db_inst = None
@@ -754,7 +758,11 @@ class Coll(DB):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.coll = None
         self.coll_db = kwargs.get("db", "test")
@@ -925,7 +933,11 @@ class Rep(Server):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.repset = None
         self.ismaster = None
@@ -996,7 +1008,11 @@ class MasterRep(Rep):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.ismaster = None
         self.issecondary = None
@@ -1082,7 +1098,11 @@ class SlaveRep(Rep):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.ismaster = None
         self.issecondary = None
@@ -1170,8 +1190,11 @@ class RepSet(Rep):
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
-            ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.repset = kwargs.get("repset", None)
         self.repset_hosts = kwargs.get("repset_hosts", None)
@@ -1276,7 +1299,11 @@ class RepSetColl(RepSet):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.db_name = kwargs.get("db", "test")
         self.coll = kwargs.get("coll", None)
