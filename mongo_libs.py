@@ -288,9 +288,7 @@ def crt_coll_inst(cfg, dbs, tbl):
     config["tls_certkey_phrase"] = cfg.tls_certkey_phrase if hasattr(
         cfg, "tls_certkey_phrase") else None
 
-
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
-
         return mongo_class.RepSetColl(
             cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
             auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,

@@ -145,6 +145,7 @@ class Cfg3(object):
         self.tls_certkey = None
         self.tls_certkey_phrase = None
 
+
 class Cfg4(object):
 
     """Class:  Cfg4
@@ -186,6 +187,7 @@ class Cfg4(object):
         self.tls_ca_certs = None
         self.tls_certkey = None
         self.tls_certkey_phrase = None
+
 
 class Cfg5(object):
 

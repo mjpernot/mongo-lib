@@ -182,13 +182,12 @@ class UnitTest(unittest.TestCase):
         self.config7["ssl_certfile"] = self.ssl_client_cert
         self.config7[KEY3 + KEY1 + KEY4] = self.ssl_client_phrase
 
-
         self.tls_ca_certs = "tlsCAFile"
         self.tls_certkey = "tlsCertificationKeyFile"
         self.tls_certkey_phrase = "tlsCertificationKeyFilePassword"
 
         config = dict()
-        config["password"] = self.japd
+        config["password"] = self.cfg.japd
         config["authMechanism"] = self.auth_mech2
         config["tls"] = True
 
@@ -225,9 +224,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
-            tls_certkey=self.tls_certkey,
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            tls_ca_certs=self.tls_ca_certs, tls_certkey=self.tls_certkey,
             tls_certkey_phrase=self.tls_certkey_phrase,
             ssl_client_key=self.ssl_client_key,
             ssl_client_cert=self.ssl_client_cert,
@@ -247,9 +246,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
-            tls_certkey=self.tls_certkey,
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            tls_ca_certs=self.tls_ca_certs, tls_certkey=self.tls_certkey,
             tls_certkey_phrase=self.tls_certkey_phrase,
             ssl_client_key=self.ssl_client_key,
             ssl_client_cert=self.ssl_client_cert,
@@ -269,9 +268,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
-            tls_certkey=self.tls_certkey,
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            tls_ca_certs=self.tls_ca_certs, tls_certkey=self.tls_certkey,
             tls_certkey_phrase=self.tls_certkey_phrase,
             ssl_client_key=self.ssl_client_key,
             ssl_client_cert=self.ssl_client_cert,
@@ -291,9 +290,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
-            tls_certkey=self.tls_certkey,
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            tls_ca_certs=self.tls_ca_certs, tls_certkey=self.tls_certkey,
             tls_certkey_phrase=self.tls_certkey_phrase, auth_type="TLS")
 
         self.assertEqual(mongo.config, self.config7a)
@@ -309,8 +308,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            tls_ca_certs=self.tls_ca_certs,
             tls_certkey=self.tls_certkey, auth_type="TLS")
 
         self.assertEqual(mongo.config, self.config6a)
@@ -326,8 +326,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, tls_certkey=self.tls_certkey,
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            tls_certkey=self.tls_certkey,
             tls_certkey_phrase=self.tls_certkey_phrase, auth_type="TLS")
 
         self.assertEqual(mongo.config, self.config5a)
@@ -343,9 +344,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, tls_certkey=self.tls_certkey,
-            auth_type="TLS")
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            tls_certkey=self.tls_certkey, auth_type="TLS")
 
         self.assertEqual(mongo.config, self.config4a)
 
@@ -360,8 +361,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            tls_ca_certs=self.tls_ca_certs,
             tls_certkey_phrase=self.tls_certkey_phrase, auth_type="TLS")
 
         self.assertEqual(mongo.config, self.config3a)
@@ -377,9 +379,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, self.host, self.port,
-            conf_file=self.conf_file, tls_ca_certs=self.tls_ca_certs,
-            auth_type="TLS")
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            tls_ca_certs=self.tls_ca_certs, auth_type="TLS")
 
         self.assertEqual(mongo.config, self.config3a)
 
@@ -394,8 +396,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            tls_certkey_phrase=self.tls_certkey_phrase, auth_type="TLS")
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, tls_certkey_phrase=self.tls_certkey_phrase,
+            auth_type="TLS")
 
         self.assertEqual(mongo.tls_certkey_phrase, self.tls_certkey_phrase)
 
@@ -410,8 +413,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            auth_type="TLS")
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth_type="TLS")
 
         self.assertEqual(mongo.ssl_client_phrase, None)
 
@@ -426,8 +429,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            tls_certkey=self.tls_certkey, auth_type="TLS")
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, tls_certkey=self.tls_certkey, auth_type="TLS")
 
         self.assertEqual(mongo.tls_certkey, self.tls_certkey)
 
@@ -442,8 +445,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            auth_type="TLS")
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth_type="TLS")
 
         self.assertEqual(mongo.tls_certkey, None)
 
@@ -458,8 +461,9 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            tls_ca_certs=self.tls_ca_certs, auth_type="TLS")
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, tls_ca_certs=self.tls_ca_certs,
+            auth_type="TLS")
 
         self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
 
@@ -474,8 +478,8 @@ class UnitTest(unittest.TestCase):
         """
 
         mongo = mongo_class.Rep(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            auth_type="TLS")
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth_type="TLS")
 
         self.assertEqual(mongo.tls_ca_certs, None)
 

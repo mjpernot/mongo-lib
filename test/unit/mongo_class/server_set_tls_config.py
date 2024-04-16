@@ -55,7 +55,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-
         self.name = "Mongo_Server"
         self.user = "mongo_user"
         self.japd = "mongo_japd"
@@ -198,7 +197,6 @@ class UnitTest(unittest.TestCase):
             auth_type="TLS")
 
         self.assertEqual(mongo.config, self.config3a)
-
 
 
 if __name__ == "__main__":

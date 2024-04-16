@@ -201,7 +201,6 @@ class Server(object):
             self.auth_type = "SSL"
             self.set_ssl_config()
 
-
     def upd_srv_stat(self):
 
         """Method:  upd_srv_stat

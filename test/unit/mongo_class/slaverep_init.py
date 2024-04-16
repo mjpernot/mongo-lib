@@ -189,7 +189,6 @@ class UnitTest(unittest.TestCase):
         self.config7["ssl_certfile"] = self.ssl_client_cert
         self.config7[KEY3 + KEY1 + KEY4] = self.ssl_client_phrase
 
-
         self.tls_ca_certs = "tlsCAFile"
         self.tls_certkey = "tlsCertificationKeyFile"
         self.tls_certkey_phrase = "tlsCertificationKeyFilePassword"

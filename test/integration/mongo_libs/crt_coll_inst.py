@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
         self.cfg.repset_hosts = None
         mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
 
-        self.assertEqual(mongo.tls_ca_certs, self.tls_ca_certs)
+        self.assertEqual(mongo.tls_ca_certs, self.cfg.tls_ca_certs)
 
     def test_auth_type_tls(self):
 
