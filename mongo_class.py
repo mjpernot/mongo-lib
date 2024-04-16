@@ -41,10 +41,6 @@ except (ValueError, ImportError) as err:
 __version__ = version.__version__
 
 # Global
-KEY1 = "pass"
-KEY2 = "word"
-KEY3 = "ssl_pem_"
-KEY4 = "phrase"
 
 
 def fetch_cmd_line(mongo):
@@ -120,6 +116,7 @@ class Server(object):
         is_locked
         set_pass_config
         set_ssl_config
+        set_tls_config
 
     """
 
@@ -138,18 +135,16 @@ class Server(object):
             (input) port -> '27017' or port for Mongo
             (input) kwargs:
                 auth -> True|False - Authentication on
-                conf_file -> Location of mongo.conf file
+                conf_file -> Location of mongod.conf file
                 auth_db -> Authentication database name
                 auth_mech -> Authentication mechanism for connecting
                 ssl_client_ca -> SSL certificate authority file
                 ssl_client_key -> SSL key pem file
                 ssl_client_cert -> SSL certificate pem file
                 ssl_client_phrase -> SSL client pass phrase to key file
+                auth_type -> SSL | TLS | None - Type of connection to use.
 
         """
-
-        global KEY1
-        global KEY2
 
         self.name = name
         self.user = user
@@ -183,12 +178,28 @@ class Server(object):
         if self.auth_mech != "MONGODB-CR":
             self.config["authMechanism"] = self.auth_mech
 
+        # TLS|SSL setting
+        self.auth_type = kwargs.get("auth_type", None)
+
         # SSL configuration settings
         self.ssl_client_ca = kwargs.get("ssl_client_ca", None)
         self.ssl_client_key = kwargs.get("ssl_client_key", None)
         self.ssl_client_cert = kwargs.get("ssl_client_cert", None)
         self.ssl_client_phrase = kwargs.get("ssl_client_phrase", None)
-        self.set_ssl_config()
+
+        # TLS configuration settings
+        self.tls_ca_certs = kwargs.get("tls_ca_certs", None)
+        self.tls_certkey = kwargs.get("tls_certkey", None)
+        self.tls_certkey_phrase = kwargs.get("tls_certkey_phrase", None)
+
+        if self.auth_type == "TLS":
+            self.set_tls_config()
+
+        # Double check for SSL for backward comptability
+        elif self.auth_type == "SSL" or (self.ssl_client_ca or
+                                         self.ssl_client_cert):
+            self.auth_type = "SSL"
+            self.set_ssl_config()
 
     def upd_srv_stat(self):
 
@@ -444,10 +455,7 @@ class Server(object):
 
         """
 
-        global KEY1
-        global KEY2
-
-        self.config[KEY1 + KEY2] = self.japd
+        self.config["password"] = self.japd
 
     def set_ssl_config(self):
 
@@ -458,10 +466,6 @@ class Server(object):
         Arguments:
 
         """
-
-        global KEY1
-        global KEY3
-        global KEY4
 
         if self.ssl_client_ca or self.ssl_client_cert:
             self.config["ssl"] = True
@@ -476,7 +480,30 @@ class Server(object):
                 self.config["ssl_keyfile"] = self.ssl_client_key
 
             if self.ssl_client_phrase and self.ssl_client_cert:
-                self.config[KEY3 + KEY1 + KEY4] = self.ssl_client_phrase
+                self.config["ssl_pem_passphrase"] = self.ssl_client_phrase
+
+    def set_tls_config(self):
+
+        """Method:  set_tls_config
+
+        Description:  Append TLS attributes to config.
+
+        Arguments:
+
+        """
+
+        if self.tls_ca_certs or self.tls_certkey:
+            self.config["tls"] = True
+
+            if self.tls_ca_certs:
+                self.config["tlsCAFile"] = self.tls_ca_certs
+
+            if self.tls_certkey:
+                self.config["tlsCertificateKeyFile"] = self.tls_certkey
+
+            if self.tls_certkey_phrase and self.tls_certkey:
+                self.config[
+                    "tlsCertificateKeyFilePassword"] = self.tls_certkey_phrase
 
 
 class DB(Server):
@@ -534,7 +561,11 @@ class DB(Server):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.db_name = kwargs.get("db", "test")
         self.db_inst = None
@@ -726,7 +757,11 @@ class Coll(DB):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.coll = None
         self.coll_db = kwargs.get("db", "test")
@@ -897,7 +932,11 @@ class Rep(Server):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.repset = None
         self.ismaster = None
@@ -968,7 +1007,11 @@ class MasterRep(Rep):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.ismaster = None
         self.issecondary = None
@@ -1054,7 +1097,11 @@ class SlaveRep(Rep):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.ismaster = None
         self.issecondary = None
@@ -1141,9 +1188,13 @@ class RepSet(Rep):
             auth_db=kwargs.get("auth_db", "admin"),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
-            ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_key=kwargs.get("ssl_client_key", None),
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.repset = kwargs.get("repset", None)
         self.repset_hosts = kwargs.get("repset_hosts", None)
@@ -1248,7 +1299,11 @@ class RepSetColl(RepSet):
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_cert=kwargs.get("ssl_client_cert", None),
-            ssl_client_phrase=kwargs.get("ssl_client_phrase", None))
+            ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
+            auth_type=kwargs.get("auth_type", None),
+            tls_ca_certs=kwargs.get("tls_ca_certs", None),
+            tls_certkey=kwargs.get("tls_certkey", None),
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
 
         self.db_name = kwargs.get("db", "test")
         self.coll = kwargs.get("coll", None)

@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.3.0] - 2024-04-09
+- Added TLS connection capability to the Mongo classes and libraries.
+- Set pymongo to 3.12.3 for Python 2 and Python 3.
+
+### Changed
+- mongo_libs.crt_base_cmd: Added check for TLS settings.
+- mongo_class.DB.\_\_init\_\_: Added TLS attributes and type of connection attribute.
+- mongo_class.Coll.\_\_init\_\_: Added TLS attributes and type of connection attribute.
+- mongo_class.Rep.\_\_init\_\_: Added TLS attributes and type of connection attribute.
+- mongo_class.SlaveRep.\_\_init\_\_: Added TLS attributes and type of connection attribute.
+- mongo_class.RepSet.\_\_init\_\_: Added TLS attributes and type of connection attribute.
+- mongo_class.RepSetColl.\_\_init\_\_: Added TLS attributes and type of connection attribute.
+- mongo_libs: create_instance, crt_coll_inst: Added TLS configuration entries and also passed in TLS and SSL via a pointer instead of individual parameters.
+- mongo_class.Server.\_\_init\_\_: Added TLS attributes and type of connection attribute.
+- mongo_class.Server.set_tls_config: Set the TLS attributes to the config setup.
+- mongo_class.Server: \_\_init\_\_, set_pass_config, set_ssl_config: Removed global variables and replaced them with hardcoded values.
+- mongo_libs: add_ssl_cmd, crt_base_cmd: Removed global variables and replaced them with hardcoded values.
+- Documentation changes.
+
+### Added
+- mongo_libs.add_tls_cmd: Add TLS options to the command line.
+- mongo_class.Server.set_tls_config: Append TLS attributes to config.
+- Added mongo.py - Remplate Mongo configuration file.
+
+
 ## [4.2.9] - 2024-02-21
 - Updated python-lib to v3.0.3
 - Updated module requirements for Python.

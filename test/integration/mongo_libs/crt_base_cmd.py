@@ -41,6 +41,9 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_tls_true
+        test_tls_false2
+        test_tls_false
         test_ssl_true
         test_ssl_false2
         test_ssl_false
@@ -103,12 +106,63 @@ class UnitTest(unittest.TestCase):
         self.results4 = [self.prog_name, self.host_str]
         self.results5 = [self.prog_name, self.uname + self.cfg.user,
                          self.host_str]
+
         self.ssl = "--ssl"
-        self.ssl_ca = "--sslCAFile="
-        self.ssl_key = "--sslPEMKeyFile="
-        self.ssl_phrase = "--sslPEMKeyPass"
         self.results6 = [self.prog_name, self.uname + self.cfg.user,
                          self.host_str, self.japd2 + self.cfg.japd, self.ssl]
+
+        self.tls = "--tls"
+        self.results7 = [self.prog_name, self.uname + self.cfg.user,
+                         self.host_str, self.japd2 + self.cfg.japd, self.tls]
+
+    def test_tls_true(self):
+
+        """Function:  test_tls_true
+
+        Description:  Test with TLS option set to True.
+
+        Arguments:
+
+        """
+
+        self.mongo.config["tls"] = True
+        self.mongo.config.pop("tls_ca_certs", None)
+        self.mongo.config.pop("tls_certkey", None)
+        self.mongo.config.pop("tls_certkey_phrase", None)
+
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(self.mongo, self.prog_name),
+            self.results7)
+
+    def test_tls_false2(self):
+
+        """Function:  test_tls_false2
+
+        Description:  Test with TLS option set to False.
+
+        Arguments:
+
+        """
+
+        self.mongo.config["tls"] = False
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(self.mongo, self.prog_name),
+            self.results)
+
+    def test_tls_false(self):
+
+        """Function:  test_tls_false
+
+        Description:  Test with no TLS option present.
+
+        Arguments:
+
+        """
+
+        self.mongo.config.pop("tls", None)
+        self.assertEqual(
+            mongo_libs.crt_base_cmd(self.mongo, self.prog_name),
+            self.results)
 
     def test_ssl_true(self):
 

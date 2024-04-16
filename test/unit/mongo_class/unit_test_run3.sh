@@ -52,6 +52,7 @@ echo "Unit test: mongo_class"
 /usr/bin/python3 ./test/unit/mongo_class/server_lock_db.py
 /usr/bin/python3 ./test/unit/mongo_class/server_set_pass_config.py
 /usr/bin/python3 ./test/unit/mongo_class/server_set_ssl_config.py
+/usr/bin/python3 ./test/unit/mongo_class/server_set_tls_config.py
 /usr/bin/python3 ./test/unit/mongo_class/server_unlock_db.py
 /usr/bin/python3 ./test/unit/mongo_class/server_upd_server_attr.py
 /usr/bin/python3 ./test/unit/mongo_class/server_upd_srv_stat.py

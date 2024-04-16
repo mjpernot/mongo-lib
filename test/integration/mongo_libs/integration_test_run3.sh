@@ -6,6 +6,7 @@
 
 echo "Integration test: mongo_libs"
 /usr/bin/python3 ./test/integration/mongo_libs/add_ssl_cmd.py
+/usr/bin/python3 ./test/integration/mongo_libs/add_tls_cmd.py
 /usr/bin/python3 ./test/integration/mongo_libs/create_cmd.py
 /usr/bin/python3 ./test/integration/mongo_libs/create_instance.py
 /usr/bin/python3 ./test/integration/mongo_libs/crt_base_cmd.py
