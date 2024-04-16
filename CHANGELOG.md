@@ -5,7 +5,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.3.0] - 2024-04-09
-- Added TLS connection capability to the Mongo classes.
+- Added TLS connection capability to the Mongo classes and libraries.
 - Set pymongo to 3.12.3 for Python 2 and Python 3.
 
 ### Changed
