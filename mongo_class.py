@@ -1188,6 +1188,7 @@ class RepSet(Rep):
             auth_db=kwargs.get("auth_db", "admin"),
             auth_mech=kwargs.get("auth_mech", "SCRAM-SHA-1"),
             ssl_client_ca=kwargs.get("ssl_client_ca", None),
+            ssl_client_cert=kwargs.get("ssl_client_cert", None),
             ssl_client_key=kwargs.get("ssl_client_key", None),
             ssl_client_phrase=kwargs.get("ssl_client_phrase", None),
             auth_type=kwargs.get("auth_type", None),
