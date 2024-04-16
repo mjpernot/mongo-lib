@@ -5,6 +5,7 @@
     Description:  Library of function calls for a Mongo database system.
 
     Functions:
+        add_tls_cmd
         add_ssl_cmd
         create_cmd
         create_instance
@@ -37,11 +38,41 @@ except (ValueError, ImportError) as err:
 __version__ = version.__version__
 
 # Global
-KEY1 = "pass"
-KEY2 = "word"
-KEY3 = "ssl_pem_"
-KEY4 = "phrase"
 HOST = "--host="
+
+
+def add_tls_cmd(mongo, cmd_list):
+
+    """Function:  add_tls_cmd
+
+    Description:  Determine if TLS options are present and add to the command
+        line.
+
+    Arguments:
+        (input) mongo -> Database instance
+        (input) cmd_line -> Basic Mongo utility command line in list format
+        (output) cmd_line -> Basic Mongo utility command line in list format
+    """
+
+    cmd_list = list(cmd_list)
+
+    if mongo.config.get("tls", False):
+        cmd_list.append("--tls")
+
+        if mongo.config.get("tlsCAFile"):
+            cmd_list.append("--tlsCAFile=" + mongo.config.get("tlsCAFile"))
+
+        if mongo.config.get("tlsCertificateKeyFile"):
+            cmd_list.append(
+                "--tlsCertificateKeyFile=" + mongo.config.get(
+                    "tlsCertificateKeyFile"))
+
+            if mongo.config.get("tlsCertificateKeyFilePassword"):
+                cmd_list.append(
+                    "--tlsCertificateKeyFilePassword=" +
+                    mongo.config.get("tlsCertificateKeyFilePassword"))
+
+    return cmd_list
 
 
 def add_ssl_cmd(mongo, cmd_list):
@@ -57,11 +88,6 @@ def add_ssl_cmd(mongo, cmd_list):
         (output) cmd_line -> Basic Mongo utility command line in list format
     """
 
-    global KEY1
-    global KEY2
-    global KEY3
-    global KEY4
-
     cmd_list = list(cmd_list)
 
     if mongo.config.get("ssl", False):
@@ -74,10 +100,10 @@ def add_ssl_cmd(mongo, cmd_list):
             cmd_list.append(
                 "--sslPEMKeyFile=" + mongo.config.get("ssl_keyfile"))
 
-            if mongo.config.get(KEY3 + KEY1 + KEY4):
+            if mongo.config.get("ssl_pem_passphrase"):
                 cmd_list.append(
-                    "--sslPEMKeyPass" + KEY2 + "=" +
-                    mongo.config.get(KEY3 + KEY1 + KEY4))
+                    "--sslPEMKeyPassword=" +
+                    mongo.config.get("ssl_pem_passphrase"))
 
     return cmd_list
 
@@ -142,23 +168,30 @@ def create_instance(cfg_file, dir_path, class_name):
     """
 
     cfg = gen_libs.load_module(cfg_file, dir_path)
-    auth_db = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
-    auth_mech = cfg.auth_mech if hasattr(cfg, "auth_mech") else "SCRAM-SHA-1"
-    ssl_client_ca = cfg.ssl_client_ca if hasattr(
+    config = dict()
+    config["auth_db"] = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
+    config["auth_mech"] = cfg.auth_mech if hasattr(
+        cfg, "auth_mech") else "SCRAM-SHA-1"
+    config["ssl_client_ca"] = cfg.ssl_client_ca if hasattr(
         cfg, "ssl_client_ca") else None
-    ssl_client_cert = cfg.ssl_client_cert if hasattr(
+    config["ssl_client_cert"] = cfg.ssl_client_cert if hasattr(
         cfg, "ssl_client_cert") else None
-    ssl_client_key = cfg.ssl_client_key if hasattr(
+    config["ssl_client_key"] = cfg.ssl_client_key if hasattr(
         cfg, "ssl_client_key") else None
-    ssl_client_phrase = cfg.ssl_client_phrase if hasattr(
+    config["ssl_client_phrase"] = cfg.ssl_client_phrase if hasattr(
         cfg, "ssl_client_phrase") else None
+    config["auth_type"] = cfg.auth_type if hasattr(
+        cfg, "auth_type") else None
+    config["tls_ca_certs"] = cfg.tls_ca_certs if hasattr(
+        cfg, "tls_ca_certs") else None
+    config["tls_certkey"] = cfg.tls_certkey if hasattr(
+        cfg, "tls_certkey") else None
+    config["tls_certkey_phrase"] = cfg.tls_certkey_phrase if hasattr(
+        cfg, "tls_certkey_phrase") else None
 
     return class_name(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
-        auth=cfg.auth, conf_file=cfg.conf_file, auth_db=auth_db,
-        auth_mech=auth_mech, ssl_client_ca=ssl_client_ca,
-        ssl_client_cert=ssl_client_cert, ssl_client_key=ssl_client_key,
-        ssl_client_phrase=ssl_client_phrase)
+        auth=cfg.auth, conf_file=cfg.conf_file, **config)
 
 
 def crt_base_cmd(mongo, prog_name, **kwargs):
@@ -180,10 +213,6 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     """
 
-    global KEY1
-    global KEY2
-    global KEY3
-    global KEY4
     global HOST
 
     cmd_list = []
@@ -209,12 +238,15 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     elif mongo.auth:
         cmd_list = [prog_name, "--username=" + mongo.user, host_port,
-                    "--" + KEY1 + KEY2 + "=" + mongo.japd]
+                    "--password=" + mongo.japd]
 
     else:
         cmd_list = [prog_name, host_port]
 
-    if mongo.config.get("ssl", False):
+    if mongo.config.get("tls", False):
+        cmd_list = add_tls_cmd(mongo, cmd_list)
+
+    elif mongo.config.get("ssl", False):
         cmd_list = add_ssl_cmd(mongo, cmd_list)
 
     return cmd_list
@@ -235,33 +267,36 @@ def crt_coll_inst(cfg, dbs, tbl):
 
     """
 
-    auth_db = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
-    auth_mech = cfg.auth_mech if hasattr(cfg, "auth_mech") else "SCRAM-SHA-1"
-    ssl_client_ca = cfg.ssl_client_ca if hasattr(
+    config = dict()
+    config["auth_db"] = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
+    config["auth_mech"] = cfg.auth_mech if hasattr(
+        cfg, "auth_mech") else "SCRAM-SHA-1"
+    config["ssl_client_ca"] = cfg.ssl_client_ca if hasattr(
         cfg, "ssl_client_ca") else None
-    ssl_client_cert = cfg.ssl_client_cert if hasattr(
+    config["ssl_client_cert"] = cfg.ssl_client_cert if hasattr(
         cfg, "ssl_client_cert") else None
-    ssl_client_key = cfg.ssl_client_key if hasattr(
+    config["ssl_client_key"] = cfg.ssl_client_key if hasattr(
         cfg, "ssl_client_key") else None
-    ssl_client_phrase = cfg.ssl_client_phrase if hasattr(
+    config["ssl_client_phrase"] = cfg.ssl_client_phrase if hasattr(
         cfg, "ssl_client_phrase") else None
+    config["auth_type"] = cfg.auth_type if hasattr(
+        cfg, "auth_type") else None
+    config["tls_ca_certs"] = cfg.tls_ca_certs if hasattr(
+        cfg, "tls_ca_certs") else None
+    config["tls_certkey"] = cfg.tls_certkey if hasattr(
+        cfg, "tls_certkey") else None
+    config["tls_certkey_phrase"] = cfg.tls_certkey_phrase if hasattr(
+        cfg, "tls_certkey_phrase") else None
 
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
-
         return mongo_class.RepSetColl(
             cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
             auth=cfg.auth, repset=cfg.repset, repset_hosts=cfg.repset_hosts,
-            db=dbs, coll=tbl, db_auth=cfg.db_auth, auth_db=auth_db,
-            auth_mech=auth_mech, ssl_client_ca=ssl_client_ca,
-            ssl_client_cert=ssl_client_cert, ssl_client_key=ssl_client_key,
-            ssl_client_phrase=ssl_client_phrase)
+            db=dbs, coll=tbl, db_auth=cfg.db_auth, **config)
 
     return mongo_class.Coll(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
-        db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file,
-        auth_db=auth_db, auth_mech=auth_mech, ssl_client_ca=ssl_client_ca,
-        ssl_client_cert=ssl_client_cert, ssl_client_key=ssl_client_key,
-        ssl_client_phrase=ssl_client_phrase)
+        db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file, **config)
 
 
 def disconnect(*args):

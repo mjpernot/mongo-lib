@@ -8,6 +8,7 @@
 ###  This README file is broken down into the following sections:
  * Prerequisites
    - FIPS Environment
+ * Configuration
  * Installation
    - Pip Installation
  * Testing
@@ -28,6 +29,10 @@
     - Edit the file and locate the \_password_digest function.
     - In the \_password_digest function there is an line that should match: "md5hash = hashlib.md5()".  Change it to "md5hash = hashlib.md5(usedforsecurity=False)".
     - Lastly, it will require the configuration file entry auth_mech to be set to: SCRAM-SHA-1 or SCRAM-SHA-256.
+
+
+# Configuration
+Any program that wants to use this module to connect to mongo, recommend using the mongo.py file as a baseline configuration file for the mongo connection configuration.
 
 
 # Installation:
@@ -70,7 +75,7 @@ chardet==3.0.4
 distro==1.6.0
 email==4.0.3
 psutil==5.4.3
-pymongo==3.8.0
+pymongo==3.12.3
 simplejson==2.0.9
 ```
 
@@ -81,7 +86,7 @@ Add/modify the following lines to the {Other_Python_Project}/requirements3.txt f
 chardet==3.0.4
 distro==1.6.0
 psutil==5.4.3
-pymongo==3.8.0
+pymongo==3.12.3
 simplejson==3.12.0
 ```
 
@@ -180,25 +185,31 @@ Create Mongo configuration files.
     - NOTE 2:  FIPS 140-2 environment requires SCRAM-SHA-1 or SCRAM-SHA-256.
     - NOTE 3:  MONGODB-CR is not supported in Mongodb 4.0 and better.
 
-  * If Mongo is set to use SSL connections, then one or more of the following entries will need to be completed to connect using SSL protocols.  Note:  Read the configuration file (mongo.py.TEMPLATE) to determine which entries will need to be set.
-    - ssl_client_ca = None
-    - ssl_client_key = None
-    - ssl_client_cert = None
-    - ssl_client_phrase = None
+  * If Mongo is set to use TLS or SSL connections, then one or more of the following entries will need to be completed to connect using TLS or SSL protocols.  Note:  Read the configuration file to determine which entries will need to be set.
+    - SSL:
+        -> auth_type = None
+        -> ssl_client_ca = None
+        -> ssl_client_key = None
+        -> ssl_client_cert = None
+        -> ssl_client_phrase = None
+    - TLS:
+        -> auth_type = None
+        -> tls_ca_certs = None
+        -> tls_certkey = None
+        -> tls_certkey_phrase = None
 
 ```
-cd test/integration/config
-cp mongo.py.TEMPLATE mongo.py
-cp mongo.py.TEMPLATE master_mongo.py
-cp mongo.py.TEMPLATE slave_mongo.py
-chmod 600 mongo.py master_mongo.py slave_mongo.py
-vim mongo.py master_mongo.py slave_mongo.py
+cd {Python_Project}/mongo-lib
+cp mongo.py test/integration/config/mongo.py
+cp mongo.py test/integration/config/master_mongo.py
+cp mongo.py test/integration/config/slave_mongo.py
+chmod 600 test/integration/config/mongo.py test/integration/config/master_mongo.py test/integration/config/slave_mongo.py
+vim test/integration/config/mongo.py test/integration/config/master_mongo.py test/integration/config/slave_mongo.py
 ```
 
 ### Testing mongo_class.py - Mongo Stand Alone
 
 ```
-cd {Python_Project}/mongo-lib
 test/integration/mongo_class/integration_test_run.sh
 test/integration/mongo_class/code_coverage.sh
 ```
