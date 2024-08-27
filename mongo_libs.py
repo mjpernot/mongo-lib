@@ -27,11 +27,13 @@ import json
 # Local
 try:
     from .lib import gen_libs
+    from .lib import gen_class
     from . import mongo_class
     from . import version
 
 except (ValueError, ImportError) as err:
     import lib.gen_libs as gen_libs
+    import lib.gen_class as gen_class
     import mongo_class
     import version
 
@@ -297,6 +299,38 @@ def crt_coll_inst(cfg, dbs, tbl):
     return mongo_class.Coll(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file, **config)
+
+
+def data_out(data, **kwargs):
+
+    """Function:  data_out
+
+    Description:  Outputs the data in a variety of formats and media.
+
+    Arguments:
+        (input) data -> JSON data document
+        (input) kwargs:
+            to_addr -> To email address
+            subj -> Email subject line
+            mailx -> True|False - Use mailx command
+            outfile -> Name of output file name
+            mode -> w|a => Write or append mode for file
+            indent int -> Indent the JSON document the stated value
+            suppress -> True|False - Suppress standard out
+            mongo -> Mongo config file - Insert into Mongo database
+            db_tbl -> database:table - Database name:Table name
+        (output) state -> True|False - Successful operation
+        (output) msg -> None or error message
+
+    """
+
+    state, msg = gen_class.dict_out(data, **kwargs)
+
+    if kwargs.get("mongo", False) and state:
+        dbs, tbl = kwargs.get("db_tbl").split(":")
+        state, msg = ins_doc(kwargs.get("mongo"), dbs, tbl, data)
+
+    return state, msg
 
 
 def disconnect(*args):

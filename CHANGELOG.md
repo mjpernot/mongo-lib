@@ -7,6 +7,10 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [4.3.1] - 2024-08-16
 - Set simplejson to 3.13.2 for Python 2.
 - Set pymongo to 4.6.3 for Python 3.
+- Updated python-lib to 3.0.4
+
+### Added
+- mongo_libs.data_out: Outputs the data in a variety of formats and media.
 
 
 ## [4.3.0] - 2024-04-09

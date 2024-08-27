@@ -11,6 +11,7 @@ echo "Unit test: mongo_class"
 /usr/bin/python ./test/unit/mongo_libs/create_instance.py
 /usr/bin/python ./test/unit/mongo_libs/crt_base_cmd.py
 /usr/bin/python ./test/unit/mongo_libs/crt_coll_inst.py
+/usr/bin/python ./test/unit/mongo_libs/data_out.py
 /usr/bin/python ./test/unit/mongo_libs/disconnect.py
 /usr/bin/python ./test/unit/mongo_libs/ins_doc.py
 
