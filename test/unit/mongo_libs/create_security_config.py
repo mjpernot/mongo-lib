@@ -240,6 +240,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_no_cfg_passed
         test_set_tls_certkey_phrase
         test_set_tls_certkey
         test_set_tls_ca_certs2
@@ -274,6 +275,20 @@ class UnitTest(unittest.TestCase):
         self.cfg5 = Cfg5()
         self.tls_certkey = "tlsCertKeyFile"
         self.tls_certkey_phrase = "tlsCertKeyPhrase"
+
+    def test_no_cfg_passed(self):
+
+        """Function:  test_no_cfg_passed
+
+        Description:  Test with no config objects passed.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_libs.create_security_config()
+
+        self.assertFalse(mongo)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_tls_certkey_phrase(self, mock_load):
