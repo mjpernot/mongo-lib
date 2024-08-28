@@ -27,11 +27,13 @@ import json
 # Local
 try:
     from .lib import gen_libs
+    from .lib import gen_class
     from . import mongo_class
     from . import version
 
 except (ValueError, ImportError) as err:
     import lib.gen_libs as gen_libs
+    import lib.gen_class as gen_class
     import mongo_class
     import version
 
@@ -168,7 +170,41 @@ def create_instance(cfg_file, dir_path, class_name):
     """
 
     cfg = gen_libs.load_module(cfg_file, dir_path)
+    config = create_security_config(cfg=cfg)
+
+    return class_name(
+        cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
+        auth=cfg.auth, conf_file=cfg.conf_file, **config)
+
+
+def create_security_config(**kwargs):
+
+    """Function:  create_security_config
+
+    Description:  Create security configuration object.  Can take a
+        configuration file and load it or a pre-loaded configuration module or
+        a mongo instance.
+
+    Arguments:
+        (input) **kwargs:
+            cfg_file -> Configuration file name
+            dir_path -> Directory path to configuration file
+            cfg -> Mongo instance or loaded configuration module
+        (output) config -> Dictionary of security config parameters
+
+    """
+
     config = dict()
+    cfg_file = kwargs.get("cfg_file", None)
+    dir_path = kwargs.get("dir_path", None)
+    cfg = kwargs.get("cfg", None)
+
+    if cfg_file and dir_path:
+        cfg = gen_libs.load_module(cfg_file, dir_path)
+
+    if not cfg:
+        return config
+    
     config["auth_db"] = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
     config["auth_mech"] = cfg.auth_mech if hasattr(
         cfg, "auth_mech") else "SCRAM-SHA-1"
@@ -189,9 +225,7 @@ def create_instance(cfg_file, dir_path, class_name):
     config["tls_certkey_phrase"] = cfg.tls_certkey_phrase if hasattr(
         cfg, "tls_certkey_phrase") else None
 
-    return class_name(
-        cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
-        auth=cfg.auth, conf_file=cfg.conf_file, **config)
+    return config
 
 
 def crt_base_cmd(mongo, prog_name, **kwargs):
@@ -267,26 +301,7 @@ def crt_coll_inst(cfg, dbs, tbl):
 
     """
 
-    config = dict()
-    config["auth_db"] = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
-    config["auth_mech"] = cfg.auth_mech if hasattr(
-        cfg, "auth_mech") else "SCRAM-SHA-1"
-    config["ssl_client_ca"] = cfg.ssl_client_ca if hasattr(
-        cfg, "ssl_client_ca") else None
-    config["ssl_client_cert"] = cfg.ssl_client_cert if hasattr(
-        cfg, "ssl_client_cert") else None
-    config["ssl_client_key"] = cfg.ssl_client_key if hasattr(
-        cfg, "ssl_client_key") else None
-    config["ssl_client_phrase"] = cfg.ssl_client_phrase if hasattr(
-        cfg, "ssl_client_phrase") else None
-    config["auth_type"] = cfg.auth_type if hasattr(
-        cfg, "auth_type") else None
-    config["tls_ca_certs"] = cfg.tls_ca_certs if hasattr(
-        cfg, "tls_ca_certs") else None
-    config["tls_certkey"] = cfg.tls_certkey if hasattr(
-        cfg, "tls_certkey") else None
-    config["tls_certkey_phrase"] = cfg.tls_certkey_phrase if hasattr(
-        cfg, "tls_certkey_phrase") else None
+    config = create_security_config(cfg=cfg)
 
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
         return mongo_class.RepSetColl(
@@ -297,6 +312,38 @@ def crt_coll_inst(cfg, dbs, tbl):
     return mongo_class.Coll(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         db=dbs, coll=tbl, auth=cfg.auth, conf_file=cfg.conf_file, **config)
+
+
+def data_out(data, **kwargs):
+
+    """Function:  data_out
+
+    Description:  Outputs the data in a variety of formats and media.
+
+    Arguments:
+        (input) data -> JSON data document
+        (input) kwargs:
+            to_addr -> To email address
+            subj -> Email subject line
+            mailx -> True|False - Use mailx command
+            outfile -> Name of output file name
+            mode -> w|a => Write or append mode for file
+            indent int -> Indent the JSON document the stated value
+            suppress -> True|False - Suppress standard out
+            mongo -> Mongo config file - Insert into Mongo database
+            db_tbl -> database:table - Database name:Table name
+        (output) state -> True|False - Successful operation
+        (output) msg -> None or error message
+
+    """
+
+    state, msg = gen_class.dict_out(data, **kwargs)
+
+    if kwargs.get("mongo", False) and state:
+        dbs, tbl = kwargs.get("db_tbl").split(":")
+        state, msg = ins_doc(kwargs.get("mongo"), dbs, tbl, data)
+
+    return state, msg
 
 
 def disconnect(*args):
