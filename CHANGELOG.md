@@ -13,6 +13,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_libs.create_security_config:  Create security configuration object from a configuration file or mongo instance.
 - mongo_libs.data_out: Outputs the data in a variety of formats and media.
 
+### Changed
+- mongo_libs.create_instance, mongo_libs.crt_coll_inst:  Replaced section of code with call to create_security_config.
+
 
 ## [4.3.0] - 2024-04-09
 - Added TLS connection capability to the Mongo classes and libraries.

@@ -170,26 +170,7 @@ def create_instance(cfg_file, dir_path, class_name):
     """
 
     cfg = gen_libs.load_module(cfg_file, dir_path)
-    config = dict()
-    config["auth_db"] = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
-    config["auth_mech"] = cfg.auth_mech if hasattr(
-        cfg, "auth_mech") else "SCRAM-SHA-1"
-    config["ssl_client_ca"] = cfg.ssl_client_ca if hasattr(
-        cfg, "ssl_client_ca") else None
-    config["ssl_client_cert"] = cfg.ssl_client_cert if hasattr(
-        cfg, "ssl_client_cert") else None
-    config["ssl_client_key"] = cfg.ssl_client_key if hasattr(
-        cfg, "ssl_client_key") else None
-    config["ssl_client_phrase"] = cfg.ssl_client_phrase if hasattr(
-        cfg, "ssl_client_phrase") else None
-    config["auth_type"] = cfg.auth_type if hasattr(
-        cfg, "auth_type") else None
-    config["tls_ca_certs"] = cfg.tls_ca_certs if hasattr(
-        cfg, "tls_ca_certs") else None
-    config["tls_certkey"] = cfg.tls_certkey if hasattr(
-        cfg, "tls_certkey") else None
-    config["tls_certkey_phrase"] = cfg.tls_certkey_phrase if hasattr(
-        cfg, "tls_certkey_phrase") else None
+    config = create_security_config(cfg=cfg)
 
     return class_name(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
@@ -318,26 +299,7 @@ def crt_coll_inst(cfg, dbs, tbl):
 
     """
 
-    config = dict()
-    config["auth_db"] = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
-    config["auth_mech"] = cfg.auth_mech if hasattr(
-        cfg, "auth_mech") else "SCRAM-SHA-1"
-    config["ssl_client_ca"] = cfg.ssl_client_ca if hasattr(
-        cfg, "ssl_client_ca") else None
-    config["ssl_client_cert"] = cfg.ssl_client_cert if hasattr(
-        cfg, "ssl_client_cert") else None
-    config["ssl_client_key"] = cfg.ssl_client_key if hasattr(
-        cfg, "ssl_client_key") else None
-    config["ssl_client_phrase"] = cfg.ssl_client_phrase if hasattr(
-        cfg, "ssl_client_phrase") else None
-    config["auth_type"] = cfg.auth_type if hasattr(
-        cfg, "auth_type") else None
-    config["tls_ca_certs"] = cfg.tls_ca_certs if hasattr(
-        cfg, "tls_ca_certs") else None
-    config["tls_certkey"] = cfg.tls_certkey if hasattr(
-        cfg, "tls_certkey") else None
-    config["tls_certkey_phrase"] = cfg.tls_certkey_phrase if hasattr(
-        cfg, "tls_certkey_phrase") else None
+    config = create_security_config(cfg=cfg)
 
     if hasattr(cfg, "repset_hosts") and cfg.repset_hosts:
         return mongo_class.RepSetColl(
