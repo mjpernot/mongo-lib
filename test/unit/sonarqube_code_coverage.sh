@@ -64,6 +64,7 @@ coverage run -a --source=mongo_libs test/unit/mongo_libs/add_ssl_cmd.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/add_tls_cmd.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/create_cmd.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/create_instance.py
+coverage run -a --source=mongo_libs test/unit/mongo_libs/create_security_config.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/crt_base_cmd.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/crt_coll_inst.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/data_out.py

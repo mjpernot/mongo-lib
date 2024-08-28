@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Updated python-lib to 3.0.4
 
 ### Added
+- mongo_libs.create_security_config:  Create security configuration object from a configuration file or mongo instance.
 - mongo_libs.data_out: Outputs the data in a variety of formats and media.
 
 
