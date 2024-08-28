@@ -17,7 +17,6 @@
 # Standard
 import sys
 import os
-import json
 import unittest
 import mock
 
