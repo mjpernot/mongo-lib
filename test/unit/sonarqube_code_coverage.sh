@@ -69,6 +69,8 @@ coverage run -a --source=mongo_libs test/unit/mongo_libs/crt_base_cmd.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/crt_coll_inst.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/data_out.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/disconnect.py
+coverage run -a --source=mongo_libs test/unit/mongo_libs/get_all_dbs_tbls.py
+coverage run -a --source=mongo_libs test/unit/mongo_libs/get_db_tbl.py
 coverage run -a --source=mongo_libs test/unit/mongo_libs/ins_doc.py
 
 echo ""
