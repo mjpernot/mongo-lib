@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.3.2] - 2024-09-23
+- Set pymongo to 4.1.1 for Python 3.6.
+- Set simplejson to 3.13.2 for Python 3.
 
 ### Added
 - mongo_libs.get_all_dbs_tbls: Return a dictionary of databases with table lists.

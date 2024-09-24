@@ -206,7 +206,7 @@ def create_security_config(**kwargs):
 
     if not cfg:
         return config
-    
+
     config["auth_db"] = cfg.auth_db if hasattr(cfg, "auth_db") else "admin"
     config["auth_mech"] = cfg.auth_mech if hasattr(
         cfg, "auth_mech") else "SCRAM-SHA-1"
