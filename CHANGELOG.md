@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.3.2] - 2024-09-23
+
+### Added
+- mongo_libs.get_all_dbs_tbls: Return a dictionary of databases with table lists.
+- mongo_libs.get_db_tbl: Determines which databases and tables will be checked.
+
+### Changed
+- Documentation changes.
+
+
 ## [4.3.1] - 2024-08-16
 - Set simplejson to 3.13.2 for Python 2.
 - Set pymongo to 4.6.3 for Python 3.

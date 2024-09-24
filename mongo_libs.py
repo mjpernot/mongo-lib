@@ -9,8 +9,10 @@
         add_ssl_cmd
         create_cmd
         create_instance
+        create_security_config
         crt_base_cmd
         crt_coll_inst
+        data_out
         disconnect
         ins_doc
 
@@ -368,6 +370,83 @@ def disconnect(*args):
 
         else:
             server.disconnect()
+
+
+def get_all_dbs_tbls(mongo, db_list, **kwargs):
+
+    """Function:  get_all_dbs_tbls
+
+    Description:  Return a dictionary of databases with table lists.
+
+    Arguments:
+        (input) mongo -> Mongo Database instance
+        (input) db_list -> List of database names
+        (input) kwargs:
+            ign_db_tbl -> Database dictionary with list of tables to ignore
+        (output) db_dict -> Dictionary of databases and lists of tables
+
+    """
+
+    db_dict = dict()
+    db_list = list(db_list)
+    ign_db_tbl = dict(kwargs.get("ign_db_tbl", dict()))
+
+    for dbs in db_list:
+        ign_tbls = ign_db_tbl[dbs] if dbs in ign_db_tbl else list()
+        mongo.chg_db(dbs=dbs)
+        tbl_list = gen_libs.del_not_and_list(
+            mongo.get_tbl_list(inc_sys=False), ign_tbls)
+        db_dict[dbs] = tbl_list
+
+    return db_dict
+
+
+def get_db_tbl(mongo, db_list, **kwargs):
+
+    """Function:  get_db_tbl
+
+    Description:  Determines which databases and tables will be checked.
+
+    Arguments:
+        (input) mongo -> Mongo Database instance
+        (input) db_list -> List of database names
+        (input) **kwargs:
+            ign_dbs -> List of databases to skip
+            tbls -> List of tables to process
+            ign_db_tbl -> Database dictionary with list of tables to ignore
+        (output) db_dict -> Dictionary of databases and lists of tables
+
+    """
+
+    db_dict = dict()
+    db_list = list(db_list)
+    ign_dbs = list(kwargs.get("ign_dbs", list()))
+    tbls = kwargs.get("tbls", list())
+    ign_db_tbl = dict(kwargs.get("ign_db_tbl", dict()))
+
+    if db_list:
+        db_list = gen_libs.del_not_and_list(db_list, ign_dbs)
+
+        if len(db_list) == 1 and tbls:
+            mongo.chg_db(dbs=db_list[0])
+            tbl_list = gen_libs.del_not_in_list(
+                tbls, mongo.get_tbl_list(inc_sys=False))
+            ign_tbls = \
+                ign_db_tbl[db_list[0]] if db_list[0] in ign_db_tbl else list()
+            tbl_list = gen_libs.del_not_and_list(tbl_list, ign_tbls)
+            db_dict[db_list[0]] = tbl_list
+
+        elif db_list:
+            db_dict = get_all_dbs_tbls(mongo, db_list, ign_db_tbl=ign_db_tbl)
+
+    else:
+        db_list = mongo.fetch_dbs()
+        db_list = gen_libs.del_not_and_list(db_list, ign_dbs)
+
+        if db_list:
+            db_dict = get_all_dbs_tbls(mongo, db_list, ign_db_tbl=ign_db_tbl)
+
+    return db_dict
 
 
 def ins_doc(mongo_cfg, dbs, tbl, data, **kwargs):
