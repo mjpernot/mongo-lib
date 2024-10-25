@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.3.3] - 2024-10-25
+- Updated chardet==4.0.0 for Python 3.
+- Updated distro==1.9.0 for Python 3.
+- Updated psutil==5.9.4 for Python 3.
+- Updated python-lib to 3.0.6
+
+
 ## [4.3.2] - 2024-09-23
 - Set pymongo to 4.1.1 for Python 3.6.
 - Set simplejson to 3.13.2 for Python 3.
