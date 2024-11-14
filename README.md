@@ -23,6 +23,7 @@
       -> python-devel
     Redhat 8 (Running Python 3.6):
       -> python3-devel
+      -> gcc
 
   * FIPS Environment:  If operating in a FIPS 104-2 environment, this package will require at least a minimum of pymongo==3.8.0 or better.  It will also require a manual change to the auth.py module in the pymongo package.  See below for changes to auth.py.
     - Locate the auth.py file python installed packages on the system in the pymongo package directory.
@@ -122,8 +123,8 @@ Install the project using the procedures in the Git Installation section.
 
 ```
 cd {Python_Project}/mongo-lib
-test/unit/mongodb_class/unit_test_run.sh
-test/unit/mongodb_lib/unit_test_run.sh
+test/unit/mongodb_class/unit_test_run3.sh
+test/unit/mongodb_lib/unit_test_run3.sh
 ```
 
 ### Code coverage:
@@ -193,21 +194,21 @@ vim test/integration/config/mongo.py test/integration/config/master_mongo.py tes
 ### Testing mongo_class.py - Mongo Stand Alone
 
 ```
-test/integration/mongo_class/integration_test_run.sh
+test/integration/mongo_class/integration_test_run3.sh
 test/integration/mongo_class/code_coverage.sh
 ```
 
 ### Testing mongo_lib.py:
 
 ```
-test/integration/mongo_libs/integration_test_run.sh
+test/integration/mongo_libs/integration_test_run3.sh
 test/integration/mongo_libs/code_coverage.sh
 ```
 
 ### Testing mongo_class.py - Mongo Replica Set
 
 ```
-test/integration/mongo_class/replica_integration_test_run.sh
+test/integration/mongo_class/replica_integration_test_run3.sh
 test/integration/mongo_class/replica_code_coverage.sh
 ```
 
