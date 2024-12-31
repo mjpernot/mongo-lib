@@ -15,6 +15,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - mongo_class: Replaced dict() with {} and list() with [].
 - mongo_libs: Replaced dict() with {} and list() with [].
 - mongo_class: Converted strings to f-strings.
+- Documentation changes.
 
 ### Deprecated
 - Support for Mongo 3.4
