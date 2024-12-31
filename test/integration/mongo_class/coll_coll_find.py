@@ -97,7 +97,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.coll_find({"db": self.database})
 
-        self.assertTrue(isinstance(data, pymongo.cursor.Cursor))
+        self.assertIsInstance(data, pymongo.cursor.Cursor)
 
     def test_empty_query2(self):
 
@@ -125,7 +125,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.coll_find({})
 
-        self.assertTrue(isinstance(data, pymongo.cursor.Cursor))
+        self.assertIsInstance(data, pymongo.cursor.Cursor)
 
     def test_no_query2(self):
 
@@ -153,7 +153,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.coll_find()
 
-        self.assertTrue(isinstance(data, pymongo.cursor.Cursor))
+        self.assertIsInstance(data, pymongo.cursor.Cursor)
 
 
 if __name__ == "__main__":

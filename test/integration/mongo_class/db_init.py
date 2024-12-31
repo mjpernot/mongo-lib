@@ -407,7 +407,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_type="TLS")
 
-        self.assertEqual(mongo.ssl_client_phrase, None)
+        self.assertIsNone(mongo.ssl_client_phrase)
 
     def test_tls_cert_key2(self):
 
@@ -439,7 +439,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_type="TLS")
 
-        self.assertEqual(mongo.tls_certkey, None)
+        self.assertIsNone(mongo.tls_certkey)
 
     def test_tls_client_ca2(self):
 
@@ -472,7 +472,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_type="TLS")
 
-        self.assertEqual(mongo.tls_ca_certs, None)
+        self.assertIsNone(mongo.tls_ca_certs)
 
     def test_ssl_all_phrase2(self):
 
@@ -791,7 +791,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port)
 
-        self.assertEqual(mongo.ssl_client_phrase, None)
+        self.assertIsNone(mongo.ssl_client_phrase)
 
     def test_ssl_client_cert2(self):
 
@@ -823,7 +823,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port)
 
-        self.assertEqual(mongo.ssl_client_cert, None)
+        self.assertIsNone(mongo.ssl_client_cert)
 
     def test_ssl_client_key2(self):
 
@@ -855,7 +855,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port)
 
-        self.assertEqual(mongo.ssl_client_key, None)
+        self.assertIsNone(mongo.ssl_client_key)
 
     def test_ssl_client_ca2(self):
 
@@ -887,7 +887,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port)
 
-        self.assertEqual(mongo.ssl_client_ca, None)
+        self.assertIsNone(mongo.ssl_client_ca)
 
     def test_set_pass(self):
 

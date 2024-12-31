@@ -77,7 +77,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.fetch_nodes()
 
-        self.assertTrue(self.results in data)
+        self.assertIn(self.results, data)
 
     def test_fetch_nodes(self):
 
@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.fetch_nodes()
 
-        self.assertTrue(isinstance(data, frozenset))
+        self.assertIsInstance(data, frozenset)
 
 
 if __name__ == "__main__":

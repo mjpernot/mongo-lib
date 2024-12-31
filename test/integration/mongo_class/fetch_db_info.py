@@ -78,7 +78,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = [item["name"] for item in data["databases"]]
 
-        self.assertTrue("admin" in db_list)
+        self.assertIn("admin", db_list)
 
     def test_fetch_db_info(self):
 
@@ -92,7 +92,7 @@ class UnitTest(unittest.TestCase):
 
         data = mongo_class.fetch_db_info(self.mongo)
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
 
 if __name__ == "__main__":

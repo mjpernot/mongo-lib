@@ -139,7 +139,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file)
         mongo.connect()
 
-        self.assertTrue(isinstance(mongo.slaves, list))
+        self.assertIsInstance(mongo.slaves, list)
 
     def test_repset(self):
 

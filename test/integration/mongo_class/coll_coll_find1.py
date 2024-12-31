@@ -124,7 +124,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.coll_find1({})
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
     def test_no_query2(self):
 
@@ -152,7 +152,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.coll_find1()
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
 
 if __name__ == "__main__":

@@ -79,7 +79,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.coll_options()
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
     def test_coll_options(self):
 

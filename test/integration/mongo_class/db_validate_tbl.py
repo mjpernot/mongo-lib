@@ -129,7 +129,7 @@ class UnitTest(unittest.TestCase):
 
         _, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
     def test_full_scan(self):
 
@@ -171,7 +171,7 @@ class UnitTest(unittest.TestCase):
 
         _, data = self.mongo.validate_tbl(self.tbl_name)
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
     def test_table(self):
 

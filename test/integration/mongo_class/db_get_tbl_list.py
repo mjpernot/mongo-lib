@@ -81,7 +81,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = self.mongo.get_tbl_list(False)
 
-        self.assertTrue(isinstance(db_list, list))
+        self.assertIsInstance(db_list, list)
 
     def test_pass_true2(self):
 
@@ -95,7 +95,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = self.mongo.get_tbl_list(True)
 
-        self.assertTrue(self.tbl_name in db_list)
+        self.assertIn(self.tbl_name, db_list)
 
     def test_pass_true(self):
 
@@ -109,7 +109,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = self.mongo.get_tbl_list(True)
 
-        self.assertTrue(isinstance(db_list, list))
+        self.assertIsInstance(db_list, list)
 
     def test_default2(self):
 
@@ -123,7 +123,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = self.mongo.get_tbl_list()
 
-        self.assertTrue(self.tbl_name in db_list)
+        self.assertIn(self.tbl_name, db_list)
 
     def test_default(self):
 
@@ -137,7 +137,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = self.mongo.get_tbl_list()
 
-        self.assertTrue(isinstance(db_list, list))
+        self.assertIsInstance(db_list, list)
 
 
 if __name__ == "__main__":

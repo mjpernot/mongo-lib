@@ -76,7 +76,7 @@ class UnitTest(unittest.TestCase):
 
         data = mongo_class.fetch_cmd_line(self.mongo)
 
-        self.assertTrue("mongod" in data["argv"])
+        self.assertIn("mongod", data["argv"])
 
     def test_fetch_cmd_line(self):
 
@@ -90,7 +90,7 @@ class UnitTest(unittest.TestCase):
 
         data = mongo_class.fetch_cmd_line(self.mongo)
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
 
 if __name__ == "__main__":

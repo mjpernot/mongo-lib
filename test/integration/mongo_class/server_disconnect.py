@@ -75,7 +75,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.disconnect()
 
-        self.assertEqual(self.mongo.conn, None)
+        self.assertIsNone(self.mongo.conn)
 
 
 if __name__ == "__main__":

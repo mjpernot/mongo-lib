@@ -94,7 +94,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.fetch_svr_info()
 
-        self.assertTrue(isinstance(data["buildEnvironment"], dict))
+        self.assertIsInstance(data["buildEnvironment"], dict)
 
     def test_fetch_svr_info2(self):
 
@@ -108,7 +108,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.fetch_svr_info()
 
-        self.assertTrue(isinstance(data["storageEngines"], list))
+        self.assertIsInstance(data["storageEngines"], list)
 
     def test_fetch_svr_info(self):
 
@@ -120,7 +120,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(isinstance(self.mongo.fetch_svr_info(), dict))
+        self.assertIsInstance(self.mongo.fetch_svr_info(), dict)
 
 
 if __name__ == "__main__":

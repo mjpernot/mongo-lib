@@ -94,7 +94,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.db_cmd("collstats", obj=self.tbl_name)
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
     def test_base_cmd2(self):
 
@@ -108,7 +108,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.db_cmd("buildinfo")
 
-        self.assertTrue(isinstance(data["storageEngines"], list))
+        self.assertIsInstance(data["storageEngines"], list)
 
     def test_base_cmd(self):
 
@@ -122,7 +122,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.db_cmd("buildinfo")
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
 
 if __name__ == "__main__":

@@ -75,7 +75,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(isinstance(self.mongo.fetch_adr(), tuple))
+        self.assertIsInstance(self.mongo.fetch_adr(), tuple)
 
     def test_fetch_adr(self):
 

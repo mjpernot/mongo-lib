@@ -74,7 +74,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = self.mongo.fetch_dbs()
 
-        self.assertTrue("admin" in db_list)
+        self.assertIn("admin", db_list)
 
 
 if __name__ == "__main__":

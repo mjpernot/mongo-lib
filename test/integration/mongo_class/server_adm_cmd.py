@@ -77,7 +77,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.adm_cmd("getLog", arg1="global")
 
-        self.assertTrue(isinstance(data["log"], list))
+        self.assertIsInstance(data["log"], list)
 
     def test_arg(self):
 
@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.adm_cmd("getLog", arg1="global")
 
-        self.assertTrue(data["totalLinesWritten"] >= 0)
+        self.assertGreaterEqual(data["totalLinesWritten"], 0)
 
     def test_adm_cmd(self):
 
@@ -106,7 +106,7 @@ class UnitTest(unittest.TestCase):
         data = self.mongo.adm_cmd("listDatabases")
         db_list = [item["name"] for item in data["databases"]]
 
-        self.assertTrue("admin" in db_list)
+        self.assertIn("admin", db_list)
 
 
 if __name__ == "__main__":

@@ -93,7 +93,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.coll_dst("db")
 
-        self.assertTrue(isinstance(data, list))
+        self.assertIsInstance(data, list)
 
     def test_empty_query2(self):
 
@@ -121,7 +121,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.coll_dst("")
 
-        self.assertTrue(isinstance(data, list))
+        self.assertIsInstance(data, list)
 
     def test_no_query2(self):
 
@@ -149,7 +149,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.coll_dst()
 
-        self.assertTrue(isinstance(data, list))
+        self.assertIsInstance(data, list)
 
 
 if __name__ == "__main__":
