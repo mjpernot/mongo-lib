@@ -441,7 +441,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, host=self.host, port=self.port,
             auth_type="TLS")
 
-        self.assertEqual(mongo.tls_certkey, None)
+        self.assertIsNone(mongo.tls_certkey)
 
     def test_tls_client_ca2(self):
 

@@ -399,7 +399,7 @@ class UnitTest(unittest.TestCase):
         cfg = Cfg3()
         mongo = mongo_libs.create_security_config(cfg=cfg)
 
-        self.assertEqual(mongo["auth_type"], None)
+        self.assertIsNone(mongo["auth_type"])
 
     def test_coll_set_ssl(self):
 
