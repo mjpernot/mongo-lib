@@ -88,7 +88,7 @@ class UnitTest(unittest.TestCase):
                                  self.port)
         mongo.conn = {"test": {"coll_name": None}}
 
-        self.assertEqual(mongo.coll_coll, None)
+        self.assertIsNone(mongo.coll_coll)
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -131,7 +131,7 @@ class UnitTest(unittest.TestCase):
         mongo.conn = {"test": {"coll_name": "connect"}}
         mongo.connect()
 
-        self.assertEqual((mongo.coll), ("connect"))
+        self.assertEqual(mongo.coll, "connect")
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -174,7 +174,7 @@ class UnitTest(unittest.TestCase):
         mongo.conn = {"test": {"coll_name": "connect"}}
         mongo.connect()
 
-        self.assertEqual((mongo.coll), ("connect"))
+        self.assertEqual(mongo.coll, "connect")
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -215,7 +215,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
                                  self.port, coll=self.coll)
 
-        self.assertEqual(mongo.coll, None)
+        self.assertIsNone(mongo.coll)
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -257,7 +257,7 @@ class UnitTest(unittest.TestCase):
         mongo.conn = {"test": {"coll_name": "connect"}}
         mongo.connect()
 
-        self.assertEqual((mongo.coll), ("connect"))
+        self.assertEqual(mongo.coll, "connect")
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")

@@ -576,7 +576,7 @@ class UnitTest(unittest.TestCase):
             db=self.dbs, auth=True)
         mongo.connect()
 
-        self.assertEqual((mongo.auth), (True))
+        self.assertTrue(mongo.auth)
 
     @mock.patch("mongo_class.Server.get_srv_attr",
                 mock.Mock(return_value=(True, None)))

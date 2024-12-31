@@ -415,7 +415,7 @@ class UnitTest(unittest.TestCase):
                                            mongo_class.RepSetColl)
         self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, None)
+        self.assertIsNone(mongo.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl7(self, mock_load):
@@ -435,7 +435,7 @@ class UnitTest(unittest.TestCase):
                                            mongo_class.RepSet)
         self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, None)
+        self.assertIsNone(mongo.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl6(self, mock_load):
@@ -455,7 +455,7 @@ class UnitTest(unittest.TestCase):
                                            mongo_class.SlaveRep)
         self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, None)
+        self.assertIsNone(mongo.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl5(self, mock_load):
@@ -475,7 +475,7 @@ class UnitTest(unittest.TestCase):
                                            mongo_class.MasterRep)
         self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, None)
+        self.assertIsNone(mongo.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl4(self, mock_load):
@@ -495,7 +495,7 @@ class UnitTest(unittest.TestCase):
                                            mongo_class.Rep)
         self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, None)
+        self.assertIsNone(mongo.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl3(self, mock_load):
@@ -515,7 +515,7 @@ class UnitTest(unittest.TestCase):
                                            mongo_class.Coll)
         self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, None)
+        self.assertIsNone(mongo.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl2(self, mock_load):
@@ -535,7 +535,7 @@ class UnitTest(unittest.TestCase):
                                            mongo_class.DB)
         self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, None)
+        self.assertIsNone(mongo.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_none_ssl(self, mock_load):
@@ -555,7 +555,7 @@ class UnitTest(unittest.TestCase):
                                            mongo_class.Server)
         self.ssl_client_ca = tmp
 
-        self.assertEqual(mongo.ssl_client_ca, None)
+        self.assertIsNone(mongo.ssl_client_ca)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_auth_mech8(self, mock_load):
@@ -711,7 +711,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.RepSetColl)
 
-        self.assertTrue(isinstance(mongo, mongo_class.RepSetColl))
+        self.assertIsInstance(mongo, mongo_class.RepSetColl)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_auth_db_repsetcoll(self, mock_load):
@@ -756,7 +756,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.RepSet)
 
-        self.assertTrue(isinstance(mongo, mongo_class.RepSet))
+        self.assertIsInstance(mongo, mongo_class.RepSet)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_auth_db_repset(self, mock_load):
@@ -801,7 +801,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Coll)
 
-        self.assertTrue(isinstance(mongo, mongo_class.Coll))
+        self.assertIsInstance(mongo, mongo_class.Coll)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_auth_db_coll(self, mock_load):
@@ -846,7 +846,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.DB)
 
-        self.assertTrue(isinstance(mongo, mongo_class.DB))
+        self.assertIsInstance(mongo, mongo_class.DB)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_auth_db_db(self, mock_load):
@@ -891,7 +891,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.SlaveRep)
 
-        self.assertTrue(isinstance(mongo, mongo_class.SlaveRep))
+        self.assertIsInstance(mongo, mongo_class.SlaveRep)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_auth_db_slaverep(self, mock_load):
@@ -936,7 +936,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.MasterRep)
 
-        self.assertTrue(isinstance(mongo, mongo_class.MasterRep))
+        self.assertIsInstance(mongo, mongo_class.MasterRep)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_auth_db_masterrep(self, mock_load):
@@ -981,7 +981,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Rep)
 
-        self.assertTrue(isinstance(mongo, mongo_class.Rep))
+        self.assertIsInstance(mongo, mongo_class.Rep)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_auth_db_rep(self, mock_load):
@@ -1026,7 +1026,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Server)
 
-        self.assertTrue(isinstance(mongo, mongo_class.Server))
+        self.assertIsInstance(mongo, mongo_class.Server)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_auth_db_server(self, mock_load):
@@ -1066,7 +1066,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.RepSetColl)
 
-        self.assertTrue(isinstance(mongo, mongo_class.RepSetColl))
+        self.assertIsInstance(mongo, mongo_class.RepSetColl)
 
     def test_create_repsetcoll(self):
 
@@ -1100,7 +1100,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.RepSet)
 
-        self.assertTrue(isinstance(mongo, mongo_class.RepSet))
+        self.assertIsInstance(mongo, mongo_class.RepSet)
 
     def test_create_repset(self):
 
@@ -1134,7 +1134,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Coll)
 
-        self.assertTrue(isinstance(mongo, mongo_class.Coll))
+        self.assertIsInstance(mongo, mongo_class.Coll)
 
     def test_create_coll(self):
 
@@ -1168,7 +1168,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.DB)
 
-        self.assertTrue(isinstance(mongo, mongo_class.DB))
+        self.assertIsInstance(mongo, mongo_class.DB)
 
     def test_create_db(self):
 
@@ -1202,7 +1202,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.SlaveRep)
 
-        self.assertTrue(isinstance(mongo, mongo_class.SlaveRep))
+        self.assertIsInstance(mongo, mongo_class.SlaveRep)
 
     def test_create_slaverep(self):
 
@@ -1236,7 +1236,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.MasterRep)
 
-        self.assertTrue(isinstance(mongo, mongo_class.MasterRep))
+        self.assertIsInstance(mongo, mongo_class.MasterRep)
 
     def test_create_masterrep(self):
 
@@ -1270,7 +1270,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Rep)
 
-        self.assertTrue(isinstance(mongo, mongo_class.Rep))
+        self.assertIsInstance(mongo, mongo_class.Rep)
 
     def test_create_rep(self):
 
@@ -1304,7 +1304,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_libs.create_instance(self.config_name, self.config_dir,
                                            mongo_class.Server)
 
-        self.assertTrue(isinstance(mongo, mongo_class.Server))
+        self.assertIsInstance(mongo, mongo_class.Server)
 
     def test_create_server(self):
 

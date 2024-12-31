@@ -188,7 +188,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.DB(self.name, self.user, self.japd,
                                self.host, self.port)
 
-        self.assertEqual((mongo.db_inst), (None))
+        self.assertIsNone(mongo.db_inst)
 
     @mock.patch("mongo_class.Server.get_srv_attr")
     @mock.patch("mongo_class.pymongo.MongoClient")
@@ -248,7 +248,7 @@ class UnitTest(unittest.TestCase):
         mongo.conn = {"test": "testdb"}
         mongo.connect()
 
-        self.assertEqual((mongo.db_inst), ("testdb"))
+        self.assertEqual(mongo.db_inst, "testdb")
 
 
 if __name__ == "__main__":

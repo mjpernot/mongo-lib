@@ -230,7 +230,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file, repset=self.cfg.repset)
         mongo.connect()
 
-        self.assertTrue(isinstance(mongo.conn, pymongo.MongoClient))
+        self.assertIsInstance(mongo.conn, pymongo.MongoClient)
 
     def test_conn_false(self):
 

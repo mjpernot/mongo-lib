@@ -160,7 +160,7 @@ class UnitTest(unittest.TestCase):
         mongo.db_inst = DBValidate2()
         status, _ = mongo.validate_tbl("tbl", True)
 
-        self.assertEqual((status), (False))
+        self.assertFalse(status, False)
 
     def test_raise_exception(self):
 

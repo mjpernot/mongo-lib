@@ -77,7 +77,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(self.mongo.coll_cnt({"db": self.database}) >= 1)
+        self.assertGreaterEqual(self.mongo.coll_cnt({"db": self.database}), 1)
 
     def test_empty_query(self):
 

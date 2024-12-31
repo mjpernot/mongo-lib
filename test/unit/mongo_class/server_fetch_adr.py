@@ -95,7 +95,7 @@ class UnitTest(unittest.TestCase):
                                 self.port)
         mongo.conn = Conn()
 
-        self.assertEqual(mongo.fetch_adr(), True)
+        self.assertTrue(mongo.fetch_adr())
 
 
 if __name__ == "__main__":

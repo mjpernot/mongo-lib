@@ -97,7 +97,7 @@ class UnitTest(unittest.TestCase):
                                 self.port)
         mongo.conn = Conn()
 
-        self.assertEqual(mongo.is_locked(), True)
+        self.assertTrue(mongo.is_locked())
 
 
 if __name__ == "__main__":

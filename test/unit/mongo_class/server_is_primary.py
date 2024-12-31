@@ -97,7 +97,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, self.host, self.port)
         mongo.conn = Conn()
 
-        self.assertEqual(mongo.is_primary(), True)
+        self.assertTrue(mongo.is_primary())
 
 
 if __name__ == "__main__":

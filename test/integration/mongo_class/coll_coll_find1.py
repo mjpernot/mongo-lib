@@ -96,7 +96,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.coll_find1({"db": self.database})
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
     def test_empty_query2(self):
 
