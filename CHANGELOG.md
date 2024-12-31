@@ -6,6 +6,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [4.4.0] - 2024-12-20
 - Removed support for Python 2.7.
+- Added pymongo==4.6.8 for Python 3.9.
+- Set pymongo==4.1.1 for Python 3.6.
 - Update python-lib to v4.0.0
 
 ### Changed
