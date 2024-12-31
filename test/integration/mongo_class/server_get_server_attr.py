@@ -22,9 +22,9 @@ import pymongo
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import lib.gen_libs as gen_libs
-import version
+import mongo_class                          # pylint:disable=E0401,C0413
+import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
+import version                              # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -68,7 +68,7 @@ class UnitTest(unittest.TestCase):
         """
 
         msg = "Authentication failed."
-        errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
+        errmsg = f"Error:  Auth flag or login params is incorrect: {msg}"
         mongo = mongo_class.Server(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,

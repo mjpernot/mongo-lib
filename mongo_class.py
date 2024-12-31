@@ -22,8 +22,6 @@
 """
 
 # Libraries and Global Variables
-from __future__ import print_function
-from __future__ import absolute_import
 
 # Standard
 import time
@@ -89,7 +87,7 @@ def fetch_ismaster(mongo):
     return mongo.adm_cmd("isMaster")
 
 
-class Server(object):
+class Server():                                         # pylint:disable=R0902
 
     """Class:  Server
 
@@ -120,8 +118,8 @@ class Server(object):
 
     """
 
-    def __init__(self, name, user, japd, host="localhost", port=27017,
-                 **kwargs):
+    def __init__(                                       # pylint:disable=R0913
+        self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
 
@@ -289,7 +287,7 @@ class Server(object):
         except pymongo.errors.OperationFailure as msg:
             self.disconnect()
             status = False
-            errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
+            errmsg = f"Error:  Auth flag or login params is incorrect: {msg}"
 
         return status, errmsg
 
@@ -429,8 +427,12 @@ class Server(object):
 
         """
 
+        status = None
+
         if "lock" in kwargs:
-            return self.conn.fsync(lock=kwargs["lock"])
+            status = self.conn.fsync(lock=kwargs["lock"])
+
+        return status
 
     def is_locked(self):
 
@@ -526,8 +528,8 @@ class DB(Server):
 
     """
 
-    def __init__(self, name, user, japd, host="localhost", port=27017,
-                 **kwargs):
+    def __init__(                                       # pylint:disable=R0913
+        self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
 
@@ -552,7 +554,7 @@ class DB(Server):
 
         """
 
-        super(DB, self).__init__(
+        super(DB, self).__init__(                       # pylint:disable=R1725
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
@@ -582,7 +584,7 @@ class DB(Server):
 
         """
 
-        status, errmsg = super(DB, self).connect()
+        status, errmsg = super(DB, self).connect()      # pylint:disable=R1725
 
         if status:
             self.db_inst = self.conn[self.db_name]
@@ -721,8 +723,8 @@ class Coll(DB):
 
     """
 
-    def __init__(self, name, user, japd, host="localhost", port=27017,
-                 **kwargs):
+    def __init__(                                       # pylint:disable=R0913
+        self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
 
@@ -748,7 +750,7 @@ class Coll(DB):
 
         """
 
-        super(Coll, self).__init__(
+        super(Coll, self).__init__(                     # pylint:disable=R1725
             name, user, japd, host=host, port=port,
             db=kwargs.get("db", "test"), auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
@@ -779,7 +781,7 @@ class Coll(DB):
 
         """
 
-        status, errmsg = super(Coll, self).connect()
+        status, errmsg = super(Coll, self).connect()    # pylint:disable=R1725
 
         if status:
             if self.coll_coll:
@@ -898,8 +900,8 @@ class Rep(Server):
 
     """
 
-    def __init__(self, name, user, japd, host="localhost", port=27017,
-                 **kwargs):
+    def __init__(                                       # pylint:disable=R0913
+        self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
 
@@ -923,7 +925,7 @@ class Rep(Server):
 
         """
 
-        super(Rep, self).__init__(
+        super(Rep, self).__init__(                      # pylint:disable=R1725
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
@@ -973,8 +975,8 @@ class MasterRep(Rep):
 
     """
 
-    def __init__(self, name, user, japd, host="localhost", port=27017,
-                 **kwargs):
+    def __init__(                                       # pylint:disable=R0913
+        self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
 
@@ -998,7 +1000,7 @@ class MasterRep(Rep):
 
         """
 
-        super(MasterRep, self).__init__(
+        super(MasterRep, self).__init__(                # pylint:disable=R1725
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
@@ -1030,7 +1032,8 @@ class MasterRep(Rep):
 
         """
 
-        status, errmsg = super(MasterRep, self).connect()
+        status, errmsg = super(                         # pylint:disable=R1725
+            MasterRep, self).connect()
 
         if status:
             data = fetch_ismaster(self)
@@ -1063,8 +1066,8 @@ class SlaveRep(Rep):
 
     """
 
-    def __init__(self, name, user, japd, host="localhost", port=27017,
-                 **kwargs):
+    def __init__(                                       # pylint:disable=R0913
+        self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
 
@@ -1088,7 +1091,7 @@ class SlaveRep(Rep):
 
         """
 
-        super(SlaveRep, self).__init__(
+        super(SlaveRep, self).__init__(                 # pylint:disable=R1725
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
@@ -1120,7 +1123,8 @@ class SlaveRep(Rep):
 
         """
 
-        status, errmsg = super(SlaveRep, self).connect()
+        status, errmsg = super(                         # pylint:disable=R1725
+            SlaveRep, self).connect()
 
         if status:
             data = fetch_ismaster(self)
@@ -1154,8 +1158,8 @@ class RepSet(Rep):
 
     """
 
-    def __init__(self, name, user, japd, host="localhost", port=27017,
-                 **kwargs):
+    def __init__(                                       # pylint:disable=R0913
+        self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
 
@@ -1181,7 +1185,7 @@ class RepSet(Rep):
 
         """
 
-        super(RepSet, self).__init__(
+        super(RepSet, self).__init__(                   # pylint:disable=R1725
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),
@@ -1258,8 +1262,8 @@ class RepSetColl(RepSet):
 
     """
 
-    def __init__(self, name, user, japd, host="localhost", port=27017,
-                 **kwargs):
+    def __init__(                                       # pylint:disable=R0913
+        self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
 
@@ -1288,7 +1292,7 @@ class RepSetColl(RepSet):
 
         """
 
-        super(RepSetColl, self).__init__(
+        super(RepSetColl, self).__init__(               # pylint:disable=R1725
             name, user, japd, host=host, port=port,
             auth=kwargs.get("auth", True),
             conf_file=kwargs.get("conf_file", None),

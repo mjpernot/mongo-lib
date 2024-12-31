@@ -20,18 +20,14 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_libs
-import mongo_class
-import lib.gen_libs as gen_libs
-import version
+import mongo_libs                           # pylint:disable=E0401,C0413
+import mongo_class                          # pylint:disable=E0401,C0413
+import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
+import version                              # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 # Global
-KEY1 = "pass"
-KEY2 = "word"
-KEY3 = "ssl_pem_"
-KEY4 = "phrase"
 
 
 class UnitTest(unittest.TestCase):
@@ -95,23 +91,18 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY2
-        global KEY3
-        global KEY4
-
         self.mongo.config["ssl"] = True
         self.mongo.config.pop("ssl_ca_certs", None)
         self.mongo.config.pop("ssl_keyfile", None)
-        self.mongo.config.pop(KEY3 + KEY1 + KEY4, None)
+        self.mongo.config.pop("ssl_pem_passphrase", None)
         self.mongo.config["ssl_keyfile"] = self.key_file
-        self.mongo.config[KEY3 + KEY1 + KEY4] = self.key_phrase
+        self.mongo.config["ssl_pem_passphrase"] = self.key_phrase
         self.mongo.config["ssl_ca_certs"] = self.ca_file
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
         result_cmd.append(self.ssl_ca + self.ca_file)
         result_cmd.append(self.ssl_key + self.key_file)
-        result_cmd.append(self.ssl_phrase + KEY2 + "=" + self.key_phrase)
+        result_cmd.append(self.ssl_phrase + "word=" + self.key_phrase)
 
         self.assertEqual(
             mongo_libs.add_ssl_cmd(self.mongo, self.cmd_line), result_cmd)
@@ -126,20 +117,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY3
-        global KEY4
-
         self.mongo.config["ssl"] = True
         self.mongo.config.pop("ssl_ca_certs", None)
         self.mongo.config.pop("ssl_keyfile", None)
-        self.mongo.config.pop(KEY3 + KEY1 + KEY4, None)
+        self.mongo.config.pop("ssl_pem_passphrase", None)
         self.mongo.config["ssl_keyfile"] = self.key_file
-        self.mongo.config[KEY3 + KEY1 + KEY4] = self.key_phrase
+        self.mongo.config["ssl_pem_passphrase"] = self.key_phrase
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
         result_cmd.append(self.ssl_key + self.key_file)
-        result_cmd.append(self.ssl_phrase + KEY2 + "=" + self.key_phrase)
+        result_cmd.append(self.ssl_phrase + "word=" + self.key_phrase)
 
         self.assertEqual(
             mongo_libs.add_ssl_cmd(self.mongo, self.cmd_line), result_cmd)
@@ -154,14 +141,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY3
-        global KEY4
-
         self.mongo.config["ssl"] = True
         self.mongo.config.pop("ssl_ca_certs", None)
         self.mongo.config.pop("ssl_keyfile", None)
-        self.mongo.config.pop(KEY3 + KEY1 + KEY4, None)
+        self.mongo.config.pop("ssl_pem_passphrase", None)
         self.mongo.config["ssl_keyfile"] = self.key_file
         self.mongo.config["ssl_ca_certs"] = self.ca_file
         result_cmd = list(self.cmd_line)
@@ -182,14 +165,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY3
-        global KEY4
-
         self.mongo.config["ssl"] = True
         self.mongo.config.pop("ssl_ca_certs", None)
         self.mongo.config.pop("ssl_keyfile", None)
-        self.mongo.config.pop(KEY3 + KEY1 + KEY4, None)
+        self.mongo.config.pop("ssl_pem_passphrase", None)
         self.mongo.config["ssl_keyfile"] = self.key_file
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
@@ -208,14 +187,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY3
-        global KEY4
-
         self.mongo.config["ssl"] = True
         self.mongo.config.pop("ssl_ca_certs", None)
         self.mongo.config.pop("ssl_keyfile", None)
-        self.mongo.config.pop(KEY3 + KEY1 + KEY4, None)
+        self.mongo.config.pop("ssl_pem_passphrase", None)
         self.mongo.config["ssl_ca_certs"] = self.ca_file
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
@@ -234,14 +209,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY3
-        global KEY4
-
         self.mongo.config["ssl"] = True
         self.mongo.config.pop("ssl_ca_certs", None)
         self.mongo.config.pop("ssl_keyfile", None)
-        self.mongo.config.pop(KEY3 + KEY1 + KEY4, None)
+        self.mongo.config.pop("ssl_pem_passphrase", None)
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
 

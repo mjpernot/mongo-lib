@@ -1,4 +1,4 @@
-# Classification (U)
+# Classification (U)                            # pylint:disable=C0302
 
 """Program:  db_init.py
 
@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import version
+import mongo_class                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -190,7 +190,7 @@ class UnitTest(unittest.TestCase):
         self.tls_certkey = "tlsCertificationKeyFile"
         self.tls_certkey_phrase = "tlsCertificationKeyFilePassword"
 
-        config = dict()
+        config = {}
         config["password"] = self.japd
         config["authMechanism"] = self.auth_mech2
         config["tls"] = True

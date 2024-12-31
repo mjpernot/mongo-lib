@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.0.0] - 2024-12-20
+- Removed support for Python 2.7.
+- Update python-lib to v4.0.0
+
+### Changed
+- mongo_class.Server.lock_db: Refactored the method.
+- mongo_class:  Replaced dict() with {} and list() with [].
+- mongo_libs:  Replaced dict() with {} and list() with [].
+- mongo_class:  Converted strings to f-strings.
+
+### Deprecated
+- Support for Mongo 3.4
+
+
 ## [4.3.4] - 2024-11-14
 
 ### Fixed

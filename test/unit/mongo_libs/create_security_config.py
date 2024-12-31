@@ -21,13 +21,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_libs
-import version
+import mongo_libs                               # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class Cfg(object):
+class Cfg():                                    # pylint:disable=R0903
 
     """Class:  Cfg
 
@@ -60,7 +60,7 @@ class Cfg(object):
         self.db_auth = "db_name"
 
 
-class Cfg2(object):
+class Cfg2():                                   # pylint:disable=R0903
 
     """Class:  Cfg2
 
@@ -103,7 +103,7 @@ class Cfg2(object):
         self.tls_certkey_phrase = None
 
 
-class Cfg3(object):
+class Cfg3():                                   # pylint:disable=R0903
 
     """Class:  Cfg3
 
@@ -146,7 +146,7 @@ class Cfg3(object):
         self.tls_certkey_phrase = None
 
 
-class Cfg4(object):
+class Cfg4():                                   # pylint:disable=R0903
 
     """Class:  Cfg4
 
@@ -189,7 +189,7 @@ class Cfg4(object):
         self.tls_certkey_phrase = None
 
 
-class Cfg5(object):
+class Cfg5():                                   # pylint:disable=R0903
 
     """Class:  Cfg5
 
