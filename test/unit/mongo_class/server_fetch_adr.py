@@ -20,13 +20,13 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import version
+import mongo_class                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class Conn(object):
+class Conn():                                   # pylint:disable=R0903
 
     """Class:  Conn
 
@@ -95,7 +95,7 @@ class UnitTest(unittest.TestCase):
                                 self.port)
         mongo.conn = Conn()
 
-        self.assertEqual(mongo.fetch_adr(), True)
+        self.assertTrue(mongo.fetch_adr())
 
 
 if __name__ == "__main__":

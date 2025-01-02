@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import lib.gen_libs as gen_libs
-import version
+import mongo_class                          # pylint:disable=E0401,C0413
+import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
+import version                              # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -78,7 +78,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = [item["name"] for item in data["databases"]]
 
-        self.assertTrue("admin" in db_list)
+        self.assertIn("admin", db_list)
 
     def test_fetch_db_info(self):
 
@@ -92,7 +92,7 @@ class UnitTest(unittest.TestCase):
 
         data = mongo_class.fetch_db_info(self.mongo)
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-# Classification (U)
+# Classification (U)                        # pylint:disable=C0302
 
 """Program:  coll_init.py
 
@@ -20,17 +20,13 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import lib.gen_libs as gen_libs
-import version
+import mongo_class                          # pylint:disable=E0401,C0413
+import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
+import version                              # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 # Global
-KEY1 = "pass"
-KEY2 = "word"
-KEY3 = "ssl_pem_"
-KEY4 = "phrase"
 
 
 class UnitTest(unittest.TestCase):
@@ -121,11 +117,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY2
-        global KEY3
-        global KEY4
-
         self.base_dir = "test/integration"
         self.config_dir = os.path.join(self.base_dir, "config")
         self.config_name = "mongo"
@@ -142,35 +133,35 @@ class UnitTest(unittest.TestCase):
         self.conf_file = "MyConf"
 
         self.config = {}
-        self.config[KEY1 + KEY2] = self.cfg.japd
+        self.config["password"] = self.cfg.japd
 
         self.config2 = {}
-        self.config2[KEY1 + KEY2] = self.cfg.japd
+        self.config2["password"] = self.cfg.japd
         self.config2["authMechanism"] = self.auth_mech2
 
         self.config3 = {}
-        self.config3[KEY1 + KEY2] = self.cfg.japd
+        self.config3["password"] = self.cfg.japd
         self.config3["authMechanism"] = self.auth_mech2
         self.config3["ssl"] = True
         self.config3["ssl_ca_certs"] = self.ssl_client_ca
 
         self.config4 = {}
-        self.config4[KEY1 + KEY2] = self.cfg.japd
+        self.config4["password"] = self.cfg.japd
         self.config4["authMechanism"] = self.auth_mech2
         self.config4["ssl"] = True
         self.config4["ssl_keyfile"] = self.ssl_client_key
         self.config4["ssl_certfile"] = self.ssl_client_cert
 
         self.config5 = {}
-        self.config5[KEY1 + KEY2] = self.cfg.japd
+        self.config5["password"] = self.cfg.japd
         self.config5["authMechanism"] = self.auth_mech2
         self.config5["ssl"] = True
         self.config5["ssl_keyfile"] = self.ssl_client_key
         self.config5["ssl_certfile"] = self.ssl_client_cert
-        self.config5[KEY3 + KEY1 + KEY4] = self.ssl_client_phrase
+        self.config5["ssl_pem_passphrase"] = self.ssl_client_phrase
 
         self.config6 = {}
-        self.config6[KEY1 + KEY2] = self.cfg.japd
+        self.config6["password"] = self.cfg.japd
         self.config6["authMechanism"] = self.auth_mech2
         self.config6["ssl"] = True
         self.config6["ssl_ca_certs"] = self.ssl_client_ca
@@ -178,19 +169,19 @@ class UnitTest(unittest.TestCase):
         self.config6["ssl_certfile"] = self.ssl_client_cert
 
         self.config7 = {}
-        self.config7[KEY1 + KEY2] = self.cfg.japd
+        self.config7["password"] = self.cfg.japd
         self.config7["authMechanism"] = self.auth_mech2
         self.config7["ssl"] = True
         self.config7["ssl_ca_certs"] = self.ssl_client_ca
         self.config7["ssl_keyfile"] = self.ssl_client_key
         self.config7["ssl_certfile"] = self.ssl_client_cert
-        self.config7[KEY3 + KEY1 + KEY4] = self.ssl_client_phrase
+        self.config7["ssl_pem_passphrase"] = self.ssl_client_phrase
 
         self.tls_ca_certs = "tlsCAFile"
         self.tls_certkey = "tlsCertificationKeyFile"
         self.tls_certkey_phrase = "tlsCertificationKeyFilePassword"
 
-        config = dict()
+        config = {}
         config["password"] = self.cfg.japd
         config["authMechanism"] = self.auth_mech2
         config["tls"] = True
@@ -420,7 +411,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_type="TLS")
 
-        self.assertEqual(mongo.ssl_client_phrase, None)
+        self.assertIsNone(mongo.ssl_client_phrase)
 
     def test_tls_cert_key2(self):
 
@@ -452,7 +443,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_type="TLS")
 
-        self.assertEqual(mongo.tls_certkey, None)
+        self.assertIsNone(mongo.tls_certkey)
 
     def test_tls_client_ca2(self):
 
@@ -485,7 +476,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_type="TLS")
 
-        self.assertEqual(mongo.tls_ca_certs, None)
+        self.assertIsNone(mongo.tls_ca_certs)
 
     def test_ssl_all_phrase2(self):
 
@@ -805,7 +796,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
-        self.assertEqual(mongo.ssl_client_phrase, None)
+        self.assertIsNone(mongo.ssl_client_phrase)
 
     def test_ssl_client_cert2(self):
 
@@ -838,7 +829,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
-        self.assertEqual(mongo.ssl_client_cert, None)
+        self.assertIsNone(mongo.ssl_client_cert)
 
     def test_ssl_client_key2(self):
 
@@ -871,7 +862,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
-        self.assertEqual(mongo.ssl_client_key, None)
+        self.assertIsNone(mongo.ssl_client_key)
 
     def test_ssl_client_ca2(self):
 
@@ -904,7 +895,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, coll=self.coll_name)
 
-        self.assertEqual(mongo.ssl_client_ca, None)
+        self.assertIsNone(mongo.ssl_client_ca)
 
     def test_set_pass(self):
 
@@ -916,10 +907,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY2
-
-        config = {KEY1 + KEY2: self.cfg.japd}
+        config = {"password": self.cfg.japd}
         config["authMechanism"] = self.auth_mech2
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,

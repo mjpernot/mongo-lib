@@ -21,13 +21,13 @@ import pymongo
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import version
+import mongo_class                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class DBValidate2(object):
+class DBValidate2():                            # pylint:disable=R0903
 
     """Class:  DBValidate2
 
@@ -70,7 +70,7 @@ class DBValidate2(object):
         raise pymongo.errors.OperationFailure("ErrorMsg")
 
 
-class DBValidate(object):
+class DBValidate():                             # pylint:disable=R0903
 
     """Class:  DBValidate
 
@@ -160,16 +160,13 @@ class UnitTest(unittest.TestCase):
         mongo.db_inst = DBValidate2()
         status, _ = mongo.validate_tbl("tbl", True)
 
-        self.assertEqual((status), (False))
+        self.assertFalse(status, False)
 
-    @unittest.skip("Bug: Skipped since pymongo 3.2.0 is current production.")
     def test_raise_exception(self):
 
         """Function:  test_raise_exception
 
         Description:  Test the raise exception.
-
-        Note:  This test will fail if pymongo is below 3.8.0.
 
         Arguments:
 
@@ -180,7 +177,8 @@ class UnitTest(unittest.TestCase):
         mongo.db_inst = DBValidate2()
         status, msg = mongo.validate_tbl("tbl", True)
 
-        self.assertEqual((status, msg._message), (False, "ErrorMsg"))
+        self.assertEqual((
+            status, msg._message), (False, "ErrorMsg"))  # pylint:disable=W0212
 
     def test_default(self):
 

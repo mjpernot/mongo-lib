@@ -21,9 +21,9 @@ import pymongo
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import lib.gen_libs as gen_libs
-import version
+import mongo_class                          # pylint:disable=E0401,C0413
+import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
+import version                              # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -175,7 +175,7 @@ class UnitTest(unittest.TestCase):
             coll=self.coll, db_auth=self.cfg.auth_db)
         mongo.connect()
 
-        self.assertTrue(mongo.db_name, "test")
+        self.assertEqual(mongo.db_name, "test")
 
     def test_db_not_passed(self):
 
@@ -212,7 +212,7 @@ class UnitTest(unittest.TestCase):
             coll=self.coll, db_auth=self.cfg.auth_db, db=self.dbs)
         mongo.connect()
 
-        self.assertTrue(mongo.db_name, self.dbs)
+        self.assertEqual(mongo.db_name, self.dbs)
 
     def test_db_passed(self):
 
@@ -298,7 +298,7 @@ class UnitTest(unittest.TestCase):
         """
 
         msg = "Authentication failed."
-        errmsg = "Error:  Auth flag or login params is incorrect: %s" % msg
+        errmsg = f"Error:  Auth flag or login params is incorrect: {msg}"
 
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
@@ -362,7 +362,7 @@ class UnitTest(unittest.TestCase):
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
 
-        self.assertTrue(isinstance(mongo.conn, pymongo.MongoClient))
+        self.assertIsInstance(mongo.conn, pymongo.MongoClient)
 
     def test_no_auth(self):
 
@@ -399,7 +399,7 @@ class UnitTest(unittest.TestCase):
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
 
-        self.assertTrue(isinstance(mongo.conn, pymongo.MongoClient))
+        self.assertIsInstance(mongo.conn, pymongo.MongoClient)
 
     def test_conn_false(self):
 
@@ -437,7 +437,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
         mongo.connect()
 
-        self.assertTrue(isinstance(mongo.conn, pymongo.MongoClient))
+        self.assertIsInstance(mongo.conn, pymongo.MongoClient)
 
     def test_conn_true(self):
 

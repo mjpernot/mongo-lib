@@ -4,7 +4,7 @@
 # Will need to run this from the base directory where the module file 
 #   is located at.
 
-echo "Unit test: mongo_class"  
+echo "Unit test: mongo_libs"  
 /usr/bin/python ./test/unit/mongo_libs/add_ssl_cmd.py
 /usr/bin/python ./test/unit/mongo_libs/add_tls_cmd.py
 /usr/bin/python ./test/unit/mongo_libs/create_cmd.py

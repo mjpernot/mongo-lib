@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.4.0] - 2024-12-20
+- Removed support for Python 2.7.
+- Added pymongo==4.10.1 for Python 3.9 and Python 3.12.
+- Added dnspython==2.7.0 for Python 3.9 and Python 3.12.
+- Set pymongo==4.1.1 for Python 3.6.
+- Update python-lib to v4.0.0
+
+### Changed
+- mongo_class.Server.lock_db: Refactored the method.
+- mongo_class: Replaced dict() with {} and list() with [].
+- mongo_libs: Replaced dict() with {} and list() with [].
+- mongo_class: Converted strings to f-strings.
+- Documentation changes.
+
+### Deprecated
+- Support for Mongo 3.4
+
+
 ## [4.3.4] - 2024-11-14
 
 ### Fixed
