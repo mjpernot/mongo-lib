@@ -55,11 +55,11 @@ python -m pip install -r requirements-mongo-lib.txt --target mongo_lib --trusted
 python -m pip install -r requirements-mongo-python-lib.txt --target mongo_lib/lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
-Redhat 8 (Running Python 3.6 -> pymongo==4.1.1):
+Redhat 8 (Running Python 3.6):
 
 ##### Add the general mongo-Lib requirements to (requirements3.txt) to the other program's requirements3.txt file.
 
-Redhat 8 (Running Python 3.9 -> pymongo==4.6.8):
+Redhat 8 (Running Python 3.9/3.12):
 
 ##### Add the general mongo-Lib requirements to (requirements39.txt) to the other program's requirements39.txt file.
 
