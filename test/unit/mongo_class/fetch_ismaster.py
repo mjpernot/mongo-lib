@@ -20,13 +20,13 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import version
+import mongo_class                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class Mongo(object):
+class Mongo():                                  # pylint:disable=R0903
 
     """Class:  Mongo
 

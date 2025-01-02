@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import lib.gen_libs as gen_libs
-import version
+import mongo_class                          # pylint:disable=E0401,C0413
+import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
+import version                              # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -94,7 +94,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.db_cmd("collstats", obj=self.tbl_name)
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
     def test_base_cmd2(self):
 
@@ -108,7 +108,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.db_cmd("buildinfo")
 
-        self.assertTrue(isinstance(data["storageEngines"], list))
+        self.assertIsInstance(data["storageEngines"], list)
 
     def test_base_cmd(self):
 
@@ -122,7 +122,7 @@ class UnitTest(unittest.TestCase):
 
         data = self.mongo.db_cmd("buildinfo")
 
-        self.assertTrue(isinstance(data, dict))
+        self.assertIsInstance(data, dict)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-# Classification (U)
+# Classification (U)                            # pylint:disable=C0302
 
 """Program:  server_init.py
 
@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import version
+import mongo_class                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -178,7 +178,7 @@ class UnitTest(unittest.TestCase):
         self.tls_certkey = "tlsCertificationKeyFile"
         self.tls_certkey_phrase = "tlsCertificationKeyFilePassword"
 
-        config = dict()
+        config = {}
         config["password"] = self.japd
         config["authMechanism"] = self.auth_mech2
         config["tls"] = True
@@ -404,7 +404,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, host=self.host, port=self.port,
             auth_type="TLS")
 
-        self.assertEqual(mongo.ssl_client_phrase, None)
+        self.assertIsNone(mongo.ssl_client_phrase)
 
     def test_tls_cert_key2(self):
 
@@ -436,7 +436,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, host=self.host, port=self.port,
             auth_type="TLS")
 
-        self.assertEqual(mongo.tls_certkey, None)
+        self.assertIsNone(mongo.tls_certkey)
 
     def test_tls_client_ca2(self):
 
@@ -468,7 +468,7 @@ class UnitTest(unittest.TestCase):
             self.name, self.user, self.japd, host=self.host, port=self.port,
             auth_type="TLS")
 
-        self.assertEqual(mongo.tls_ca_certs, None)
+        self.assertIsNone(mongo.tls_ca_certs)
 
     def test_ssl_all_phrase2(self):
 
@@ -771,7 +771,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, host=self.host, port=self.port)
 
-        self.assertEqual(mongo.ssl_client_phrase, None)
+        self.assertIsNone(mongo.ssl_client_phrase)
 
     def test_ssl_client_cert2(self):
 
@@ -802,7 +802,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, host=self.host, port=self.port)
 
-        self.assertEqual(mongo.ssl_client_cert, None)
+        self.assertIsNone(mongo.ssl_client_cert)
 
     def test_ssl_client_key2(self):
 
@@ -833,7 +833,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, host=self.host, port=self.port)
 
-        self.assertEqual(mongo.ssl_client_key, None)
+        self.assertIsNone(mongo.ssl_client_key)
 
     def test_ssl_client_ca2(self):
 
@@ -864,7 +864,7 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, host=self.host, port=self.port)
 
-        self.assertEqual(mongo.ssl_client_ca, None)
+        self.assertIsNone(mongo.ssl_client_ca)
 
     def test_set_pass(self):
 

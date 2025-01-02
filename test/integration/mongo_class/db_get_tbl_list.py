@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import lib.gen_libs as gen_libs
-import version
+import mongo_class                          # pylint:disable=E0401,C0413
+import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
+import version                              # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -81,7 +81,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = self.mongo.get_tbl_list(False)
 
-        self.assertTrue(isinstance(db_list, list))
+        self.assertIsInstance(db_list, list)
 
     def test_pass_true2(self):
 
@@ -95,7 +95,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = self.mongo.get_tbl_list(True)
 
-        self.assertTrue(self.tbl_name in db_list)
+        self.assertIn(self.tbl_name, db_list)
 
     def test_pass_true(self):
 
@@ -109,7 +109,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = self.mongo.get_tbl_list(True)
 
-        self.assertTrue(isinstance(db_list, list))
+        self.assertIsInstance(db_list, list)
 
     def test_default2(self):
 
@@ -123,7 +123,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = self.mongo.get_tbl_list()
 
-        self.assertTrue(self.tbl_name in db_list)
+        self.assertIn(self.tbl_name, db_list)
 
     def test_default(self):
 
@@ -137,7 +137,7 @@ class UnitTest(unittest.TestCase):
 
         db_list = self.mongo.get_tbl_list()
 
-        self.assertTrue(isinstance(db_list, list))
+        self.assertIsInstance(db_list, list)
 
 
 if __name__ == "__main__":

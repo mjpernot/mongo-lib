@@ -20,19 +20,15 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_libs
-import version
+import mongo_libs                               # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 # Global
-KEY1 = "pass"
-KEY2 = "word"
-KEY3 = "ssl_pem_"
-KEY4 = "phrase"
 
 
-class Mongo(object):
+class Mongo():                                  # pylint:disable=R0903
 
     """Class:  Mongo
 
@@ -115,19 +111,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY2
-        global KEY3
-        global KEY4
-
         self.mongo2.config["ssl_keyfile"] = self.key_file
-        self.mongo2.config[KEY3 + KEY1 + KEY4] = self.key_phrase
+        self.mongo2.config["ssl_pem_passphrase"] = self.key_phrase
         self.mongo2.config["ssl_ca_certs"] = self.ca_file
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
         result_cmd.append(self.ssl_ca + self.ca_file)
         result_cmd.append(self.ssl_key + self.key_file)
-        result_cmd.append(self.ssl_phrase + KEY2 + "=" + self.key_phrase)
+        result_cmd.append(self.ssl_phrase + "word=" + self.key_phrase)
 
         self.assertEqual(
             mongo_libs.add_ssl_cmd(self.mongo2, self.cmd_line), result_cmd)
@@ -143,11 +134,11 @@ class UnitTest(unittest.TestCase):
         """
 
         self.mongo2.config["ssl_keyfile"] = self.key_file
-        self.mongo2.config[KEY3 + KEY1 + KEY4] = self.key_phrase
+        self.mongo2.config["ssl_pem_passphrase"] = self.key_phrase
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.ssl)
         result_cmd.append(self.ssl_key + self.key_file)
-        result_cmd.append(self.ssl_phrase + KEY2 + "=" + self.key_phrase)
+        result_cmd.append(self.ssl_phrase + "word=" + self.key_phrase)
 
         self.assertEqual(
             mongo_libs.add_ssl_cmd(self.mongo2, self.cmd_line), result_cmd)

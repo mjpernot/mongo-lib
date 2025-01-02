@@ -21,14 +21,12 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import version
+import mongo_class                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 # Global
-KEY1 = "pass"
-KEY2 = "word"
 
 
 class UnitTest(unittest.TestCase):
@@ -76,10 +74,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY2
-
-        new_config = {KEY1 + KEY2: self.new_japd}
+        new_config = {"password": self.new_japd}
         new_config["authMechanism"] = "SCRAM-SHA-1"
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, self.host, self.port,
@@ -100,10 +95,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY2
-
-        config = {KEY1 + KEY2: self.japd}
+        config = {"password": self.japd}
         config["authMechanism"] = "SCRAM-SHA-1"
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, self.host, self.port,
@@ -122,10 +114,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY2
-
-        config = {KEY1 + KEY2: self.japd}
+        config = {"password": self.japd}
         config["authMechanism"] = "SCRAM-SHA-1"
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, self.host, self.port,

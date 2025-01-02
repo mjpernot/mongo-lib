@@ -21,13 +21,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import version
+import mongo_class                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class RepSetColl(object):
+class RepSetColl():                             # pylint:disable=R0903
 
     """Class:  RepSetColl
 
@@ -576,7 +576,7 @@ class UnitTest(unittest.TestCase):
             db=self.dbs, auth=True)
         mongo.connect()
 
-        self.assertEqual((mongo.auth), (True))
+        self.assertTrue(mongo.auth)
 
     @mock.patch("mongo_class.Server.get_srv_attr",
                 mock.Mock(return_value=(True, None)))

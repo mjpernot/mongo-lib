@@ -21,13 +21,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_libs
-import version
+import mongo_libs                               # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class ArgParser(object):
+class ArgParser():
 
     """Class:  ArgParser
 
@@ -51,7 +51,7 @@ class ArgParser(object):
 
         """
 
-        self.args_array = dict()
+        self.args_array = {}
 
     def arg_exist(self, arg):
 
@@ -63,7 +63,7 @@ class ArgParser(object):
 
         """
 
-        return True if arg in self.args_array else False
+        return arg in self.args_array
 
     def arg_set_path(self, arg_opt):
 
@@ -101,7 +101,7 @@ class ArgParser(object):
         return self.args_array.get(skey, def_val)
 
 
-class Mongo(object):
+class Mongo():                                  # pylint:disable=R0903
 
     """Class:  Mongo
 

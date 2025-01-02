@@ -21,13 +21,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_libs
-import version
+import mongo_libs                               # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class Mongo(object):
+class Mongo():
 
     """Class:  Mongo
 

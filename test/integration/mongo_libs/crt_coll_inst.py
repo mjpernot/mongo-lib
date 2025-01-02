@@ -20,10 +20,10 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_libs
-import mongo_class
-import lib.gen_libs as gen_libs
-import version
+import mongo_libs                           # pylint:disable=E0401,C0413
+import mongo_class                          # pylint:disable=E0401,C0413
+import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
+import version                              # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -232,7 +232,7 @@ class UnitTest(unittest.TestCase):
         self.cfg.repset_hosts = None
         mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
 
-        self.assertTrue(isinstance(mongo, mongo_class.Coll))
+        self.assertIsInstance(mongo, mongo_class.Coll)
 
     def test_coll_auth_mech(self):
 
@@ -282,7 +282,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
 
-        self.assertTrue(isinstance(mongo, mongo_class.RepSetColl))
+        self.assertIsInstance(mongo, mongo_class.RepSetColl)
 
     def test_repset_auth_mech(self):
 
@@ -315,7 +315,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
 
-        self.assertTrue(isinstance(mongo, mongo_class.Coll))
+        self.assertIsInstance(mongo, mongo_class.Coll)
 
     def test_auth_db_coll(self):
 
@@ -352,7 +352,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
 
-        self.assertTrue(isinstance(mongo, mongo_class.RepSetColl))
+        self.assertIsInstance(mongo, mongo_class.RepSetColl)
 
     def test_auth_db_repsetcoll(self):
 
@@ -388,7 +388,7 @@ class UnitTest(unittest.TestCase):
         self.cfg.repset_hosts = None
         mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
 
-        self.assertTrue(isinstance(mongo, mongo_class.Coll))
+        self.assertIsInstance(mongo, mongo_class.Coll)
 
     def test_coll(self):
 
@@ -422,7 +422,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_libs.crt_coll_inst(self.cfg, self.dbn, self.coll)
 
-        self.assertTrue(isinstance(mongo, mongo_class.RepSetColl))
+        self.assertIsInstance(mongo, mongo_class.RepSetColl)
 
     def test_repsetcoll(self):
 

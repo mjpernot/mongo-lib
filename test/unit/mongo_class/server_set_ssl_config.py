@@ -20,16 +20,12 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class
-import version
+import mongo_class                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 # Global
-KEY1 = "pass"
-KEY2 = "word"
-KEY3 = "ssl_pem_"
-KEY4 = "phrase"
 
 
 class UnitTest(unittest.TestCase):
@@ -68,11 +64,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global KEY1
-        global KEY2
-        global KEY3
-        global KEY4
-
         self.name = "Mongo_Server"
         self.user = "mongo_user"
         self.japd = "mongo_japd"
@@ -85,28 +76,28 @@ class UnitTest(unittest.TestCase):
         self.ssl_client_phrase = "MyPhrase"
 
         self.config = {}
-        self.config[KEY1 + KEY2] = self.japd
+        self.config["password"] = self.japd
         self.config["authMechanism"] = "SCRAM-SHA-1"
         self.config["ssl"] = True
         self.config["ssl_ca_certs"] = "CAFile"
 
         self.config2 = {}
-        self.config2[KEY1 + KEY2] = self.japd
+        self.config2["password"] = self.japd
         self.config2["authMechanism"] = "SCRAM-SHA-1"
         self.config2["ssl"] = True
         self.config2["ssl_keyfile"] = "KeyFile"
         self.config2["ssl_certfile"] = "CertFile"
 
         self.config3 = {}
-        self.config3[KEY1 + KEY2] = self.japd
+        self.config3["password"] = self.japd
         self.config3["authMechanism"] = "SCRAM-SHA-1"
         self.config3["ssl"] = True
         self.config3["ssl_keyfile"] = "KeyFile"
         self.config3["ssl_certfile"] = "CertFile"
-        self.config3[KEY3 + KEY1 + KEY4] = "MyPhrase"
+        self.config3["ssl_pem_passphrase"] = "MyPhrase"
 
         self.config4 = {}
-        self.config4[KEY1 + KEY2] = self.japd
+        self.config4["password"] = self.japd
         self.config4["authMechanism"] = "SCRAM-SHA-1"
         self.config4["ssl"] = True
         self.config4["ssl_ca_certs"] = "CAFile"
@@ -114,13 +105,13 @@ class UnitTest(unittest.TestCase):
         self.config4["ssl_certfile"] = "CertFile"
 
         self.config5 = {}
-        self.config5[KEY1 + KEY2] = self.japd
+        self.config5["password"] = self.japd
         self.config5["authMechanism"] = "SCRAM-SHA-1"
         self.config5["ssl"] = True
         self.config5["ssl_ca_certs"] = "CAFile"
         self.config5["ssl_keyfile"] = "KeyFile"
         self.config5["ssl_certfile"] = "CertFile"
-        self.config5[KEY3 + KEY1 + KEY4] = "MyPhrase"
+        self.config5["ssl_pem_passphrase"] = "MyPhrase"
 
     def test_ssl_all_phrase(self):
 

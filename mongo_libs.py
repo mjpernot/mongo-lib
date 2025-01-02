@@ -19,8 +19,6 @@
 """
 
 # Libraries and Global Variables
-from __future__ import print_function
-from __future__ import absolute_import
 
 # Standard
 import os
@@ -34,15 +32,14 @@ try:
     from . import version
 
 except (ValueError, ImportError) as err:
-    import lib.gen_libs as gen_libs
-    import lib.gen_class as gen_class
+    import lib.gen_libs as gen_libs                     # pylint:disable=R0402
+    import lib.gen_class as gen_class                   # pylint:disable=R0402
     import mongo_class
     import version
 
 __version__ = version.__version__
 
 # Global
-HOST = "--host="
 
 
 def add_tls_cmd(mongo, cmd_list):
@@ -196,7 +193,7 @@ def create_security_config(**kwargs):
 
     """
 
-    config = dict()
+    config = {}
     cfg_file = kwargs.get("cfg_file", None)
     dir_path = kwargs.get("dir_path", None)
     cfg = kwargs.get("cfg", None)
@@ -249,24 +246,23 @@ def crt_base_cmd(mongo, prog_name, **kwargs):
 
     """
 
-    global HOST
-
+    host = "--host="
     cmd_list = []
 
     # Use repset name and hosts for connection
     if kwargs.get("use_repset", False) and mongo.repset \
             and mongo.repset_hosts:
 
-        host_port = HOST + mongo.repset + "/" + mongo.repset_hosts
+        host_port = host + mongo.repset + "/" + mongo.repset_hosts
 
     # Use repset name for connection
     elif kwargs.get("use_repset", False) and mongo.repset:
-        host_port = HOST + mongo.repset + "/" + mongo.host + ":" + str(
+        host_port = host + mongo.repset + "/" + mongo.host + ":" + str(
             mongo.port)
 
     # Assume just host and port
     else:
-        host_port = HOST + mongo.host + ":" + str(mongo.port)
+        host_port = host + mongo.host + ":" + str(mongo.port)
 
     # Determine the type of user parameters to add
     if mongo.auth and kwargs.get("no_pass", False):
@@ -387,12 +383,12 @@ def get_all_dbs_tbls(mongo, db_list, **kwargs):
 
     """
 
-    db_dict = dict()
+    db_dict = {}
     db_list = list(db_list)
-    ign_db_tbl = dict(kwargs.get("ign_db_tbl", dict()))
+    ign_db_tbl = dict(kwargs.get("ign_db_tbl", {}))
 
     for dbs in db_list:
-        ign_tbls = ign_db_tbl[dbs] if dbs in ign_db_tbl else list()
+        ign_tbls = ign_db_tbl[dbs] if dbs in ign_db_tbl else []
         mongo.chg_db(dbs=dbs)
         tbl_list = gen_libs.del_not_and_list(
             mongo.get_tbl_list(inc_sys=False), ign_tbls)
@@ -418,11 +414,11 @@ def get_db_tbl(mongo, db_list, **kwargs):
 
     """
 
-    db_dict = dict()
+    db_dict = {}
     db_list = list(db_list)
-    ign_dbs = list(kwargs.get("ign_dbs", list()))
-    tbls = kwargs.get("tbls", list())
-    ign_db_tbl = dict(kwargs.get("ign_db_tbl", dict()))
+    ign_dbs = list(kwargs.get("ign_dbs", []))
+    tbls = kwargs.get("tbls", [])
+    ign_db_tbl = dict(kwargs.get("ign_db_tbl", {}))
 
     if db_list:
         db_list = gen_libs.del_not_and_list(db_list, ign_dbs)
@@ -432,7 +428,7 @@ def get_db_tbl(mongo, db_list, **kwargs):
             tbl_list = gen_libs.del_not_in_list(
                 tbls, mongo.get_tbl_list(inc_sys=False))
             ign_tbls = \
-                ign_db_tbl[db_list[0]] if db_list[0] in ign_db_tbl else list()
+                ign_db_tbl[db_list[0]] if db_list[0] in ign_db_tbl else []
             tbl_list = gen_libs.del_not_and_list(tbl_list, ign_tbls)
             db_dict[db_list[0]] = tbl_list
 

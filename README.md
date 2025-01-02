@@ -19,11 +19,8 @@
 # Prerequisites:
 
   * List of Linux packages that need to be installed on the server.
-    - Centos 7 (Running Python 2.7):
-      -> python-devel
-    Redhat 8 (Running Python 3.6):
-      -> python3-devel
-      -> gcc
+    - python3-devel
+    - gcc
 
   * FIPS Environment:  If operating in a FIPS 104-2 environment, this package will require at least a minimum of pymongo==3.8.0 or better.  It will also require a manual change to the auth.py module in the pymongo package.  See below for changes to auth.py.
     - Locate the auth.py file python installed packages on the system in the pymongo package directory.
@@ -39,41 +36,35 @@ Any program that wants to use this module to connect to mongo, recommend using t
 # Installation:
 
 ### Pip Installation:
-  * From here on out, any reference to **{Python_Project}** or **PYTHON_PROJECT** replace with the baseline path of the python program and any reference to **{Other_Python_Project}** with the baseline path of another python program.
 
 ##### Create requirements file in another program's project to install mongo-lib as a library module.
 
-Create requirements-mongo-lib.txt and requirements-mongo-python-lib.txt files:
+  * Create requirements-mongo-lib.txt and requirements-mongo-python-lib.txt.  Replace N.N.N with the version of the library needed.
 
 ```
-cp {Python_Project}/requirements-mongo-lib.txt {Other_Python_Project}/requirements-mongo-lib.txt
-cp {Python_Project}/requirements-python-lib.txt {Other_Python_Project}/requirements-mongo-python-lib.txt
+echo 'git+ssh://git@sc.appdev.proj.coe.ic.gov/JAC-DSXD/mongo-lib.git@N.N.N#egg=mysql-lib' > requirements-mongo-lib.txt
+echo 'git+ssh://git@sc.appdev.proj.coe.ic.gov/JAC-DSXD/python-lib.git@N.N.N#egg=python-lib' > requirements-mongo-python-lib.txt
 ```
 
 ##### Modify the other program's README.md file to add the pip commands under the "Install supporting classes and libraries" section.
 
-Modify the {Other_Python_Project}/README.md file:
+Modify the README.md file and the following lines to install the library modules:
 
-Centos 7 (Running Python 2.7):
-```
-pip install -r requirements-mongo-lib.txt --target mongo_lib --trusted-host pypi.appdev.proj.coe.ic.gov
-pip install -r requirements-mongo-python-lib.txt --target mongo_lib/lib --trusted-host pypi.appdev.proj.coe.ic.gov
-```
-
-Redhat 8 (Running Python 3.6):
 ```
 python -m pip install -r requirements-mongo-lib.txt --target mongo_lib --trusted-host pypi.appdev.proj.coe.ic.gov
 python -m pip install -r requirements-mongo-python-lib.txt --target mongo_lib/lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
-##### Add the general Mongo-Lib requirements to the other program's requirements.txt file.  Remove any duplicates.
-
-Centos 7 (Running Python 2.7):
-{Python_Project}/requirements.txt
-
 Redhat 8 (Running Python 3.6):
-{Python_Project}/requirements3.txt
 
+##### Add the general mongo-Lib requirements to (requirements3.txt) to the other program's requirements3.txt file.
+
+Redhat 8 (Running Python 3.9/3.12):
+
+##### Add the general mongo-Lib requirements to (requirements39.txt) to the other program's requirements39.txt file.
+
+
+# Testing
 
 ### Git Installation:
 
@@ -84,34 +75,27 @@ git clone git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/mongo-lib.git
 ```
 
 Install/upgrade system modules.
-Centos 7 (Running Python 2.7):
 
-```
-sudo pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
-```
-
-Redhat 8 (Running Python 3.6):
 NOTE: Install as the user that will use the package.
 
+Redhat 8 (Running Python 3.6 -> pymongo==4.1.1):
+
 ```
-python -m pip install --user -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
+python -m pip install --user -r requirements3.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
+```
+
+Redhat 8 (Running Python 3.9 -> pymongo==4.6.8):
+
+```
+python -m pip install --user -r requirements39.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 Install supporting classes and libraries
-Centos 7 (Running Python 2.7):
-
-```
-pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
-```
-
-Redhat 8 (Running Python 3.6):
 
 ```
 python -m pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
-
-# Testing
 
 # Unit Testing:
 
@@ -122,9 +106,8 @@ Install the project using the procedures in the Git Installation section.
 ### Testing:
 
 ```
-cd {Python_Project}/mongo-lib
-test/unit/mongodb_class/unit_test_run3.sh
-test/unit/mongodb_lib/unit_test_run3.sh
+test/unit/mongodb_class/unit_test_run.sh
+test/unit/mongodb_lib/unit_test_run.sh
 ```
 
 ### Code coverage:
@@ -183,7 +166,6 @@ Create Mongo configuration files.
         -> tls_certkey_phrase = None
 
 ```
-cd {Python_Project}/mongo-lib
 cp mongo.py test/integration/config/mongo.py
 cp mongo.py test/integration/config/master_mongo.py
 cp mongo.py test/integration/config/slave_mongo.py
@@ -194,21 +176,21 @@ vim test/integration/config/mongo.py test/integration/config/master_mongo.py tes
 ### Testing mongo_class.py - Mongo Stand Alone
 
 ```
-test/integration/mongo_class/integration_test_run3.sh
+test/integration/mongo_class/integration_test_run.sh
 test/integration/mongo_class/code_coverage.sh
 ```
 
 ### Testing mongo_lib.py:
 
 ```
-test/integration/mongo_libs/integration_test_run3.sh
+test/integration/mongo_libs/integration_test_run.sh
 test/integration/mongo_libs/code_coverage.sh
 ```
 
 ### Testing mongo_class.py - Mongo Replica Set
 
 ```
-test/integration/mongo_class/replica_integration_test_run3.sh
+test/integration/mongo_class/replica_integration_test_run.sh
 test/integration/mongo_class/replica_code_coverage.sh
 ```
 
