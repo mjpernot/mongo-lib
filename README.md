@@ -78,13 +78,13 @@ Install/upgrade system modules.
 
 NOTE: Install as the user that will use the package.
 
-Redhat 8 (Running Python 3.6 -> pymongo==4.1.1):
+Redhat 8 (Running Python 3.6):
 
 ```
 python -m pip install --user -r requirements3.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
-Redhat 8 (Running Python 3.9 -> pymongo==4.6.8):
+Redhat 8 (Running Python 3.9/3.12):
 
 ```
 python -m pip install --user -r requirements39.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
