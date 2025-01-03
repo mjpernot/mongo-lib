@@ -19,7 +19,7 @@ import version
 # Read in long description from README file.
 here = os.path.abspath(os.path.dirname(__file__))
 
-with open(os.path.join(here, "README.md", "r", encoding="UTF-8")) as f_hdlr:
+with open(os.path.join(here, "README.md"), "r", encoding="UTF-8") as f_hdlr:
     LONG_DESCRIPTION = f_hdlr.read()
 
 setuptools.setup(
