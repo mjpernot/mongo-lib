@@ -227,6 +227,50 @@ class Cfg5():                                   # pylint:disable=R0903
         self.tls_certkey_phrase = "tlsCertKeyPhrase"
 
 
+class Cfg6():                                   # pylint:disable=R0903
+
+    """Class:  Cfg6
+
+    Description:  Class stub holder for Cfg class with new attributes.
+
+    Methods:
+        __init__
+
+    """
+
+    def __init__(self, repset_hosts=None):
+
+        """Function:  __init__
+
+        Description:  Class initialization.
+
+        Arguments:
+
+        """
+
+        self.name = "name"
+        self.user = "user"
+        self.japd = "userpd"
+        self.host = "host"
+        self.port = 27017
+        self.auth = True
+        self.direct_connect = False
+        self.repset = "repset_name"
+        self.conf_file = "conf_file"
+        self.repset_hosts = repset_hosts
+        self.db_auth = "db_name"
+        self.auth_db = "mydatabase"
+        self.auth_mech = "SCRAM-SHA-1"
+        self.ssl_client_ca = None
+        self.ssl_client_cert = None
+        self.ssl_client_key = None
+        self.ssl_client_phrase = None
+        self.auth_type = "TLS"
+        self.tls_ca_certs = "tlsCAFile"
+        self.tls_certkey = "tlsCertKeyFile"
+        self.tls_certkey_phrase = None
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -235,6 +279,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_set_direct_connect_false
         test_set_tls_certkey_phrase8
         test_set_tls_certkey_phrase7
         test_set_tls_certkey_phrase6
@@ -310,6 +355,7 @@ class UnitTest(unittest.TestCase):
         self.cfg3 = Cfg3()
         self.cfg4 = Cfg4()
         self.cfg5 = Cfg5()
+        self.cfg6 = Cfg6()
         self.auth_db2 = "mydatabase"
         self.auth_meth = "SCRAM-SHA-1"
         self.ssl_client_ca = "CAFile"
@@ -317,6 +363,42 @@ class UnitTest(unittest.TestCase):
         self.tls_ca_certs = "tlsCAFile"
         self.tls_certkey = "tlsCertKeyFile"
         self.tls_certkey_phrase = "tlsCertKeyPhrase"
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_direct_connect_true(self, mock_load):
+
+        """Function:  test_set_direct_connect_true
+
+        Description:  Test with direct_connect set to True.
+
+        Arguments:
+
+        """
+
+        self.cfg6.direct_connect = True
+
+        mock_load.return_value = self.cfg6
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.Server)
+
+        self.assertTrue(mongo.direct_connect)
+
+    @mock.patch("mongo_libs.gen_libs.load_module")
+    def test_set_direct_connect_false(self, mock_load):
+
+        """Function:  test_set_direct_connect_false
+
+        Description:  Test with direct_connect set to False.
+
+        Arguments:
+
+        """
+
+        mock_load.return_value = self.cfg6
+        mongo = mongo_libs.create_instance(
+            "cfg_file", "dir_path", mongo_class.RepSetColl)
+
+        self.assertFalse(mongo.direct_connect)
 
     @mock.patch("mongo_libs.gen_libs.load_module")
     def test_set_tls_certkey_phrase8(self, mock_load):

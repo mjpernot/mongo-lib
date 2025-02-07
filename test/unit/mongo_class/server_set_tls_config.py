@@ -68,8 +68,9 @@ class UnitTest(unittest.TestCase):
         self.tls_certkey_phrase = "tlsCertificationKeyFilePassword"
 
         config = {}
-        config["password"] = self.japd
+        config["directConnection"] = False
         config["authMechanism"] = self.auth_mech2
+        config["password"] = self.japd
         config["tls"] = True
 
         self.config2 = dict(config)

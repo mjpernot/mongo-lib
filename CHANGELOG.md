@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.5.0] - 2025-02-07
+- Added capability to connect directly to single server in replica set.
+
+### Changed
+- mongo_class.\_\_init\_\_: Added direct_connect attribute and set it in config attribute. 
+- mongo_libs.create_instance: Added check for direct_connect configuration entry.
+
+### Removed
+- Mongo 3.4 support.
+
+
 ## [4.4.0] - 2024-12-20
 - Removed support for Python 2.7.
 - Added pymongo==4.10.1 for Python 3.9 and Python 3.12.
