@@ -76,42 +76,37 @@ class UnitTest(unittest.TestCase):
         self.ssl_client_phrase = "MyPhrase"
 
         self.config = {}
-        self.config["password"] = self.japd
+        self.config["directConnection"] = False
         self.config["authMechanism"] = "SCRAM-SHA-1"
+        self.config["password"] = self.japd
         self.config["ssl"] = True
         self.config["ssl_ca_certs"] = "CAFile"
 
         self.config2 = {}
-        self.config2["password"] = self.japd
+        self.config2["directConnection"] = False
         self.config2["authMechanism"] = "SCRAM-SHA-1"
+        self.config2["password"] = self.japd
         self.config2["ssl"] = True
         self.config2["ssl_keyfile"] = "KeyFile"
         self.config2["ssl_certfile"] = "CertFile"
 
         self.config3 = {}
-        self.config3["password"] = self.japd
+        self.config3["directConnection"] = False
         self.config3["authMechanism"] = "SCRAM-SHA-1"
+        self.config3["password"] = self.japd
         self.config3["ssl"] = True
         self.config3["ssl_keyfile"] = "KeyFile"
         self.config3["ssl_certfile"] = "CertFile"
         self.config3["ssl_pem_passphrase"] = "MyPhrase"
 
         self.config4 = {}
-        self.config4["password"] = self.japd
+        self.config4["directConnection"] = False
         self.config4["authMechanism"] = "SCRAM-SHA-1"
+        self.config4["password"] = self.japd
         self.config4["ssl"] = True
         self.config4["ssl_ca_certs"] = "CAFile"
         self.config4["ssl_keyfile"] = "KeyFile"
         self.config4["ssl_certfile"] = "CertFile"
-
-        self.config5 = {}
-        self.config5["password"] = self.japd
-        self.config5["authMechanism"] = "SCRAM-SHA-1"
-        self.config5["ssl"] = True
-        self.config5["ssl_ca_certs"] = "CAFile"
-        self.config5["ssl_keyfile"] = "KeyFile"
-        self.config5["ssl_certfile"] = "CertFile"
-        self.config5["ssl_pem_passphrase"] = "MyPhrase"
 
     def test_ssl_all_phrase(self):
 

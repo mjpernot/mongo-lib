@@ -171,6 +171,9 @@ def create_instance(cfg_file, dir_path, class_name):
     cfg = gen_libs.load_module(cfg_file, dir_path)
     config = create_security_config(cfg=cfg)
 
+    if hasattr(cfg, "direct_connect"):
+        config["direct_connect"] = cfg.direct_connect
+
     return class_name(
         cfg.name, cfg.user, cfg.japd, host=cfg.host, port=cfg.port,
         auth=cfg.auth, conf_file=cfg.conf_file, **config)

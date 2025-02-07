@@ -11,6 +11,9 @@ name = "HOSTNAME"
 # Mongo database port
 # Default port for Mongo is 27017.
 port = 27017
+# Direct connection
+# Set to True if wanting to connect to single server in a replica seta.
+direct_connect=False
 # Mongo configuration settings
 # Only set if using a different Mongo configuration file.
 conf_file = None
