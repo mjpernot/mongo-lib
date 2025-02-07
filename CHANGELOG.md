@@ -5,7 +5,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.5.0] - 2025-02-07
-- Added ability to connect directly to single server in replica set.
+- Added capability to connect directly to single server in replica set.
 
 ### Changed
 - mongo_class.\_\_init\_\_: Added direct_connect attribute and set it in config attribute. 

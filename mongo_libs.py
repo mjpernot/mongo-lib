@@ -22,7 +22,11 @@
 
 # Standard
 import os
-import json
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 # Local
 try:
