@@ -140,7 +140,8 @@ class Server():                                         # pylint:disable=R0902
                 ssl_client_key -> SSL key pem file
                 ssl_client_cert -> SSL certificate pem file
                 ssl_client_phrase -> SSL client pass phrase to key file
-                auth_type -> SSL | TLS | None - Type of connection to use.
+                auth_type -> SSL | TLS | None - Type of connection to use
+                direct_connect -> True|False - Connect to server directly
 
         """
 
@@ -167,14 +168,17 @@ class Server():                                         # pylint:disable=R0902
         self.conn_list = [self.host + ":" + str(self.port)]
         self.auth_db = kwargs.get("auth_db", "admin")
         self.auth_mech = kwargs.get("auth_mech", "SCRAM-SHA-1")
+        self.direct_connect = kwargs.get("direct_connect", False)
 
-        # Passwd configuration setup
         self.config = {}
-        self.japd = japd
-        self.set_pass_config()
+        self.config["directConnection"] = self.direct_connect
 
         if self.auth_mech != "MONGODB-CR":
             self.config["authMechanism"] = self.auth_mech
+
+        # Passwd configuration setup
+        self.japd = japd
+        self.set_pass_config()
 
         # TLS|SSL setting
         self.auth_type = kwargs.get("auth_type", None)

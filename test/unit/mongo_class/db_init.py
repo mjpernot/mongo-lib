@@ -133,53 +133,51 @@ class UnitTest(unittest.TestCase):
         self.ssl_client_phrase = "MyPhrase"
 
         self.config = {}
+        self.config["directConnection"] = False
         self.config["password"] = self.japd
 
         self.config2 = {}
-        self.config2["password"] = self.japd
+        self.config2["directConnection"] = False
         self.config2["authMechanism"] = self.auth_mech2
+        self.config2["password"] = self.japd
 
         self.config3 = {}
-        self.config3["password"] = self.japd
+        self.config3["directConnection"] = False
         self.config3["authMechanism"] = self.auth_mech2
+        self.config3["password"] = self.japd
         self.config3["ssl"] = True
         self.config3["ssl_ca_certs"] = self.ssl_client_ca
 
         self.config4 = {}
-        self.config4["password"] = self.japd
+        self.config4["directConnection"] = False
         self.config4["authMechanism"] = self.auth_mech2
+        self.config4["password"] = self.japd
         self.config4["ssl"] = True
         self.config4["ssl_keyfile"] = self.ssl_client_key
         self.config4["ssl_certfile"] = self.ssl_client_cert
 
         self.config5 = {}
-        self.config5["password"] = self.japd
+        self.config5["directConnection"] = False
         self.config5["authMechanism"] = self.auth_mech2
+        self.config5["password"] = self.japd
         self.config5["ssl"] = True
         self.config5["ssl_keyfile"] = self.ssl_client_key
         self.config5["ssl_certfile"] = self.ssl_client_cert
         self.config5["ssl_pem_passphrase"] = self.ssl_client_phrase
 
         self.config6 = {}
-        self.config6["password"] = self.japd
+        self.config6["directConnection"] = False
         self.config6["authMechanism"] = self.auth_mech2
+        self.config6["password"] = self.japd
         self.config6["ssl"] = True
         self.config6["ssl_ca_certs"] = self.ssl_client_ca
         self.config6["ssl_keyfile"] = self.ssl_client_key
         self.config6["ssl_certfile"] = self.ssl_client_cert
 
         self.config7 = {}
-        self.config7["password"] = self.japd
+        self.config7["directConnection"] = False
         self.config7["authMechanism"] = self.auth_mech2
-        self.config7["ssl"] = True
-        self.config7["ssl_ca_certs"] = self.ssl_client_ca
-        self.config7["ssl_keyfile"] = self.ssl_client_key
-        self.config7["ssl_certfile"] = self.ssl_client_cert
-        self.config7["ssl_pem_passphrase"] = self.ssl_client_phrase
-
-        self.config7 = {}
         self.config7["password"] = self.japd
-        self.config7["authMechanism"] = self.auth_mech2
         self.config7["ssl"] = True
         self.config7["ssl_ca_certs"] = self.ssl_client_ca
         self.config7["ssl_keyfile"] = self.ssl_client_key
@@ -191,8 +189,9 @@ class UnitTest(unittest.TestCase):
         self.tls_certkey_phrase = "tlsCertificationKeyFilePassword"
 
         config = {}
-        config["password"] = self.japd
+        config["directConnection"] = False
         config["authMechanism"] = self.auth_mech2
+        config["password"] = self.japd
         config["tls"] = True
 
         self.config3a = dict(config)
@@ -888,8 +887,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        config = {"password": self.japd}
+        config = {}
+        config["directConnection"] = False
         config["authMechanism"] = self.auth_mech2
+        config["password"] = self.japd
         mongo = mongo_class.DB(
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file)

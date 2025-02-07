@@ -74,8 +74,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        new_config = {"password": self.new_japd}
+        new_config = {}
+        new_config["directConnection"] = False
         new_config["authMechanism"] = "SCRAM-SHA-1"
+        new_config["password"] = self.new_japd
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file)
@@ -95,14 +97,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        config = {"password": self.japd}
-        config["authMechanism"] = "SCRAM-SHA-1"
+        new_config = {}
+        new_config["directConnection"] = False
+        new_config["authMechanism"] = "SCRAM-SHA-1"
+        new_config["password"] = self.japd
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file)
         mongo.set_pass_config()
 
-        self.assertEqual(mongo.config, config)
+        self.assertEqual(mongo.config, new_config)
 
     def test_set_pass_config(self):
 
@@ -114,8 +118,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        config = {"password": self.japd}
+        config = {}
+        config["directConnection"] = False
         config["authMechanism"] = "SCRAM-SHA-1"
+        config["password"] = self.japd
         mongo = mongo_class.Server(
             self.name, self.user, self.japd, self.host, self.port,
             conf_file=self.conf_file)
