@@ -226,6 +226,7 @@ class Cfg5():                                   # pylint:disable=R0903
         self.tls_certkey = "tlsCertKeyFile"
         self.tls_certkey_phrase = "tlsCertKeyPhrase"
 
+
 class Cfg6():                                   # pylint:disable=R0903
 
     """Class:  Cfg6
