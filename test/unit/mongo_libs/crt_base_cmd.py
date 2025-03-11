@@ -127,7 +127,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(
             mongo_libs.crt_base_cmd(mongo, self.prog_name),
             [self.prog_name, self.uname + self.user, self.host_port3,
-             self.japd2 + self.japd, self.tls])
+             self.japd2 + self.japd, self.ssl])
 
     def test_tls_false2(self):
 

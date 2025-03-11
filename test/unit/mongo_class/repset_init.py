@@ -75,7 +75,6 @@ class UnitTest(unittest.TestCase):
         test_ssl_client_ca2
         test_ssl_client_ca
         test_set_pass
-        test_auth_mech2
         test_auth_mech
         test_default_auth_mech
         test_uptime_attr
@@ -88,7 +87,6 @@ class UnitTest(unittest.TestCase):
         test_db_path_attr
         test_conn_attr
         test_config_attr3
-        test_config_attr2
         test_no_repset_hosts_attr
         test_repset_hosts_attr
         test_no_repset_attr
@@ -132,7 +130,6 @@ class UnitTest(unittest.TestCase):
         self.conn_list = [self.host + ":" + str(self.port)]
         self.conf_file = "Config File"
         self.repset_hosts = ["host1:port", "host2:port"]
-        self.auth_mech = "MONGODB-CR"
         self.auth_mech2 = "SCRAM-SHA-1"
         self.ssl_client_ca = "CAFile"
         self.ssl_client_cert = "CertFile"
@@ -911,22 +908,6 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(mongo.config, config)
 
-    def test_auth_mech2(self):
-
-        """Function:  test_auth_mech
-
-        Description:  Test passing arg to auth_mech attribute.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            auth_mech=self.auth_mech, repset=self.repset)
-
-        self.assertEqual(mongo.auth_mech, self.auth_mech)
-
     def test_auth_mech(self):
 
         """Function:  test_auth_mech
@@ -1118,22 +1099,6 @@ class UnitTest(unittest.TestCase):
             repset=self.repset, auth_mech=self.auth_mech2)
 
         self.assertEqual(mongo.config, self.config2)
-
-    def test_config_attr2(self):
-
-        """Function:  test_config_attr2
-
-        Description:  Test with MONGODB-CR setting.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.RepSet(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, auth_mech=self.auth_mech)
-
-        self.assertEqual(mongo.config, self.config)
 
     def test_no_repset_hosts_attr(self):
 
