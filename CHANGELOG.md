@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.5.1] - 2025-03-11
+- Fixed problem with external binaries requiring to use SSL options to connect.
+
+### Fixed
+- mongo_libs.add_tls_cmd: Changed the TLS options to SSL options for outside binary commands.
+
+### Changed
+- mongo_class.Server.\_\_init\_\_: Removed check for "MONGODB-CR" in authorization mechanism.
+- Documentation changes.
+
+
 ## [4.5.0] - 2025-02-07
 - Added capability to connect directly to single server in replica set.
 

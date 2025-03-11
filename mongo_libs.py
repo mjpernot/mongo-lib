@@ -62,20 +62,20 @@ def add_tls_cmd(mongo, cmd_list):
     cmd_list = list(cmd_list)
 
     if mongo.config.get("tls", False):
-        cmd_list.append("--tls")
+        cmd_list.append("--ssl")
 
         if mongo.config.get("tlsCAFile"):
-            cmd_list.append("--tlsCAFile=" + mongo.config.get("tlsCAFile"))
+            cmd_list.append("--sslCAFile=" + mongo.config.get("tlsCAFile"))
 
         if mongo.config.get("tlsCertificateKeyFile"):
             cmd_list.append(
-                "--tlsCertificateKeyFile=" + mongo.config.get(
+                "--sslPEMKeyFile=" + mongo.config.get(
                     "tlsCertificateKeyFile"))
 
             if mongo.config.get("tlsCertificateKeyFilePassword"):
                 cmd_list.append(
-                    "--tlsCertificateKeyFilePassword=" +
-                    mongo.config.get("tlsCertificateKeyFilePassword"))
+                    "--sslPEMKeyPassword=" + mongo.config.get(
+                        "tlsCertificateKeyFilePassword"))
 
     return cmd_list
 
@@ -107,8 +107,8 @@ def add_ssl_cmd(mongo, cmd_list):
 
             if mongo.config.get("ssl_pem_passphrase"):
                 cmd_list.append(
-                    "--sslPEMKeyPassword=" +
-                    mongo.config.get("ssl_pem_passphrase"))
+                    "--sslPEMKeyPassword=" + mongo.config.get(
+                        "ssl_pem_passphrase"))
 
     return cmd_list
 
@@ -337,6 +337,7 @@ def data_out(data, **kwargs):
             suppress -> True|False - Suppress standard out
             mongo -> Mongo config file - Insert into Mongo database
             db_tbl -> database:table - Database name:Table name
+            use_pprint -> True|False - Use Pretty Print option
         (output) state -> True|False - Successful operation
         (output) msg -> None or error message
 

@@ -36,7 +36,6 @@ class UnitTest(unittest.TestCase):
     Methods:
         setUp
         test_auth_mech3
-        test_auth_mech2
         test_auth_mech
         test_conn_false2
         test_conn_false
@@ -74,7 +73,6 @@ class UnitTest(unittest.TestCase):
         self.conf_file = "Conf_File"
         self.errmsg = "Error Message"
         self.auth_mech = "SCRAM-SHA-1"
-        self.auth_mech2 = "MONGODB-CR"
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")
@@ -102,33 +100,6 @@ class UnitTest(unittest.TestCase):
              mongo.auth_mech),
             (self.name, self.user, self.japd, self.host, self.port,
              self.auth_mech))
-
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    @mock.patch("mongo_class.Server.get_srv_attr")
-    def test_auth_mech2(self, mock_cmd, mock_client):
-
-        """Function:  test_auth_mech2
-
-        Description:  Test with auth_mech set to MONGODB-CR.
-
-        Arguments:
-
-        """
-
-        mock_cmd.return_value = (True, None)
-        mock_client.return_value = True
-
-        mongo = mongo_class.Server(
-            self.name, self.user, self.japd, host=self.host, port=self.port,
-            auth=True, use_arg=True, auth_mech=self.auth_mech2)
-        mongo.conn = False
-        mongo.connect()
-
-        self.assertEqual(
-            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port,
-             mongo.auth_mech),
-            (self.name, self.user, self.japd, self.host, self.port,
-             self.auth_mech2))
 
     @mock.patch("mongo_class.pymongo.MongoClient")
     @mock.patch("mongo_class.Server.get_srv_attr")

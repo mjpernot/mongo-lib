@@ -78,8 +78,6 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_auth_mech4
-        test_auth_mech3
         test_auth_mech2
         test_auth_mech
         test_no_auth_mech2
@@ -139,54 +137,6 @@ class UnitTest(unittest.TestCase):
         self.conn2 = {"db_name": RepSetColl(), "test": {"coll_name": True}}
         self.dbn = "MyDatabase"
         self.auth_mech = "SCRAM-SHA-1"
-        self.auth_mech2 = "MONGODB-CR"
-
-    @mock.patch("mongo_class.Server.get_srv_attr",
-                mock.Mock(return_value=(True, None)))
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    def test_auth_mech4(self, mock_mongo):
-
-        """Function:  test_auth_mech4
-
-        Description:  Test with authenticate mechanism passed.
-
-        Arguments:
-
-        """
-
-        mock_mongo.return_value = {"db_name": RepSetColl(),
-                                   "test": {"coll_name": True}}
-
-        mongo = mongo_class.RepSetColl(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, auth_mech=self.auth_mech2)
-        mongo.connect()
-
-        self.assertEqual(mongo.auth_mech, self.auth_mech2)
-
-    @mock.patch("mongo_class.Server.get_srv_attr",
-                mock.Mock(return_value=(True, None)))
-    @mock.patch("mongo_class.pymongo.MongoClient")
-    def test_auth_mech3(self, mock_mongo):
-
-        """Function:  test_auth_mech3
-
-        Description:  Test with authenticate mechanism passed.
-
-        Arguments:
-
-        """
-
-        mock_mongo.return_value = {"db_name": RepSetColl(),
-                                   "test": {"coll_name": True}}
-
-        mongo = mongo_class.RepSetColl(
-            self.name, self.user, self.japd, self.host, self.port,
-            repset=self.repset, coll=self.coll, db_auth=self.db_auth,
-            db=self.dbs, auth=True, auth_mech=self.auth_mech2)
-
-        self.assertEqual(mongo.connect(), (True, None))
 
     @mock.patch("mongo_class.Server.get_srv_attr",
                 mock.Mock(return_value=(True, None)))

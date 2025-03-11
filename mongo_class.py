@@ -172,9 +172,7 @@ class Server():                                         # pylint:disable=R0902
 
         self.config = {}
         self.config["directConnection"] = self.direct_connect
-
-        if self.auth_mech != "MONGODB-CR":
-            self.config["authMechanism"] = self.auth_mech
+        self.config["authMechanism"] = self.auth_mech
 
         # Passwd configuration setup
         self.japd = japd
@@ -198,8 +196,8 @@ class Server():                                         # pylint:disable=R0902
             self.set_tls_config()
 
         # Double check for SSL for backward comptability
-        elif self.auth_type == "SSL" or (self.ssl_client_ca or
-                                         self.ssl_client_cert):
+        elif self.auth_type == "SSL" or (
+                self.ssl_client_ca or self.ssl_client_cert):
             self.auth_type = "SSL"
             self.set_ssl_config()
 
