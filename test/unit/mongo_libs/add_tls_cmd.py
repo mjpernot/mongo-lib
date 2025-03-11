@@ -93,10 +93,10 @@ class UnitTest(unittest.TestCase):
         self.mongo2 = Mongo()
         self.mongo2.config["tls"] = True
         self.cmd_line = ["program_name"]
-        self.tls = "--tls"
-        self.tls_ca = "--tlsCAFile="
-        self.tls_key = "--tlsCertificateKeyFile="
-        self.tls_phrase = "--tlsCertificateKeyFilePassword"
+        self.tls = "--ssl"
+        self.tls_ca = "--sslCAFile="
+        self.tls_key = "--sslPEMKeyFile="
+        self.tls_phrase = "--sslPEMKeyPassword"
         self.ca_file = "tlsCAFile"
         self.key_file = "tlsCertificateKeyFile"
         self.key_phrase = "tlsCertificateKeyFilePassword"
