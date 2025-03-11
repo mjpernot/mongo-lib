@@ -5,6 +5,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.5.1] - 2025-03-11
+- Added support for Mongo 7.0
 - Fixed problem with external binaries requiring to use SSL options to connect.
 
 ### Fixed
