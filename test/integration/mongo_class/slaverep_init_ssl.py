@@ -1,11 +1,13 @@
 # Classification (U)                                    # pylint:disable=C0302
 
-"""Program:  slaverep_init.py
+"""Program:  slaverep_init_ssl.py
 
     Description:  Integration testing of SlaveRep.__init__ in mongo_class.py.
 
+    Note:  This is only for testing on SSL connections.
+
     Usage:
-        test/integration/mongo_class/slaverep_init.py
+        test/integration/mongo_class/slaverep_init_ssl.py
 
     Arguments:
 
@@ -37,34 +39,31 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_set_pass
-        test_auth_mech2
-        test_auth_mech
-        test_default_auth_mech
-        test_uptime_attr
-        test_port_attr
-        test_host_attr
-        test_japd_attr
-        test_user_attr
-        test_name_attr
-        test_log_path_attr
-        test_db_path_attr
-        test_conn_attr
-        test_config_attr3
-        test_config_attr2
-        test_primary_attr
-        test_issecondary_attr
-        test_ismaster_attr
-        test_repset_attr
-        test_default_conf_file
-        test_using_conf_file
-        test_default_auth
-        test_using_auth
-        test_conn_list_attr
-        test_config_attr
-        test_default_auth_db
-        test_using_auth_db
-        test_default
+        test_auth_type_none
+        test_auth_type_ssl
+        test_ssl_all_phrase2
+        test_ssl_all_phrase
+        test_ssl_all2
+        test_ssl_all
+        test_ssl_client_key_phrase2
+        test_ssl_client_key_phrase
+        test_ssl_client_key_cert3
+        test_ssl_client_key_cert2
+        test_ssl_client_key_cert
+        test_ssl_client_ca8
+        test_ssl_client_ca7
+        test_ssl_client_ca6
+        test_ssl_client_ca5
+        test_ssl_client_ca4
+        test_ssl_client_ca3
+        test_ssl_client_phrase2
+        test_ssl_client_phrase
+        test_ssl_client_cert2
+        test_ssl_client_cert
+        test_ssl_client_key2
+        test_ssl_client_key
+        test_ssl_client_ca2
+        test_ssl_client_ca
 
     """
 
@@ -166,6 +165,465 @@ class UnitTest(unittest.TestCase):
         self.config7a["tlsCertificateKeyFile"] = self.tls_certkey
         self.config7a[
             "tlsCertificateKeyFilePassword"] = self.tls_certkey_phrase
+
+    def test_auth_type_none(self):
+
+        """Function:  test_auth_type_tls
+
+        Description:  Test with all ssl arguments present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            tls_ca_certs=self.tls_ca_certs, tls_certkey=self.tls_certkey,
+            tls_certkey_phrase=self.tls_certkey_phrase,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_ca=self.ssl_client_ca,
+            ssl_client_phrase=self.ssl_client_phrase)
+
+        self.assertEqual(mongo.config, self.config7)
+
+    def test_auth_type_ssl(self):
+
+        """Function:  test_auth_type_tls
+
+        Description:  Test with all ssl arguments present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            tls_ca_certs=self.tls_ca_certs, tls_certkey=self.tls_certkey,
+            tls_certkey_phrase=self.tls_certkey_phrase,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_ca=self.ssl_client_ca,
+            ssl_client_phrase=self.ssl_client_phrase, auth_type="SSL")
+
+        self.assertEqual(mongo.config, self.config7)
+
+    def test_ssl_all_phrase2(self):
+
+        """Function:  test_ssl_all_phrase2
+
+        Description:  Test with all ssl arguments and phrase present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_ca=self.ssl_client_ca,
+            ssl_client_phrase=self.ssl_client_phrase)
+
+        self.assertEqual(mongo.config, self.config7)
+
+    def test_ssl_all_phrase(self):
+
+        """Function:  test_ssl_all_phrase
+
+        Description:  Test with all ssl arguments and phrase present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_ca=self.ssl_client_ca,
+            ssl_client_phrase=self.ssl_client_phrase)
+
+        self.assertEqual(
+            (mongo.ssl_client_key, mongo.ssl_client_cert, mongo.ssl_client_ca,
+             mongo.ssl_client_phrase),
+            (self.ssl_client_key, self.ssl_client_cert, self.ssl_client_ca,
+             self.ssl_client_phrase))
+
+    def test_ssl_all2(self):
+
+        """Function:  test_ssl_all2
+
+        Description:  Test with all ssl arguments present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_ca=self.ssl_client_ca)
+
+        self.assertEqual(mongo.config, self.config6)
+
+    def test_ssl_all(self):
+
+        """Function:  test_ssl_all
+
+        Description:  Test with all ssl arguments present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_ca=self.ssl_client_ca)
+
+        self.assertEqual(
+            (mongo.ssl_client_ca, mongo.ssl_client_key, mongo.ssl_client_cert),
+            (self.ssl_client_ca, self.ssl_client_key, self.ssl_client_cert))
+
+    def test_ssl_client_key_phrase2(self):
+
+        """Function:  test_ssl_client_key_phrase2
+
+        Description:  Test with cert, key and phrase present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_phrase=self.ssl_client_phrase)
+
+        self.assertEqual(mongo.config, self.config5)
+
+    def test_ssl_client_key_phrase(self):
+
+        """Function:  test_ssl_client_key_phrase
+
+        Description:  Test with cert, key and phrase present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert,
+            ssl_client_phrase=self.ssl_client_phrase)
+
+        self.assertEqual(mongo.ssl_client_phrase, self.ssl_client_phrase)
+
+    def test_ssl_client_key_cert3(self):
+
+        """Function:  test_ssl_client_key_cert3
+
+        Description:  Test with both cert and key present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert)
+
+        self.assertEqual(mongo.config, self.config4)
+
+    def test_ssl_client_key_cert2(self):
+
+        """Function:  test_ssl_client_key_cert2
+
+        Description:  Test with both cert and key present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert)
+
+        self.assertEqual(
+            (mongo.ssl_client_ca, mongo.ssl_client_phrase), (None, None))
+
+    def test_ssl_client_key_cert(self):
+
+        """Function:  test_ssl_client_key_cert
+
+        Description:  Test with both cert and key present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_cert=self.ssl_client_cert)
+
+        self.assertEqual(
+            (mongo.ssl_client_key, mongo.ssl_client_cert),
+            (self.ssl_client_key, self.ssl_client_cert))
+
+    def test_ssl_client_ca8(self):
+
+        """Function:  test_ssl_client_ca8
+
+        Description:  Test with ssl_client_ca only present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_ca=self.ssl_client_ca,
+            ssl_client_key=self.ssl_client_key,
+            ssl_client_phrase=self.ssl_client_phrase)
+
+        self.assertEqual(mongo.config, self.config3)
+
+    def test_ssl_client_ca7(self):
+
+        """Function:  test_ssl_client_ca7
+
+        Description:  Test with ssl_client_ca only present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_ca=self.ssl_client_ca,
+            ssl_client_phrase=self.ssl_client_phrase)
+
+        self.assertEqual(mongo.config, self.config3)
+
+    def test_ssl_client_ca6(self):
+
+        """Function:  test_ssl_client_ca6
+
+        Description:  Test with ssl_client_ca only present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_ca=self.ssl_client_ca,
+            ssl_client_key=self.ssl_client_key)
+
+        self.assertEqual(mongo.config, self.config3)
+
+    def test_ssl_client_ca5(self):
+
+        """Function:  test_ssl_client_ca5
+
+        Description:  Test with ssl_client_ca only present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_ca=self.ssl_client_ca)
+
+        self.assertEqual(mongo.config, self.config3)
+
+    def test_ssl_client_ca4(self):
+
+        """Function:  test_ssl_client_ca4
+
+        Description:  Test with ssl_client_ca only present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_ca=self.ssl_client_ca)
+
+        self.assertEqual(
+            (mongo.ssl_client_key, mongo.ssl_client_cert,
+             mongo.ssl_client_phrase), (None, None, None))
+
+    def test_ssl_client_ca3(self):
+
+        """Function:  test_ssl_client_ca3
+
+        Description:  Test with ssl_client_ca only present.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, conf_file=self.conf_file,
+            ssl_client_ca=self.ssl_client_ca)
+
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+
+    def test_ssl_client_phrase2(self):
+
+        """Function:  test_ssl_client_phrase2
+
+        Description:  Test with ssl_client_phrase attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, ssl_client_phrase=self.ssl_client_phrase)
+
+        self.assertEqual(mongo.ssl_client_phrase, self.ssl_client_phrase)
+
+    def test_ssl_client_phrase(self):
+
+        """Function:  test_ssl_client_phrase
+
+        Description:  Test with ssl_client_phrase attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertIsNone(mongo.ssl_client_phrase)
+
+    def test_ssl_client_cert2(self):
+
+        """Function:  test_ssl_client_cert2
+
+        Description:  Test with ssl_client_cert attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, ssl_client_cert=self.ssl_client_cert)
+
+        self.assertEqual(mongo.ssl_client_cert, self.ssl_client_cert)
+
+    def test_ssl_client_cert(self):
+
+        """Function:  test_ssl_client_cert
+
+        Description:  Test with ssl_client_cert attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertIsNone(mongo.ssl_client_cert)
+
+    def test_ssl_client_key2(self):
+
+        """Function:  test_ssl_client_key2
+
+        Description:  Test with ssl_client_key attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, ssl_client_key=self.ssl_client_key)
+
+        self.assertEqual(mongo.ssl_client_key, self.ssl_client_key)
+
+    def test_test_ssl_client_key(self):
+
+        """Function:  test_test_ssl_client_key
+
+        Description:  Test with ssl_client_key attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertIsNone(mongo.ssl_client_key)
+
+    def test_ssl_client_ca2(self):
+
+        """Function:  test_ssl_client_ca2
+
+        Description:  Test with ssl_client_ca attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, ssl_client_ca=self.ssl_client_ca)
+
+        self.assertEqual(mongo.ssl_client_ca, self.ssl_client_ca)
+
+    def test_ssl_client_ca(self):
+
+        """Function:  test_ssl_client_ca
+
+        Description:  Test with ssl_client_ca attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertIsNone(mongo.ssl_client_ca)
 
     def test_set_pass(self):
 

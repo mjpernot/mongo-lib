@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.5.2] - 2025-05-06
+
+## Changes
+- Documentation changes.
+
+
 ## [4.5.1] - 2025-03-11
 - Added support for Mongo 7.0
 - Fixed problem with external binaries requiring to use SSL options to connect.
