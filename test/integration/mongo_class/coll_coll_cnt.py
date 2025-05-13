@@ -65,7 +65,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-        self.mongo.connect()
 
     def test_query(self):
 
@@ -77,7 +76,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.assertGreaterEqual(self.mongo.coll_cnt({"db": self.database}), 1)
+        self.mongo.disconnect()
 
     def test_empty_query(self):
 

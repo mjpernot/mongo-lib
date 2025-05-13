@@ -152,7 +152,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-#        self.mongo.connect()
         self.args = ArgParser()
         self.args2 = ArgParser()
         self.args3 = ArgParser()
