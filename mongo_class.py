@@ -415,7 +415,8 @@ class Server():                                         # pylint:disable=R0902
         """
 
 #        return self.conn.unlock()
-        self.conn.admin.command("fsyncUnlock")
+        if self.conn.admin.command("currentOp").get("fsyncLock"):
+            self.conn.admin.command("fsyncUnlock")
 
     def lock_db(self, **kwargs):
 
