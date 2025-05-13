@@ -109,7 +109,7 @@ class UnitTest(unittest.TestCase):
         result_cmd.append(self.tls)
         result_cmd.append(self.tls_ca + self.ca_file)
         result_cmd.append(self.tls_key + self.key_file)
-        result_cmd.append(self.tls_phrase + self.key_phrase)
+        result_cmd.append(self.tls_phrase + "=" + self.key_phrase)
 #        result_cmd.append(self.tls_phrase + "word=" + self.key_phrase)
 
         self.assertEqual(
@@ -134,7 +134,7 @@ class UnitTest(unittest.TestCase):
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.tls)
         result_cmd.append(self.tls_key + self.key_file)
-        result_cmd.append(self.tls_phrase + self.key_phrase)
+        result_cmd.append(self.tls_phrase + "=" + self.key_phrase)
 #        result_cmd.append(self.tls_phrase + "word=" + self.key_phrase)
 
         self.assertEqual(
