@@ -38,11 +38,6 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_auth_no_pass
-        test_auth_pass
-        test_auth
-        test_no_auth
-        test_host
         test_repset
         test_repset_hosts
 
@@ -66,6 +61,11 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd,
             host=self.cfg.host, port=self.cfg.port, auth=self.cfg.auth,
             conf_file=self.cfg.conf_file, auth_db=self.cfg.auth_db)
+        self.mongorep = mongo_class.RepSet(
+            self.cfg.name, self.cfg.user, self.cfg.japd,
+            host=self.cfg.host, port=self.cfg.port, auth=self.cfg.auth,
+            conf_file=self.cfg.conf_file, auth_db=self.cfg.auth_db,
+            repset=self.cfg.repset)
         host = "--host="
         data = "--pass"
         data2 = "word="
@@ -73,90 +73,52 @@ class UnitTest(unittest.TestCase):
         self.japd2 = data + data2
         self.prog_name = "crt_base_cmd.py"
         self.host_port = self.cfg.host + ":" + str(self.cfg.port)
+        self.host_port_uri = host + self.cfg.repset + "/" + self.host_port
         self.host_str = host + self.cfg.host + ":" + str(self.cfg.port)
+        self.host_str2 = host + self.cfg.repset + "/" + self.host_port
         self.results = [self.prog_name, self.uname + self.cfg.user,
                         self.host_str, self.japd2 + self.cfg.japd]
+        self.results2 = [self.prog_name, self.uname + self.cfg.user,
+                         self.host_str2, self.japd2 + self.cfg.japd]
+        self.results3 = [self.prog_name, self.uname + self.cfg.user,
+                         self.host_port_uri, self.japd2 + self.cfg.japd]
         self.results4 = [self.prog_name, self.host_str]
         self.results5 = [self.prog_name, self.uname + self.cfg.user,
                          self.host_str]
 
-    def test_auth_no_pass(self):
+    def test_repset(self):
 
-        """Function:  test_auth_no_pass
+        """Function:  test_repset
 
-        Description:  Test with auth and no_pass set to True.
-
-        Arguments:
-
-        """
-
-        self.mongo.config["ssl"] = False
-        cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name,
-                                          no_pass=True)
-
-        self.assertEqual(cmdline, self.results5)
-
-    def test_auth_pass(self):
-
-        """Function:  test_auth_pass
-
-        Description:  Test with auth and no_pass set to False.
+        Description:  Test with repset name for connection.
 
         Arguments:
 
         """
 
-        self.mongo.config["ssl"] = False
-        cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name,
-                                          no_pass=False)
+        self.mongorep.config["ssl"] = False
+        cmdline = mongo_libs.crt_base_cmd(self.mongorep, self.prog_name,
+                                          use_repset=True)
 
-        self.assertEqual(cmdline, self.results)
+        self.assertEqual(cmdline, self.results2)
 
-    def test_auth(self):
+    def test_repset_hosts(self):
 
-        """Function:  test_auth
+        """Function:  test_repset_hosts
 
-        Description:  Test with authority needed.
-
-        Arguments:
-
-        """
-
-        self.mongo.config["ssl"] = False
-        cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name)
-
-        self.assertEqual(cmdline, self.results)
-
-    def test_no_auth(self):
-
-        """Function:  test_no_auth
-
-        Description:  Test with no authority needed.
+        Description:  Test with repset name and hosts for connection.
 
         Arguments:
 
         """
 
-        self.mongo.auth = False
-        self.mongo.config["ssl"] = False
-        cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name)
+        self.mongorep.repset_hosts = self.host_port
+        self.mongorep.config["ssl"] = False
 
-        self.assertEqual(cmdline, self.results4)
+        cmdline = mongo_libs.crt_base_cmd(self.mongorep, self.prog_name,
+                                          use_repset=True)
 
-    def test_host(self):
-
-        """Function:  test_host
-
-        Description:  Test with host name for connection.
-
-        Arguments:
-
-        """
-
-        self.mongo.config["ssl"] = False
-        cmdline = mongo_libs.crt_base_cmd(self.mongo, self.prog_name)
-
-        self.assertEqual(cmdline, self.results)
+        self.assertEqual(cmdline, self.results3)
 
 
 if __name__ == "__main__":
