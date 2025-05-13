@@ -36,7 +36,9 @@ class ArgParser():                          # pylint:disable=R0903
 
     Methods:
         __init__
+        arg_exist
         arg_set_path
+        get_val
 
     """
 
@@ -51,6 +53,18 @@ class ArgParser():                          # pylint:disable=R0903
         """
 
         self.args_array = {}
+
+    def arg_exist(self, arg):
+
+        """Method:  arg_exist
+
+        Description:  Return True|False if argument exists.
+
+        Arguments:
+
+        """
+
+        return arg in self.args_array
 
     def arg_set_path(self, arg_opt):
 
@@ -67,6 +81,25 @@ class ArgParser():                          # pylint:disable=R0903
             self.args_array[arg_opt] if arg_opt in self.args_array else "")
 
         return path
+
+    def get_val(self, skey, **kwargs):
+
+        """Method:  get_val
+
+        Description:  Return value for argument.
+
+        Arguments:
+
+        """
+        def_val = kwargs.get("def_val", None)
+
+        if isinstance(def_val, list):
+            def_val = list(def_val)
+
+        elif isinstance(def_val, dict):
+            def_val = dict(def_val)
+
+        return self.args_array.get(skey, def_val)
 
 
 class UnitTest(unittest.TestCase):
