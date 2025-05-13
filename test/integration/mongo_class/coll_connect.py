@@ -132,7 +132,6 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertFalse(mongo.coll)
-        mongo.disconnect()
 
     def test_fail_get_srv_attr(self):
 
@@ -157,7 +156,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.connect(), (False, errmsg))
-        mongo.disconnect()
 
     def test_auth(self):
 
@@ -205,7 +203,6 @@ class UnitTest(unittest.TestCase):
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
              self.cfg.port))
-        mongo.disconnect()
 
     def test_no_auth(self):
 
@@ -227,7 +224,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertFalse(mongo.connect()[0])
-        mongo.disconnect()
 
     def test_fail_connection2(self):
 
@@ -249,7 +245,6 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertFalse(mongo.coll)
-        mongo.disconnect()
 
     def test_fail_connection(self):
 
@@ -273,7 +268,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.connect(), (False, errmsg))
-        mongo.disconnect()
 
     def test_connection2(self):
 
