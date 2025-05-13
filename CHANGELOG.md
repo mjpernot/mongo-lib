@@ -5,12 +5,16 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.5.2] - 2025-05-06
+- Fixed a number of methods to work in Pymongo v4.X.
 
 ### Fixed
-- mongo_class.Server.lock_db: Replaced fsync() with admin.command() call.
+- mongo_class.Server.is_locked: Replaced is_locked with admin.command("currentOp") call.
+- mongo_class.Server.unlock_db: Replaced unlock() with admin.commandi"fsyncUnlock"() call.
+- mongo_class.Server.lock_db: Replaced fsync() with admin.command("fsync") call.
 - Renamed mongo.py to mongo_template.py due to conflict in testing.
 
 ## Changes
+- mongo_class.Server.unlock_db: Add check to only unlock if database is locked.
 - Documentation changes.
 
 

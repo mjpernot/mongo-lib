@@ -407,14 +407,12 @@ class Server():                                         # pylint:disable=R0902
 
         """Method:  unlock_db
 
-        Description:  Unlocks a Mongo database server.
+        Description:  Unlocks a Mongo database server, but only if is locked.
 
         Arguments:
-#            (output) Returns any output from the unlock command
 
         """
 
-#        return self.conn.unlock()
         if self.conn.admin.command("currentOp").get("fsyncLock"):
             self.conn.admin.command("fsyncUnlock")
 
@@ -427,16 +425,9 @@ class Server():                                         # pylint:disable=R0902
         Arguments:
             (input) **kwargs:
                 lock -> True|False - To lock the database
-            (output) Returns any output from the lock command
 
         """
 
-#        status = None
-#
-#        if "lock" in kwargs:
-#            status = self.conn.fsync(lock=kwargs["lock"])
-#
-#        return status
         self.conn.admin.command("fsync", lock=True)
 
     def is_locked(self):
@@ -446,11 +437,10 @@ class Server():                                         # pylint:disable=R0902
         Description:  Checks to see if the Mongo database is locked.
 
         Arguments:
-            (output) Returns True|False based on the database status
+            (output) Returns True|None based on the fsyncLock status
 
         """
 
-#        return self.conn.is_locked
         return self.conn.admin.command("currentOp").get("fsyncLock")
 
     def set_pass_config(self):
