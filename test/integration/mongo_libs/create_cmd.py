@@ -234,7 +234,7 @@ class UnitTest(unittest.TestCase):
 
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
-            self.mongo, self.args_array, self.prog_name, self.path_opt)
+            self.mongo, self.args, self.prog_name, self.path_opt)
 
         self.assertEqual(cmd_line, self.cmd_result)
 
