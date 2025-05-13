@@ -415,7 +415,7 @@ class Server():                                         # pylint:disable=R0902
         """
 
 #        return self.conn.unlock()
-        self.adm_cmd("fsyncUnlock")
+        self.conn.admin.command("fsyncUnlock")
 
     def lock_db(self, **kwargs):
 
@@ -436,7 +436,7 @@ class Server():                                         # pylint:disable=R0902
 #            status = self.conn.fsync(lock=kwargs["lock"])
 #
 #        return status
-        self.adm_cmd("fsync", lock=True)
+        self.conn.admin.command("fsync", lock=True)
 
     def is_locked(self):
 
@@ -450,7 +450,7 @@ class Server():                                         # pylint:disable=R0902
         """
 
 #        return self.conn.is_locked
-        return self.adm_cmd("currentOp").get("fsyncLock")
+        return self.conn.admin.command("currentOp").get("fsyncLock")
 
     def set_pass_config(self):
 
