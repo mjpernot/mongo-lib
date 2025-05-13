@@ -6,6 +6,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [4.5.2] - 2025-05-06
 
+### Fixed
+- Renamed mongo.py to mongo_template.py due to conflict in testing.
+
 ## Changes
 - Documentation changes.
 
@@ -114,7 +117,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Added
 - mongo_libs.add_tls_cmd: Add TLS options to the command line.
 - mongo_class.Server.set_tls_config: Append TLS attributes to config.
-- Added mongo.py - Remplate Mongo configuration file.
+- Added mongo.py - Template Mongo configuration file.
 
 
 ## [4.2.9] - 2024-02-21

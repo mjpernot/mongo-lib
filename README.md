@@ -30,7 +30,7 @@
 
 
 # Configuration
-Any program that wants to use this module to connect to mongo, recommend using the mongo.py file as a baseline configuration file for the mongo connection configuration.
+Any program that wants to use this module to connect to mongo, recommend using the mongo_template.py file as a baseline configuration file for the mongo connection configuration.
 
 
 # Installation:
@@ -168,9 +168,9 @@ Create Mongo configuration files.
         -> tls_certkey_phrase = None
 
 ```
-cp mongo.py test/integration/config/mongo.py
-cp mongo.py test/integration/config/master_mongo.py
-cp mongo.py test/integration/config/slave_mongo.py
+cp mongo_template.py test/integration/config/mongo.py
+cp mongo_template.py test/integration/config/master_mongo.py
+cp mongo_template.py test/integration/config/slave_mongo.py
 chmod 600 test/integration/config/mongo.py test/integration/config/master_mongo.py test/integration/config/slave_mongo.py
 vim test/integration/config/mongo.py test/integration/config/master_mongo.py test/integration/config/slave_mongo.py
 ```
