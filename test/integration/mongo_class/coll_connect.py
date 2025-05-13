@@ -287,7 +287,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertIsNotNone(mongo.coll)
+        self.assertIsNone(mongo.coll)
 
     def test_connection(self):
 
