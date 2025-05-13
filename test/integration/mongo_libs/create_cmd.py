@@ -28,7 +28,7 @@ import version                                  # pylint:disable=E0401,C0413
 __version__ = version.__version__
 
 
-class ArgParser():                          # pylint:disable=R0903
+class ArgParser():
 
     """Class:  ArgParser
 
@@ -152,7 +152,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-        self.mongo.connect()
+#        self.mongo.connect()
         self.args = ArgParser()
         self.args2 = ArgParser()
         self.args3 = ArgParser()
@@ -216,9 +216,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args, self.prog_name, self.path_opt)
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result)
 
@@ -232,9 +234,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args, self.prog_name, self.path_opt)
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result)
 
@@ -248,10 +252,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args3, self.prog_name, self.path_opt,
             req_arg=self.req_arg2, opt_arg=self.opt_arg2)
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result9)
 
@@ -265,10 +271,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args3, self.prog_name, self.path_opt,
             req_arg=self.req_arg, opt_arg=self.opt_arg2)
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result8)
 
@@ -282,10 +290,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args3, self.prog_name, self.path_opt,
             opt_arg=self.opt_arg2)
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result6)
 
@@ -299,10 +309,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args, self.prog_name, self.path_opt,
             req_arg=self.req_arg2)
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result5)
 
@@ -316,10 +328,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args, self.prog_name, self.path_opt,
             opt_arg={})
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result)
 
@@ -333,10 +347,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args, self.prog_name, self.path_opt,
             req_arg=[])
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result)
 
@@ -350,10 +366,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args2, self.prog_name, self.path_opt,
             opt_arg=self.opt_arg, req_arg=self.req_arg)
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result4)
 
@@ -367,10 +385,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args2, self.prog_name, self.path_opt,
             opt_arg=self.opt_arg)
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result3)
 
@@ -384,10 +404,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args, self.prog_name, self.path_opt,
             req_arg=self.req_arg)
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result2)
 
@@ -401,9 +423,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.config["ssl"] = False
         cmd_line = mongo_libs.create_cmd(
             self.mongo, self.args, self.prog_name, self.path_opt)
+        self.mongo.disconnect()
 
         self.assertEqual(cmd_line, self.cmd_result)
 
