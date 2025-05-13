@@ -410,11 +410,12 @@ class Server():                                         # pylint:disable=R0902
         Description:  Unlocks a Mongo database server.
 
         Arguments:
-            (output) Returns any output from the unlock command
+#            (output) Returns any output from the unlock command
 
         """
 
-        return self.conn.unlock()
+#        return self.conn.unlock()
+        self.adm_cmd("fsyncUnlock")
 
     def lock_db(self, **kwargs):
 

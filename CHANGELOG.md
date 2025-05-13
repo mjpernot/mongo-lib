@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Renamed mongo.py to mongo_template.py due to conflict in testing.
 
 ## Changes
+- mongo_class.Server.unlock_db: Changed self.conn.unlock to calling adm_cmd method to unlock the database.
 - Documentation changes.
 
 
