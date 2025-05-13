@@ -103,7 +103,6 @@ class UnitTest(unittest.TestCase):
         self.config3["authMechanism"] = self.auth_mech2
         self.config3["ssl"] = True
         self.config3["ssl_ca_certs"] = self.ssl_client_ca
-
         self.config4 = {}
         self.config4["password"] = self.cfg.japd
         self.config4["direct_connect=False"] = False
