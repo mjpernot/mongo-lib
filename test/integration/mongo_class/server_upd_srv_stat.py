@@ -63,7 +63,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-        self.mongo.connect()
 
     def test_decision_attr(self):
 
@@ -75,9 +74,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.upd_srv_stat()
 
         self.assertTrue(self.mongo.max_mem > 0 or self.mongo.prct_mem > 0)
+        self.mongo.disconnect()
 
     def test_derived_attr(self):
 
@@ -89,9 +90,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.upd_srv_stat()
 
         self.assertTrue(self.mongo.max_conn > 0 and self.mongo.days_up >= 0)
+        self.mongo.disconnect()
 
     def test_base_attr(self):
 
@@ -103,9 +106,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.upd_srv_stat()
 
         self.assertTrue(self.mongo.uptime > 0 and self.mongo.cur_conn > 0)
+        self.mongo.disconnect()
 
 
 if __name__ == "__main__":

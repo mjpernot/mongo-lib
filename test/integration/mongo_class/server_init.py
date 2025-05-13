@@ -90,19 +90,23 @@ class UnitTest(unittest.TestCase):
 
         self.config = {}
         self.config["password"] = self.cfg.japd
+        self.config["direct_connect=False"] = False
 
         self.config2 = {}
         self.config2["password"] = self.cfg.japd
+        self.config2["direct_connect=False"] = False
         self.config2["authMechanism"] = self.auth_mech2
 
         self.config3 = {}
         self.config3["password"] = self.cfg.japd
+        self.config3["direct_connect=False"] = False
         self.config3["authMechanism"] = self.auth_mech2
         self.config3["ssl"] = True
         self.config3["ssl_ca_certs"] = self.ssl_client_ca
 
         self.config4 = {}
         self.config4["password"] = self.cfg.japd
+        self.config4["direct_connect=False"] = False
         self.config4["authMechanism"] = self.auth_mech2
         self.config4["ssl"] = True
         self.config4["ssl_keyfile"] = self.ssl_client_key
@@ -110,6 +114,7 @@ class UnitTest(unittest.TestCase):
 
         self.config5 = {}
         self.config5["password"] = self.cfg.japd
+        self.config5["direct_connect=False"] = False
         self.config5["authMechanism"] = self.auth_mech2
         self.config5["ssl"] = True
         self.config5["ssl_keyfile"] = self.ssl_client_key
@@ -118,6 +123,7 @@ class UnitTest(unittest.TestCase):
 
         self.config6 = {}
         self.config6["password"] = self.cfg.japd
+        self.config6["direct_connect=False"] = False
         self.config6["authMechanism"] = self.auth_mech2
         self.config6["ssl"] = True
         self.config6["ssl_ca_certs"] = self.ssl_client_ca
@@ -126,6 +132,7 @@ class UnitTest(unittest.TestCase):
 
         self.config7 = {}
         self.config7["password"] = self.cfg.japd
+        self.config7["direct_connect=False"] = False
         self.config7["authMechanism"] = self.auth_mech2
         self.config7["ssl"] = True
         self.config7["ssl_ca_certs"] = self.ssl_client_ca

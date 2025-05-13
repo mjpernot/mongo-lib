@@ -61,8 +61,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.mongo.connect()
-
     def test_is_locked(self):
 
         """Function:  test_is_locked
@@ -73,7 +71,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertFalse(self.mongo.is_locked())
+        self.mongo.connect()
+        self.assertIsNone(self.mongo.is_locked())
+        self.mongo.disconnect()
 
 
 if __name__ == "__main__":

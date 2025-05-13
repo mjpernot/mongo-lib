@@ -64,7 +64,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-        self.mongo.connect()
         self.conf_file = "/path/conf_file"
 
     def test_base_attr(self):
@@ -77,9 +76,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.upd_server_attr()
 
         self.assertTrue(self.mongo.db_path and self.mongo.log_path)
+        self.mongo.disconnect()
 
     def test_no_conf_file(self):
 
@@ -91,9 +92,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.upd_server_attr()
 
         self.assertTrue(self.mongo.conf_file)
+        self.mongo.disconnect()
 
     def test_conf_file(self):
 
@@ -105,10 +108,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.mongo.conf_file = self.conf_file
         self.mongo.upd_server_attr()
 
         self.assertEqual(self.mongo.conf_file, self.conf_file)
+        self.mongo.disconnect()
 
 
 if __name__ == "__main__":

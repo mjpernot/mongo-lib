@@ -63,7 +63,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-        self.mongo.connect()
 
     def test_is_primary(self):
 
@@ -75,7 +74,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.assertTrue(self.mongo.is_primary())
+        self.mongo.disconnect()
 
 
 if __name__ == "__main__":
