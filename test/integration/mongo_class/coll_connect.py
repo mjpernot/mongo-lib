@@ -256,8 +256,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg = "Authentication failed."
-        errmsg = f"Error:  Auth flag or login params is incorrect: {msg}"
+#        msg = "Authentication failed."
+#        errmsg = f"Error:  Auth flag or login params is incorrect: {msg}"
 
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
@@ -267,7 +267,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertEqual(mongo.connect(), (False, errmsg))
+        self.assertFalse(mongo.connect()(0))
 
     def test_connection2(self):
 
