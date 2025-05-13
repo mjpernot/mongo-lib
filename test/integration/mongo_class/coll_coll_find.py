@@ -69,7 +69,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-        self.mongo.connect()
 
     def test_query2(self):
 
@@ -81,7 +80,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find({"db": self.database})
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -95,7 +96,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find({"db": self.database})
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, pymongo.cursor.Cursor)
 
@@ -109,7 +112,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find({})
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -123,7 +128,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find({})
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, pymongo.cursor.Cursor)
 
@@ -137,7 +144,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find()
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -151,7 +160,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, pymongo.cursor.Cursor)
 
