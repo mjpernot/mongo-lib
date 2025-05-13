@@ -262,6 +262,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         status = mongo.connect()
+        print(status)
 
         self.assertFalse(status(0))
 
