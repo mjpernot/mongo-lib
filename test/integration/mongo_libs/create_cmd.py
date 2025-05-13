@@ -20,10 +20,10 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_libs                           # pylint:disable=E0401,C0413
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_libs                               # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -36,6 +36,7 @@ class ArgParser():                          # pylint:disable=R0903
 
     Methods:
         __init__
+        arg_set_path
 
     """
 
@@ -50,6 +51,22 @@ class ArgParser():                          # pylint:disable=R0903
         """
 
         self.args_array = {}
+
+    def arg_set_path(self, arg_opt):
+
+        """Method:  arg_set_path
+
+        Description:  Return dir path from argument list or return empty
+            string.
+
+        Arguments:
+
+        """
+
+        path = os.path.join(
+            self.args_array[arg_opt] if arg_opt in self.args_array else "")
+
+        return path
 
 
 class UnitTest(unittest.TestCase):

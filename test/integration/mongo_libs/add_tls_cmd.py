@@ -80,14 +80,6 @@ class UnitTest(unittest.TestCase):
         self.key_file = "tlsCertificateKeyFile"
         self.key_phrase = "tlsCertificateKeyFilePassword"
 
-#        self.tls = "--tls"
-#        self.tls_ca = "--tlsCAFile="
-#        self.tls_key = "--tlsCertificateKeyFile="
-#        self.tls_phrase = "--tlsCertificateKeyFilePassword"
-#        self.ca_file = "tlsCAFile"
-#        self.key_file = "tlsCertificateKeyFile"
-#        self.key_phrase = "tlsCertificateKeyFilePassword"
-
     def test_tls_ca_phrase(self):
 
         """Function:  test_tls_ca_phrase
@@ -110,7 +102,6 @@ class UnitTest(unittest.TestCase):
         result_cmd.append(self.tls_ca + self.ca_file)
         result_cmd.append(self.tls_key + self.key_file)
         result_cmd.append(self.tls_phrase + "=" + self.key_phrase)
-#        result_cmd.append(self.tls_phrase + "word=" + self.key_phrase)
 
         self.assertEqual(
             mongo_libs.add_tls_cmd(self.mongo, self.cmd_line), result_cmd)
@@ -135,7 +126,6 @@ class UnitTest(unittest.TestCase):
         result_cmd.append(self.tls)
         result_cmd.append(self.tls_key + self.key_file)
         result_cmd.append(self.tls_phrase + "=" + self.key_phrase)
-#        result_cmd.append(self.tls_phrase + "word=" + self.key_phrase)
 
         self.assertEqual(
             mongo_libs.add_tls_cmd(self.mongo, self.cmd_line), result_cmd)
