@@ -1,11 +1,11 @@
 # Classification (U)                                    # pylint:disable=C0302
 
-"""Program:  slaverep_init.py
+"""Program:  coll_init.py
 
-    Description:  Integration testing of SlaveRep.__init__ in mongo_class.py.
+    Description:  Integration testing of Coll.__init__ in mongo_class.py.
 
     Usage:
-        test/integration/mongo_class/slaverep_init.py
+        test/integration/mongo_class/coll_init.py
 
     Arguments:
 
@@ -71,6 +71,8 @@ class UnitTest(unittest.TestCase):
         self.auth_mech = "MONGODB-CR"
         self.auth_mech2 = "SCRAM-SHA-1"
         self.conn_list = [self.cfg.host + ":" + str(self.cfg.port)]
+        self.coll_db = "admin"
+        self.coll_name = "system.users"
         self.ssl_client_ca = "CAFile"
         self.ssl_client_cert = "CertFile"
         self.ssl_client_key = "KeyFile"
@@ -163,7 +165,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             tls_ca_certs=self.tls_ca_certs, tls_certkey=self.tls_certkey,
@@ -185,7 +187,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             tls_ca_certs=self.tls_ca_certs, tls_certkey=self.tls_certkey,
@@ -207,7 +209,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             tls_ca_certs=self.tls_ca_certs, tls_certkey=self.tls_certkey,
@@ -225,7 +227,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             tls_ca_certs=self.tls_ca_certs, tls_certkey=self.tls_certkey,
@@ -243,7 +245,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             tls_certkey=self.tls_certkey,
@@ -261,7 +263,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             tls_certkey=self.tls_certkey, auth_type="TLS")
@@ -278,7 +280,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             tls_ca_certs=self.tls_ca_certs,
@@ -296,7 +298,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.conf_file,
             tls_ca_certs=self.tls_ca_certs, auth_type="TLS")
@@ -313,7 +315,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, tls_certkey_phrase=self.tls_certkey_phrase,
             auth_type="TLS")
@@ -330,7 +332,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_type="TLS")
 
@@ -346,7 +348,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, tls_certkey=self.tls_certkey, auth_type="TLS")
 
@@ -362,7 +364,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_type="TLS")
 
@@ -378,7 +380,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, tls_ca_certs=self.tls_ca_certs,
             auth_type="TLS")
@@ -395,7 +397,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.SlaveRep(
+        mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_type="TLS")
 
