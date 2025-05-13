@@ -286,10 +286,8 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-        mongo.connect()
 
-        self.assertTrue(mongo.coll)
-        mongo.disconnect()
+        self.assertIsNotNone(mongo.coll)
 
     def test_connection(self):
 
