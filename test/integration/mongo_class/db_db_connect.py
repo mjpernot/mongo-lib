@@ -128,6 +128,7 @@ class UnitTest(unittest.TestCase):
         mongo.db_connect(dbs=None)
 
         self.assertIsNotNone(mongo.db_inst)
+        mongo.disconnect()
 
     def test_none_database_passed(self):
 
