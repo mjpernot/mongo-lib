@@ -75,8 +75,8 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
         mongo.chg_db(self.database)
 
-        self.assertTrue(mongo.db_inst)
-        mongo.disconnect()
+        self.assertIsNotNone(mongo.db_inst)
+        #mongo.disconnect()
 
     def test_database_passed(self):
 
