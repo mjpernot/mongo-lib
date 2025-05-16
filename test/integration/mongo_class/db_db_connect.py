@@ -127,8 +127,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.db_connect(dbs=None)
 
-        self.assertTrue(mongo.db_inst)
-        mongo.disconnect()
+        self.assertIsNotNone(mongo.db_inst)
 
     def test_none_database_passed(self):
 
