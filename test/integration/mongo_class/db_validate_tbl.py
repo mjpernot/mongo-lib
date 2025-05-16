@@ -70,8 +70,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-        self.mongo.connect()
-        self.mongo.chg_db(self.database)
 
     def test_raise_exception2(self):
 
@@ -83,6 +81,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
+        self.mongo.chg_db(self.database)
         _, data = self.mongo.validate_tbl(self.tbl_name2, scan=True)
         self.mongo.disconnect()
         results = f"{data}"
@@ -99,6 +99,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
+        self.mongo.chg_db(self.database)
         status, _ = self.mongo.validate_tbl(self.tbl_name2, scan=True)
         self.mongo.disconnect()
 
@@ -114,6 +116,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
+        self.mongo.chg_db(self.database)
         _, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
         self.mongo.disconnect()
 
@@ -129,6 +133,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
+        self.mongo.chg_db(self.database)
         _, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
         self.mongo.disconnect()
 
@@ -144,6 +150,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
+        self.mongo.chg_db(self.database)
         status, _ = self.mongo.validate_tbl(self.tbl_name, scan=True)
         self.mongo.disconnect()
 
@@ -159,6 +167,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
+        self.mongo.chg_db(self.database)
         _, data = self.mongo.validate_tbl(self.tbl_name)
 
         self.assertTrue(data["valid"])
@@ -173,6 +183,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
+        self.mongo.chg_db(self.database)
         _, data = self.mongo.validate_tbl(self.tbl_name)
         self.mongo.disconnect()
 
@@ -188,6 +200,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
+        self.mongo.chg_db(self.database)
         status, _ = self.mongo.validate_tbl(self.tbl_name)
         self.mongo.disconnect()
 
