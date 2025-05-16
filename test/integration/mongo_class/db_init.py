@@ -37,7 +37,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_set_pass
+        test_set_config
         test_auth_mech2
         test_auth_mech
         test_default_auth_mech
@@ -167,9 +167,9 @@ class UnitTest(unittest.TestCase):
         self.config7a[
             "tlsCertificateKeyFilePassword"] = self.tls_certkey_phrase
 
-    def test_set_pass(self):
+    def test_set_config(self):
 
-        """Function:  test_set_pass
+        """Function:  test_set_config
 
         Description:  Test setting configuration settings.
 
@@ -177,7 +177,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        config = {"password": self.cfg.japd}
+        config = {"directConnection": False}
         config["authMechanism"] = self.auth_mech2
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
