@@ -79,6 +79,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.db_cmd("collstats", obj=self.tbl_name)
+        self.mongo.disconnect()
 
         self.assertEqual(data["ns"], self.database + "." + self.tbl_name)
 
@@ -93,6 +94,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.db_cmd("collstats", obj=self.tbl_name)
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 
@@ -107,6 +109,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.db_cmd("buildinfo")
+        self.mongo.disconnect()
 
         self.assertIsInstance(data["storageEngines"], list)
 
@@ -121,6 +124,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.db_cmd("buildinfo")
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 
