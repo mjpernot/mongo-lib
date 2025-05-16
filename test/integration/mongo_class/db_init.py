@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
         self.conf_file = "MyConf"
 
         self.config = {"directConnection": False}
-        self.config["directConnection"] = False
+        self.config["authMechanism"] = self.auth_mech
         self.config["password"] = self.cfg.japd
 
         self.config2 = {"directConnection": False}
