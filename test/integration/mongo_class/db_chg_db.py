@@ -119,7 +119,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
         mongo.chg_db()
 
-        self.assertTrue(mongo.db_inst)
+        self.assertIsNone(mongo.db_inst)
         mongo.disconnect()
 
     def test_no_database(self):
