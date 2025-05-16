@@ -416,15 +416,13 @@ class Server():                                         # pylint:disable=R0902
         if self.conn.admin.command("currentOp").get("fsyncLock"):
             self.conn.admin.command("fsyncUnlock")
 
-    def lock_db(self, **kwargs):
+    def lock_db(self):
 
         """Method:  lock_db
 
         Description:  Locks a Mongo database server.
 
         Arguments:
-            (input) **kwargs:
-                lock -> True|False - To lock the database
 
         """
 

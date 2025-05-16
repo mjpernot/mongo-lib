@@ -261,7 +261,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertFalse( mongo.connect()[0])
+        self.assertFalse(mongo.connect()[0])
 
     def test_connection2(self):
 
