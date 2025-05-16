@@ -146,6 +146,7 @@ class UnitTest(unittest.TestCase):
 
         config = {}
         config["password"] = self.cfg.japd
+        config["directConnection"] = False
         config["authMechanism"] = self.auth_mech2
         config["tls"] = True
 
