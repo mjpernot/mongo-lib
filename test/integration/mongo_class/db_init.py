@@ -90,13 +90,13 @@ class UnitTest(unittest.TestCase):
         self.ssl_client_phrase = "MyPhrase"
         self.conf_file = "MyConf"
 
-        self.config = {}
-        self.config["password"] = self.cfg.japd
+        self.config = {"directConnection": False}
         self.config["directConnection"] = False
+        self.config["password"] = self.cfg.japd
 
-        self.config2 = {}
-        self.config2["password"] = self.cfg.japd
+        self.config2 = {"directConnection": False}
         self.config2["authMechanism"] = self.auth_mech2
+        self.config2["password"] = self.cfg.japd
 
         self.config3 = {}
         self.config3["password"] = self.cfg.japd
