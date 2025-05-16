@@ -73,6 +73,7 @@ class UnitTest(unittest.TestCase):
         """
 
         db_list = self.mongo.fetch_dbs()
+        self.mongo.disconnect()
 
         self.assertIn("admin", db_list)
 

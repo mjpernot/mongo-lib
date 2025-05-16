@@ -78,6 +78,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.fetch_svr_info()
+        self.mongo.disconnect()
         build_data = data["buildEnvironment"]
 
         self.assertTrue(build_data["target_arch"])
@@ -93,6 +94,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.fetch_svr_info()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data["buildEnvironment"], dict)
 
@@ -107,6 +109,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.fetch_svr_info()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data["storageEngines"], list)
 
@@ -121,6 +124,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertIsInstance(self.mongo.fetch_svr_info(), dict)
+        self.mongo.disconnect()
 
 
 if __name__ == "__main__":

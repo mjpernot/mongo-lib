@@ -76,6 +76,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertIsInstance(self.mongo.fetch_adr(), tuple)
+        self.mongo.disconnect()
 
     def test_fetch_adr(self):
 
@@ -88,6 +89,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertEqual(self.mongo.fetch_adr(), self.results)
+        self.mongo.disconnect()
 
 
 if __name__ == "__main__":
