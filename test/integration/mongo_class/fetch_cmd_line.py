@@ -77,7 +77,7 @@ class UnitTest(unittest.TestCase):
         data = mongo_class.fetch_cmd_line(self.mongo)
         self.mongo.disconnect()
 
-        self.assertIn("mongod", data["argv"])
+        self.assertTrue(data["argv"][0].find('mongod'))
 
     def test_fetch_cmd_line(self):
 
