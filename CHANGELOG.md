@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Fixed a number of methods to work in Pymongo v4.X.
 
 ### Fixed
+- mongo_class.Coll.coll_dst: Removed the default value for the col argument.
 - mongo_class.DB.get_tbl_list: Removed "include_system_collections" and replaced with regex expression in filter argument.
 - mongo_class.Server.is_locked: Replaced is_locked with admin.command("currentOp") call.
 - mongo_class.Server.unlock_db: Replaced unlock() with admin.commandi"fsyncUnlock"() call.

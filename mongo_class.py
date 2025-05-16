@@ -827,7 +827,7 @@ class Coll(DB):
 
         return self.coll.find(qry)
 
-    def coll_dst(self, col=""):
+    def coll_dst(self, col):
 
         """Method:  coll_dst
 

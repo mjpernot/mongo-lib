@@ -49,37 +49,33 @@ class DBValidate():
 
         """
 
-        self.include_system_collections = None
+        self.filter = None
 
-    def collection_names(self, include_system_collections):
+    def collection_names(self, **kwargs):
 
         """Function:  collection_names
 
         Description:  Stub for DB.db.collection_names method.
 
         Arguments:
-            (input) include_system_collections -> True|False - Include system
-                tables
 
         """
 
-        self.include_system_collections = include_system_collections
+        self.filter = kwargs.get("filter", {})
 
         return True
 
-    def list_collection_names(self, include_system_collections):
+    def list_collection_names(self, **kwargs):
 
         """Function:  list_collection_names
 
         Description:  Stub for DB.db.list_collection_names method.
 
         Arguments:
-            (input) include_system_collections -> True|False - Include system
-                tables
 
         """
 
-        self.include_system_collections = include_system_collections
+        self.filter = kwargs.get("filter", {})
 
         return True
 
@@ -92,6 +88,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_exclude_sys_tbls
         test_default
 
     """
@@ -113,6 +110,22 @@ class UnitTest(unittest.TestCase):
         self.port = 27017
         self.dbs = "test"
         self.db_auth = None
+
+    def test_exclude_sys_tbls(self):
+
+        """Function:  test_exclude_sys_tbls
+
+        Description:  Test with excluding system tables.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.DB(
+            self.name, self.user, self.japd, self.host, self.port)
+        mongo.db_inst = DBValidate()
+
+        self.assertTrue(mongo.get_tbl_list(False))
 
     def test_default(self):
 
