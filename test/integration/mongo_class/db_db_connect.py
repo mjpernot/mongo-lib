@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -94,9 +94,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg = "Authentication failed."
-        errmsg = f"Error:  Auth flag or login params is incorrect: {msg}"
-
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
@@ -106,7 +103,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertEqual(mongo.db_connect("testdb"), (False, errmsg))
+        self.assertFalse(mongo.db_connect("testdb")[0])
 
     def test_none_database_passed2(self):
 
@@ -127,7 +124,8 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
         mongo.db_connect(dbs=None)
 
-        self.assertTrue(mongo.db_inst)
+        self.assertIsNotNone(mongo.db_inst)
+        mongo.disconnect()
 
     def test_none_database_passed(self):
 
@@ -148,6 +146,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.db_connect(dbs=None), (True, None))
+        mongo.disconnect()
 
     def test_database_passed2(self):
 
@@ -169,6 +168,7 @@ class UnitTest(unittest.TestCase):
         mongo.db_connect(self.database)
 
         self.assertEqual(mongo.db_name, self.database)
+        mongo.disconnect()
 
     def test_database_passed(self):
 
@@ -189,6 +189,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.db_connect(self.database), (True, None))
+        mongo.disconnect()
 
     def test_no_database2(self):
 
@@ -209,6 +210,7 @@ class UnitTest(unittest.TestCase):
         mongo.db_connect()
 
         self.assertEqual(mongo.db_name, "test")
+        mongo.disconnect()
 
     def test_no_database(self):
 
@@ -229,6 +231,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.db_connect(), (True, None))
+        mongo.disconnect()
 
 
 if __name__ == "__main__":

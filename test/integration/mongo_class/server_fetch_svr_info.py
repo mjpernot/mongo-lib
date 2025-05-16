@@ -21,9 +21,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -78,6 +78,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.fetch_svr_info()
+        self.mongo.disconnect()
         build_data = data["buildEnvironment"]
 
         self.assertTrue(build_data["target_arch"])
@@ -93,6 +94,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.fetch_svr_info()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data["buildEnvironment"], dict)
 
@@ -107,6 +109,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.fetch_svr_info()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data["storageEngines"], list)
 
@@ -121,6 +124,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertIsInstance(self.mongo.fetch_svr_info(), dict)
+        self.mongo.disconnect()
 
 
 if __name__ == "__main__":

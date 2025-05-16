@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -75,7 +75,8 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
         mongo.chg_db(self.database)
 
-        self.assertTrue(mongo.db_inst)
+        self.assertIsNotNone(mongo.db_inst)
+        mongo.disconnect()
 
     def test_database_passed(self):
 
@@ -97,6 +98,7 @@ class UnitTest(unittest.TestCase):
         mongo.chg_db(dbs=self.database)
 
         self.assertEqual(mongo.db_name, self.database)
+        mongo.disconnect()
 
     def test_no_database2(self):
 
@@ -117,7 +119,8 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
         mongo.chg_db()
 
-        self.assertTrue(mongo.db_inst)
+        self.assertIsNotNone(mongo.db_inst)
+        mongo.disconnect()
 
     def test_no_database(self):
 
@@ -139,6 +142,7 @@ class UnitTest(unittest.TestCase):
         mongo.chg_db()
 
         self.assertEqual(mongo.db_name, "test")
+        mongo.disconnect()
 
 
 if __name__ == "__main__":

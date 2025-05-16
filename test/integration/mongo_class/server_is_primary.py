@@ -22,9 +22,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -63,7 +63,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-        self.mongo.connect()
 
     def test_is_primary(self):
 
@@ -75,7 +74,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         self.assertTrue(self.mongo.is_primary())
+        self.mongo.disconnect()
 
 
 if __name__ == "__main__":

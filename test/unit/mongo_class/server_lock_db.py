@@ -26,15 +26,15 @@ import version                                  # pylint:disable=E0401,C0413
 __version__ = version.__version__
 
 
-class LockDb():                                 # pylint:disable=R0903
+class Command1():                                       # pylint:disable=R0903
 
-    """Class:  LockDb
+    """Class:  Command1
 
-    Description:  Class stub holder for Server class.
+    Description:  Class stub holder for command class.
 
     Methods:
         __init__
-        fsync
+        command
 
     """
 
@@ -42,28 +42,53 @@ class LockDb():                                 # pylint:disable=R0903
 
         """Function:  __init__
 
-        Description:  Class intialization.
+        Description:  Initialization of class.
 
         Arguments:
 
         """
 
+        self.cmd = None
         self.lock = None
 
-    def fsync(self, lock):
+    def command(self, cmd, lock):
 
-        """Function:  fsync
+        """Function:  database_names
 
-        Description:  Stub holder for Server.conn.fsync method.
+        Description:  Stub holder for Server.conn.database_names method.
 
         Arguments:
-            (input) lock
 
         """
 
+        self.cmd = cmd
         self.lock = lock
 
         return True
+
+
+class Admin1():                                         # pylint:disable=R0903
+
+    """Class:  Admin1
+
+    Description:  Class stub holder for admin class.
+
+    Methods:
+        __init__
+
+    """
+
+    def __init__(self):
+
+        """Function:  __init__
+
+        Description:  Initialization of class.
+
+        Arguments:
+
+        """
+
+        self.admin = Command1()
 
 
 class UnitTest(unittest.TestCase):
@@ -108,11 +133,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mongo = mongo_class.Server(self.name, self.user, self.japd,
-                                   self.host, self.port)
-        mongo.conn = LockDb()
+        mongo = mongo_class.Server(
+            self.name, self.user, self.japd, self.host, self.port)
+        mongo.conn = Admin1()
 
-        self.assertTrue(mongo.lock_db(lock=True))
+        self.assertFalse(mongo.lock_db())
 
 
 if __name__ == "__main__":

@@ -407,34 +407,26 @@ class Server():                                         # pylint:disable=R0902
 
         """Method:  unlock_db
 
-        Description:  Unlocks a Mongo database server.
+        Description:  Unlocks a Mongo database server, but only if is locked.
 
         Arguments:
-            (output) Returns any output from the unlock command
 
         """
 
-        return self.conn.unlock()
+        if self.conn.admin.command("currentOp").get("fsyncLock"):
+            self.conn.admin.command("fsyncUnlock")
 
-    def lock_db(self, **kwargs):
+    def lock_db(self):
 
         """Method:  lock_db
 
         Description:  Locks a Mongo database server.
 
         Arguments:
-            (input) **kwargs:
-                lock -> True|False - To lock the database
-            (output) Returns any output from the lock command
 
         """
 
-        status = None
-
-        if "lock" in kwargs:
-            status = self.conn.fsync(lock=kwargs["lock"])
-
-        return status
+        self.conn.admin.command("fsync", lock=True)
 
     def is_locked(self):
 
@@ -443,11 +435,11 @@ class Server():                                         # pylint:disable=R0902
         Description:  Checks to see if the Mongo database is locked.
 
         Arguments:
-            (output) Returns True|False based on the database status
+            (output) Returns True|None based on the fsyncLock status
 
         """
 
-        return self.conn.is_locked
+        return self.conn.admin.command("currentOp").get("fsyncLock")
 
     def set_pass_config(self):
 
@@ -654,8 +646,12 @@ class DB(Server):
 
         """
 
-        return self.db_inst.list_collection_names(
-            include_system_collections=inc_sys)
+        qry_filter = {"filter": {"name": {"$regex": "^(?!system\\.)"}}}
+
+        if inc_sys:
+            qry_filter = {}
+
+        return self.db_inst.list_collection_names(**qry_filter)
 
     def validate_tbl(self, tbl_name, scan=False):
 
@@ -829,7 +825,7 @@ class Coll(DB):
 
         return self.coll.find(qry)
 
-    def coll_dst(self, col=""):
+    def coll_dst(self, col):
 
         """Method:  coll_dst
 

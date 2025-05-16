@@ -26,7 +26,7 @@ import version                                  # pylint:disable=E0401,C0413
 __version__ = version.__version__
 
 
-class Command1():                               # pylint:disable=R0903
+class Command1():                                       # pylint:disable=R0903
 
     """Class:  Command1
 
@@ -67,7 +67,7 @@ class Command1():                               # pylint:disable=R0903
         return True
 
 
-class Admin1():                                 # pylint:disable=R0903
+class Admin1():                                         # pylint:disable=R0903
 
     """Class:  Admin1
 

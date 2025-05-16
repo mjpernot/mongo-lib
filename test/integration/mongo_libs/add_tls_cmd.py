@@ -20,10 +20,10 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_libs                           # pylint:disable=E0401,C0413
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_libs                               # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -72,10 +72,10 @@ class UnitTest(unittest.TestCase):
             tls_certkey_phrase=self.cfg.tls_certkey_phrase)
 
         self.cmd_line = ["program_name"]
-        self.tls = "--tls"
-        self.tls_ca = "--tlsCAFile="
-        self.tls_key = "--tlsCertificateKeyFile="
-        self.tls_phrase = "--tlsCertificateKeyFilePassword"
+        self.tls = "--ssl"
+        self.tls_ca = "--sslCAFile="
+        self.tls_key = "--sslPEMKeyFile="
+        self.tls_phrase = "--sslPEMKeyPassword"
         self.ca_file = "tlsCAFile"
         self.key_file = "tlsCertificateKeyFile"
         self.key_phrase = "tlsCertificateKeyFilePassword"
@@ -101,7 +101,7 @@ class UnitTest(unittest.TestCase):
         result_cmd.append(self.tls)
         result_cmd.append(self.tls_ca + self.ca_file)
         result_cmd.append(self.tls_key + self.key_file)
-        result_cmd.append(self.tls_phrase + "word=" + self.key_phrase)
+        result_cmd.append(self.tls_phrase + "=" + self.key_phrase)
 
         self.assertEqual(
             mongo_libs.add_tls_cmd(self.mongo, self.cmd_line), result_cmd)
@@ -125,7 +125,7 @@ class UnitTest(unittest.TestCase):
         result_cmd = list(self.cmd_line)
         result_cmd.append(self.tls)
         result_cmd.append(self.tls_key + self.key_file)
-        result_cmd.append(self.tls_phrase + "word=" + self.key_phrase)
+        result_cmd.append(self.tls_phrase + "=" + self.key_phrase)
 
         self.assertEqual(
             mongo_libs.add_tls_cmd(self.mongo, self.cmd_line), result_cmd)

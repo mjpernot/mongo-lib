@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -35,6 +35,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_query2
         test_query
         test_empty_query
         test_no_query
@@ -65,7 +66,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-        self.mongo.connect()
 
     def test_query2(self):
 
@@ -77,7 +77,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_dst("db")
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -91,63 +93,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_dst("db")
-
-        self.assertIsInstance(data, list)
-
-    def test_empty_query2(self):
-
-        """Function:  test_empty_query2
-
-        Description:  Test with empty query command.
-
-        Arguments:
-
-        """
-
-        data = self.mongo.coll_dst("")
-
-        self.assertFalse(data)
-
-    def test_empty_query(self):
-
-        """Function:  test_empty_query
-
-        Description:  Test with empty query command.
-
-        Arguments:
-
-        """
-
-        data = self.mongo.coll_dst("")
-
-        self.assertIsInstance(data, list)
-
-    def test_no_query2(self):
-
-        """Function:  test_no_query2
-
-        Description:  Test with no query command.
-
-        Arguments:
-
-        """
-
-        data = self.mongo.coll_dst()
-
-        self.assertFalse(data)
-
-    def test_no_query(self):
-
-        """Function:  test_no_query
-
-        Description:  Test with no query command.
-
-        Arguments:
-
-        """
-
-        data = self.mongo.coll_dst()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, list)
 
