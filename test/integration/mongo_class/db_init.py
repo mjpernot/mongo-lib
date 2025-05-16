@@ -179,6 +179,7 @@ class UnitTest(unittest.TestCase):
 
         config = {"directConnection": False}
         config["authMechanism"] = self.auth_mech2
+        config["password"] = self.cfg.japd
         mongo = mongo_class.DB(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.cfg.conf_file)
