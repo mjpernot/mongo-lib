@@ -85,9 +85,8 @@ class UnitTest(unittest.TestCase):
 
         _, data = self.mongo.validate_tbl(self.tbl_name2, scan=True)
         self.mongo.disconnect()
-        results = f"{data}"
 
-        self.assertIsNotNone(results)
+        self.assertIsNotNone(data)
 
     def test_raise_exception(self):
 
