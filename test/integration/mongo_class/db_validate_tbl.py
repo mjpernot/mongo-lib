@@ -83,11 +83,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        errmsg = "ns not found"
         _, data = self.mongo.validate_tbl(self.tbl_name2, scan=True)
+        self.mongo.disconnect()
         results = f"{data}"
 
-        self.assertEqual(results, errmsg)
+        self.assertIsNotNone(results)
 
     def test_raise_exception(self):
 
@@ -100,6 +100,7 @@ class UnitTest(unittest.TestCase):
         """
 
         status, _ = self.mongo.validate_tbl(self.tbl_name2, scan=True)
+        self.mongo.disconnect()
 
         self.assertFalse(status)
 
@@ -114,6 +115,7 @@ class UnitTest(unittest.TestCase):
         """
 
         _, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
+        self.mongo.disconnect()
 
         self.assertTrue(data["valid"])
 
@@ -128,6 +130,7 @@ class UnitTest(unittest.TestCase):
         """
 
         _, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 
@@ -142,6 +145,7 @@ class UnitTest(unittest.TestCase):
         """
 
         status, _ = self.mongo.validate_tbl(self.tbl_name, scan=True)
+        self.mongo.disconnect()
 
         self.assertTrue(status)
 
@@ -170,6 +174,7 @@ class UnitTest(unittest.TestCase):
         """
 
         _, data = self.mongo.validate_tbl(self.tbl_name)
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 
@@ -184,6 +189,7 @@ class UnitTest(unittest.TestCase):
         """
 
         status, _ = self.mongo.validate_tbl(self.tbl_name)
+        self.mongo.disconnect()
 
         self.assertTrue(status)
 

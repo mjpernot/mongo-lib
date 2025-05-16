@@ -76,6 +76,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.adm_cmd("getLog", arg1="global")
+        self.mongo.disconnect()
 
         self.assertIsInstance(data["log"], list)
 
@@ -90,6 +91,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.adm_cmd("getLog", arg1="global")
+        self.mongo.disconnect()
 
         self.assertGreaterEqual(data["totalLinesWritten"], 0)
 
@@ -104,6 +106,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.adm_cmd("listDatabases")
+        self.mongo.disconnect()
         db_list = [item["name"] for item in data["databases"]]
 
         self.assertIn("admin", db_list)

@@ -92,6 +92,7 @@ class UnitTest(unittest.TestCase):
 
         self.config = {}
         self.config["password"] = self.cfg.japd
+        self.config["directConnection"] = False
 
         self.config2 = {}
         self.config2["password"] = self.cfg.japd

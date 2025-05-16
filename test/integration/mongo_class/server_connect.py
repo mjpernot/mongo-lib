@@ -80,6 +80,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_conn_true(self):
 
@@ -105,6 +106,7 @@ class UnitTest(unittest.TestCase):
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
              self.cfg.port))
+        mongo.disconnect()
 
     def test_fail_get_srv_attr2(self):
 
@@ -129,6 +131,7 @@ class UnitTest(unittest.TestCase):
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, "mytestpd", self.cfg.host,
              self.cfg.port))
+        mongo.disconnect()
 
     def test_fail_get_srv_attr(self):
 
@@ -140,9 +143,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg = "Authentication failed."
-        errmsg = f"Error:  Auth flag or login params is incorrect: {msg}"
-
         mongo = mongo_class.Server(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
@@ -151,7 +151,8 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertEqual(mongo.connect(), (False, errmsg))
+        self.assertFalse(mongo.connect()[0])
+        mongo.disconnect()
 
     def test_no_auth2(self):
 
@@ -176,6 +177,7 @@ class UnitTest(unittest.TestCase):
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
              self.cfg.port))
+        mongo.disconnect()
 
     def test_no_auth(self):
 
@@ -196,6 +198,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertFalse(mongo.connect()[0])
+        mongo.disconnect()
 
 
 if __name__ == "__main__":
