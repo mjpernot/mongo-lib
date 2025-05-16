@@ -651,7 +651,7 @@ class DB(Server):
         qry_filter = {}
 
         if inc_sys:
-            qry_filter = {"filter": {"name": {"$regex": "^(?!system\\.)"}}
+            qry_filter = {"filter": {"name": {"$regex": "^(?!system\\.)"}}}
 
         return self.db_inst.list_collection_names(**qry_filter)
 #        return self.db_inst.list_collection_names(
