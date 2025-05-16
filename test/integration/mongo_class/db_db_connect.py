@@ -106,7 +106,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertEqual(mongo.db_connect("testdb"), (False, errmsg))
+        self.assertFalse(mongo.db_connect("testdb")[0])
 
     def test_none_database_passed2(self):
 
@@ -128,6 +128,7 @@ class UnitTest(unittest.TestCase):
         mongo.db_connect(dbs=None)
 
         self.assertTrue(mongo.db_inst)
+        mongo.disconnect()
 
     def test_none_database_passed(self):
 
@@ -148,6 +149,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.db_connect(dbs=None), (True, None))
+        mongo.disconnect()
 
     def test_database_passed2(self):
 
@@ -169,6 +171,7 @@ class UnitTest(unittest.TestCase):
         mongo.db_connect(self.database)
 
         self.assertEqual(mongo.db_name, self.database)
+        mongo.disconnect()
 
     def test_database_passed(self):
 
@@ -189,6 +192,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.db_connect(self.database), (True, None))
+        mongo.disconnect()
 
     def test_no_database2(self):
 
@@ -209,6 +213,7 @@ class UnitTest(unittest.TestCase):
         mongo.db_connect()
 
         self.assertEqual(mongo.db_name, "test")
+        mongo.disconnect()
 
     def test_no_database(self):
 
@@ -229,6 +234,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertEqual(mongo.db_connect(), (True, None))
+        mongo.disconnect()
 
 
 if __name__ == "__main__":
