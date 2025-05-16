@@ -219,7 +219,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, auth_mech=self.auth_mech)
 
         self.assertEqual(
-            mongo.config["authMechanism"], self.config2["authMechanism"])
+            mongo.config["authMechanism"], self.config["authMechanism"])
 
     def test_auth_mech(self):
 
