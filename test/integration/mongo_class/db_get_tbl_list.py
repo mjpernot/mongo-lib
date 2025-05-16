@@ -80,6 +80,7 @@ class UnitTest(unittest.TestCase):
         """
 
         db_list = self.mongo.get_tbl_list(False)
+        self.mongo.disconnect()
 
         self.assertIsInstance(db_list, list)
 
@@ -94,6 +95,7 @@ class UnitTest(unittest.TestCase):
         """
 
         db_list = self.mongo.get_tbl_list(True)
+        self.mongo.disconnect()
 
         self.assertIn(self.tbl_name, db_list)
 
@@ -108,6 +110,7 @@ class UnitTest(unittest.TestCase):
         """
 
         db_list = self.mongo.get_tbl_list(True)
+        self.mongo.disconnect()
 
         self.assertIsInstance(db_list, list)
 
@@ -122,6 +125,7 @@ class UnitTest(unittest.TestCase):
         """
 
         db_list = self.mongo.get_tbl_list()
+        self.mongo.disconnect()
 
         self.assertIn(self.tbl_name, db_list)
 
@@ -136,6 +140,7 @@ class UnitTest(unittest.TestCase):
         """
 
         db_list = self.mongo.get_tbl_list()
+        self.mongo.disconnect()
 
         self.assertIsInstance(db_list, list)
 
