@@ -91,6 +91,7 @@ class UnitTest(unittest.TestCase):
         self.config = {}
         self.config["password"] = self.cfg.japd
         self.config["directConnection"] = False
+        self.config["authMechanism"] = self.auth_mech
 
         self.config2 = {}
         self.config2["password"] = self.cfg.japd
@@ -218,8 +219,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth_mech=self.auth_mech)
 
-        self.assertEqual(
-            mongo.config["authMechanism"], self.config["authMechanism"])
+        self.assertEqual(mongo.config, self.config)
 
     def test_auth_mech(self):
 
