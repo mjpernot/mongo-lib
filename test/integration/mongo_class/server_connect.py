@@ -131,7 +131,6 @@ class UnitTest(unittest.TestCase):
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, "mytestpd", self.cfg.host,
              self.cfg.port))
-        mongo.disconnect()
 
     def test_fail_get_srv_attr(self):
 
@@ -152,7 +151,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
         self.assertFalse(mongo.connect()[0])
-        mongo.disconnect()
 
     def test_no_auth2(self):
 
