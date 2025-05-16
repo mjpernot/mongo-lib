@@ -74,6 +74,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = mongo_class.fetch_ismaster(self.mongo)
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 

@@ -76,6 +76,7 @@ class UnitTest(unittest.TestCase):
         mongo.chg_db(self.database)
 
         self.assertTrue(mongo.db_inst)
+        mongo.disconnect()
 
     def test_database_passed(self):
 
@@ -97,6 +98,7 @@ class UnitTest(unittest.TestCase):
         mongo.chg_db(dbs=self.database)
 
         self.assertEqual(mongo.db_name, self.database)
+        mongo.disconnect()
 
     def test_no_database2(self):
 
@@ -118,6 +120,7 @@ class UnitTest(unittest.TestCase):
         mongo.chg_db()
 
         self.assertTrue(mongo.db_inst)
+        mongo.disconnect()
 
     def test_no_database(self):
 
@@ -139,6 +142,7 @@ class UnitTest(unittest.TestCase):
         mongo.chg_db()
 
         self.assertEqual(mongo.db_name, "test")
+        mongo.disconnect()
 
 
 if __name__ == "__main__":

@@ -75,6 +75,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = mongo_class.fetch_cmd_line(self.mongo)
+        self.mongo.disconnect()
 
         self.assertIn("mongod", data["argv"])
 
@@ -89,6 +90,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = mongo_class.fetch_cmd_line(self.mongo)
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 

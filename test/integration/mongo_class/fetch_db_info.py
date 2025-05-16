@@ -75,6 +75,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = mongo_class.fetch_db_info(self.mongo)
+        self.mongo.disconnect()
 
         db_list = [item["name"] for item in data["databases"]]
 
@@ -91,6 +92,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = mongo_class.fetch_db_info(self.mongo)
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 
