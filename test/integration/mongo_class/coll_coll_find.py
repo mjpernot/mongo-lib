@@ -21,9 +21,9 @@ import pymongo
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -69,7 +69,6 @@ class UnitTest(unittest.TestCase):
             ssl_client_key=self.cfg.ssl_client_key,
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
-        self.mongo.connect()
 
     def test_query2(self):
 
@@ -81,7 +80,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find({"db": self.database})
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -95,7 +96,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find({"db": self.database})
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, pymongo.cursor.Cursor)
 
@@ -109,7 +112,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find({})
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -123,7 +128,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find({})
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, pymongo.cursor.Cursor)
 
@@ -137,7 +144,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find()
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -151,7 +160,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.mongo.connect()
         data = self.mongo.coll_find()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, pymongo.cursor.Cursor)
 

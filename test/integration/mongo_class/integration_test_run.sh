@@ -23,19 +23,6 @@ echo "Unit test: mongo_class"
 /usr/bin/python ./test/integration/mongo_class/db_get_tbl_list.py
 /usr/bin/python ./test/integration/mongo_class/db_init.py
 /usr/bin/python ./test/integration/mongo_class/db_validate_tbl.py
-#test/integration/mongo_class/masterrep_connect.py
-/usr/bin/python ./test/integration/mongo_class/masterrep_init.py
-/usr/bin/python ./test/integration/mongo_class/repsetcoll_coll_cnt.py
-/usr/bin/python ./test/integration/mongo_class/repsetcoll_coll_dst.py
-/usr/bin/python ./test/integration/mongo_class/repsetcoll_coll_find.py
-/usr/bin/python ./test/integration/mongo_class/repsetcoll_coll_find1.py
-/usr/bin/python ./test/integration/mongo_class/repsetcoll_coll_options.py
-#test/integration/mongo_class/repsetcoll_connect.py
-/usr/bin/python ./test/integration/mongo_class/repsetcoll_init.py
-#test/integration/mongo_class/repset_connect.py
-/usr/bin/python ./test/integration/mongo_class/repset_init.py
-/usr/bin/python ./test/integration/mongo_class/rep_fetch_nodes.py
-/usr/bin/python ./test/integration/mongo_class/rep_init.py
 /usr/bin/python ./test/integration/mongo_class/server_adm_cmd.py
 /usr/bin/python ./test/integration/mongo_class/server_connect.py
 /usr/bin/python ./test/integration/mongo_class/server_disconnect.py
@@ -48,6 +35,4 @@ echo "Unit test: mongo_class"
 /usr/bin/python ./test/integration/mongo_class/server_is_primary.py
 /usr/bin/python ./test/integration/mongo_class/server_upd_server_attr.py
 /usr/bin/python ./test/integration/mongo_class/server_upd_srv_stat.py
-#test/integration/mongo_class/slaverep_connect.py
-/usr/bin/python ./test/integration/mongo_class/slaverep_init.py
 

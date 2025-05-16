@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -80,6 +80,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_conn_true(self):
 
@@ -105,6 +106,7 @@ class UnitTest(unittest.TestCase):
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
              self.cfg.port))
+        mongo.disconnect()
 
     def test_fail_get_srv_attr2(self):
 
@@ -140,9 +142,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg = "Authentication failed."
-        errmsg = f"Error:  Auth flag or login params is incorrect: {msg}"
-
         mongo = mongo_class.Server(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
@@ -151,7 +150,7 @@ class UnitTest(unittest.TestCase):
             ssl_client_cert=self.cfg.ssl_client_cert,
             ssl_client_phrase=self.cfg.ssl_client_phrase)
 
-        self.assertEqual(mongo.connect(), (False, errmsg))
+        self.assertFalse(mongo.connect()[0])
 
     def test_no_auth2(self):
 

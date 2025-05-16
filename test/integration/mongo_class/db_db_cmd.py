@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -79,6 +79,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.db_cmd("collstats", obj=self.tbl_name)
+        self.mongo.disconnect()
 
         self.assertEqual(data["ns"], self.database + "." + self.tbl_name)
 
@@ -93,6 +94,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.db_cmd("collstats", obj=self.tbl_name)
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 
@@ -107,6 +109,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.db_cmd("buildinfo")
+        self.mongo.disconnect()
 
         self.assertIsInstance(data["storageEngines"], list)
 
@@ -121,6 +124,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.db_cmd("buildinfo")
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 

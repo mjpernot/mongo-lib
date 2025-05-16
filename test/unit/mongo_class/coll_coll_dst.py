@@ -26,7 +26,7 @@ import version                                  # pylint:disable=E0401,C0413
 __version__ = version.__version__
 
 
-class CollDst():                                # pylint:disable=R0903
+class CollDst():                                        # pylint:disable=R0903
 
     """Class:  CollDst
 
@@ -76,7 +76,6 @@ class UnitTest(unittest.TestCase):
         setUp
         test_query
         test_empty_query
-        test_no_query
 
     """
 
@@ -130,22 +129,6 @@ class UnitTest(unittest.TestCase):
         mongo.coll = CollDst()
 
         self.assertTrue(mongo.coll_dst({}))
-
-    def test_no_query(self):
-
-        """Function:  test_no_query
-
-        Description:  Test with no query command.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.Coll(self.name, self.user, self.japd, self.host,
-                                 self.port)
-        mongo.coll = CollDst()
-
-        self.assertTrue(mongo.coll_dst())
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@
 
 ###  This README file is broken down into the following sections:
  * Prerequisites
-   - FIPS Environment
+   - Secure Environment
  * Configuration
  * Installation
    - Pip Installation
@@ -22,7 +22,7 @@
     - python3-devel
     - gcc
 
-  * FIPS Environment:  If operating in a FIPS 104-2 environment, this package will require at least a minimum of pymongo==3.8.0 or better.  It will also require a manual change to the auth.py module in the pymongo package.  See below for changes to auth.py.
+  * Secure Environment:  If operating in a Secure environment, this package will require at least a minimum of pymongo==3.8.0 or better.  It will also require a manual change to the auth.py module in the pymongo package.  See below for changes to auth.py.
     - Locate the auth.py file python installed packages on the system in the pymongo package directory.
     - Edit the file and locate the \_password_digest function.
     - In the \_password_digest function there is an line that should match: "md5hash = hashlib.md5()".  Change it to "md5hash = hashlib.md5(usedforsecurity=False)".
@@ -30,7 +30,7 @@
 
 
 # Configuration
-Any program that wants to use this module to connect to mongo, recommend using the mongo.py file as a baseline configuration file for the mongo connection configuration.
+Any program that wants to use this module to connect to mongo, recommend using the mongo_template.py file as a baseline configuration file for the mongo connection configuration.
 
 
 # Installation:
@@ -149,9 +149,12 @@ Create Mongo configuration files.
 
   * Notes for auth_mech configuration entry:
     - NOTE 1:  SCRAM-SHA-256 only works for Mongodb 4.0 and better.
-    - NOTE 2:  FIPS 140-2 environment requires SCRAM-SHA-1 or SCRAM-SHA-256.
+    - NOTE 2:  Secure environment requires SCRAM-SHA-1 or SCRAM-SHA-256.
 
-  * If Mongo is set to use TLS or SSL connections, then one or more of the following entries will need to be completed to connect using TLS or SSL protocols.  Note:  Read the configuration file to determine which entries will need to be set.
+  * If Mongo is set to use TLS or SSL connections, then one or more of the following entries will need to be completed to connect using TLS or SSL protocols.
+    - Note 1:  Read the configuration file to determine which entries will need to be set.
+    - Note 2:  Use the individual test files to test using SSL and/or TLS connections - see below.
+
     - SSL:
         -> auth_type = None
         -> ssl_client_ca = None
@@ -165,9 +168,9 @@ Create Mongo configuration files.
         -> tls_certkey_phrase = None
 
 ```
-cp mongo.py test/integration/config/mongo.py
-cp mongo.py test/integration/config/master_mongo.py
-cp mongo.py test/integration/config/slave_mongo.py
+cp mongo_template.py test/integration/config/mongo.py
+cp mongo_template.py test/integration/config/master_mongo.py
+cp mongo_template.py test/integration/config/slave_mongo.py
 chmod 600 test/integration/config/mongo.py test/integration/config/master_mongo.py test/integration/config/slave_mongo.py
 vim test/integration/config/mongo.py test/integration/config/master_mongo.py test/integration/config/slave_mongo.py
 ```
@@ -186,10 +189,28 @@ test/integration/mongo_libs/integration_test_run.sh
 test/integration/mongo_libs/code_coverage.sh
 ```
 
+### Testing mongo_lib.py with SSL and/or TLS connections:
+
+```
+test/integration/mongo_libs/create_instance_ssl.py
+test/integration/mongo_libs/create_instance_tls.py
+test/integration/mongo_libs/crt_base_cmd_ssl.py
+test/integration/mongo_libs/crt_base_cmd_tls.py
+test/integration/mongo_libs/crt_coll_inst_ssl.py
+test/integration/mongo_libs/crt_coll_inst_tls.py
+```
+
 ### Testing mongo_class.py - Mongo Replica Set
 
 ```
 test/integration/mongo_class/replica_integration_test_run.sh
 test/integration/mongo_class/replica_code_coverage.sh
+```
+
+### Testing mongo_class.py - Mongo Replica Set with SSL and/or TLS connections:
+
+```
+test/integration/mongo_class/slaverep_init_ssl.py
+test/integration/mongo_class/slaverep_init_tls.py
 ```
 

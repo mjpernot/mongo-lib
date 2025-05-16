@@ -26,7 +26,7 @@ import version                                  # pylint:disable=E0401,C0413
 __version__ = version.__version__
 
 
-class Mongo():                                  # pylint:disable=R0903
+class Mongo():                                          # pylint:disable=R0903
 
     """Class:  Mongo
 

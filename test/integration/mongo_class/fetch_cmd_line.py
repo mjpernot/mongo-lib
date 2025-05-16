@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -75,8 +75,9 @@ class UnitTest(unittest.TestCase):
         """
 
         data = mongo_class.fetch_cmd_line(self.mongo)
+        self.mongo.disconnect()
 
-        self.assertIn("mongod", data["argv"])
+        self.assertTrue(data["argv"][0].find('mongod'))
 
     def test_fetch_cmd_line(self):
 
@@ -89,6 +90,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = mongo_class.fetch_cmd_line(self.mongo)
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 

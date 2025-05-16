@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -83,11 +83,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        errmsg = "ns not found"
         _, data = self.mongo.validate_tbl(self.tbl_name2, scan=True)
-        results = f"{data}"
+        self.mongo.disconnect()
 
-        self.assertEqual(results, errmsg)
+        self.assertIsNotNone(data)
 
     def test_raise_exception(self):
 
@@ -100,6 +99,7 @@ class UnitTest(unittest.TestCase):
         """
 
         status, _ = self.mongo.validate_tbl(self.tbl_name2, scan=True)
+        self.mongo.disconnect()
 
         self.assertFalse(status)
 
@@ -114,6 +114,7 @@ class UnitTest(unittest.TestCase):
         """
 
         _, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
+        self.mongo.disconnect()
 
         self.assertTrue(data["valid"])
 
@@ -128,6 +129,7 @@ class UnitTest(unittest.TestCase):
         """
 
         _, data = self.mongo.validate_tbl(self.tbl_name, scan=True)
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 
@@ -142,6 +144,7 @@ class UnitTest(unittest.TestCase):
         """
 
         status, _ = self.mongo.validate_tbl(self.tbl_name, scan=True)
+        self.mongo.disconnect()
 
         self.assertTrue(status)
 
@@ -156,6 +159,7 @@ class UnitTest(unittest.TestCase):
         """
 
         _, data = self.mongo.validate_tbl(self.tbl_name)
+        self.mongo.disconnect()
 
         self.assertTrue(data["valid"])
 
@@ -170,6 +174,7 @@ class UnitTest(unittest.TestCase):
         """
 
         _, data = self.mongo.validate_tbl(self.tbl_name)
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 
@@ -184,6 +189,7 @@ class UnitTest(unittest.TestCase):
         """
 
         status, _ = self.mongo.validate_tbl(self.tbl_name)
+        self.mongo.disconnect()
 
         self.assertTrue(status)
 

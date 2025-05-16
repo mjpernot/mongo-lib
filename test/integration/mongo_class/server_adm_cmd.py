@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -76,6 +76,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.adm_cmd("getLog", arg1="global")
+        self.mongo.disconnect()
 
         self.assertIsInstance(data["log"], list)
 
@@ -90,6 +91,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.adm_cmd("getLog", arg1="global")
+        self.mongo.disconnect()
 
         self.assertGreaterEqual(data["totalLinesWritten"], 0)
 
@@ -104,6 +106,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.adm_cmd("listDatabases")
+        self.mongo.disconnect()
         db_list = [item["name"] for item in data["databases"]]
 
         self.assertIn("admin", db_list)

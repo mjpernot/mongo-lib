@@ -14,6 +14,8 @@
         crt_coll_inst
         data_out
         disconnect
+        get_all_dbs_tbls
+        get_db_tbl
         ins_doc
 
 """

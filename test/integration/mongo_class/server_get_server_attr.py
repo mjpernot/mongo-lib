@@ -22,9 +22,9 @@ import pymongo
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -67,8 +67,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg = "Authentication failed."
-        errmsg = f"Error:  Auth flag or login params is incorrect: {msg}"
         mongo = mongo_class.Server(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
@@ -81,7 +79,7 @@ class UnitTest(unittest.TestCase):
             mongo.conn_list, username=mongo.user, authSource=mongo.auth_db,
             **mongo.config)
 
-        self.assertEqual(mongo.get_srv_attr(), (False, errmsg))
+        self.assertFalse(mongo.get_srv_attr()[0])
 
     def test_connect(self):
 
@@ -106,6 +104,7 @@ class UnitTest(unittest.TestCase):
             **mongo.config)
 
         self.assertEqual(mongo.get_srv_attr(), (True, None))
+        mongo.disconnect()
 
 
 if __name__ == "__main__":

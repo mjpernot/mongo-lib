@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import mongo_class                          # pylint:disable=E0401,C0413
+import mongo_class                              # pylint:disable=E0401,C0413
 import lib.gen_libs as gen_libs             # pylint:disable=E0401,C0413,R0402
-import version                              # pylint:disable=E0401,C0413
+import version                                  # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -80,6 +80,7 @@ class UnitTest(unittest.TestCase):
         """
 
         db_list = self.mongo.get_tbl_list(False)
+        self.mongo.disconnect()
 
         self.assertIsInstance(db_list, list)
 
@@ -94,6 +95,7 @@ class UnitTest(unittest.TestCase):
         """
 
         db_list = self.mongo.get_tbl_list(True)
+        self.mongo.disconnect()
 
         self.assertIn(self.tbl_name, db_list)
 
@@ -108,6 +110,7 @@ class UnitTest(unittest.TestCase):
         """
 
         db_list = self.mongo.get_tbl_list(True)
+        self.mongo.disconnect()
 
         self.assertIsInstance(db_list, list)
 
@@ -122,6 +125,7 @@ class UnitTest(unittest.TestCase):
         """
 
         db_list = self.mongo.get_tbl_list()
+        self.mongo.disconnect()
 
         self.assertIn(self.tbl_name, db_list)
 
@@ -136,6 +140,7 @@ class UnitTest(unittest.TestCase):
         """
 
         db_list = self.mongo.get_tbl_list()
+        self.mongo.disconnect()
 
         self.assertIsInstance(db_list, list)
 
