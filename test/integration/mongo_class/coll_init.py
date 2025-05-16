@@ -94,21 +94,24 @@ class UnitTest(unittest.TestCase):
         self.ssl_client_phrase = "MyPhrase"
         self.conf_file = "MyConf"
 
-        self.config = {}
+        self.config = {"directConnection": False}
+        self.config["authMechanism"] = self.auth_mech
         self.config["password"] = self.cfg.japd
 
-        self.config2 = {}
-        self.config2["password"] = self.cfg.japd
+        self.config2 = {"directConnection": False}
         self.config2["authMechanism"] = self.auth_mech2
+        self.config2["password"] = self.cfg.japd
 
         self.config3 = {}
         self.config3["password"] = self.cfg.japd
+        self.config3["directConnection"] = False
         self.config3["authMechanism"] = self.auth_mech2
         self.config3["ssl"] = True
         self.config3["ssl_ca_certs"] = self.ssl_client_ca
 
         self.config4 = {}
         self.config4["password"] = self.cfg.japd
+        self.config4["directConnection"] = False
         self.config4["authMechanism"] = self.auth_mech2
         self.config4["ssl"] = True
         self.config4["ssl_keyfile"] = self.ssl_client_key
@@ -116,6 +119,7 @@ class UnitTest(unittest.TestCase):
 
         self.config5 = {}
         self.config5["password"] = self.cfg.japd
+        self.config5["directConnection"] = False
         self.config5["authMechanism"] = self.auth_mech2
         self.config5["ssl"] = True
         self.config5["ssl_keyfile"] = self.ssl_client_key
@@ -124,6 +128,7 @@ class UnitTest(unittest.TestCase):
 
         self.config6 = {}
         self.config6["password"] = self.cfg.japd
+        self.config6["directConnection"] = False
         self.config6["authMechanism"] = self.auth_mech2
         self.config6["ssl"] = True
         self.config6["ssl_ca_certs"] = self.ssl_client_ca
@@ -132,6 +137,7 @@ class UnitTest(unittest.TestCase):
 
         self.config7 = {}
         self.config7["password"] = self.cfg.japd
+        self.config7["directConnection"] = False
         self.config7["authMechanism"] = self.auth_mech2
         self.config7["ssl"] = True
         self.config7["ssl_ca_certs"] = self.ssl_client_ca
@@ -180,8 +186,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        config = {"password": self.cfg.japd}
+        config = {"directConnection": False}
         config["authMechanism"] = self.auth_mech2
+        config["password"] = self.cfg.japd
         mongo = mongo_class.Coll(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.cfg.conf_file,

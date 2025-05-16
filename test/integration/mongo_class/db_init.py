@@ -37,7 +37,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_set_config
+        test_set_pass
         test_auth_mech2
         test_auth_mech
         test_default_auth_mech
@@ -167,9 +167,9 @@ class UnitTest(unittest.TestCase):
         self.config7a[
             "tlsCertificateKeyFilePassword"] = self.tls_certkey_phrase
 
-    def test_set_config(self):
+    def test_set_pass(self):
 
-        """Function:  test_set_config
+        """Function:  test_set_pass
 
         Description:  Test setting configuration settings.
 
