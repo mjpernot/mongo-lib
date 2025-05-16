@@ -80,6 +80,7 @@ class UnitTest(unittest.TestCase):
             **mongo.config)
 
         self.assertFalse(mongo.get_srv_attr()[0])
+        mongo.disconnect()
 
     def test_connect(self):
 
@@ -104,6 +105,7 @@ class UnitTest(unittest.TestCase):
             **mongo.config)
 
         self.assertEqual(mongo.get_srv_attr(), (True, None))
+        mongo.disconnect()
 
 
 if __name__ == "__main__":
