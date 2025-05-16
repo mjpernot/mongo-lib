@@ -80,7 +80,6 @@ class UnitTest(unittest.TestCase):
             **mongo.config)
 
         self.assertFalse(mongo.get_srv_attr()[0])
-        mongo.disconnect()
 
     def test_connect(self):
 
