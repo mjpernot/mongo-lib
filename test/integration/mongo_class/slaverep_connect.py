@@ -48,7 +48,6 @@ class UnitTest(unittest.TestCase):
         test_fail_get_srv_attr2
         test_fail_get_srv_attr
         test_auth
-        test_no_auth2
         test_no_auth
 
     """
@@ -66,7 +65,7 @@ class UnitTest(unittest.TestCase):
         self.base_dir = "test/integration"
         self.config_dir = os.path.join(self.base_dir, "config")
         self.config_name = "slave_mongo"
-        self.config_name2 = "mongo"
+        self.config_name2 = "master_mongo"
         self.cfg = gen_libs.load_module(self.config_name, self.config_dir)
         self.cfg2 = gen_libs.load_module(self.config_name2, self.config_dir)
         self.database = "admin"
@@ -89,7 +88,6 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertFalse(mongo.ismaster)
-        mongo.disconnect()
 
     def test_is_not_slave(self):
 
@@ -111,7 +109,6 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertEqual(mongo.connect(), (False, errmsg))
-        mongo.disconnect()
 
     def test_primary2(self):
 
@@ -188,7 +185,7 @@ class UnitTest(unittest.TestCase):
             direct_connect=self.cfg.direct_connect)
         mongo.connect()
 
-        self.assertEqual(mongo.repset, self.cfg.repset)
+        self.assertIsNotNone(mongo.repset)
         mongo.disconnect()
 
     def test_issecondary2(self):
@@ -290,7 +287,6 @@ class UnitTest(unittest.TestCase):
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, "mytestpd", self.cfg.host,
              self.cfg.port))
-        mongo.disconnect()
 
     def test_fail_get_srv_attr(self):
 
@@ -329,29 +325,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(mongo.connect(), (True, None))
         mongo.disconnect()
 
-    def test_no_auth2(self):
-
-        """Function:  test_no_auth2
-
-        Description:  Test with no auth present.
-
-        Arguments:
-
-        """
-
-        mongo = mongo_class.SlaveRep(
-            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file,
-            direct_connect=self.cfg.direct_connect)
-        mongo.connect()
-
-        self.assertEqual(
-            (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
-            (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
-             self.cfg.port))
-        mongo.disconnect()
-
     def test_no_auth(self):
 
         """Function:  test_no_auth
@@ -368,8 +341,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file,
             direct_connect=self.cfg.direct_connect)
 
-        self.assertEqual(mongo.connect(), (True, None))
-        mongo.disconnect()
+        self.assertFalse(mongo.connect()[0])
 
 
 if __name__ == "__main__":

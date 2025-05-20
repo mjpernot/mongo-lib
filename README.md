@@ -142,10 +142,14 @@ Create Mongo configuration files.
     - auth_mech = "SCRAM-SHA-1"
 
   * Connecting to a Mongo replica set.
-    Note:  These will only be in the master_mongo.py and slave_mongo.py files.
+    Note:  These will only be in the master_mongo.py file.
     - repset = "REPLICA_SET_NAME"
     - repset_hosts = "HOST_1:PORT, HOST_2:PORT, ..."
     - db_auth = "AUTHENTICATION_DATABASE"
+
+  * Connecting to a Slave Replica.
+    Note:  This will only be for the slave_mongo.py file.
+    - direct_connect = True
 
   * Notes for auth_mech configuration entry:
     - NOTE 1:  SCRAM-SHA-256 only works for Mongodb 4.0 and better.
