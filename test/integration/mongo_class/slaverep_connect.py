@@ -318,7 +318,7 @@ class UnitTest(unittest.TestCase):
 
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
-            port=self.cfg.port, auth=self.cfg.auth, auth_db=True,
+            port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file,
             direct_connect=self.cfg.direct_connect)
 
