@@ -487,7 +487,7 @@ class UnitTest(unittest.TestCase):
              mongo.repset_hosts),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
              self.cfg.port, None))
-        mongo.disconnect()
+        #mongo.disconnect()
 
     def test_connections_passed(self):
 
