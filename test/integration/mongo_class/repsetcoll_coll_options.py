@@ -78,6 +78,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_options()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 
@@ -92,6 +93,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_options()
+        self.mongo.disconnect()
 
         self.assertFalse(data)
 

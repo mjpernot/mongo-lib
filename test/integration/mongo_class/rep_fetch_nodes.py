@@ -76,6 +76,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.fetch_nodes()
+        self.mongo.disconnect()
 
         self.assertIn(self.results, data)
 
@@ -90,6 +91,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.fetch_nodes()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, frozenset)
 

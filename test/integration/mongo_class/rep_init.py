@@ -37,6 +37,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_default_direct_connect
+        test_using_direct_connect
         test_set_pass
         test_auth_mech2
         test_auth_mech
@@ -91,44 +93,52 @@ class UnitTest(unittest.TestCase):
         self.conf_file = "MyConf"
 
         self.config = {}
+        self.config["directConnection"] = False
+        self.config["authMechanism"] = self.auth_mech
         self.config["password"] = self.cfg.japd
 
         self.config2 = {}
-        self.config2["password"] = self.cfg.japd
+        self.config2["directConnection"] = False
         self.config2["authMechanism"] = self.auth_mech2
+        self.config2["password"] = self.cfg.japd
 
         self.config3 = {}
+        self.config3["directConnection"] = False
+        self.config3["authMechanism"] = self.auth_mech
         self.config3["password"] = self.cfg.japd
-        self.config3["authMechanism"] = self.auth_mech2
         self.config3["ssl"] = True
         self.config3["ssl_ca_certs"] = self.ssl_client_ca
 
         self.config4 = {}
+        self.config4["directConnection"] = False
+        self.config4["authMechanism"] = self.auth_mech
         self.config4["password"] = self.cfg.japd
-        self.config4["authMechanism"] = self.auth_mech2
         self.config4["ssl"] = True
         self.config4["ssl_keyfile"] = self.ssl_client_key
         self.config4["ssl_certfile"] = self.ssl_client_cert
 
         self.config5 = {}
+        self.config5["directConnection"] = False
+        self.config5["authMechanism"] = self.auth_mech
         self.config5["password"] = self.cfg.japd
-        self.config5["authMechanism"] = self.auth_mech2
         self.config5["ssl"] = True
         self.config5["ssl_keyfile"] = self.ssl_client_key
         self.config5["ssl_certfile"] = self.ssl_client_cert
         self.config5["ssl_pem_passphrase"] = self.ssl_client_phrase
 
         self.config6 = {}
+        self.config6["directConnection"] = False
+        self.config6["authMechanism"] = self.auth_mech
         self.config6["password"] = self.cfg.japd
-        self.config6["authMechanism"] = self.auth_mech2
         self.config6["ssl"] = True
         self.config6["ssl_ca_certs"] = self.ssl_client_ca
         self.config6["ssl_keyfile"] = self.ssl_client_key
         self.config6["ssl_certfile"] = self.ssl_client_cert
 
         self.config7 = {}
+        self.config7["directConnection"] = False
+        self.config7["authMechanism"] = self.auth_mech
         self.config7["password"] = self.cfg.japd
-        self.config7["authMechanism"] = self.auth_mech2
         self.config7["ssl"] = True
         self.config7["ssl_ca_certs"] = self.ssl_client_ca
         self.config7["ssl_keyfile"] = self.ssl_client_key
@@ -166,6 +176,38 @@ class UnitTest(unittest.TestCase):
         self.config7a[
             "tlsCertificateKeyFilePassword"] = self.tls_certkey_phrase
 
+    def test_default_direct_connect(self):
+
+        """Function:  test_default_direct_connect
+
+        Description:  Test using the default direct_connect setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Rep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertFalse(mongo.direct_connect)
+
+    def test_using_direct_connect(self):
+
+        """Function:  test_using_direct_connect
+
+        Description:  Test using the direct_connect attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.Rep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth_db=self.cfg.auth_db, direct_connect=True)
+
+        self.assertTrue(mongo.direct_connect)
+
     def test_set_pass(self):
 
         """Function:  test_set_pass
@@ -176,13 +218,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        config = {"password": self.cfg.japd}
-        config["authMechanism"] = self.auth_mech2
         mongo = mongo_class.Rep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.cfg.conf_file)
 
-        self.assertEqual(mongo.config, config)
+        self.assertEqual(mongo.config, self.config2)
 
     def test_auth_mech2(self):
 
