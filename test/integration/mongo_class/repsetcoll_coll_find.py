@@ -83,6 +83,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find({"db": self.database})
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -97,6 +98,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find({"db": self.database})
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, pymongo.cursor.Cursor)
 
@@ -111,6 +113,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find({})
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -125,6 +128,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find({})
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, pymongo.cursor.Cursor)
 
@@ -139,6 +143,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find()
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -153,6 +158,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, pymongo.cursor.Cursor)
 

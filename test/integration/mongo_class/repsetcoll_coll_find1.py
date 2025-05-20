@@ -82,6 +82,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find1({"db": self.database})
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -96,6 +97,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find1({"db": self.database})
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 
@@ -110,6 +112,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find1({})
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -124,6 +127,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find1({})
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 
@@ -138,6 +142,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find1()
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -152,6 +157,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_find1()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, dict)
 

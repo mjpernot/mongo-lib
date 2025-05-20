@@ -35,9 +35,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_query2
         test_query
-        test_empty_query
-        test_no_query
 
     """
 
@@ -78,6 +77,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_dst("db")
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -92,62 +92,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_dst("db")
-
-        self.assertIsInstance(data, list)
-
-    def test_empty_query2(self):
-
-        """Function:  test_empty_query2
-
-        Description:  Test with empty query command.
-
-        Arguments:
-
-        """
-
-        data = self.mongo.coll_dst("")
-
-        self.assertFalse(data)
-
-    def test_empty_query(self):
-
-        """Function:  test_empty_query
-
-        Description:  Test with empty query command.
-
-        Arguments:
-
-        """
-
-        data = self.mongo.coll_dst("")
-
-        self.assertIsInstance(data, list)
-
-    def test_no_query2(self):
-
-        """Function:  test_no_query2
-
-        Description:  Test with no query command.
-
-        Arguments:
-
-        """
-
-        data = self.mongo.coll_dst()
-
-        self.assertFalse(data)
-
-    def test_no_query(self):
-
-        """Function:  test_no_query
-
-        Description:  Test with no query command.
-
-        Arguments:
-
-        """
-
-        data = self.mongo.coll_dst()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, list)
 

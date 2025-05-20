@@ -16,6 +16,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Renamed mongo.py to mongo_template.py due to conflict in testing.
 
 ## Changes
+- mongo_class.Rep.\_\_init\_\_: Added direct_connect to initialization of the class.
+- mongo_class.SlaveRep.\_\_init\_\_: Added direct_connect to initialization of the class.
 - mongo_class.Server.unlock_db: Add check to only unlock if database is locked.
 - Documentation changes.
 

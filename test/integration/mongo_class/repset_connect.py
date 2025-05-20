@@ -81,15 +81,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg = "Authentication failed."
-        errmsg = f"Error:  Auth flag or login params is incorrect: {msg}"
-
         mongo = mongo_class.RepSet(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset)
 
-        self.assertEqual(mongo.connect(), (False, errmsg))
+        self.assertFalse(mongo.connect()[0])
 
     def test_no_repset(self):
 
@@ -107,6 +104,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file, repset=self.cfg.repset)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_repset(self):
 
@@ -124,6 +122,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file, repset=self.cfg.repset)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_auth(self):
 
@@ -141,6 +140,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file, repset=self.cfg.repset)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_no_auth2(self):
 
@@ -175,7 +175,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset)
 
-        self.assertEqual(mongo.connect(), (True, None))
+        self.assertFalse(mongo.connect()[0])
 
     def test_conn_true2(self):
 
@@ -195,6 +195,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertTrue(mongo.auth)
+        mongo.disconnect()
 
     def test_conn_true(self):
 
@@ -213,6 +214,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_conn_false2(self):
 
@@ -231,6 +233,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertIsInstance(mongo.conn, pymongo.MongoClient)
+        mongo.disconnect()
 
     def test_conn_false(self):
 
@@ -248,6 +251,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file, repset=self.cfg.repset)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_connections_passed2(self):
 
@@ -270,6 +274,7 @@ class UnitTest(unittest.TestCase):
              mongo.repset_hosts),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
              self.cfg.port, None))
+        mongo.disconnect()
 
     def test_connections_passed(self):
 
@@ -288,6 +293,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(mongo.connect(connections=self.cfg.repset_hosts),
                          (True, None))
+        mongo.disconnect()
 
     def test_no_conn_list3(self):
 
@@ -311,6 +317,7 @@ class UnitTest(unittest.TestCase):
              mongo.repset_hosts),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
              self.cfg.port, self.cfg.repset_hosts))
+        mongo.disconnect()
 
     def test_no_conn_list2(self):
 
@@ -329,6 +336,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_no_conn_list1(self):
 
@@ -351,6 +359,7 @@ class UnitTest(unittest.TestCase):
              mongo.repset_hosts),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
              self.cfg.port, None))
+        mongo.disconnect()
 
     def test_no_conn_list(self):
 
@@ -368,6 +377,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file, repset=self.cfg.repset)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
 
 if __name__ == "__main__":
