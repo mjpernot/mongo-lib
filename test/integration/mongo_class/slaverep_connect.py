@@ -84,7 +84,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg2.name, self.cfg2.user, self.cfg2.japd,
             host=self.cfg2.host, port=self.cfg2.port, auth=self.cfg2.auth,
-            auth_db=self.cfg2.auth_db, conf_file=self.cfg2.conf_file)
+            auth_db=self.cfg2.auth_db, conf_file=self.cfg2.conf_file,
+            direct_connect=self.cfg2.direct_connect)
         mongo.connect()
 
         self.assertFalse(mongo.ismaster)
@@ -105,7 +106,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg2.name, self.cfg2.user, self.cfg2.japd,
             host=self.cfg2.host, port=self.cfg2.port, auth=self.cfg2.auth,
-            auth_db=self.cfg2.auth_db, conf_file=self.cfg2.conf_file)
+            auth_db=self.cfg2.auth_db, conf_file=self.cfg2.conf_file,
+            direct_connect=self.cfg.direct_connect)
         mongo.connect()
 
         self.assertEqual(mongo.connect(), (False, errmsg))
@@ -124,7 +126,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
 
         self.assertEqual(mongo.connect(), (True, None))
         mongo.disconnect()
@@ -142,7 +145,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
         mongo.connect()
 
         self.assertTrue(mongo.primary)
@@ -161,7 +165,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
 
         self.assertEqual(mongo.connect(), (True, None))
         mongo.disconnect()
@@ -179,7 +184,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
         mongo.connect()
 
         self.assertEqual(mongo.repset, self.cfg.repset)
@@ -198,7 +204,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
 
         self.assertEqual(mongo.connect(), (True, None))
         mongo.disconnect()
@@ -216,7 +223,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
         mongo.connect()
 
         self.assertTrue(mongo.issecondary)
@@ -235,7 +243,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
 
         self.assertEqual(mongo.connect(), (True, None))
         mongo.disconnect()
@@ -253,7 +262,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
         mongo.connect()
 
         self.assertFalse(mongo.ismaster)
@@ -272,7 +282,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
         mongo.connect()
 
         self.assertEqual(
@@ -294,7 +305,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
 
         self.assertFalse(mongo.connect()[0])
 
@@ -311,7 +323,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=True,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
 
         self.assertEqual(mongo.connect(), (True, None))
         mongo.disconnect()
@@ -329,7 +342,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
         mongo.connect()
 
         self.assertEqual(
@@ -351,7 +365,8 @@ class UnitTest(unittest.TestCase):
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
-            conf_file=self.cfg.conf_file)
+            conf_file=self.cfg.conf_file,
+            direct_connect=self.cfg.direct_connect)
 
         self.assertEqual(mongo.connect(), (True, None))
         mongo.disconnect()
