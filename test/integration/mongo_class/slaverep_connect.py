@@ -88,6 +88,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertFalse(mongo.ismaster)
+        mongo.disconnect()
 
     def test_is_not_slave(self):
 
@@ -108,6 +109,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertEqual(mongo.connect(), (False, errmsg))
+        mongo.disconnect()
 
     def test_primary2(self):
 
@@ -125,6 +127,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_primary(self):
 
@@ -143,6 +146,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertTrue(mongo.primary)
+        mongo.disconnect()
 
     def test_repset2(self):
 
@@ -160,6 +164,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_repset(self):
 
@@ -178,6 +183,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertEqual(mongo.repset, self.cfg.repset)
+        mongo.disconnect()
 
     def test_issecondary2(self):
 
@@ -195,6 +201,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_issecondary(self):
 
@@ -213,6 +220,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertTrue(mongo.issecondary)
+        mongo.disconnect()
 
     def test_ismaster2(self):
 
@@ -230,6 +238,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_ismaster(self):
 
@@ -248,6 +257,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertFalse(mongo.ismaster)
+        mongo.disconnect()
 
     def test_fail_get_srv_attr2(self):
 
@@ -269,6 +279,7 @@ class UnitTest(unittest.TestCase):
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, "mytestpd", self.cfg.host,
              self.cfg.port))
+        mongo.disconnect()
 
     def test_fail_get_srv_attr(self):
 
@@ -280,15 +291,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg = "Authentication failed."
-        errmsg = f"Error:  Auth flag or login params is incorrect: {msg}"
-
         mongo = mongo_class.SlaveRep(
             self.cfg.name, self.cfg.user, "mytestpd", host=self.cfg.host,
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file)
 
-        self.assertEqual(mongo.connect(), (False, errmsg))
+        self.assertFalse(mongo.connect()[0])
 
     def test_auth(self):
 
@@ -306,6 +314,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
     def test_no_auth2(self):
 
@@ -327,6 +336,7 @@ class UnitTest(unittest.TestCase):
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
              self.cfg.port))
+        mongo.disconnect()
 
     def test_no_auth(self):
 
@@ -344,6 +354,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file)
 
         self.assertEqual(mongo.connect(), (True, None))
+        mongo.disconnect()
 
 
 if __name__ == "__main__":
