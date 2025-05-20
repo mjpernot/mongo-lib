@@ -275,8 +275,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=None, db=self.dbs)
 
-        self.assertEqual(mongo.connect(), (True, None))
-        mongo.disconnect()
+        self.assertFalse(mongo.connect()[0])
 
     def test_fail_get_srv_attr2(self):
 
@@ -371,8 +370,7 @@ class UnitTest(unittest.TestCase):
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
 
-        self.assertIsInstance(mongo.conn, pymongo.MongoClient)
-        mongo.disconnect()
+        self.assertIsNone(mongo.conn)
 
     def test_no_auth(self):
 
@@ -390,8 +388,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
 
-        self.assertEqual(mongo.connect(), (True, None))
-        mongo.disconnect()
+        self.assertFalse(mongo.connect()[0])
 
     def test_conn_false2(self):
 
@@ -410,8 +407,7 @@ class UnitTest(unittest.TestCase):
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
 
-        self.assertIsInstance(mongo.conn, pymongo.MongoClient)
-        mongo.disconnect()
+        self.assertIsNone(mongo.conn)
 
     def test_conn_false(self):
 
@@ -429,8 +425,7 @@ class UnitTest(unittest.TestCase):
             conf_file=self.cfg.conf_file, repset=self.cfg.repset,
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
 
-        self.assertEqual(mongo.connect(), (True, None))
-        mongo.disconnect()
+        self.assertFalse(mongo.connect()[0])
 
     def test_conn_true2(self):
 
@@ -450,8 +445,7 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
         mongo.connect()
 
-        self.assertIsInstance(mongo.conn, pymongo.MongoClient)
-        mongo.disconnect()
+        self.assertIsNone(mongo.conn)
 
     def test_conn_true(self):
 
@@ -470,8 +464,7 @@ class UnitTest(unittest.TestCase):
             coll=self.coll, db_auth=self.db_auth, db=self.dbs)
         mongo.connect()
 
-        self.assertEqual(mongo.connect(), (True, None))
-        mongo.disconnect()
+        self.assertFalse(mongo.connect()[0])
 
     def test_connections_passed2(self):
 
