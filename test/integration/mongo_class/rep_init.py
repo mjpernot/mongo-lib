@@ -97,7 +97,7 @@ class UnitTest(unittest.TestCase):
 
         self.config2 = {}
         self.config2["directConnection"] = False
-        self.config2["authMechanism"] = self.auth_mech
+        self.config2["authMechanism"] = self.auth_mech2
         self.config2["password"] = self.cfg.japd
 
         self.config3 = {}
