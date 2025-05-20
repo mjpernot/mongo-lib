@@ -37,6 +37,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_default_direct_connect
+        test_using_direct_connect
         test_set_pass
         test_auth_mech2
         test_auth_mech
@@ -174,6 +176,38 @@ class UnitTest(unittest.TestCase):
         self.config7a["tlsCertificateKeyFile"] = self.tls_certkey
         self.config7a[
             "tlsCertificateKeyFilePassword"] = self.tls_certkey_phrase
+
+    def test_default_direct_connect(self):
+
+        """Function:  test_default_direct_connect
+
+        Description:  Test using the default direct_connect setting.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port)
+
+        self.assertFalse(mongo.direct_connect)
+
+    def test_using_direct_connect(self):
+
+        """Function:  test_using_direct_connect
+
+        Description:  Test using the direct_connect attribute.
+
+        Arguments:
+
+        """
+
+        mongo = mongo_class.SlaveRep(
+            self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
+            port=self.cfg.port, auth_db=self.cfg.auth_db, direct_connect=True)
+
+        self.assertTrue(mongo.direct_connect)
 
     def test_set_pass(self):
 

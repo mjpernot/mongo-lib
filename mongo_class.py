@@ -140,6 +140,9 @@ class Server():                                         # pylint:disable=R0902
                 ssl_client_key -> SSL key pem file
                 ssl_client_cert -> SSL certificate pem file
                 ssl_client_phrase -> SSL client pass phrase to key file
+                tls_ca_certs -> TLS certificate authority file
+                tls_certkey -> TLS certificate and key pem file
+                tls_certkey_phrase -> TLS client pass phrase to key file
                 auth_type -> SSL | TLS | None - Type of connection to use
                 direct_connect -> True|False - Connect to server directly
 
@@ -545,6 +548,10 @@ class DB(Server):
                 ssl_client_key -> SSL key pem file
                 ssl_client_cert -> SSL certificate pem file
                 ssl_client_phrase -> SSL client pass phrase to key file
+                auth_type -> SSL | TLS | None - Type of connection to use
+                tls_ca_certs -> TLS certificate authority file
+                tls_certkey -> TLS certificate and key pem file
+                tls_certkey_phrase -> TLS client pass phrase to key file
 
         """
 
@@ -745,6 +752,10 @@ class Coll(DB):
                 ssl_client_key -> SSL key pem file
                 ssl_client_cert -> SSL certificate pem file
                 ssl_client_phrase -> SSL client pass phrase to key file
+                auth_type -> SSL | TLS | None - Type of connection to use
+                tls_ca_certs -> TLS certificate authority file
+                tls_certkey -> TLS certificate and key pem file
+                tls_certkey_phrase -> TLS client pass phrase to key file
 
         """
 
@@ -920,6 +931,11 @@ class Rep(Server):
                 ssl_client_key -> SSL key pem file
                 ssl_client_cert -> SSL certificate pem file
                 ssl_client_phrase -> SSL client pass phrase to key file
+                auth_type -> SSL | TLS | None - Type of connection to use
+                tls_ca_certs -> TLS certificate authority file
+                tls_certkey -> TLS certificate and key pem file
+                tls_certkey_phrase -> TLS client pass phrase to key file
+                direct_connect -> True|False - Connect to server directly
 
         """
 
@@ -936,7 +952,8 @@ class Rep(Server):
             auth_type=kwargs.get("auth_type", None),
             tls_ca_certs=kwargs.get("tls_ca_certs", None),
             tls_certkey=kwargs.get("tls_certkey", None),
-            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None),
+            direct_connect = kwargs.get("direct_connect", False))
 
         self.repset = None
         self.ismaster = None
@@ -995,6 +1012,10 @@ class MasterRep(Rep):
                 ssl_client_key -> SSL key pem file
                 ssl_client_cert -> SSL certificate pem file
                 ssl_client_phrase -> SSL client pass phrase to key file
+                auth_type -> SSL | TLS | None - Type of connection to use
+                tls_ca_certs -> TLS certificate authority file
+                tls_certkey -> TLS certificate and key pem file
+                tls_certkey_phrase -> TLS client pass phrase to key file
 
         """
 
@@ -1086,6 +1107,11 @@ class SlaveRep(Rep):
                 ssl_client_key -> SSL key pem file
                 ssl_client_cert -> SSL certificate pem file
                 ssl_client_phrase -> SSL client pass phrase to key file
+                auth_type -> SSL | TLS | None - Type of connection to use
+                tls_ca_certs -> TLS certificate authority file
+                tls_certkey -> TLS certificate and key pem file
+                tls_certkey_phrase -> TLS client pass phrase to key file
+                direct_connect -> True|False - Connect to server directly
 
         """
 
@@ -1102,7 +1128,8 @@ class SlaveRep(Rep):
             auth_type=kwargs.get("auth_type", None),
             tls_ca_certs=kwargs.get("tls_ca_certs", None),
             tls_certkey=kwargs.get("tls_certkey", None),
-            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None))
+            tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None),
+            direct_connect = kwargs.get("direct_connect", False))
 
         self.ismaster = None
         self.issecondary = None
@@ -1180,6 +1207,10 @@ class RepSet(Rep):
                 ssl_client_key -> SSL key pem file
                 ssl_client_cert -> SSL certificate pem file
                 ssl_client_phrase -> SSL client pass phrase to key file
+                auth_type -> SSL | TLS | None - Type of connection to use
+                tls_ca_certs -> TLS certificate authority file
+                tls_certkey -> TLS certificate and key pem file
+                tls_certkey_phrase -> TLS client pass phrase to key file
 
         """
 
@@ -1287,6 +1318,10 @@ class RepSetColl(RepSet):
                 ssl_client_key -> SSL key pem file
                 ssl_client_cert -> SSL certificate pem file
                 ssl_client_phrase -> SSL client pass phrase to key file
+                auth_type -> SSL | TLS | None - Type of connection to use
+                tls_ca_certs -> TLS certificate authority file
+                tls_certkey -> TLS certificate and key pem file
+                tls_certkey_phrase -> TLS client pass phrase to key file
 
         """
 
