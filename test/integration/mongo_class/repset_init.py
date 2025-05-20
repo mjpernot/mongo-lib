@@ -98,7 +98,7 @@ class UnitTest(unittest.TestCase):
 
         self.config2 = {}
         self.config2["directConnection"] = False
-        self.config2["authMechanism"] = self.auth_mech
+        self.config2["authMechanism"] = self.auth_mech2
         self.config2["password"] = self.cfg.japd
 
         self.config3 = {}
@@ -185,14 +185,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        config = {"password": self.cfg.japd}
-        config["authMechanism"] = self.auth_mech2
         mongo = mongo_class.RepSet(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.cfg.conf_file,
             repset_hosts=self.cfg.repset_hosts)
 
-        self.assertEqual(mongo.config, config)
+        self.assertEqual(mongo.config, self.config2)
 
     def test_auth_mech2(self):
 

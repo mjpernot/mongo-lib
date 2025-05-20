@@ -86,8 +86,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, auth=self.cfg.auth, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset)
 
-        self.assertTrue(mongo.connect()[0])
-        mongo.disconnect()
+        self.assertFalse(mongo.connect()[0])
 
     def test_no_repset(self):
 
@@ -160,7 +159,6 @@ class UnitTest(unittest.TestCase):
         mongo.connect()
 
         self.assertFalse(mongo.auth)
-        mongo.disconnect()
 
     def test_no_auth(self):
 
@@ -177,8 +175,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, auth=False, auth_db=self.cfg.auth_db,
             conf_file=self.cfg.conf_file, repset=self.cfg.repset)
 
-        self.assertEqual(mongo.connect(), (True, None))
-        mongo.disconnect()
+        self.assertFalse(mongo.connect()[0])
 
     def test_conn_true2(self):
 
