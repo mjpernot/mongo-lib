@@ -953,7 +953,7 @@ class Rep(Server):
             tls_ca_certs=kwargs.get("tls_ca_certs", None),
             tls_certkey=kwargs.get("tls_certkey", None),
             tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None),
-            direct_connect = kwargs.get("direct_connect", False))
+            direct_connect=kwargs.get("direct_connect", False))
 
         self.repset = None
         self.ismaster = None
@@ -1129,7 +1129,7 @@ class SlaveRep(Rep):
             tls_ca_certs=kwargs.get("tls_ca_certs", None),
             tls_certkey=kwargs.get("tls_certkey", None),
             tls_certkey_phrase=kwargs.get("tls_certkey_phrase", None),
-            direct_connect = kwargs.get("direct_connect", False))
+            direct_connect=kwargs.get("direct_connect", False))
 
         self.ismaster = None
         self.issecondary = None
