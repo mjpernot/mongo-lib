@@ -190,7 +190,7 @@ class UnitTest(unittest.TestCase):
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.cfg.conf_file)
 
-        self.assertEqual(mongo.config, config2)
+        self.assertEqual(mongo.config, self.config2)
 
     def test_auth_mech2(self):
 
