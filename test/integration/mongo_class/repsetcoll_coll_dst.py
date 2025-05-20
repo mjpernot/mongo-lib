@@ -78,6 +78,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_dst("db")
+        self.mongo.disconnect()
 
         self.assertTrue(data)
 
@@ -92,6 +93,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_dst("db")
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, list)
 
@@ -106,6 +108,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_dst("")
+        self.mongo.disconnect()
 
         self.assertFalse(data)
 
@@ -120,6 +123,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_dst("")
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, list)
 
@@ -134,6 +138,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_dst()
+        self.mongo.disconnect()
 
         self.assertFalse(data)
 
@@ -148,6 +153,7 @@ class UnitTest(unittest.TestCase):
         """
 
         data = self.mongo.coll_dst()
+        self.mongo.disconnect()
 
         self.assertIsInstance(data, list)
 

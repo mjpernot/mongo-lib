@@ -100,44 +100,52 @@ class UnitTest(unittest.TestCase):
         self.conf_file = "MyConf"
 
         self.config = {}
+        self.config["directConnection"] = False
+        self.config["authMechanism"] = self.auth_mech
         self.config["password"] = self.cfg.japd
 
         self.config2 = {}
+        self.config2["directConnection"] = False
+        self.config2["authMechanism"] = self.auth_mech
         self.config2["password"] = self.cfg.japd
-        self.config2["authMechanism"] = self.auth_mech2
 
         self.config3 = {}
+        self.config3["directConnection"] = False
+        self.config3["authMechanism"] = self.auth_mech
         self.config3["password"] = self.cfg.japd
-        self.config3["authMechanism"] = self.auth_mech2
         self.config3["ssl"] = True
         self.config3["ssl_ca_certs"] = self.ssl_client_ca
 
         self.config4 = {}
+        self.config4["directConnection"] = False
+        self.config4["authMechanism"] = self.auth_mech
         self.config4["password"] = self.cfg.japd
-        self.config4["authMechanism"] = self.auth_mech2
         self.config4["ssl"] = True
         self.config4["ssl_keyfile"] = self.ssl_client_key
         self.config4["ssl_certfile"] = self.ssl_client_cert
 
         self.config5 = {}
+        self.config5["directConnection"] = False
+        self.config5["authMechanism"] = self.auth_mech
         self.config5["password"] = self.cfg.japd
-        self.config5["authMechanism"] = self.auth_mech2
         self.config5["ssl"] = True
         self.config5["ssl_keyfile"] = self.ssl_client_key
         self.config5["ssl_certfile"] = self.ssl_client_cert
         self.config5["ssl_pem_passphrase"] = self.ssl_client_phrase
 
         self.config6 = {}
+        self.config6["directConnection"] = False
+        self.config6["authMechanism"] = self.auth_mech
         self.config6["password"] = self.cfg.japd
-        self.config6["authMechanism"] = self.auth_mech2
         self.config6["ssl"] = True
         self.config6["ssl_ca_certs"] = self.ssl_client_ca
         self.config6["ssl_keyfile"] = self.ssl_client_key
         self.config6["ssl_certfile"] = self.ssl_client_cert
 
         self.config7 = {}
+        self.config7["directConnection"] = False
+        self.config7["authMechanism"] = self.auth_mech
         self.config7["password"] = self.cfg.japd
-        self.config7["authMechanism"] = self.auth_mech2
         self.config7["ssl"] = True
         self.config7["ssl_ca_certs"] = self.ssl_client_ca
         self.config7["ssl_keyfile"] = self.ssl_client_key
@@ -185,14 +193,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        config = {"password": self.cfg.japd}
-        config["authMechanism"] = self.auth_mech2
         mongo = mongo_class.RepSetColl(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.cfg.conf_file,
             coll=self.coll_name, repset_hosts=self.cfg.repset_hosts)
 
-        self.assertEqual(mongo.config, config)
+        self.assertEqual(mongo.config, self.config2)
+        mongo.disconnect()
 
     def test_auth_mech2(self):
 
@@ -210,6 +217,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertEqual(mongo.auth_mech, self.auth_mech)
+        mongo.disconnect()
 
     def test_auth_mech(self):
 
@@ -227,6 +235,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertEqual(mongo.auth_mech, self.auth_mech2)
+        mongo.disconnect()
 
     def test_default_auth_mech(self):
 
@@ -244,6 +253,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertEqual(mongo.auth_mech, self.auth_mech2)
+        mongo.disconnect()
 
     def test_uptime_attr(self):
 
@@ -261,6 +271,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertFalse(mongo.uptime)
+        mongo.disconnect()
 
     def test_port_attr(self):
 
@@ -278,6 +289,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertEqual(mongo.port, self.cfg.port)
+        mongo.disconnect()
 
     def test_host_attr(self):
 
@@ -295,6 +307,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertEqual(mongo.host, self.cfg.host)
+        mongo.disconnect()
 
     def test_japd_attr(self):
 
@@ -312,6 +325,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertEqual(mongo.japd, self.cfg.japd)
+        mongo.disconnect()
 
     def test_user_attr(self):
 
@@ -329,6 +343,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertEqual(mongo.user, self.cfg.user)
+        mongo.disconnect()
 
     def test_name_attr(self):
 
@@ -346,6 +361,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertEqual(mongo.name, self.cfg.name)
+        mongo.disconnect()
 
     def test_log_path_attr(self):
 
@@ -363,6 +379,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertFalse(mongo.log_path)
+        mongo.disconnect()
 
     def test_db_path_attr(self):
 
@@ -380,6 +397,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertFalse(mongo.db_path)
+        mongo.disconnect()
 
     def test_conn_attr(self):
 
@@ -397,6 +415,7 @@ class UnitTest(unittest.TestCase):
             repset_hosts=self.cfg.repset_hosts)
 
         self.assertFalse(mongo.conn)
+        mongo.disconnect()
 
     def test_config_attr3(self):
 
@@ -413,6 +432,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, auth_mech=self.auth_mech2)
 
         self.assertEqual(mongo.config, self.config2)
+        mongo.disconnect()
 
     def test_config_attr2(self):
 
@@ -429,6 +449,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, auth_mech=self.auth_mech)
 
         self.assertEqual(mongo.config, self.config)
+        mongo.disconnect()
 
     def test_db_coll_attr(self):
 
@@ -445,6 +466,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port)
 
         self.assertFalse(mongo.db_coll)
+        mongo.disconnect()
 
     def test_db_conn_attr(self):
 
@@ -461,6 +483,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port)
 
         self.assertFalse(mongo.db_auth)
+        mongo.disconnect()
 
     def test_db_auth_attr2(self):
 
@@ -477,6 +500,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port)
 
         self.assertFalse(mongo.db_auth)
+        mongo.disconnect()
 
     def test_db_auth_attr(self):
 
@@ -493,6 +517,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, db_auth=self.db_auth)
 
         self.assertEqual(mongo.db_auth, self.db_auth)
+        mongo.disconnect()
 
     def test_coll_attr2(self):
 
@@ -509,6 +534,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port)
 
         self.assertFalse(mongo.coll)
+        mongo.disconnect()
 
     def test_coll_attr(self):
 
@@ -525,6 +551,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, coll=self.db_coll)
 
         self.assertEqual(mongo.coll, self.db_coll)
+        mongo.disconnect()
 
     def test_db_attr2(self):
 
@@ -541,6 +568,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port)
 
         self.assertEqual(mongo.db_name, "test")
+        mongo.disconnect()
 
     def test_db_attr(self):
 
@@ -557,6 +585,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, db=self.dbn)
 
         self.assertEqual(mongo.db_name, self.dbn)
+        mongo.disconnect()
 
     def test_default_conf_file(self):
 
@@ -573,6 +602,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port)
 
         self.assertFalse(mongo.conf_file)
+        mongo.disconnect()
 
     def test_using_conf_file(self):
 
@@ -589,6 +619,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, conf_file="myfile")
 
         self.assertEqual(mongo.conf_file, "myfile")
+        mongo.disconnect()
 
     def test_default_auth(self):
 
@@ -605,6 +636,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port)
 
         self.assertTrue(mongo.auth)
+        mongo.disconnect()
 
     def test_using_auth(self):
 
@@ -637,6 +669,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port)
 
         self.assertEqual(mongo.conn_list, self.conn_list)
+        mongo.disconnect()
 
     def test_config_attr(self):
 
@@ -653,6 +686,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port)
 
         self.assertEqual(mongo.config, self.config2)
+        mongo.disconnect()
 
     def test_default_auth_db(self):
 
@@ -669,6 +703,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port)
 
         self.assertEqual(mongo.auth_db, self.cfg.auth_db)
+        mongo.disconnect()
 
     def test_using_auth_db(self):
 
@@ -685,6 +720,7 @@ class UnitTest(unittest.TestCase):
             port=self.cfg.port, auth_db=self.cfg.auth_db)
 
         self.assertEqual(mongo.auth_db, self.cfg.auth_db)
+        mongo.disconnect()
 
     def test_default(self):
 
@@ -704,6 +740,7 @@ class UnitTest(unittest.TestCase):
             (mongo.name, mongo.user, mongo.japd, mongo.host, mongo.port),
             (self.cfg.name, self.cfg.user, self.cfg.japd, self.cfg.host,
              self.cfg.port))
+        mongo.disconnect()
 
 
 if __name__ == "__main__":

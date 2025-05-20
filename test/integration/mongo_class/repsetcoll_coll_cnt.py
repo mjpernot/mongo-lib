@@ -78,6 +78,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertGreaterEqual(self.mongo.coll_cnt({"db": self.database}), 1)
+        self.mongo.disconnect()
 
     def test_empty_query(self):
 
@@ -90,6 +91,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertGreaterEqual(self.mongo.coll_cnt({}), 1)
+        self.mongo.disconnect()
 
     def test_no_query(self):
 
@@ -102,6 +104,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertGreaterEqual(self.mongo.coll_cnt(), 1)
+        self.mongo.disconnect()
 
 
 if __name__ == "__main__":
