@@ -184,13 +184,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        config = {"password": self.cfg.japd}
-        config["authMechanism"] = self.auth_mech2
+#        config = {"password": self.cfg.japd}
+#        config["authMechanism"] = self.auth_mech2
         mongo = mongo_class.Rep(
             self.cfg.name, self.cfg.user, self.cfg.japd, host=self.cfg.host,
             port=self.cfg.port, conf_file=self.cfg.conf_file)
 
-        self.assertEqual(mongo.config, config)
+        self.assertEqual(mongo.config, config2)
 
     def test_auth_mech2(self):
 
