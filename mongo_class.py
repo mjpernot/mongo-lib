@@ -725,6 +725,7 @@ class Coll(DB):
         coll_find1
         ins_doc
         coll_options
+        coll_del_many
 
     """
 
@@ -892,6 +893,30 @@ class Coll(DB):
         """
 
         return self.coll.options()
+
+    def coll_del_many(self, qry=None, override=False):
+
+        """Method:  coll_del_many
+
+        Description:  Delete records in a collection that match the search
+            criteria.  Override allows for truncate of a collection.
+
+        Arguments:
+            (input) qry -> Query criteria for delete command
+            (input) override -> True|False - Truncate collection
+
+        """
+
+        if qry:
+            self.coll.delete_many(qry)
+
+        # Allow for truncation.
+        elif override:
+            self.coll.delete_many({})
+
+        # Assume must be a mistake.
+        else:
+            print("WARNING:  Require search criteria.")
 
 
 class Rep(Server):
