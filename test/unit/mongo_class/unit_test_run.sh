@@ -13,6 +13,7 @@ echo "Unit test: mongo_class"
 /usr/bin/python ./test/unit/mongo_class/coll_coll_find.py
 /usr/bin/python ./test/unit/mongo_class/coll_coll_find1.py
 /usr/bin/python ./test/unit/mongo_class/coll_coll_options.py
+/usr/bin/python ./test/unit/mongo_class/coll_coll_del_many.py
 /usr/bin/python ./test/unit/mongo_class/coll_connect.py
 /usr/bin/python ./test/unit/mongo_class/coll_init.py
 /usr/bin/python ./test/unit/mongo_class/coll_ins_doc.py
