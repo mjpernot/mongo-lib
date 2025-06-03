@@ -5,6 +5,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.5.3] - 2025-06-03
+- Updated python-lib to v4.0.1
 
 ### Added
 - mongo_class.Coll.coll_del_many: Delete records in a collection that match the search criteria.
