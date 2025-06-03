@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.5.3] - 2025-06-03
+
+### Added
+- mongo_class.Coll.coll_del_many: Delete records in a collection that match the search criteria.
+
+
 ## [4.5.2] - 2025-05-06
 - Fixed a number of methods to work in Pymongo v4.X.
 
