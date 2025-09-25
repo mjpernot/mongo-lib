@@ -118,7 +118,7 @@ class Server():                                         # pylint:disable=R0902
 
     """
 
-    def __init__(                                       # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913.R0917
             self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
@@ -525,7 +525,7 @@ class DB(Server):
 
     """
 
-    def __init__(                                       # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913.R0917
             self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
@@ -729,7 +729,7 @@ class Coll(DB):
 
     """
 
-    def __init__(                                       # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913.R0917
             self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
@@ -934,7 +934,7 @@ class Rep(Server):
 
     """
 
-    def __init__(                                       # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913.R0917
             self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
@@ -1015,7 +1015,7 @@ class MasterRep(Rep):
 
     """
 
-    def __init__(                                       # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913.R0917
             self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
@@ -1110,7 +1110,7 @@ class SlaveRep(Rep):
 
     """
 
-    def __init__(                                       # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913.R0917
             self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
@@ -1208,7 +1208,7 @@ class RepSet(Rep):
 
     """
 
-    def __init__(                                       # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913.R0917
             self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
@@ -1316,7 +1316,7 @@ class RepSetColl(RepSet):
 
     """
 
-    def __init__(                                       # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913.R0917
             self, name, user, japd, host="localhost", port=27017, **kwargs):
 
         """Method:  __init__
