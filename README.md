@@ -108,10 +108,6 @@ Install the project using the procedures in the Git Installation section.
 ```
 test/unit/mongodb_class/unit_test_run.sh
 test/unit/mongodb_lib/unit_test_run.sh
-```
-
-### Code coverage:
-```
 test/unit/mongodb_class/code_coverage.sh
 test/unit/mongodb_lib/code_coverage.sh
 ```
@@ -179,17 +175,12 @@ chmod 600 test/integration/config/mongo.py test/integration/config/master_mongo.
 vim test/integration/config/mongo.py test/integration/config/master_mongo.py test/integration/config/slave_mongo.py
 ```
 
-### Testing mongo_class.py - Mongo Stand Alone
+### Testing mongo_class.py and mongo_lib.py - Mongo Stand Alone
 
 ```
 test/integration/mongo_class/integration_test_run.sh
-test/integration/mongo_class/code_coverage.sh
-```
-
-### Testing mongo_lib.py:
-
-```
 test/integration/mongo_libs/integration_test_run.sh
+test/integration/mongo_class/code_coverage.sh
 test/integration/mongo_libs/code_coverage.sh
 ```
 
